@@ -3,16 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Iterators &amp; the Iteration Protocol — Learn with Adi</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>">
-<link rel="stylesheet" href="../../assets/site.css?v=4">
-<link rel="stylesheet" href="../../assets/unit.css?v=4">
+<title>Iterators &amp; the Iteration Protocol — Learn AI by Building</title>
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=6">
+<link rel="stylesheet" href="../../assets/unit.css?v=6">
 </head>
 <body data-lwa-course="python-programming" data-lwa-chapter="u17" data-lwa-title="Unit 17 · Iterators &amp; the iteration protocol">
 <header class="masthead">
   <div class="masthead-in">
     <div class="lwa-brandrow">
-      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg" alt="Learn with Adi"></a>
+      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building"></a>
       <div class="lwa-brand-right">
         <span class="lwa-tag"><a href="index.html">Series 02 · Python Programming</a></span>
         <span data-lwa-auth></span>
@@ -51,7 +53,7 @@
   <section id="s1">
     <div class="prereq">
       <div class="pq"><b>Welcome to Advanced</b>Beginner and Intermediate are behind you — Units 1–16, all of them, and especially the four class units. From here on these notes stop teaching new syntax and start showing you the machinery that was running underneath all along.</div>
-      <div class="pq"><b>How this unit works</b>Same rhythm as always: each concept is a 3–4 minute read, then ~10 minutes of practice. <a href="https://colab.research.google.com/github/Aditya-402/learn-with-adi/blob/main/notebooks/python-programming/unit17.ipynb" rel="noopener">▶ Run this unit in Colab</a> if you prefer a notebook.</div>
+      <div class="pq"><b>How this unit works</b>Same rhythm as always: each concept is a 3–4 minute read, then ~10 minutes of practice. <a href="https://colab.research.google.com/github/Aditya-402/learn-ai-by-building/blob/main/notebooks/python-programming/unit17.ipynb" rel="noopener">▶ Run this unit in Colab</a> if you prefer a notebook.</div>
       <div class="pq"><b>Bring your dunders</b>Unit 15 taught that built-in functions are polite knockers: <code>len(x)</code> knocks on <code>__len__</code>, <code>print(x)</code> knocks on <code>__str__</code>. This unit is that idea's finest hour — two more knocks and your class joins the language.</div>
     </div>
     <div class="prose">
@@ -85,40 +87,40 @@ print(next(it))</div>
     </div>
     <div class="fig">
       <svg viewBox="0 0 860 250" role="img" aria-label="A bookshelf of three items with a bookmark moving forward after each next() call">
-        <text x="16" y="26" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6b7585" letter-spacing="1.5">THE BOOKSHELF DOESN'T MOVE — THE BOOKMARK DOES</text>
+        <text x="16" y="26" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6a626e" letter-spacing="1.5">THE BOOKSHELF DOESN'T MOVE — THE BOOKMARK DOES</text>
 
-        <text x="40" y="62" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#3d3170">it = iter([10, 20, 30])</text>
-        <polygon points="55,76 71,76 63,90" fill="#a35a33"/>
-        <rect x="40" y="96" width="46" height="42" rx="8" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.5"/>
-        <text x="63" y="123" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#1f2733">10</text>
-        <rect x="92" y="96" width="46" height="42" rx="8" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.5"/>
-        <text x="115" y="123" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#1f2733">20</text>
-        <rect x="144" y="96" width="46" height="42" rx="8" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.5"/>
-        <text x="167" y="123" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#1f2733">30</text>
-        <line x1="40" y1="146" x2="190" y2="146" stroke="#e3e6ee" stroke-width="3"/>
-        <text x="115" y="170" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a35a33">fresh bookmark, nothing read yet</text>
+        <text x="40" y="62" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#3f2a41">it = iter([10, 20, 30])</text>
+        <polygon points="55,76 71,76 63,90" fill="#a8441f"/>
+        <rect x="40" y="96" width="46" height="42" rx="8" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.5"/>
+        <text x="63" y="123" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#2b2730">10</text>
+        <rect x="92" y="96" width="46" height="42" rx="8" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.5"/>
+        <text x="115" y="123" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#2b2730">20</text>
+        <rect x="144" y="96" width="46" height="42" rx="8" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.5"/>
+        <text x="167" y="123" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#2b2730">30</text>
+        <line x1="40" y1="146" x2="190" y2="146" stroke="#e9dfcf" stroke-width="3"/>
+        <text x="115" y="170" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a8441f">fresh bookmark, nothing read yet</text>
 
-        <text x="330" y="62" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#3d3170">next(it)  →  10</text>
-        <polygon points="397,76 413,76 405,90" fill="#a35a33"/>
-        <rect x="330" y="96" width="46" height="42" rx="8" fill="#f0f1f7" stroke="#e3e6ee" stroke-width="1.5"/>
-        <text x="353" y="123" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#6b7585">10</text>
-        <rect x="382" y="96" width="46" height="42" rx="8" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.5"/>
-        <text x="405" y="123" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#1f2733">20</text>
-        <rect x="434" y="96" width="46" height="42" rx="8" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.5"/>
-        <text x="457" y="123" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#1f2733">30</text>
-        <line x1="330" y1="146" x2="480" y2="146" stroke="#e3e6ee" stroke-width="3"/>
+        <text x="330" y="62" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#3f2a41">next(it)  →  10</text>
+        <polygon points="397,76 413,76 405,90" fill="#a8441f"/>
+        <rect x="330" y="96" width="46" height="42" rx="8" fill="#f3ece0" stroke="#e9dfcf" stroke-width="1.5"/>
+        <text x="353" y="123" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#6a626e">10</text>
+        <rect x="382" y="96" width="46" height="42" rx="8" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.5"/>
+        <text x="405" y="123" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#2b2730">20</text>
+        <rect x="434" y="96" width="46" height="42" rx="8" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.5"/>
+        <text x="457" y="123" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#2b2730">30</text>
+        <line x1="330" y1="146" x2="480" y2="146" stroke="#e9dfcf" stroke-width="3"/>
         <text x="405" y="170" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#1d5654">one read, one step forward</text>
 
-        <text x="620" y="62" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#3d3170">after three next() calls</text>
-        <polygon points="777,76 793,76 785,90" fill="#a35a33"/>
-        <rect x="620" y="96" width="46" height="42" rx="8" fill="#f0f1f7" stroke="#e3e6ee" stroke-width="1.5"/>
-        <text x="643" y="123" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#6b7585">10</text>
-        <rect x="672" y="96" width="46" height="42" rx="8" fill="#f0f1f7" stroke="#e3e6ee" stroke-width="1.5"/>
-        <text x="695" y="123" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#6b7585">20</text>
-        <rect x="724" y="96" width="46" height="42" rx="8" fill="#f0f1f7" stroke="#e3e6ee" stroke-width="1.5"/>
-        <text x="747" y="123" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#6b7585">30</text>
-        <line x1="620" y1="146" x2="770" y2="146" stroke="#e3e6ee" stroke-width="3"/>
-        <text x="700" y="170" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a35a33">past the end — next() now raises StopIteration</text>
+        <text x="620" y="62" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#3f2a41">after three next() calls</text>
+        <polygon points="777,76 793,76 785,90" fill="#a8441f"/>
+        <rect x="620" y="96" width="46" height="42" rx="8" fill="#f3ece0" stroke="#e9dfcf" stroke-width="1.5"/>
+        <text x="643" y="123" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#6a626e">10</text>
+        <rect x="672" y="96" width="46" height="42" rx="8" fill="#f3ece0" stroke="#e9dfcf" stroke-width="1.5"/>
+        <text x="695" y="123" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#6a626e">20</text>
+        <rect x="724" y="96" width="46" height="42" rx="8" fill="#f3ece0" stroke="#e9dfcf" stroke-width="1.5"/>
+        <text x="747" y="123" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#6a626e">30</text>
+        <line x1="620" y1="146" x2="770" y2="146" stroke="#e9dfcf" stroke-width="3"/>
+        <text x="700" y="170" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a8441f">past the end — next() now raises StopIteration</text>
 
         <rect x="40" y="196" width="780" height="38" rx="9" fill="#23262e"/>
         <text x="58" y="221" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#e8e9ee">for n in nums:   ≡   it = iter(nums);  then next(it), next(it), … until StopIteration</text>
@@ -453,42 +455,42 @@ Liftoff!</div>
     </div>
     <div class="fig">
       <svg viewBox="0 0 860 270" role="img" aria-label="The for loop calling __iter__ once and __next__ repeatedly on a Countdown object until StopIteration">
-        <text x="16" y="26" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6b7585" letter-spacing="1.5">WHO KNOCKS ON WHAT — for n in Countdown(3)</text>
+        <text x="16" y="26" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6a626e" letter-spacing="1.5">WHO KNOCKS ON WHAT — for n in Countdown(3)</text>
 
         <rect x="30" y="52" width="200" height="52" rx="10" fill="#23262e"/>
         <text x="130" y="76" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#e8e9ee">for n in Countdown(3):</text>
         <text x="130" y="94" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#9aa1b1">Python's loop machinery</text>
 
-        <line x1="230" y1="66" x2="316" y2="66" stroke="#5b4b9e" stroke-width="1.6"/>
-        <polygon points="316,62 326,66 316,70" fill="#5b4b9e"/>
-        <text x="273" y="58" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="10.5" fill="#3d3170">calls iter( ) once</text>
+        <line x1="230" y1="66" x2="316" y2="66" stroke="#5a3d5c" stroke-width="1.6"/>
+        <polygon points="316,62 326,66 316,70" fill="#5a3d5c"/>
+        <text x="273" y="58" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="10.5" fill="#3f2a41">calls iter( ) once</text>
 
-        <rect x="330" y="44" width="216" height="46" rx="9" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.5"/>
-        <text x="438" y="63" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#3d3170">__iter__(self)</text>
-        <text x="438" y="80" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#1f2733">return self</text>
+        <rect x="330" y="44" width="216" height="46" rx="9" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.5"/>
+        <text x="438" y="63" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#3f2a41">__iter__(self)</text>
+        <text x="438" y="80" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#2b2730">return self</text>
 
-        <line x1="230" y1="92" x2="316" y2="128" stroke="#2b7a78" stroke-width="1.6"/>
-        <polygon points="311,120 322,131 307,131" fill="#2b7a78"/>
+        <line x1="230" y1="92" x2="316" y2="128" stroke="#2f5a45" stroke-width="1.6"/>
+        <polygon points="311,120 322,131 307,131" fill="#2f5a45"/>
         <text x="248" y="122" font-family="Segoe UI,system-ui,sans-serif" font-size="10.5" fill="#1d5654">then next( ), again and again</text>
 
-        <rect x="330" y="118" width="216" height="70" rx="9" fill="#e3efee" stroke="#2b7a78" stroke-width="1.5"/>
+        <rect x="330" y="118" width="216" height="70" rx="9" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.5"/>
         <text x="438" y="139" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#1d5654">__next__(self)</text>
-        <text x="438" y="157" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#1f2733">self.n still &gt; 0 ?</text>
-        <text x="438" y="175" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#1f2733">return it, step down</text>
+        <text x="438" y="157" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#2b2730">self.n still &gt; 0 ?</text>
+        <text x="438" y="175" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#2b2730">return it, step down</text>
 
-        <line x1="546" y1="140" x2="632" y2="140" stroke="#2b7a78" stroke-width="1.6"/>
-        <polygon points="632,136 642,140 632,144" fill="#2b7a78"/>
-        <rect x="646" y="118" width="180" height="42" rx="9" fill="#ffffff" stroke="#e3e6ee" stroke-width="1.5"/>
-        <text x="736" y="144" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#1f2733">3 … 2 … 1</text>
+        <line x1="546" y1="140" x2="632" y2="140" stroke="#2f5a45" stroke-width="1.6"/>
+        <polygon points="632,136 642,140 632,144" fill="#2f5a45"/>
+        <rect x="646" y="118" width="180" height="42" rx="9" fill="#ffffff" stroke="#e9dfcf" stroke-width="1.5"/>
+        <text x="736" y="144" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#2b2730">3 … 2 … 1</text>
 
-        <line x1="546" y1="176" x2="632" y2="212" stroke="#a35a33" stroke-width="1.6" stroke-dasharray="5 4"/>
-        <polygon points="627,204 638,215 623,215" fill="#a35a33"/>
-        <rect x="646" y="196" width="180" height="42" rx="9" fill="#f7ebe4" stroke="#a35a33" stroke-width="1.5"/>
+        <line x1="546" y1="176" x2="632" y2="212" stroke="#a8441f" stroke-width="1.6" stroke-dasharray="5 4"/>
+        <polygon points="627,204 638,215 623,215" fill="#a8441f"/>
+        <rect x="646" y="196" width="180" height="42" rx="9" fill="#f8e6dc" stroke="#a8441f" stroke-width="1.5"/>
         <text x="736" y="222" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" font-weight="700" fill="#7c4324">StopIteration</text>
         <text x="736" y="256" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#7c4324">caught by for — loop ends quietly</text>
 
-        <text x="30" y="240" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6b7585">Your class answers both knocks — so Python's own loop walks your object,</text>
-        <text x="30" y="258" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6b7585">with no special case anywhere. That is the whole trick.</text>
+        <text x="30" y="240" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6a626e">Your class answers both knocks — so Python's own loop walks your object,</text>
+        <text x="30" y="258" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6a626e">with no special case anywhere. That is the whole trick.</text>
       </svg>
       <div class="figcap">Fig. 2 — One knock on <code>__iter__</code>, then a knock on <code>__next__</code> per round. The dashed arrow is the exit: <code>StopIteration</code> travels back up to the loop, which absorbs it and moves on.</div>
     </div>
@@ -885,8 +887,8 @@ print(next(it))</textarea>
 
 <footer class="foot">
   <div class="foot-in">
-    <img src="../../assets/wordmark.svg" alt="Learn with Adi" style="height:26px">
-    <span>Learn with Adi — Unit 17 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Series</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
+    <img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building" style="height:36px">
+    <span>Learn AI by Building — Unit 17 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Series</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
   </div>
 </footer>
 

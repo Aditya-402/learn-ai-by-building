@@ -1,4 +1,4 @@
-/* Learn with Adi - unit-page navigation.
+/* Learn AI by Building - unit-page navigation.
 
    A unit page used to reach only its two neighbours, and the only thing still
    on screen once you scrolled was the contents rail. So the rail carries the
@@ -21,17 +21,17 @@
 
   var CSS = [
     ".rail a.rnav-back{display:flex;align-items:center;gap:8px;margin-bottom:12px;padding:8px 11px;",
-    "  border:1px solid var(--line,#e3e6ee);border-radius:9px;background:var(--panel,#fff);",
-    "  color:var(--slate,#4a5a72);text-decoration:none;font-size:var(--fs-sm,13px);font-weight:600}",
-    ".rail a.rnav-back:hover{border-color:var(--accent,#5b4b9e);color:var(--accent-deep,#3d3170);",
-    "  background:var(--accent-wash,#ecebf6)}",
+    "  border:1px solid var(--line,#e9dfcf);border-radius:9px;background:var(--panel,#fff);",
+    "  color:var(--slate,#554b58);text-decoration:none;font-size:var(--fs-sm,13px);font-weight:600}",
+    ".rail a.rnav-back:hover{border-color:var(--accent,#5a3d5c);color:var(--accent-deep,#3f2a41);",
+    "  background:var(--accent-wash,#f1e7ef)}",
     ".rail a.rnav-back .ico{font-size:13px;line-height:1}",
     "@media (max-width:940px){.rail a.rnav-back{margin-bottom:0;white-space:nowrap}}",
     ".uprog{display:flex;align-items:center;gap:9px;font-size:var(--fs-xs,12px);",
-    "  color:var(--muted,#6b7585);margin:-6px 0 14px}",
-    ".uprog .bar{width:130px;height:5px;border-radius:99px;background:var(--subtle,#f0f1f7);",
-    "  border:1px solid var(--line,#e3e6ee);overflow:hidden}",
-    ".uprog .bar i{display:block;height:100%;background:var(--accent,#5b4b9e)}",
+    "  color:var(--muted,#6a626e);margin:-6px 0 14px}",
+    ".uprog .bar{width:130px;height:5px;border-radius:99px;background:var(--subtle,#f3ece0);",
+    "  border:1px solid var(--line,#e9dfcf);overflow:hidden}",
+    ".uprog .bar i{display:block;height:100%;background:var(--accent,#5a3d5c)}",
     "@media (max-width:720px){.uprog .bar{display:none}}",
     /* Spark reserves space instead of covering the text - both series */
     "body.spark-open .shell,body.spark-open .masthead-in,body.spark-open .foot-in",

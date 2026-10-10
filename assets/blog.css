@@ -1,0 +1,41 @@
+/* Learn AI by Building - blog pages (concept and topic posts that go with the YouTube videos).
+   Loaded after unit.css, which gives the masthead, the one-column shell and the components.
+   Only what the blog adds lives here, so the unit pages never change because of the blog. */
+
+/* the what / why label: decided 9 Oct 2026 (option A: visible, in the reader's words) */
+.blog-label{display:inline-flex;align-items:center;gap:8px;font-size:var(--fs-xs);letter-spacing:.14em;text-transform:uppercase;
+  font-weight:700;color:var(--accent);background:var(--accent-wash);border-radius:999px;padding:5px 12px;margin-bottom:14px}
+.blog-label.why{color:var(--clay);background:var(--clay-wash)}
+.blog-label.what{color:var(--teal);background:var(--teal-wash)}
+
+/* the video that goes with the post: 16:9, full column width */
+.video{position:relative;width:100%;aspect-ratio:16/9;border-radius:var(--r-lg);overflow:hidden;background:#000;
+  box-shadow:var(--shadow);border:1px solid var(--line)}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video-cap{font-size:var(--fs-sm);color:var(--muted);margin-top:10px}
+
+/* pictures from the video's board, shown as a row of prints */
+.prints{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;background:var(--panel);border:1px solid var(--line);
+  border-radius:14px;padding:18px;box-shadow:var(--shadow)}
+.prints img{height:220px;width:auto;max-width:100%}
+.prints .figcap{flex-basis:100%;margin-top:4px}
+
+/* a two-column "this vs that" */
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.vs > div{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px}
+.vs h4{font-family:var(--sans);font-size:var(--fs-cap);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.vs .flow{font-family:var(--mono);font-size:.95rem;color:var(--ink)}
+@media (max-width:700px){.vs{grid-template-columns:1fr}.prints img{height:130px}}
+
+/* the blog index */
+.blog-wrap{max-width:900px;margin:0 auto;padding:40px 28px 90px}
+.blog-group{margin-top:34px}
+.blog-group > h2{font-size:var(--fs-2xl)}
+.blog-group > p.g{color:var(--slate);margin:6px 0 16px}
+.blog-list{display:flex;flex-direction:column;gap:14px}
+.blog-item{display:block;text-decoration:none;color:var(--ink);background:var(--panel);border:1px solid var(--line);
+  border-radius:var(--r-lg);padding:18px 22px;box-shadow:var(--shadow)}
+.blog-item:hover{border-color:var(--accent)}
+.blog-item h3{font-size:var(--fs-xl);margin:6px 0}
+.blog-item p{color:var(--slate);font-size:var(--fs-cap)}
+.blog-item .meta{font-size:var(--fs-sm);color:var(--muted);margin-top:8px}

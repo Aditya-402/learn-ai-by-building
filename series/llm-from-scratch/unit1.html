@@ -3,27 +3,29 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>What Makes a Language Model Large — Learn with Adi</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>">
-<link rel="stylesheet" href="../../assets/site.css?v=4">
+<title>What Makes a Language Model Large — Learn AI by Building</title>
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=6">
 <style>
 :root{
-  --ground:#f6f7fb;
+  --ground:#faf6ee;
   --panel:#ffffff;
-  --subtle:#f0f1f7;
-  --ink:#1f2733;
-  --muted:#6b7585;
-  --line:#e3e6ee;
-  --accent:#5b4b9e;
-  --accent-deep:#3d3170;
-  --accent-wash:#ecebf6;
-  --teal:#2b7a78;
-  --teal-wash:#e3efee;
-  --clay:#a35a33;
-  --clay-wash:#f7ebe4;
-  --gold:#8a6d1c;
-  --gold-wash:#f5f0df;
-  --slate:#4a5a72;
+  --subtle:#f3ece0;
+  --ink:#2b2730;
+  --muted:#6a626e;
+  --line:#e9dfcf;
+  --accent:#5a3d5c;
+  --accent-deep:#3f2a41;
+  --accent-wash:#f1e7ef;
+  --teal:#2f5a45;
+  --teal-wash:#e4ede6;
+  --clay:#a8441f;
+  --clay-wash:#f8e6dc;
+  --gold:#80590f;
+  --gold-wash:#f8ecd3;
+  --slate:#554b58;
 
   --serif:'Iowan Old Style','Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif;
   --sans:'Segoe UI Variable Text','Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
@@ -200,10 +202,10 @@ tr:last-child td{border-bottom:none}
   display:block;width:100%;text-align:left;background:transparent;border:none;
   padding:2px 4px 9px;font-family:var(--serif);font-size:var(--fs-cap);font-weight:600;
 }
-.ring-ai{border-color:#c9cede;background:#fbfbfe}
-.ring-ml{border-color:#b3bcd6;background:#f4f5fb}
-.ring-dl{border-color:#9a93c8;background:var(--accent-wash)}
-.ring-llm{border-color:var(--accent);background:#e2dff2}
+.ring-ai{border-color:#d8cdbd;background:#fdfaf4}
+.ring-ml{border-color:#c8b9a6;background:#f8f3ea}
+.ring-dl{border-color:#a98aa8;background:var(--accent-wash)}
+.ring-llm{border-color:var(--accent);background:#ecdfea}
 .ring[data-on="true"]{box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 22%,transparent)}
 .ring-btn small{display:block;font-family:var(--sans);font-size:var(--fs-xs);color:var(--muted);font-weight:500;letter-spacing:.02em}
 .detail{background:var(--subtle);border:1px solid var(--line);border-radius:var(--r);padding:18px}
@@ -343,13 +345,13 @@ tr:last-child td{border-bottom:none}
 
 p{text-wrap:pretty}
 .prereq{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin-bottom:6px}
-.pq{border:1px solid var(--line);border-left:3px solid var(--teal,#2b7a78);border-radius:0 10px 10px 0;background:var(--panel);padding:12px 14px;font-size:var(--fs-sm);color:var(--slate,#4a5a72)}
+.pq{border:1px solid var(--line);border-left:3px solid var(--teal,#2f5a45);border-radius:0 10px 10px 0;background:var(--panel);padding:12px 14px;font-size:var(--fs-sm);color:var(--slate,#554b58)}
 .pq b{display:block;color:var(--ink);font-size:var(--fs-cap);margin-bottom:4px}
-.derive{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--teal,#2b7a78);border-radius:0 10px 10px 0;padding:16px 20px;max-width:66ch}
-.derive .dl{font-size:var(--fs-xs);letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--teal,#2b7a78);margin-bottom:8px}
-.derive p{font-size:var(--fs-cap);color:var(--slate,#4a5a72);margin:6px 0}
+.derive{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--teal,#2f5a45);border-radius:0 10px 10px 0;padding:16px 20px;max-width:66ch}
+.derive .dl{font-size:var(--fs-xs);letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--teal,#2f5a45);margin-bottom:8px}
+.derive p{font-size:var(--fs-cap);color:var(--slate,#554b58);margin:6px 0}
 .derive .m{font-family:var(--mono);font-size:var(--fs-sm);background:var(--subtle);border-radius:6px;padding:9px 13px;margin:8px 0;overflow-x:auto;color:var(--ink)}
-.confuse{border-left:3px solid var(--clay,#a35a33);background:var(--clay-wash,#f7ebe4);padding:16px 20px;border-radius:0 10px 10px 0;max-width:66ch}
+.confuse{border-left:3px solid var(--clay,#a8441f);background:var(--clay-wash,#f8e6dc);padding:16px 20px;border-radius:0 10px 10px 0;max-width:66ch}
 .confuse .lbl{font-size:var(--fs-xs);letter-spacing:.13em;text-transform:uppercase;font-weight:700;color:#7c4324;margin-bottom:6px}
 .confuse p{font-size:var(--fs-cap);color:#5c3f28}
 .fig{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;max-width:900px;box-shadow:var(--shadow)}
@@ -376,7 +378,7 @@ p{text-wrap:pretty}
 <header class="masthead">
   <div class="masthead-in">
     <div class="lwa-brandrow">
-      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg" alt="Learn with Adi"></a>
+      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building"></a>
       <div class="lwa-brand-right">
         <span class="lwa-tag"><a href="index.html">Series 01 · Build an LLM from Scratch</a></span>
         <span data-lwa-auth></span>
@@ -493,26 +495,26 @@ p{text-wrap:pretty}
 
     <div class="fig" role="img" aria-label="Diagram of the two training stages">
       <svg viewBox="0 0 760 150">
-        <defs><marker id="aru1a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6b7585"/></marker></defs>
+        <defs><marker id="aru1a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6a626e"/></marker></defs>
         <g font-family="Consolas,monospace" font-size="11.5">
-        <rect x="8" y="30" width="160" height="62" rx="9" fill="#f0f1f7" stroke="#6b7585" stroke-width="1.5"/>
-        <text x="88" y="56" text-anchor="middle" font-size="13" font-weight="700" fill="#1f2733" font-family="Georgia,serif">Raw internet text</text>
-        <text x="88" y="76" text-anchor="middle" fill="#6b7585">billions of words, no labels</text>
-        <line x1="172" y1="61" x2="222" y2="61" stroke="#6b7585" stroke-width="1.5" marker-end="url(#aru1a)"/>
-        <text x="197" y="48" text-anchor="middle" fill="#6b7585" font-size="10" font-family="Segoe UI,sans-serif">STAGE 1</text>
-        <rect x="226" y="30" width="160" height="62" rx="9" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.6"/>
-        <text x="306" y="56" text-anchor="middle" font-size="13" font-weight="700" fill="#3d3170" font-family="Georgia,serif">Pretraining</text>
-        <text x="306" y="76" text-anchor="middle" fill="#6b7585">guess the next word, forever</text>
-        <line x1="390" y1="61" x2="440" y2="61" stroke="#6b7585" stroke-width="1.5" marker-end="url(#aru1a)"/>
-        <rect x="444" y="30" width="140" height="62" rx="9" fill="#e3efee" stroke="#2b7a78" stroke-width="1.6"/>
+        <rect x="8" y="30" width="160" height="62" rx="9" fill="#f3ece0" stroke="#6a626e" stroke-width="1.5"/>
+        <text x="88" y="56" text-anchor="middle" font-size="13" font-weight="700" fill="#2b2730" font-family="Georgia,serif">Raw internet text</text>
+        <text x="88" y="76" text-anchor="middle" fill="#6a626e">billions of words, no labels</text>
+        <line x1="172" y1="61" x2="222" y2="61" stroke="#6a626e" stroke-width="1.5" marker-end="url(#aru1a)"/>
+        <text x="197" y="48" text-anchor="middle" fill="#6a626e" font-size="10" font-family="Segoe UI,sans-serif">STAGE 1</text>
+        <rect x="226" y="30" width="160" height="62" rx="9" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.6"/>
+        <text x="306" y="56" text-anchor="middle" font-size="13" font-weight="700" fill="#3f2a41" font-family="Georgia,serif">Pretraining</text>
+        <text x="306" y="76" text-anchor="middle" fill="#6a626e">guess the next word, forever</text>
+        <line x1="390" y1="61" x2="440" y2="61" stroke="#6a626e" stroke-width="1.5" marker-end="url(#aru1a)"/>
+        <rect x="444" y="30" width="140" height="62" rx="9" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.6"/>
         <text x="514" y="56" text-anchor="middle" font-size="13" font-weight="700" fill="#1d5654" font-family="Georgia,serif">Base model</text>
-        <text x="514" y="76" text-anchor="middle" fill="#6b7585">completes text; raw</text>
-        <line x1="588" y1="61" x2="638" y2="61" stroke="#6b7585" stroke-width="1.5" marker-end="url(#aru1a)"/>
-        <text x="613" y="48" text-anchor="middle" fill="#6b7585" font-size="10" font-family="Segoe UI,sans-serif">STAGE 2</text>
-        <rect x="642" y="30" width="112" height="62" rx="9" fill="#f5f0df" stroke="#8a6d1c" stroke-width="1.6"/>
+        <text x="514" y="76" text-anchor="middle" fill="#6a626e">completes text; raw</text>
+        <line x1="588" y1="61" x2="638" y2="61" stroke="#6a626e" stroke-width="1.5" marker-end="url(#aru1a)"/>
+        <text x="613" y="48" text-anchor="middle" fill="#6a626e" font-size="10" font-family="Segoe UI,sans-serif">STAGE 2</text>
+        <rect x="642" y="30" width="112" height="62" rx="9" fill="#f8ecd3" stroke="#80590f" stroke-width="1.6"/>
         <text x="698" y="56" text-anchor="middle" font-size="13" font-weight="700" fill="#6d5514" font-family="Georgia,serif">Fine-tuning</text>
-        <text x="698" y="76" text-anchor="middle" fill="#6b7585">assistant / classifier</text>
-        <text x="380" y="128" text-anchor="middle" fill="#6b7585" font-size="11.5" font-family="Segoe UI,sans-serif">Stage 1 is astronomically expensive and label-free; stage 2 is cheap and targeted. This series builds both.</text>
+        <text x="698" y="76" text-anchor="middle" fill="#6a626e">assistant / classifier</text>
+        <text x="380" y="128" text-anchor="middle" fill="#6a626e" font-size="11.5" font-family="Segoe UI,sans-serif">Stage 1 is astronomically expensive and label-free; stage 2 is cheap and targeted. This series builds both.</text>
         </g>
       </svg>
       <div class="figcap">The two-stage recipe every modern LLM follows: pretrain once on raw text, then fine-tune the result toward a job.</div>
@@ -720,23 +722,23 @@ p{text-wrap:pretty}
 
     <div class="fig" role="img" aria-label="Diagram of the next-word prediction loop">
       <svg viewBox="0 0 760 185">
-        <defs><marker id="aru1b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6b7585"/></marker></defs>
+        <defs><marker id="aru1b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6a626e"/></marker></defs>
         <g font-family="Consolas,monospace" font-size="12">
-        <rect x="10" y="40" width="210" height="56" rx="9" fill="#f0f1f7" stroke="#6b7585" stroke-width="1.5"/>
-        <text x="115" y="63" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1f2733" font-family="Georgia,serif">“the students opened their”</text>
-        <text x="115" y="83" text-anchor="middle" fill="#6b7585">the context so far</text>
-        <line x1="224" y1="68" x2="274" y2="68" stroke="#6b7585" stroke-width="1.5" marker-end="url(#aru1b)"/>
-        <rect x="278" y="40" width="130" height="56" rx="9" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.6"/>
-        <text x="343" y="63" text-anchor="middle" font-size="13" font-weight="700" fill="#3d3170" font-family="Georgia,serif">GPT</text>
-        <text x="343" y="83" text-anchor="middle" fill="#6b7585">one forward pass</text>
-        <line x1="412" y1="68" x2="462" y2="68" stroke="#6b7585" stroke-width="1.5" marker-end="url(#aru1b)"/>
-        <rect x="466" y="24" width="286" height="92" rx="9" fill="#e3efee" stroke="#2b7a78" stroke-width="1.6"/>
+        <rect x="10" y="40" width="210" height="56" rx="9" fill="#f3ece0" stroke="#6a626e" stroke-width="1.5"/>
+        <text x="115" y="63" text-anchor="middle" font-size="12.5" font-weight="700" fill="#2b2730" font-family="Georgia,serif">“the students opened their”</text>
+        <text x="115" y="83" text-anchor="middle" fill="#6a626e">the context so far</text>
+        <line x1="224" y1="68" x2="274" y2="68" stroke="#6a626e" stroke-width="1.5" marker-end="url(#aru1b)"/>
+        <rect x="278" y="40" width="130" height="56" rx="9" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.6"/>
+        <text x="343" y="63" text-anchor="middle" font-size="13" font-weight="700" fill="#3f2a41" font-family="Georgia,serif">GPT</text>
+        <text x="343" y="83" text-anchor="middle" fill="#6a626e">one forward pass</text>
+        <line x1="412" y1="68" x2="462" y2="68" stroke="#6a626e" stroke-width="1.5" marker-end="url(#aru1b)"/>
+        <rect x="466" y="24" width="286" height="92" rx="9" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.6"/>
         <text x="609" y="44" text-anchor="middle" font-size="12" font-weight="700" fill="#1d5654" font-family="Georgia,serif">a probability for every known token</text>
         <text x="609" y="66" text-anchor="middle" fill="#1d5654">books 41%   laptops 23%   minds 9%</text>
-        <text x="609" y="84" text-anchor="middle" fill="#6b7585">…50,254 more, all tiny</text>
+        <text x="609" y="84" text-anchor="middle" fill="#6a626e">…50,254 more, all tiny</text>
         <text x="609" y="105" text-anchor="middle" fill="#1d5654" font-size="11" font-family="Segoe UI,sans-serif">pick one → “books”</text>
-        <path d="M 609 120 L 609 148 L 115 148 L 115 100" stroke="#a35a33" stroke-width="1.5" fill="none" stroke-dasharray="4 3" marker-end="url(#aru1b)"/>
-        <text x="362" y="166" text-anchor="middle" fill="#a35a33" font-size="11.5" font-family="Segoe UI,sans-serif">append the chosen word to the context — and go again. That loop IS text generation.</text>
+        <path d="M 609 120 L 609 148 L 115 148 L 115 100" stroke="#a8441f" stroke-width="1.5" fill="none" stroke-dasharray="4 3" marker-end="url(#aru1b)"/>
+        <text x="362" y="166" text-anchor="middle" fill="#a8441f" font-size="11.5" font-family="Segoe UI,sans-serif">append the chosen word to the context — and go again. That loop IS text generation.</text>
         </g>
       </svg>
       <div class="figcap">One absurdly simple move, repeated: read the context, score every possible next token, pick one, append, repeat. Everything an LLM “does” falls out of this loop.</div>
@@ -872,8 +874,8 @@ p{text-wrap:pretty}
 
 <footer class="foot">
   <div class="foot-in">
-    <img src="../../assets/wordmark.svg" alt="Learn with Adi" style="height:26px">
-    <span>Learn with Adi — Unit 1 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Series</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
+    <img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building" style="height:36px">
+    <span>Learn AI by Building — Unit 1 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Series</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
   </div>
 </footer>
 

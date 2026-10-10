@@ -3,8 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>NumPy — Arrays That Compute — Learn with Adi</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>">
+<title>NumPy — Arrays That Compute — Learn AI by Building</title>
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
 <link rel="stylesheet" href="../../assets/site.css">
 <link rel="stylesheet" href="../../assets/unit.css">
 </head>
@@ -12,7 +14,7 @@
 <header class="masthead">
   <div class="masthead-in">
     <div class="lwa-brandrow">
-      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg" alt="Learn with Adi"></a>
+      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building"></a>
       <div class="lwa-brand-right">
         <span class="lwa-tag"><a href="index.html">Series 02 · Python Programming</a></span>
         <span data-lwa-auth></span>
@@ -52,7 +54,7 @@
   <section id="s1">
     <div class="prereq">
       <div class="pq"><b>The language is behind you</b>Units 1–20 taught Python itself — boxes, loops, functions, classes, the subtle machinery. You don't need any more <i>language</i>. What you need now is the grammar of the tools: this final stretch is that, and it starts here.</div>
-      <div class="pq"><b>You'll need Units 5, 12 and 2</b>List indexing and slicing, comprehensions (the thing we're about to replace), and f-strings with <code>:.2f</code>. <a href="https://colab.research.google.com/github/Aditya-402/learn-with-adi/blob/main/notebooks/python-programming/unit21.ipynb" rel="noopener">▶ Run this unit in Colab</a> if you prefer a notebook.</div>
+      <div class="pq"><b>You'll need Units 5, 12 and 2</b>List indexing and slicing, comprehensions (the thing we're about to replace), and f-strings with <code>:.2f</code>. <a href="https://colab.research.google.com/github/Aditya-402/learn-ai-by-building/blob/main/notebooks/python-programming/unit21.ipynb" rel="noopener">▶ Run this unit in Colab</a> if you prefer a notebook.</div>
       <div class="pq"><b>Where the line is</b>This unit teaches what an array <i>is</i> and how to compute with it. What a model is, what training means — that belongs to the Machine Learning stage, and these notes will point forward rather than pretend. Grammar first; sentences later.</div>
     </div>
     <div class="prose">
@@ -271,44 +273,44 @@ print(grid.ndim)</div>
     </div>
     <div class="fig">
       <svg viewBox="0 0 860 250" role="img" aria-label="The state of an array: a 1-D array of shape (4,) beside a 2-D array of shape (2, 3)">
-        <text x="16" y="26" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6b7585" letter-spacing="1.5">THE STATE OF AN ARRAY — SAY THE SHAPE OUT LOUD</text>
+        <text x="16" y="26" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6a626e" letter-spacing="1.5">THE STATE OF AN ARRAY — SAY THE SHAPE OUT LOUD</text>
         <!-- 1-D -->
-        <text x="40" y="62" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#3d3170">np.array([10, 20, 30, 40])</text>
-        <rect x="40" y="76" width="66" height="48" rx="8" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.5"/>
-        <text x="73" y="106" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#1f2733">10</text>
-        <rect x="112" y="76" width="66" height="48" rx="8" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.5"/>
-        <text x="145" y="106" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#1f2733">20</text>
-        <rect x="184" y="76" width="66" height="48" rx="8" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.5"/>
-        <text x="217" y="106" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#1f2733">30</text>
-        <rect x="256" y="76" width="66" height="48" rx="8" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.5"/>
-        <text x="289" y="106" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#1f2733">40</text>
-        <path d="M40 140 H322" stroke="#5b4b9e" stroke-width="1" stroke-dasharray="4 3"/>
-        <text x="181" y="160" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" font-weight="700" fill="#3d3170">.shape → (4,)</text>
-        <text x="181" y="182" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6b7585">one direction · .ndim → 1</text>
-        <text x="181" y="206" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a35a33">"four elements, in a row"</text>
+        <text x="40" y="62" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#3f2a41">np.array([10, 20, 30, 40])</text>
+        <rect x="40" y="76" width="66" height="48" rx="8" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.5"/>
+        <text x="73" y="106" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#2b2730">10</text>
+        <rect x="112" y="76" width="66" height="48" rx="8" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.5"/>
+        <text x="145" y="106" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#2b2730">20</text>
+        <rect x="184" y="76" width="66" height="48" rx="8" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.5"/>
+        <text x="217" y="106" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#2b2730">30</text>
+        <rect x="256" y="76" width="66" height="48" rx="8" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.5"/>
+        <text x="289" y="106" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#2b2730">40</text>
+        <path d="M40 140 H322" stroke="#5a3d5c" stroke-width="1" stroke-dasharray="4 3"/>
+        <text x="181" y="160" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" font-weight="700" fill="#3f2a41">.shape → (4,)</text>
+        <text x="181" y="182" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6a626e">one direction · .ndim → 1</text>
+        <text x="181" y="206" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a8441f">"four elements, in a row"</text>
         <!-- divider -->
-        <path d="M420 60 V220" stroke="#e3e6ee" stroke-width="1.5"/>
+        <path d="M420 60 V220" stroke="#e9dfcf" stroke-width="1.5"/>
         <!-- 2-D -->
-        <text x="500" y="62" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#3d3170">np.array([[1, 2, 3], [4, 5, 6]])</text>
-        <rect x="500" y="76" width="60" height="40" rx="7" fill="#e3efee" stroke="#2b7a78" stroke-width="1.5"/>
-        <text x="530" y="102" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#1f2733">1</text>
-        <rect x="566" y="76" width="60" height="40" rx="7" fill="#e3efee" stroke="#2b7a78" stroke-width="1.5"/>
-        <text x="596" y="102" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#1f2733">2</text>
-        <rect x="632" y="76" width="60" height="40" rx="7" fill="#e3efee" stroke="#2b7a78" stroke-width="1.5"/>
-        <text x="662" y="102" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#1f2733">3</text>
-        <rect x="500" y="122" width="60" height="40" rx="7" fill="#e3efee" stroke="#2b7a78" stroke-width="1.5"/>
-        <text x="530" y="148" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#1f2733">4</text>
-        <rect x="566" y="122" width="60" height="40" rx="7" fill="#e3efee" stroke="#2b7a78" stroke-width="1.5"/>
-        <text x="596" y="148" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#1f2733">5</text>
-        <rect x="632" y="122" width="60" height="40" rx="7" fill="#e3efee" stroke="#2b7a78" stroke-width="1.5"/>
-        <text x="662" y="148" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#1f2733">6</text>
-        <text x="484" y="102" text-anchor="end" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6b7585">row 0</text>
-        <text x="484" y="148" text-anchor="end" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6b7585">row 1</text>
-        <text x="530" y="182" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6b7585">col 0</text>
-        <text x="596" y="182" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6b7585">col 1</text>
-        <text x="662" y="182" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6b7585">col 2</text>
+        <text x="500" y="62" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#3f2a41">np.array([[1, 2, 3], [4, 5, 6]])</text>
+        <rect x="500" y="76" width="60" height="40" rx="7" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.5"/>
+        <text x="530" y="102" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#2b2730">1</text>
+        <rect x="566" y="76" width="60" height="40" rx="7" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.5"/>
+        <text x="596" y="102" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#2b2730">2</text>
+        <rect x="632" y="76" width="60" height="40" rx="7" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.5"/>
+        <text x="662" y="102" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#2b2730">3</text>
+        <rect x="500" y="122" width="60" height="40" rx="7" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.5"/>
+        <text x="530" y="148" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#2b2730">4</text>
+        <rect x="566" y="122" width="60" height="40" rx="7" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.5"/>
+        <text x="596" y="148" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#2b2730">5</text>
+        <rect x="632" y="122" width="60" height="40" rx="7" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.5"/>
+        <text x="662" y="148" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#2b2730">6</text>
+        <text x="484" y="102" text-anchor="end" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6a626e">row 0</text>
+        <text x="484" y="148" text-anchor="end" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6a626e">row 1</text>
+        <text x="530" y="182" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6a626e">col 0</text>
+        <text x="596" y="182" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6a626e">col 1</text>
+        <text x="662" y="182" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6a626e">col 2</text>
         <text x="596" y="208" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" font-weight="700" fill="#1d5654">.shape → (2, 3)</text>
-        <text x="596" y="230" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a35a33">"two rows, three columns" · .ndim → 2</text>
+        <text x="596" y="230" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a8441f">"two rows, three columns" · .ndim → 2</text>
       </svg>
       <div class="figcap">Fig. 1 — The state of an array. Shape reads (rows, columns) and never the other way round. Every time an array changes hands in your program, this picture should change with it — out loud.</div>
     </div>
@@ -531,54 +533,54 @@ print(f"Failed average: {failed.mean():.2f}")</pre><p>Two masks, two sub-arrays,
     </div>
     <div class="fig">
       <svg viewBox="0 0 860 300" role="img" aria-label="A 4 by 3 marks table with axis=0 collapsing down the columns and axis=1 collapsing across the rows">
-        <text x="16" y="24" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6b7585" letter-spacing="1.5">AXIS IS THE DIRECTION THAT DISAPPEARS</text>
-        <text x="150" y="56" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#3d3170">marks.shape → (4, 3)</text>
+        <text x="16" y="24" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6a626e" letter-spacing="1.5">AXIS IS THE DIRECTION THAT DISAPPEARS</text>
+        <text x="150" y="56" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#3f2a41">marks.shape → (4, 3)</text>
         <!-- table -->
-        <g font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#1f2733">
-          <rect x="150" y="68" width="70" height="38" rx="6" fill="#ffffff" stroke="#e3e6ee"/><text x="185" y="93" text-anchor="middle">91</text>
-          <rect x="222" y="68" width="70" height="38" rx="6" fill="#ffffff" stroke="#e3e6ee"/><text x="257" y="93" text-anchor="middle">78</text>
-          <rect x="294" y="68" width="70" height="38" rx="6" fill="#ffffff" stroke="#e3e6ee"/><text x="329" y="93" text-anchor="middle">85</text>
-          <rect x="150" y="108" width="70" height="38" rx="6" fill="#ffffff" stroke="#e3e6ee"/><text x="185" y="133" text-anchor="middle">45</text>
-          <rect x="222" y="108" width="70" height="38" rx="6" fill="#ffffff" stroke="#e3e6ee"/><text x="257" y="133" text-anchor="middle">32</text>
-          <rect x="294" y="108" width="70" height="38" rx="6" fill="#ffffff" stroke="#e3e6ee"/><text x="329" y="133" text-anchor="middle">58</text>
-          <rect x="150" y="148" width="70" height="38" rx="6" fill="#ffffff" stroke="#e3e6ee"/><text x="185" y="173" text-anchor="middle">78</text>
-          <rect x="222" y="148" width="70" height="38" rx="6" fill="#ffffff" stroke="#e3e6ee"/><text x="257" y="173" text-anchor="middle">88</text>
-          <rect x="294" y="148" width="70" height="38" rx="6" fill="#ffffff" stroke="#e3e6ee"/><text x="329" y="173" text-anchor="middle">92</text>
-          <rect x="150" y="188" width="70" height="38" rx="6" fill="#ffffff" stroke="#e3e6ee"/><text x="185" y="213" text-anchor="middle">85</text>
-          <rect x="222" y="188" width="70" height="38" rx="6" fill="#ffffff" stroke="#e3e6ee"/><text x="257" y="213" text-anchor="middle">70</text>
-          <rect x="294" y="188" width="70" height="38" rx="6" fill="#ffffff" stroke="#e3e6ee"/><text x="329" y="213" text-anchor="middle">76</text>
+        <g font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#2b2730">
+          <rect x="150" y="68" width="70" height="38" rx="6" fill="#ffffff" stroke="#e9dfcf"/><text x="185" y="93" text-anchor="middle">91</text>
+          <rect x="222" y="68" width="70" height="38" rx="6" fill="#ffffff" stroke="#e9dfcf"/><text x="257" y="93" text-anchor="middle">78</text>
+          <rect x="294" y="68" width="70" height="38" rx="6" fill="#ffffff" stroke="#e9dfcf"/><text x="329" y="93" text-anchor="middle">85</text>
+          <rect x="150" y="108" width="70" height="38" rx="6" fill="#ffffff" stroke="#e9dfcf"/><text x="185" y="133" text-anchor="middle">45</text>
+          <rect x="222" y="108" width="70" height="38" rx="6" fill="#ffffff" stroke="#e9dfcf"/><text x="257" y="133" text-anchor="middle">32</text>
+          <rect x="294" y="108" width="70" height="38" rx="6" fill="#ffffff" stroke="#e9dfcf"/><text x="329" y="133" text-anchor="middle">58</text>
+          <rect x="150" y="148" width="70" height="38" rx="6" fill="#ffffff" stroke="#e9dfcf"/><text x="185" y="173" text-anchor="middle">78</text>
+          <rect x="222" y="148" width="70" height="38" rx="6" fill="#ffffff" stroke="#e9dfcf"/><text x="257" y="173" text-anchor="middle">88</text>
+          <rect x="294" y="148" width="70" height="38" rx="6" fill="#ffffff" stroke="#e9dfcf"/><text x="329" y="173" text-anchor="middle">92</text>
+          <rect x="150" y="188" width="70" height="38" rx="6" fill="#ffffff" stroke="#e9dfcf"/><text x="185" y="213" text-anchor="middle">85</text>
+          <rect x="222" y="188" width="70" height="38" rx="6" fill="#ffffff" stroke="#e9dfcf"/><text x="257" y="213" text-anchor="middle">70</text>
+          <rect x="294" y="188" width="70" height="38" rx="6" fill="#ffffff" stroke="#e9dfcf"/><text x="329" y="213" text-anchor="middle">76</text>
         </g>
-        <text x="140" y="93" text-anchor="end" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6b7585">Ada</text>
-        <text x="140" y="133" text-anchor="end" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6b7585">Bob</text>
-        <text x="140" y="173" text-anchor="end" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6b7585">Cara</text>
-        <text x="140" y="213" text-anchor="end" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6b7585">Dev</text>
-        <text x="185" y="62" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6b7585">Maths</text>
-        <text x="257" y="62" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6b7585">Physics</text>
-        <text x="329" y="62" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6b7585">Python</text>
+        <text x="140" y="93" text-anchor="end" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6a626e">Ada</text>
+        <text x="140" y="133" text-anchor="end" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6a626e">Bob</text>
+        <text x="140" y="173" text-anchor="end" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6a626e">Cara</text>
+        <text x="140" y="213" text-anchor="end" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6a626e">Dev</text>
+        <text x="185" y="62" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6a626e">Maths</text>
+        <text x="257" y="62" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6a626e">Physics</text>
+        <text x="329" y="62" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6a626e">Python</text>
         <!-- axis=0 arrows down -->
         <defs>
-          <marker id="ar0" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L7 3 L0 6 z" fill="#5b4b9e"/></marker>
-          <marker id="ar1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L7 3 L0 6 z" fill="#2b7a78"/></marker>
+          <marker id="ar0" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L7 3 L0 6 z" fill="#5a3d5c"/></marker>
+          <marker id="ar1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0 0 L7 3 L0 6 z" fill="#2f5a45"/></marker>
         </defs>
-        <path d="M185 232 V252" stroke="#5b4b9e" stroke-width="1.6" marker-end="url(#ar0)"/>
-        <path d="M257 232 V252" stroke="#5b4b9e" stroke-width="1.6" marker-end="url(#ar0)"/>
-        <path d="M329 232 V252" stroke="#5b4b9e" stroke-width="1.6" marker-end="url(#ar0)"/>
-        <rect x="150" y="256" width="70" height="32" rx="6" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.4"/><text x="185" y="277" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#3d3170">74.75</text>
-        <rect x="222" y="256" width="70" height="32" rx="6" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.4"/><text x="257" y="277" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#3d3170">67.00</text>
-        <rect x="294" y="256" width="70" height="32" rx="6" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.4"/><text x="329" y="277" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#3d3170">77.75</text>
-        <text x="380" y="277" font-family="Cascadia Mono,Consolas,monospace" font-size="12" font-weight="700" fill="#3d3170">axis=0 → (3,) one per subject</text>
+        <path d="M185 232 V252" stroke="#5a3d5c" stroke-width="1.6" marker-end="url(#ar0)"/>
+        <path d="M257 232 V252" stroke="#5a3d5c" stroke-width="1.6" marker-end="url(#ar0)"/>
+        <path d="M329 232 V252" stroke="#5a3d5c" stroke-width="1.6" marker-end="url(#ar0)"/>
+        <rect x="150" y="256" width="70" height="32" rx="6" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.4"/><text x="185" y="277" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#3f2a41">74.75</text>
+        <rect x="222" y="256" width="70" height="32" rx="6" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.4"/><text x="257" y="277" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#3f2a41">67.00</text>
+        <rect x="294" y="256" width="70" height="32" rx="6" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.4"/><text x="329" y="277" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#3f2a41">77.75</text>
+        <text x="380" y="277" font-family="Cascadia Mono,Consolas,monospace" font-size="12" font-weight="700" fill="#3f2a41">axis=0 → (3,) one per subject</text>
         <!-- axis=1 arrows right -->
-        <path d="M372 87 H392" stroke="#2b7a78" stroke-width="1.6" marker-end="url(#ar1)"/>
-        <path d="M372 127 H392" stroke="#2b7a78" stroke-width="1.6" marker-end="url(#ar1)"/>
-        <path d="M372 167 H392" stroke="#2b7a78" stroke-width="1.6" marker-end="url(#ar1)"/>
-        <path d="M372 207 H392" stroke="#2b7a78" stroke-width="1.6" marker-end="url(#ar1)"/>
-        <rect x="398" y="70" width="76" height="34" rx="6" fill="#e3efee" stroke="#2b7a78" stroke-width="1.4"/><text x="436" y="92" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#1d5654">84.67</text>
-        <rect x="398" y="110" width="76" height="34" rx="6" fill="#e3efee" stroke="#2b7a78" stroke-width="1.4"/><text x="436" y="132" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#1d5654">45.00</text>
-        <rect x="398" y="150" width="76" height="34" rx="6" fill="#e3efee" stroke="#2b7a78" stroke-width="1.4"/><text x="436" y="172" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#1d5654">86.00</text>
-        <rect x="398" y="190" width="76" height="34" rx="6" fill="#e3efee" stroke="#2b7a78" stroke-width="1.4"/><text x="436" y="212" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#1d5654">77.00</text>
+        <path d="M372 87 H392" stroke="#2f5a45" stroke-width="1.6" marker-end="url(#ar1)"/>
+        <path d="M372 127 H392" stroke="#2f5a45" stroke-width="1.6" marker-end="url(#ar1)"/>
+        <path d="M372 167 H392" stroke="#2f5a45" stroke-width="1.6" marker-end="url(#ar1)"/>
+        <path d="M372 207 H392" stroke="#2f5a45" stroke-width="1.6" marker-end="url(#ar1)"/>
+        <rect x="398" y="70" width="76" height="34" rx="6" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.4"/><text x="436" y="92" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#1d5654">84.67</text>
+        <rect x="398" y="110" width="76" height="34" rx="6" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.4"/><text x="436" y="132" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#1d5654">45.00</text>
+        <rect x="398" y="150" width="76" height="34" rx="6" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.4"/><text x="436" y="172" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#1d5654">86.00</text>
+        <rect x="398" y="190" width="76" height="34" rx="6" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.4"/><text x="436" y="212" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#1d5654">77.00</text>
         <text x="490" y="132" font-family="Cascadia Mono,Consolas,monospace" font-size="12" font-weight="700" fill="#1d5654">axis=1 → (4,) one per student</text>
-        <text x="490" y="156" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a35a33">the 3 columns disappeared</text>
-        <text x="380" y="299" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a35a33">the 4 rows disappeared</text>
+        <text x="490" y="156" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a8441f">the 3 columns disappeared</text>
+        <text x="380" y="299" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a8441f">the 4 rows disappeared</text>
       </svg>
       <div class="figcap">Fig. 2 — <code>marks.mean(axis=0)</code> runs down the columns and leaves one number per subject; <code>marks.mean(axis=1)</code> runs across the rows and leaves one number per student. Read the shapes, not the arrows: (4, 3) minus axis 0 is (3,); (4, 3) minus axis 1 is (4,).</div>
     </div>
@@ -905,8 +907,8 @@ print(f"min {norm.min():.2f}, max {norm.max():.2f}")</pre><p>Two vectorised oper
 
 <footer class="foot">
   <div class="foot-in">
-    <img src="../../assets/wordmark.svg" alt="Learn with Adi" style="height:26px">
-    <span>Learn with Adi — Unit 21 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Series</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
+    <img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building" style="height:36px">
+    <span>Learn AI by Building — Unit 21 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Series</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
   </div>
 </footer>
 

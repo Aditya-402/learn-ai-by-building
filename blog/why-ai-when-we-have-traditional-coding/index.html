@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Why AI, when we have traditional coding? — Learn AI by Building</title>
+<meta name="description" content="Traditional software already runs your phone, your car and your bank. So why do we need AI at all? One photo of your friend answers it.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=6">
+<link rel="stylesheet" href="../../assets/unit.css?v=6">
+<link rel="stylesheet" href="../../assets/blog.css?v=2">
+</head>
+<body data-lwa-course="blog" data-lwa-chapter="why-ai-when-we-have-traditional-coding">
+<header class="masthead">
+  <div class="masthead-in">
+    <div class="lwa-brandrow">
+      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building"></a>
+      <div class="lwa-brand-right">
+        <span class="lwa-tag"><a href="../index.html">Blog</a></span>
+        <span data-lwa-auth></span>
+      </div>
+    </div>
+    <div class="title-block">
+      <span class="blog-label why">Why does it exist?</span>
+      <h1>Why AI, when we have traditional coding?</h1>
+      <p class="standfirst">Traditional software already runs your phone, your car and your bank. So why do we need AI at all? One photo of your friend answers it.</p>
+      <div class="facts">
+        <div><b>Read</b>~9 min</div>
+        <div><b>Watch</b>10:40 video</div>
+        <div><b>Practice</b>runs right here</div>
+        <div><b>Published</b>9 Oct 2026</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="rail" aria-label="Sections">
+    <div class="rail-h">Contents</div>
+    <a href="#video" class="on">Watch the video</a>
+    <a href="#s1">Software already runs everything</a>
+    <a href="#s2">Job A: you write the rules</a>
+    <a href="#s3">Job B: the wall</a>
+    <a href="#s4">How you really learned it</a>
+    <a href="#s5">Two ways to build it</a>
+    <a href="#s6">Does it really work?</a>
+    <a href="#s7">Certain, or predicted?</a>
+    <a href="#s8">So, AI for everything?</a>
+    <a href="#s9">Most real systems use both</a>
+    <a href="#s10">The takeaway</a>
+    <a href="#homework">Your homework</a>
+    <a href="#related">Related</a>
+    <a href="#refs">References</a>
+  </nav>
+
+  <main>
+
+  <section id="video">
+    <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/3mXQYHynuwY?rel=0" title="Why AI, when we have traditional coding?"
+      allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+    <p class="video-cap">Prefer to watch? This post goes with the video (10:40). <a href="https://www.youtube.com/watch?v=3mXQYHynuwY" rel="noopener">Open it on YouTube</a>, where you can also leave a comment.</p>
+  </section>
+
+  <section id="s1">
+    <div class="prose">
+      <h2>Software already runs everything</h2>
+      <p>Think about it. Your phone, your car, your bank. Behind each of them sit millions of lines of code. A person wrote every rule in them, and the machine follows those rules.</p>
+      <p>So a student asked me a fair question: if code can already run all of this, why do we need AI at all?</p>
+      <p>Let's try to understand. And let's start with a small puzzle. Here are two jobs for a computer.</p>
+    </div>
+    <div class="vs">
+      <div><h4>Job A</h4><p>Take a student's marks, and give the grade.</p></div>
+      <div><h4>Job B</h4><p>Take a photo, and say whether your friend is in it.</p></div>
+    </div>
+    <div class="prose">
+      <p><b>Before you read on, decide.</b> For which job can you write down the exact rules? Hold on to your answer.</p>
+    </div>
+  </section>
+
+  <section id="s2">
+    <div class="prose">
+      <h2>Job A: you write the rules</h2>
+      <p>Say your college gives grades like this. Ninety and above is an A. Seventy five and above is a B. Below that, a C.</p>
+      <p>These are rules. You can write every one of them down. So the program is easy. Press <b>▶ Run</b>, then change 82 to 95, and then to 60.</p>
+      <div class="pyrun" data-id="whyai-grade">
+        <textarea spellcheck="false">marks = 82
+
+if marks >= 90:
+    print("A")
+elif marks >= 75:
+    print("B")
+else:
+    print("C")</textarea>
+      </div>
+      <p>Same marks in, same grade out. Every single time. That is the strength of this kind of code. It is exact. And if someone asks why they got a B, you can show them the line.</p>
+      <p>A person writes the rules, and the computer follows them. This is what we call <b>traditional programming</b>.</p>
+    </div>
+  </section>
+
+  <section id="s3">
+    <div class="prose">
+      <h2>Job B: the wall</h2>
+      <p>Now job B. Say you are scrolling through the group photos from a college trip. In one second, you spot your friend. From the side. In a cap. Even in a dark, blurry one.</p>
+    </div>
+    <div class="prints">
+      <img src="img/friend-side.svg" alt="Group photo: the friend, seen from the side">
+      <img src="img/friend-cap.svg" alt="Group photo: the friend in a cap">
+      <img src="img/friend-night.svg" alt="Dark, blurry group photo">
+      <div class="figcap">You find him in each of these in a second. Now write down how.</div>
+    </div>
+    <div class="prose">
+      <p>Let's try. Two eyes, a nose and a mouth? Everyone in the photo has that. Short hair? So do half the boys in your class. A beard? He shaved last week. Glasses? He took them off for the photo.</p>
+      <p>And it gets worse. Keep all four rules anyway. Then his cousin shows up in a photo. Same hair, same beard, same glasses. Your program says, that is your friend.</p>
+    </div>
+    <div class="prints">
+      <img src="img/friend.svg" alt="The friend">
+      <img src="img/cousin.svg" alt="His cousin, who looks the same">
+      <div class="figcap">Every rule you add to tell them apart breaks on some other photo.</div>
+    </div>
+    <div class="keyidea">
+      <div class="lbl">The wall</div>
+      You know your friend's face perfectly. But you cannot write down how you know it. And if you cannot write the rules, you cannot write the program.
+    </div>
+    <div class="prose">
+      <p>Faces are not special. Understanding what you say to your phone, reading messy handwriting, spotting a spam message. Same wall, every time.</p>
+      <p>And this really happened. In 1979, a company called DEC built a program to check its customers' computer orders. It started with 250 hand-written rules. By 1983, it had about 3,300. Its own builders wrote: <i>"It is difficult now to believe R1 will ever be done."</i></p>
+    </div>
+  </section>
+
+  <section id="s4">
+    <div class="prose">
+      <h2>How you really learned it</h2>
+      <p>So let me ask you a different question. How did you learn your friend's face in the first place?</p>
+      <p>Nobody gave you rules. You simply saw him many times. In class, in the canteen, on the trip. Each time, you knew: this is him. And slowly, your brain worked out the pattern on its own.</p>
+    </div>
+    <div class="prints">
+      <img src="img/friend-class.svg" alt="The friend in class">
+      <img src="img/friend-canteen.svg" alt="The friend in the canteen">
+      <img src="img/friend-trip.svg" alt="The friend on the trip">
+      <div class="figcap">No rules. Many examples.</div>
+    </div>
+    <div class="prose">
+      <p>So here is the idea. What if we do the same for a computer? We don't give it rules. We give it thousands of photos, each with the answer. This is your friend. This is not. And the computer works out the rules by itself.</p>
+      <p>Learning the rules from examples, instead of being given them, is what we call <b>machine learning</b>. Most of what we call AI today is built on this idea.</p>
+      <p>The idea is older than you might think. In 1959, a researcher at IBM wrote a program to play checkers, a board game a bit like a simpler chess. It learned by playing. After eight to ten hours of practice, it played better than the person who wrote it.</p>
+    </div>
+  </section>
+
+  <section id="s5">
+    <div class="prose">
+      <h2>Two ways to build it</h2>
+      <p>Let's put the two side by side.</p>
+    </div>
+    <div class="vs">
+      <div><h4>Traditional coding</h4><p class="flow">rules → logic → program → answers</p></div>
+      <div><h4>Machine learning</h4><p class="flow">data → training → model → deployment</p></div>
+    </div>
+    <div class="prose">
+      <p>In traditional coding, a person discovers the rules. The rules become logic. The logic goes into a program. And the program gives you the answers.</p>
+      <p>Machine learning starts from the other end. You start with data. The data goes through a training algorithm. Out comes a model. And the model is put to work in a real app.</p>
+      <p>Finding the rules from data is what we call <b>training</b>. What comes out is what we call a <b>model</b>. Sometimes a model is a set of rules the computer found. Most often, it is just numbers. Either way, no human wrote them. And putting the model to work is what we call <b>deployment</b>.</p>
+    </div>
+  </section>
+
+  <section id="s6">
+    <div class="prose">
+      <h2>Does it really work?</h2>
+      <p>Let's look at one famous yearly challenge, called ImageNet. Every year, teams from around the world sent in their programs. Each program looks at a photo, and names what is in it. Not faces. Things. Dogs, cars, mushrooms, a thousand kinds of things. It gets five guesses.</p>
+    </div>
+    <div class="prints">
+      <img src="img/bar-2010.svg" alt="2010: 28 wrong out of 100">
+      <img src="img/bar-2015.svg" alt="2015: under 4 wrong out of 100">
+      <img src="img/bar-human.svg" alt="One careful human: about 5 wrong out of 100">
+      <div class="figcap">Wrong out of every 100 photos. Sources at the end of the page.</div>
+    </div>
+    <div class="prose">
+      <p>In 2010, the best program still got about 28 out of every 100 wrong. Then the models were improved, with better ways of learning. By 2015, the best one got fewer than 4 wrong. For comparison, one careful human tried the same challenge, and got about 5 wrong.</p>
+      <p>Nobody wrote the rules for a thousand kinds of things. The programs learned them. And today it is everywhere. In one large report this year, 88 out of every 100 organisations surveyed said they use AI.</p>
+    </div>
+  </section>
+
+  <section id="s7">
+    <div class="prose">
+      <h2>Certain, or predicted?</h2>
+      <p>But notice something. Even the best program still got some wrong. That is not a bug. That is how AI answers.</p>
+    </div>
+    <div class="vs">
+      <div><h4>Traditional code is certain</h4><p>Same input, same output, every single time.</p></div>
+      <div><h4>AI predicts</h4><p>It gives you its best guess, with how sure it is.</p></div>
+    </div>
+    <div class="prose">
+      <p>And you already live with predictions. Say you hear the weather report. Sixty percent chance of rain. You carry an umbrella, and sometimes it does not rain. Nobody calls the report broken. It told you how sure it was.</p>
+      <p>Or say Google Maps tells you, thirty five minutes. You reach in thirty four, or thirty six. If traffic catches up, it could take longer than that. That estimate is a prediction, and Google makes it with machine learning.</p>
+    </div>
+    <div class="prints">
+      <img src="img/rain.svg" alt="Rain cloud and umbrella: 60% chance of rain">
+      <img src="img/maps.svg" alt="A map on a phone showing about 35 minutes">
+      <div class="figcap">Predictions you already trust. So with AI, always ask one more question: how sure is it?</div>
+    </div>
+    <div class="confuse">
+      <div class="lbl">Careful here</div>
+      <p>Certain does not mean correct. If the rule is wrong, the code is wrong every single time.</p>
+    </div>
+  </section>
+
+  <section id="s8">
+    <div class="prose">
+      <h2>So, AI for everything?</h2>
+      <p>No. Go back to job A, the grades. Would you show a machine thousands of mark sheets, to learn a rule you can write in three lines?</p>
+      <p>It would get most of them right. But one day, it gives a B to someone with ninety five. And it cannot tell you why.</p>
+    </div>
+    <div class="prints">
+      <img src="img/marksheet-wrong.svg" alt="A learned grade: 95 marks given a B, with no reason">
+    </div>
+    <div class="prose">
+      <p>Because learning has a cost. It needs many examples. It is sometimes wrong. And it cannot always explain itself. Code with written rules has none of these costs.</p>
+      <p>So when you can write the rules, write them. Use learning only where you cannot. A well known engineering guide from Google puts it as rule number one: <i>"Don't be afraid to launch a product without machine learning."</i></p>
+      <p>Fit for purpose thinking, not trend first thinking.</p>
+    </div>
+  </section>
+
+  <section id="s9">
+    <div class="prose">
+      <h2>Most real systems use both</h2>
+      <p>Say you pay a friend from your bank app. The money moving from your account follows exact rules. Not one rupee can go missing. That part is code.</p>
+      <p>But say a payment looks unusual. A big amount, at midnight, to a stranger. Your bank may stop it, or message you to check. Is this a fraud? Nobody can write all those rules. So that part is AI. It learns from past frauds, and it predicts.</p>
+    </div>
+    <div class="prints">
+      <img src="img/bank-sms.svg" alt="A bank message asking: did you make this payment?">
+    </div>
+    <div class="prose">
+      <p>In India, the Reserve Bank has even built an AI model to help banks catch accounts used for fraud. Same app. Code for the certain part. AI for the guess.</p>
+    </div>
+    <div class="keyidea">
+      <div class="lbl">Key idea</div>
+      It was never AI or coding. It is AI and coding, each for its own job.
+    </div>
+  </section>
+
+  <section id="s10">
+    <div class="prose">
+      <h2>The takeaway</h2>
+      <p>So, why AI, when we already have traditional coding? AI did not come because traditional coding was bad. It came because some problems were never programming problems. They were learning problems.</p>
+      <p>When we know the rules, we program them. When we only have examples, we learn them.</p>
+      <p>But this opens a new question. If the machine learns from our examples, who picks the examples? And who checks what it learned?</p>
+    </div>
+  </section>
+
+  <section id="homework">
+    <div class="next">
+      <div class="lbl">Your homework</div>
+      <h3>Go and meet the wall yourself</h3>
+      <p style="font-size:var(--fs-cap);color:var(--slate)">Below are ten real-looking messages, each marked spam or not. Write three rules inside <code>looks_like_spam</code>, then press <b>▶ Run</b>. The program counts how many your rules got wrong. Make it zero. Then imagine a thousand new messages tomorrow.</p>
+      <div class="pyrun" data-id="whyai-spam">
+        <textarea spellcheck="false">messages = [
+    ("You WON Rs 10 lakh!!! Click now to claim", True),
+    ("Your OTP for login is 482193. Do not share it", False),
+    ("Mom: call me when you are free", False),
+    ("Flat 70% OFF on shoes, today only!!!", True),
+    ("Reminder: semester fees are due on Friday", False),
+    ("Congrats! You are selected for a FREE iPhone. Click the link", True),
+    ("Class moved to 3 pm tomorrow", False),
+    ("URGENT: your account will be blocked. Update KYC at this link", True),
+    ("Happy birthday da! Party tonight?", False),
+    ("Your parcel is out for delivery", False),
+]
+
+def looks_like_spam(text):
+    t = text.lower()
+    # Rule 1
+    if "won" in t:
+        return True
+    # Rule 2: write your own
+    # Rule 3: write your own
+    return False
+
+wrong = 0
+for text, is_spam in messages:
+    guess = looks_like_spam(text)
+    if guess != is_spam:
+        wrong += 1
+        print("WRONG |", text)
+print("Your rules got", wrong, "of", len(messages), "wrong.")</textarea>
+      </div>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:12px">If your rules broke, that is good. You just met the wall yourself.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:10px"><i>One question for you: one job from your day where you could write the rules, and one where you never could? Tell me under the video.</i></p>
+    </div>
+  </section>
+
+  <section id="related">
+    <div class="prose"><h2>Related</h2></div>
+    <div class="blog-list"><a class="blog-item" href="../why-learn-coding-when-ai-writes-code/"><span class="blog-label why">Blog · Why does it exist?</span><h3>Why learn coding when AI writes code?</h3></a></div>
+  </section>
+
+  <section class="lwa-refs" id="refs">
+    <div class="prose">
+      <h2>References</h2>
+      <p>Every number on this page, and where it comes from. Checked on 9 Oct 2026.</p>
+    </div>
+    <ol>
+      <li><b>ImageNet Large Scale Visual Recognition Challenge</b> — <i>ILSVRC 2010 results</i>. <span class="why">The 2010 winner&#x27;s score: about 28 wrong in 100 (top-5 error 28.2%).</span> <a href="https://www.image-net.org/challenges/LSVRC/2010/results.php" rel="noopener">link</a></li>
+      <li><b>He, K., Zhang, X., Ren, S., Sun, J.</b> — <i>Deep Residual Learning for Image Recognition (2015)</i>. <span class="why">The 2015 winner: 3.57% error, fewer than 4 in 100.</span> <a href="https://arxiv.org/abs/1512.03385" rel="noopener">link</a></li>
+      <li><b>Karpathy, A.</b> — <i>What I learned from competing against a ConvNet on ImageNet (2014)</i>. <span class="why">One careful human: 5.1% error. One trained annotator, not &#x27;all humans&#x27;.</span> <a href="https://karpathy.github.io/2014/09/02/what-i-learned-from-competing-against-a-convnet-on-imagenet/" rel="noopener">link</a></li>
+      <li><b>McDermott, J.</b> — <i>R1: The Formative Years, AI Magazine</i>. <span class="why">What DEC&#x27;s rule-based program did: configure customers&#x27; computer orders.</span> <a href="https://ojs.aaai.org/index.php/aimagazine/article/view/100" rel="noopener">link</a></li>
+      <li><b>Bachant, J. &amp; McDermott, J.</b> — <i>R1 Revisited: Four Years in the Trenches, AI Magazine 5(3), 1984</i>. <span class="why">250 rules in 1979, about 3,300 by 1983, and &#x27;difficult now to believe R1 will ever be done&#x27;.</span> <a href="https://ojs.aaai.org/aimagazine/index.php/aimagazine/article/view/445" rel="noopener">link</a></li>
+      <li><b>Samuel, A. L.</b> — <i>Some Studies in Machine Learning Using the Game of Checkers, IBM Journal, 1959</i>. <span class="why">The checkers program that learned by playing and beat its own author.</span></li>
+      <li><b>Stanford HAI</b> — <i>AI Index 2026, Economy chapter</i>. <span class="why">88% of surveyed organisations used AI in 2025.</span> <a href="https://hai.stanford.edu/ai-index/2026-ai-index-report/economy" rel="noopener">link</a></li>
+      <li><b>Google DeepMind</b> — <i>Traffic prediction with advanced Graph Neural Networks (2020)</i>. <span class="why">Google Maps&#x27; arrival times are predicted with machine learning.</span> <a href="https://deepmind.google/discover/blog/traffic-prediction-with-advanced-graph-neural-networks/" rel="noopener">link</a></li>
+      <li><b>Reserve Bank of India</b> — <i>Statement on Developmental and Regulatory Policies, 6 Dec 2024</i>. <span class="why">MuleHunter.AI, an AI/ML model that helps banks catch accounts used for fraud.</span> <a href="https://www.rbi.org.in/" rel="noopener">link</a></li>
+      <li><b>Zinkevich, M.</b> — <i>Rules of Machine Learning, Google for Developers</i>. <span class="why">Rule #1: &#x27;Don&#x27;t be afraid to launch a product without machine learning.&#x27;</span> <a href="https://developers.google.com/machine-learning/guides/rules-of-ml" rel="noopener">link</a></li>
+      <li><b>Chollet, F.</b> — <i>Deep Learning with Python, chapter 1</i>. <span class="why">The well-known picture: rules + data → answers, against data + answers → rules.</span> <a href="https://deeplearningwithpython.io/chapters/chapter01_what-is-deep-learning/" rel="noopener">link</a></li>
+      <li><b>Graham, P.</b> — <i>A Plan for Spam (2002)</i>. <span class="why">For your homework: six months of hand-written spam rules, then a filter that learns.</span> <a href="https://paulgraham.com/spam.html" rel="noopener">link</a></li>
+      </ol>
+  </section>
+
+  <div class="lwa-chapnav">
+    <a href="../index.html"><span class="k">← Blog</span><span class="t">All posts</span></a>
+    <a href="https://www.youtube.com/watch?v=3mXQYHynuwY" rel="noopener"><span class="k">Watch →</span><span class="t">The video on YouTube</span></a>
+  </div>
+
+  </main>
+</div>
+
+<footer class="foot">
+  <div class="foot-in">
+    <img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building" style="height:36px">
+    <span>Learn AI by Building — Blog · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="../index.html" style="color:var(--accent)">Blog</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
+  </div>
+</footer>
+<script src="../../assets/site-config.js"></script>
+<script src="../../assets/progress.js"></script>
+<script src="../../assets/pyrun.js"></script>
+</body>
+</html>

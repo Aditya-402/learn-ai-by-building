@@ -3,16 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Pythonic Loop — Comprehensions — Learn with Adi</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>">
-<link rel="stylesheet" href="../../assets/site.css?v=4">
-<link rel="stylesheet" href="../../assets/unit.css?v=4">
+<title>The Pythonic Loop — Comprehensions — Learn AI by Building</title>
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=6">
+<link rel="stylesheet" href="../../assets/unit.css?v=6">
 </head>
 <body data-lwa-course="python-programming" data-lwa-chapter="u12" data-lwa-title="Unit 12 · The Pythonic loop — comprehensions">
 <header class="masthead">
   <div class="masthead-in">
     <div class="lwa-brandrow">
-      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg" alt="Learn with Adi"></a>
+      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building"></a>
       <div class="lwa-brand-right">
         <span class="lwa-tag"><a href="index.html">Series 02 · Python Programming</a></span>
         <span data-lwa-auth></span>
@@ -51,7 +53,7 @@
   <section id="s1">
     <div class="prereq">
       <div class="pq"><b>You'll need the whole level</b>Lists and loops (Units 4–6), functions (Unit 7), f-strings and their alignment tricks (Unit 8). This unit deliberately harvests all of it — that's the point of a checkpoint.</div>
-      <div class="pq"><b>How this unit works</b>Same rhythm: each concept is a 3–4 minute read, then ~10 minutes of practice. <a href="https://colab.research.google.com/github/Aditya-402/learn-with-adi/blob/main/notebooks/python-programming/unit12.ipynb" rel="noopener">▶ Run this unit in Colab</a> if you prefer a notebook.</div>
+      <div class="pq"><b>How this unit works</b>Same rhythm: each concept is a 3–4 minute read, then ~10 minutes of practice. <a href="https://colab.research.google.com/github/Aditya-402/learn-ai-by-building/blob/main/notebooks/python-programming/unit12.ipynb" rel="noopener">▶ Run this unit in Colab</a> if you prefer a notebook.</div>
       <div class="pq"><b>The last Beginner unit</b>The build at 12.5 is bigger than usual — a proper checkpoint project. Every earlier unit shows up in it. Finish this page and the Beginner level is complete.</div>
     </div>
     <div class="prose">
@@ -88,27 +90,27 @@ print(doubled)</div>
     </div>
     <div class="fig">
       <svg viewBox="0 0 860 250" role="img" aria-label="The four-line accumulate loop and the one-line comprehension, with matching parts colored the same">
-        <text x="16" y="26" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6b7585" letter-spacing="1.5">SAME MACHINE, FOLDED — MATCHING PARTS, MATCHING COLORS</text>
-        <rect x="30" y="46" width="360" height="150" rx="10" fill="#f0f1f7" stroke="#e3e6ee"/>
-        <text x="52" y="76" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#6b7585">doubled = []</text>
+        <text x="16" y="26" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6a626e" letter-spacing="1.5">SAME MACHINE, FOLDED — MATCHING PARTS, MATCHING COLORS</text>
+        <rect x="30" y="46" width="360" height="150" rx="10" fill="#f3ece0" stroke="#e9dfcf"/>
+        <text x="52" y="76" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#6a626e">doubled = []</text>
         <text x="52" y="102" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#1d5654" font-weight="700">for n in numbers:</text>
-        <text x="52" y="128" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#6b7585">    doubled.append(</text>
-        <text x="209" y="128" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#3d3170" font-weight="700">n * 2</text>
-        <text x="252" y="128" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#6b7585">)</text>
-        <text x="52" y="168" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a35a33">grey parts = scaffolding, rebuilt by hand every time</text>
-        <path d="M400 121 L470 121" stroke="#5b4b9e" stroke-width="1.6" fill="none"/>
-        <path d="M470 121 l-9 -5 v10 z" fill="#5b4b9e"/>
-        <text x="435" y="110" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#3d3170">folds to</text>
-        <rect x="480" y="86" width="356" height="70" rx="10" fill="#ffffff" stroke="#5b4b9e" stroke-width="1.5"/>
-        <text x="500" y="128" font-family="Cascadia Mono,Consolas,monospace" font-size="14" fill="#1f2733">[</text>
-        <text x="510" y="128" font-family="Cascadia Mono,Consolas,monospace" font-size="14" fill="#3d3170" font-weight="700">n * 2</text>
+        <text x="52" y="128" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#6a626e">    doubled.append(</text>
+        <text x="209" y="128" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#3f2a41" font-weight="700">n * 2</text>
+        <text x="252" y="128" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#6a626e">)</text>
+        <text x="52" y="168" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a8441f">grey parts = scaffolding, rebuilt by hand every time</text>
+        <path d="M400 121 L470 121" stroke="#5a3d5c" stroke-width="1.6" fill="none"/>
+        <path d="M470 121 l-9 -5 v10 z" fill="#5a3d5c"/>
+        <text x="435" y="110" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#3f2a41">folds to</text>
+        <rect x="480" y="86" width="356" height="70" rx="10" fill="#ffffff" stroke="#5a3d5c" stroke-width="1.5"/>
+        <text x="500" y="128" font-family="Cascadia Mono,Consolas,monospace" font-size="14" fill="#2b2730">[</text>
+        <text x="510" y="128" font-family="Cascadia Mono,Consolas,monospace" font-size="14" fill="#3f2a41" font-weight="700">n * 2</text>
         <text x="558" y="128" font-family="Cascadia Mono,Consolas,monospace" font-size="14" fill="#1d5654" font-weight="700">for n in numbers</text>
-        <text x="712" y="128" font-family="Cascadia Mono,Consolas,monospace" font-size="14" fill="#1f2733">]</text>
-        <text x="533" y="180" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#3d3170">what each item becomes</text>
-        <path d="M534 168 L534 138" stroke="#5b4b9e" stroke-width="1.2" fill="none"/>
+        <text x="712" y="128" font-family="Cascadia Mono,Consolas,monospace" font-size="14" fill="#2b2730">]</text>
+        <text x="533" y="180" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#3f2a41">what each item becomes</text>
+        <path d="M534 168 L534 138" stroke="#5a3d5c" stroke-width="1.2" fill="none"/>
         <text x="640" y="210" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#1d5654">the same for-line from Unit 4</text>
-        <path d="M640 198 L636 140" stroke="#2b7a78" stroke-width="1.2" fill="none"/>
-        <text x="30" y="232" font-family="Segoe UI,system-ui,sans-serif" font-size="12" fill="#6b7585">read aloud: "a list of n-times-two, for each n in numbers"</text>
+        <path d="M640 198 L636 140" stroke="#2f5a45" stroke-width="1.2" fill="none"/>
+        <text x="30" y="232" font-family="Segoe UI,system-ui,sans-serif" font-size="12" fill="#6a626e">read aloud: "a list of n-times-two, for each n in numbers"</text>
       </svg>
       <div class="figcap">Fig. 1 — The accumulate loop and the comprehension are one machine in two spellings. Only the colored parts carry meaning; the grey scaffolding is what the comprehension deletes.</div>
     </div>
@@ -664,8 +666,8 @@ print([fizzbuzz(n) for n in range(1, limit + 1)])</pre><p>Test 15 first or it ma
 
 <footer class="foot">
   <div class="foot-in">
-    <img src="../../assets/wordmark.svg" alt="Learn with Adi" style="height:26px">
-    <span>Learn with Adi — Unit 12 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Series</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
+    <img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building" style="height:36px">
+    <span>Learn AI by Building — Unit 12 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Series</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
   </div>
 </footer>
 

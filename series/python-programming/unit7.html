@@ -3,16 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Packaging Logic — Functions — Learn with Adi</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>">
-<link rel="stylesheet" href="../../assets/site.css?v=4">
-<link rel="stylesheet" href="../../assets/unit.css?v=4">
+<title>Packaging Logic — Functions — Learn AI by Building</title>
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=6">
+<link rel="stylesheet" href="../../assets/unit.css?v=6">
 </head>
 <body data-lwa-course="python-programming" data-lwa-chapter="u07" data-lwa-title="Unit 7 · Packaging logic — functions">
 <header class="masthead">
   <div class="masthead-in">
     <div class="lwa-brandrow">
-      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg" alt="Learn with Adi"></a>
+      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building"></a>
       <div class="lwa-brand-right">
         <span class="lwa-tag"><a href="index.html">Series 02 · Python Programming</a></span>
         <span data-lwa-auth></span>
@@ -51,7 +53,7 @@
   <section id="s1">
     <div class="prereq">
       <div class="pq"><b>You'll need Units 4 &amp; 5</b>Loops and lists carry this unit's build — we're rebuilding Unit 5's to-do list, properly. Units 2 and 3 (boxes, if/else) are assumed without ceremony.</div>
-      <div class="pq"><b>How this unit works</b>Same rhythm: each concept is a 3–4 minute read, then ~10 minutes of practice. <a href="https://colab.research.google.com/github/Aditya-402/learn-with-adi/blob/main/notebooks/python-programming/unit7.ipynb" rel="noopener">▶ Run this unit in Colab</a> if you prefer a notebook.</div>
+      <div class="pq"><b>How this unit works</b>Same rhythm: each concept is a 3–4 minute read, then ~10 minutes of practice. <a href="https://colab.research.google.com/github/Aditya-402/learn-ai-by-building/blob/main/notebooks/python-programming/unit7.ipynb" rel="noopener">▶ Run this unit in Colab</a> if you prefer a notebook.</div>
       <div class="pq"><b>One warning up front</b>The single biggest stumble in this unit is that <i>defining</i> a function does nothing visible. Hold onto that sentence; 7.1 exists to make it feel obvious.</div>
     </div>
     <div class="prose">
@@ -292,34 +294,34 @@ hey!</div>
     </div>
     <div class="fig">
       <svg viewBox="0 0 860 250" role="img" aria-label="Call diagram: arguments 4 and 3 flow into parameter slots width and height; the body computes 12; the return value flows back into the box room">
-        <text x="16" y="26" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6b7585" letter-spacing="1.5">ONE CALL, START TO FINISH</text>
+        <text x="16" y="26" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6a626e" letter-spacing="1.5">ONE CALL, START TO FINISH</text>
         <!-- call site -->
-        <rect x="30" y="60" width="240" height="52" rx="9" fill="#f0f1f7" stroke="#e3e6ee" stroke-width="1.5"/>
-        <text x="150" y="82" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#1f2733">room = area(4, 3)</text>
-        <text x="150" y="101" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6b7585">the call site</text>
+        <rect x="30" y="60" width="240" height="52" rx="9" fill="#f3ece0" stroke="#e9dfcf" stroke-width="1.5"/>
+        <text x="150" y="82" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#2b2730">room = area(4, 3)</text>
+        <text x="150" y="101" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6a626e">the call site</text>
         <!-- function panel -->
-        <rect x="360" y="48" width="330" height="120" rx="12" fill="#ffffff" stroke="#5b4b9e" stroke-width="1.5"/>
-        <text x="376" y="72" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#3d3170">def area(width, height):</text>
-        <rect x="392" y="84" width="110" height="44" rx="8" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.2"/>
-        <text x="447" y="102" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" font-weight="700" fill="#3d3170">width</text>
-        <text x="447" y="120" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#1f2733">4</text>
-        <rect x="516" y="84" width="110" height="44" rx="8" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.2"/>
-        <text x="571" y="102" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" font-weight="700" fill="#3d3170">height</text>
-        <text x="571" y="120" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#1f2733">3</text>
-        <text x="392" y="154" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#1f2733">return width * height&nbsp;&nbsp;→ 12</text>
+        <rect x="360" y="48" width="330" height="120" rx="12" fill="#ffffff" stroke="#5a3d5c" stroke-width="1.5"/>
+        <text x="376" y="72" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#3f2a41">def area(width, height):</text>
+        <rect x="392" y="84" width="110" height="44" rx="8" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.2"/>
+        <text x="447" y="102" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" font-weight="700" fill="#3f2a41">width</text>
+        <text x="447" y="120" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b2730">4</text>
+        <rect x="516" y="84" width="110" height="44" rx="8" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.2"/>
+        <text x="571" y="102" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" font-weight="700" fill="#3f2a41">height</text>
+        <text x="571" y="120" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b2730">3</text>
+        <text x="392" y="154" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#2b2730">return width * height&nbsp;&nbsp;→ 12</text>
         <!-- arrows in -->
-        <path d="M272 74 C 320 66, 340 90, 390 100" fill="none" stroke="#2b7a78" stroke-width="1.8" marker-end="url(#arr7)"/>
+        <path d="M272 74 C 320 66, 340 90, 390 100" fill="none" stroke="#2f5a45" stroke-width="1.8" marker-end="url(#arr7)"/>
         <text x="316" y="66" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#1d5654">arguments in</text>
         <!-- arrow back -->
-        <path d="M420 178 C 300 218, 200 190, 140 122" fill="none" stroke="#a35a33" stroke-width="1.8" marker-end="url(#arr7b)"/>
-        <text x="272" y="216" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#a35a33">the return value flows back — the call becomes 12</text>
+        <path d="M420 178 C 300 218, 200 190, 140 122" fill="none" stroke="#a8441f" stroke-width="1.8" marker-end="url(#arr7b)"/>
+        <text x="272" y="216" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#a8441f">the return value flows back — the call becomes 12</text>
         <!-- result box -->
-        <rect x="46" y="150" width="130" height="52" rx="9" fill="#e3efee" stroke="#2b7a78" stroke-width="1.5"/>
+        <rect x="46" y="150" width="130" height="52" rx="9" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.5"/>
         <text x="111" y="172" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#1d5654">room</text>
-        <text x="111" y="192" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#1f2733">12</text>
+        <text x="111" y="192" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#2b2730">12</text>
         <defs>
-          <marker id="arr7" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#2b7a78"/></marker>
-          <marker id="arr7b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#a35a33"/></marker>
+          <marker id="arr7" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#2f5a45"/></marker>
+          <marker id="arr7b" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#a8441f"/></marker>
         </defs>
       </svg>
       <div class="figcap">Fig. 1 — The full journey of <code>room = area(4, 3)</code>: arguments flow into the parameter slots, the body computes, and the returned value flows back to the call site, where it's stored like any other value.</div>
@@ -441,23 +443,23 @@ Outside: biscuit</div>
     </div>
     <div class="fig">
       <svg viewBox="0 0 860 220" role="img" aria-label="Scope diagram: the main room keeps its snack box; the function call's workbench holds a shadowing snack box that is cleared when the call ends">
-        <text x="16" y="26" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6b7585" letter-spacing="1.5">THE ROOM AND THE WORKBENCH, DURING picnic()</text>
+        <text x="16" y="26" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6a626e" letter-spacing="1.5">THE ROOM AND THE WORKBENCH, DURING picnic()</text>
         <!-- room -->
-        <rect x="30" y="46" width="330" height="150" rx="12" fill="#ffffff" stroke="#e3e6ee" stroke-width="1.5"/>
-        <text x="46" y="72" font-family="Segoe UI,system-ui,sans-serif" font-size="12" font-weight="700" fill="#4a5a72">the main room — the program's boxes</text>
-        <rect x="46" y="88" width="150" height="56" rx="9" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.5"/>
-        <text x="121" y="110" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#3d3170">snack</text>
-        <text x="121" y="132" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#1f2733">"biscuit"</text>
-        <text x="121" y="176" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6b7585">untouched the whole time</text>
+        <rect x="30" y="46" width="330" height="150" rx="12" fill="#ffffff" stroke="#e9dfcf" stroke-width="1.5"/>
+        <text x="46" y="72" font-family="Segoe UI,system-ui,sans-serif" font-size="12" font-weight="700" fill="#554b58">the main room — the program's boxes</text>
+        <rect x="46" y="88" width="150" height="56" rx="9" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.5"/>
+        <text x="121" y="110" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#3f2a41">snack</text>
+        <text x="121" y="132" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#2b2730">"biscuit"</text>
+        <text x="121" y="176" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6a626e">untouched the whole time</text>
         <!-- bench -->
-        <rect x="470" y="46" width="360" height="150" rx="12" fill="#f0f1f7" stroke="#2b7a78" stroke-width="1.5" stroke-dasharray="7 5"/>
+        <rect x="470" y="46" width="360" height="150" rx="12" fill="#f3ece0" stroke="#2f5a45" stroke-width="1.5" stroke-dasharray="7 5"/>
         <text x="486" y="72" font-family="Segoe UI,system-ui,sans-serif" font-size="12" font-weight="700" fill="#1d5654">picnic()'s workbench — this call only</text>
-        <rect x="486" y="88" width="150" height="56" rx="9" fill="#e3efee" stroke="#2b7a78" stroke-width="1.5"/>
+        <rect x="486" y="88" width="150" height="56" rx="9" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.5"/>
         <text x="561" y="110" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#1d5654">snack</text>
-        <text x="561" y="132" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#1f2733">"mango"</text>
-        <text x="658" y="110" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#a35a33">shadows the room's box</text>
-        <text x="658" y="128" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#a35a33">while the call runs</text>
-        <text x="486" y="180" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6b7585">cleared the instant the call ends — all bench boxes vanish</text>
+        <text x="561" y="132" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#2b2730">"mango"</text>
+        <text x="658" y="110" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#a8441f">shadows the room's box</text>
+        <text x="658" y="128" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#a8441f">while the call runs</text>
+        <text x="486" y="180" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6a626e">cleared the instant the call ends — all bench boxes vanish</text>
       </svg>
       <div class="figcap">Fig. 2 — Why the trace prints mango then biscuit: two boxes with one name, on two different surfaces. The dashed bench exists only for the duration of the call.</div>
     </div>
@@ -798,8 +800,8 @@ print(max3(4, 2, 3))</pre><p>Two things to relish: <code>max2</code> needs no <c
 
 <footer class="foot">
   <div class="foot-in">
-    <img src="../../assets/wordmark.svg" alt="Learn with Adi" style="height:26px">
-    <span>Learn with Adi — Unit 7 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Series</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
+    <img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building" style="height:36px">
+    <span>Learn AI by Building — Unit 7 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Series</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
   </div>
 </footer>
 

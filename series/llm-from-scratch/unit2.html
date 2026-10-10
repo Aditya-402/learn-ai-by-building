@@ -3,27 +3,29 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>From Text to Tensors — Learn with Adi</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>">
-<link rel="stylesheet" href="../../assets/site.css?v=4">
+<title>From Text to Tensors — Learn AI by Building</title>
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=6">
 <style>
 :root{
-  --ground:#f6f7fb;
+  --ground:#faf6ee;
   --panel:#ffffff;
-  --subtle:#f0f1f7;
-  --ink:#1f2733;
-  --muted:#6b7585;
-  --line:#e3e6ee;
-  --accent:#5b4b9e;
-  --accent-deep:#3d3170;
-  --accent-wash:#ecebf6;
-  --teal:#2b7a78;
-  --teal-wash:#e3efee;
-  --clay:#a35a33;
-  --clay-wash:#f7ebe4;
-  --gold:#8a6d1c;
-  --gold-wash:#f5f0df;
-  --slate:#4a5a72;
+  --subtle:#f3ece0;
+  --ink:#2b2730;
+  --muted:#6a626e;
+  --line:#e9dfcf;
+  --accent:#5a3d5c;
+  --accent-deep:#3f2a41;
+  --accent-wash:#f1e7ef;
+  --teal:#2f5a45;
+  --teal-wash:#e4ede6;
+  --clay:#a8441f;
+  --clay-wash:#f8e6dc;
+  --gold:#80590f;
+  --gold-wash:#f8ecd3;
+  --slate:#554b58;
 
   --serif:'Iowan Old Style','Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif;
   --sans:'Segoe UI Variable Text','Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
@@ -146,12 +148,12 @@ tr:last-child td{border-bottom:none}
   padding:4px 9px;white-space:pre;
 }
 .tk.punc{background:var(--gold-wash);border-color:#d8ca9a;color:#6d5514}
-.tk.ws{background:#eef0f6;border-color:var(--line);color:#9aa3b2;font-style:italic}
+.tk.ws{background:#f2ebe0;border-color:var(--line);color:#9aa3b2;font-style:italic}
 .tk.spec{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:700}
 .tk.unk{background:var(--clay-wash);border-color:#d9ab8d;color:#7c4324;font-weight:600}
 .tk.sub{background:var(--teal-wash);border-color:var(--teal);color:#1d5654}
 .tk .id{display:block;font-size:.68rem;color:var(--muted);text-align:center;margin-top:1px;font-weight:600}
-.tk.spec .id{color:#d8d3ee}
+.tk.spec .id{color:#e2d3e1}
 .count-pill{
   display:inline-block;font-size:var(--fs-xs);font-weight:700;letter-spacing:.06em;
   background:var(--accent-wash);color:var(--accent-deep);border-radius:20px;padding:3px 11px;
@@ -198,9 +200,9 @@ tr:last-child td{border-bottom:none}
 
 /* code */
 pre{
-  margin:0;background:#f4f4f9;border:1px solid var(--line);border-radius:var(--r);
+  margin:0;background:#f8f3ea;border:1px solid var(--line);border-radius:var(--r);
   padding:14px 16px;overflow-x:auto;font-family:var(--mono);font-size:var(--fs-sm);
-  line-height:1.6;color:#2c3444;
+  line-height:1.6;color:#2f2a33;
 }
 pre .cm{color:#8a93a5;font-style:italic}
 pre .kw{color:var(--accent);font-weight:600}
@@ -231,13 +233,13 @@ pre .st{color:var(--teal)}
 
 p{text-wrap:pretty}
 .prereq{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin-bottom:6px}
-.pq{border:1px solid var(--line);border-left:3px solid var(--teal,#2b7a78);border-radius:0 10px 10px 0;background:var(--panel);padding:12px 14px;font-size:var(--fs-sm);color:var(--slate,#4a5a72)}
+.pq{border:1px solid var(--line);border-left:3px solid var(--teal,#2f5a45);border-radius:0 10px 10px 0;background:var(--panel);padding:12px 14px;font-size:var(--fs-sm);color:var(--slate,#554b58)}
 .pq b{display:block;color:var(--ink);font-size:var(--fs-cap);margin-bottom:4px}
-.derive{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--teal,#2b7a78);border-radius:0 10px 10px 0;padding:16px 20px;max-width:66ch}
-.derive .dl{font-size:var(--fs-xs);letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--teal,#2b7a78);margin-bottom:8px}
-.derive p{font-size:var(--fs-cap);color:var(--slate,#4a5a72);margin:6px 0}
+.derive{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--teal,#2f5a45);border-radius:0 10px 10px 0;padding:16px 20px;max-width:66ch}
+.derive .dl{font-size:var(--fs-xs);letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--teal,#2f5a45);margin-bottom:8px}
+.derive p{font-size:var(--fs-cap);color:var(--slate,#554b58);margin:6px 0}
 .derive .m{font-family:var(--mono);font-size:var(--fs-sm);background:var(--subtle);border-radius:6px;padding:9px 13px;margin:8px 0;overflow-x:auto;color:var(--ink)}
-.confuse{border-left:3px solid var(--clay,#a35a33);background:var(--clay-wash,#f7ebe4);padding:16px 20px;border-radius:0 10px 10px 0;max-width:66ch}
+.confuse{border-left:3px solid var(--clay,#a8441f);background:var(--clay-wash,#f8e6dc);padding:16px 20px;border-radius:0 10px 10px 0;max-width:66ch}
 .confuse .lbl{font-size:var(--fs-xs);letter-spacing:.13em;text-transform:uppercase;font-weight:700;color:#7c4324;margin-bottom:6px}
 .confuse p{font-size:var(--fs-cap);color:#5c3f28}
 .fig{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;max-width:900px;box-shadow:var(--shadow)}
@@ -260,7 +262,7 @@ p{text-wrap:pretty}
 <header class="masthead">
   <div class="masthead-in">
     <div class="lwa-brandrow">
-      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg" alt="Learn with Adi"></a>
+      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building"></a>
       <div class="lwa-brand-right">
         <span class="lwa-tag"><a href="index.html">Series 01 · Build an LLM from Scratch</a></span>
         <span data-lwa-auth></span>
@@ -310,7 +312,7 @@ p{text-wrap:pretty}
     <div class="prereq">
       <div class="pq"><b>Unit 1</b>The big picture: what an LLM is and the next-word-prediction loop. Ten minutes there makes everything here obvious. <a href="unit1.html">Take it first</a> if you haven't.</div>
       <div class="pq"><b>A little Python</b>Strings, lists, dictionaries, and reading a short class definition. Nothing exotic.</div>
-      <div class="pq"><b>Run the code (optional)</b>This unit has a companion notebook that executes the real pipeline — <a href="https://colab.research.google.com/github/Aditya-402/learn-with-adi/blob/main/notebooks/llm-from-scratch/unit2.ipynb" rel="noopener">▶ open it in Google Colab</a>, free, zero setup.</div>
+      <div class="pq"><b>Run the code (optional)</b>This unit has a companion notebook that executes the real pipeline — <a href="https://colab.research.google.com/github/Aditya-402/learn-ai-by-building/blob/main/notebooks/llm-from-scratch/unit2.ipynb" rel="noopener">▶ open it in Google Colab</a>, free, zero setup.</div>
     </div>
     <div class="prose">
       <h2>Why text has to become numbers</h2>
@@ -698,30 +700,30 @@ slow:3</textarea>
     </div>
       <div class="fig" role="img" aria-label="Diagram of the full input pipeline from text to input embeddings">
       <svg viewBox="0 0 760 150">
-        <defs><marker id="aru2a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6b7585"/></marker></defs>
+        <defs><marker id="aru2a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6a626e"/></marker></defs>
         <g font-family="Consolas,monospace" font-size="11">
-        <rect x="8" y="34" width="118" height="56" rx="9" fill="#f0f1f7" stroke="#6b7585" stroke-width="1.5"/>
-        <text x="67" y="57" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1f2733" font-family="Georgia,serif">raw text</text>
-        <text x="67" y="76" text-anchor="middle" fill="#6b7585">"Your journey…"</text>
-        <line x1="130" y1="62" x2="164" y2="62" stroke="#6b7585" stroke-width="1.5" marker-end="url(#aru2a)"/>
-        <rect x="168" y="34" width="118" height="56" rx="9" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.6"/>
-        <text x="227" y="57" text-anchor="middle" font-size="12.5" font-weight="700" fill="#3d3170" font-family="Georgia,serif">tokens</text>
-        <text x="227" y="76" text-anchor="middle" fill="#6b7585">BPE subwords</text>
-        <line x1="290" y1="62" x2="324" y2="62" stroke="#6b7585" stroke-width="1.5" marker-end="url(#aru2a)"/>
-        <rect x="328" y="34" width="118" height="56" rx="9" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.6"/>
-        <text x="387" y="57" text-anchor="middle" font-size="12.5" font-weight="700" fill="#3d3170" font-family="Georgia,serif">token IDs</text>
-        <text x="387" y="76" text-anchor="middle" fill="#6b7585">(b, 4) integers</text>
-        <line x1="450" y1="62" x2="484" y2="62" stroke="#6b7585" stroke-width="1.5" marker-end="url(#aru2a)"/>
-        <rect x="488" y="10" width="128" height="50" rx="9" fill="#e3efee" stroke="#2b7a78" stroke-width="1.6"/>
+        <rect x="8" y="34" width="118" height="56" rx="9" fill="#f3ece0" stroke="#6a626e" stroke-width="1.5"/>
+        <text x="67" y="57" text-anchor="middle" font-size="12.5" font-weight="700" fill="#2b2730" font-family="Georgia,serif">raw text</text>
+        <text x="67" y="76" text-anchor="middle" fill="#6a626e">"Your journey…"</text>
+        <line x1="130" y1="62" x2="164" y2="62" stroke="#6a626e" stroke-width="1.5" marker-end="url(#aru2a)"/>
+        <rect x="168" y="34" width="118" height="56" rx="9" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.6"/>
+        <text x="227" y="57" text-anchor="middle" font-size="12.5" font-weight="700" fill="#3f2a41" font-family="Georgia,serif">tokens</text>
+        <text x="227" y="76" text-anchor="middle" fill="#6a626e">BPE subwords</text>
+        <line x1="290" y1="62" x2="324" y2="62" stroke="#6a626e" stroke-width="1.5" marker-end="url(#aru2a)"/>
+        <rect x="328" y="34" width="118" height="56" rx="9" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.6"/>
+        <text x="387" y="57" text-anchor="middle" font-size="12.5" font-weight="700" fill="#3f2a41" font-family="Georgia,serif">token IDs</text>
+        <text x="387" y="76" text-anchor="middle" fill="#6a626e">(b, 4) integers</text>
+        <line x1="450" y1="62" x2="484" y2="62" stroke="#6a626e" stroke-width="1.5" marker-end="url(#aru2a)"/>
+        <rect x="488" y="10" width="128" height="50" rx="9" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.6"/>
         <text x="552" y="31" text-anchor="middle" font-size="12" font-weight="700" fill="#1d5654" font-family="Georgia,serif">token embeddings</text>
-        <text x="552" y="49" text-anchor="middle" fill="#6b7585">(b, 4, 256)</text>
-        <rect x="488" y="72" width="128" height="50" rx="9" fill="#f5f0df" stroke="#8a6d1c" stroke-width="1.6"/>
+        <text x="552" y="49" text-anchor="middle" fill="#6a626e">(b, 4, 256)</text>
+        <rect x="488" y="72" width="128" height="50" rx="9" fill="#f8ecd3" stroke="#80590f" stroke-width="1.6"/>
         <text x="552" y="93" text-anchor="middle" font-size="12" font-weight="700" fill="#6d5514" font-family="Georgia,serif">+ positions</text>
-        <text x="552" y="111" text-anchor="middle" fill="#6b7585">(4, 256)</text>
-        <line x1="620" y1="66" x2="654" y2="66" stroke="#6b7585" stroke-width="1.5" marker-end="url(#aru2a)"/>
-        <rect x="658" y="38" width="96" height="56" rx="9" fill="#5b4b9e" stroke="#3d3170" stroke-width="1.6"/>
+        <text x="552" y="111" text-anchor="middle" fill="#6a626e">(4, 256)</text>
+        <line x1="620" y1="66" x2="654" y2="66" stroke="#6a626e" stroke-width="1.5" marker-end="url(#aru2a)"/>
+        <rect x="658" y="38" width="96" height="56" rx="9" fill="#5a3d5c" stroke="#3f2a41" stroke-width="1.6"/>
         <text x="706" y="61" text-anchor="middle" font-size="12" font-weight="700" fill="#ffffff" font-family="Georgia,serif">input tensor</text>
-        <text x="706" y="80" text-anchor="middle" fill="#d8d3ee">(b, 4, 256)</text>
+        <text x="706" y="80" text-anchor="middle" fill="#e2d3e1">(b, 4, 256)</text>
         </g>
       </svg>
       <div class="figcap">The whole unit in one picture: text → tokens → IDs → looked-up vectors + position vectors → the tensor Unit 3 feeds into attention.</div>
@@ -780,8 +782,8 @@ slow:3</textarea>
 
 <footer class="foot">
   <div class="foot-in">
-    <img src="../../assets/wordmark.svg" alt="Learn with Adi" style="height:26px">
-    <span>Learn with Adi — Unit 2 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Series</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
+    <img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building" style="height:36px">
+    <span>Learn AI by Building — Unit 2 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Series</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
   </div>
 </footer>
 

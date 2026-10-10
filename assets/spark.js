@@ -1,4 +1,4 @@
-/* Spark ✨ — the Learn with Adi study buddy.
+/* Spark ✨ — the Learn AI by Building study buddy.
    Self-contained widget for unit pages:
    - animated character button (idle / listening / thinking / speaking)
    - chat panel; typed or spoken questions (Web Speech STT), spoken answers (TTS with pause/resume/stop)
@@ -77,69 +77,69 @@
   /* ================= styles ================= */
   const css = `
   .spk-btn{position:fixed;right:20px;bottom:20px;z-index:400;width:58px;height:58px;border-radius:50%;
-    background:#fff;border:1.5px solid #d5cfeb;box-shadow:0 4px 18px rgba(91,75,158,.25);cursor:pointer;
+    background:#fff;border:1.5px solid #e0cfdf;box-shadow:0 4px 18px rgba(90,61,92,.25);cursor:pointer;
     display:flex;align-items:center;justify-content:center;padding:0;transition:transform .15s}
   .spk-btn:hover{transform:scale(1.07)}
   .spk-btn svg{width:38px;height:38px;display:block}
   .spk-panel{position:fixed;right:16px;bottom:88px;z-index:401;width:min(390px,calc(100vw - 24px));
-    height:min(600px,calc(100vh - 110px));background:#ffffff;border:1px solid #e3e6ee;border-radius:16px;
+    height:min(600px,calc(100vh - 110px));background:#ffffff;border:1px solid #e9dfcf;border-radius:16px;
     box-shadow:0 12px 40px rgba(31,39,51,.22);display:flex;flex-direction:column;overflow:hidden;
-    font-family:'Segoe UI Variable Text','Segoe UI',system-ui,sans-serif;color:#1f2733}
-  .spk-head{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid #e3e6ee;
-    background:linear-gradient(#ffffff,#f0f1f7)}
+    font-family:'Segoe UI Variable Text','Segoe UI',system-ui,sans-serif;color:#2b2730}
+  .spk-head{display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:1px solid #e9dfcf;
+    background:linear-gradient(#ffffff,#f3ece0)}
   .spk-head svg{width:30px;height:30px}
   .spk-head b{font-size:15px}
-  .spk-head .st{font-size:11px;color:#6b7585}
+  .spk-head .st{font-size:11px;color:#6a626e}
   .spk-head .sp{flex:1}
-  .spk-head button{background:none;border:none;cursor:pointer;color:#6b7585;font-size:13px;padding:4px 7px;border-radius:6px}
-  .spk-head button:hover{background:#ecebf6;color:#3d3170}
-  .spk-msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;background:#f6f7fb}
+  .spk-head button{background:none;border:none;cursor:pointer;color:#6a626e;font-size:13px;padding:4px 7px;border-radius:6px}
+  .spk-head button:hover{background:#f1e7ef;color:#3f2a41}
+  .spk-msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;background:#faf6ee}
   .spk-m{max-width:86%;padding:9px 13px;border-radius:12px;font-size:13.5px;line-height:1.55;white-space:pre-wrap;overflow-wrap:break-word}
-  .spk-m.you{align-self:flex-end;background:#5b4b9e;color:#fff;border-bottom-right-radius:4px}
-  .spk-m.bot{align-self:flex-start;background:#ffffff;border:1px solid #e3e6ee;border-bottom-left-radius:4px}
-  .spk-m.bot .spk-tts{margin-top:7px;padding-top:7px;border-top:1px dashed #e3e6ee;display:flex;gap:6px}
-  .spk-m.bot .spk-tts button{font-size:11px;border:1px solid #e3e6ee;background:#f6f7fb;border-radius:99px;
-    padding:2px 10px;cursor:pointer;color:#4a5a72}
-  .spk-m.bot .spk-tts button:hover{border-color:#5b4b9e;color:#3d3170}
-  .spk-m.err{align-self:center;background:#f7ebe4;border:1px solid #e2c4ad;color:#7c4324;font-size:12.5px}
-  .spk-chip{margin:0 14px;margin-top:8px;background:#ecebf6;border:1px solid #d5cfeb;border-radius:10px;
-    padding:7px 11px;font-size:12px;color:#3d3170;display:flex;gap:8px;align-items:flex-start}
+  .spk-m.you{align-self:flex-end;background:#5a3d5c;color:#fff;border-bottom-right-radius:4px}
+  .spk-m.bot{align-self:flex-start;background:#ffffff;border:1px solid #e9dfcf;border-bottom-left-radius:4px}
+  .spk-m.bot .spk-tts{margin-top:7px;padding-top:7px;border-top:1px dashed #e9dfcf;display:flex;gap:6px}
+  .spk-m.bot .spk-tts button{font-size:11px;border:1px solid #e9dfcf;background:#faf6ee;border-radius:99px;
+    padding:2px 10px;cursor:pointer;color:#554b58}
+  .spk-m.bot .spk-tts button:hover{border-color:#5a3d5c;color:#3f2a41}
+  .spk-m.err{align-self:center;background:#f8e6dc;border:1px solid #e2c4ad;color:#7c4324;font-size:12.5px}
+  .spk-chip{margin:0 14px;margin-top:8px;background:#f1e7ef;border:1px solid #e0cfdf;border-radius:10px;
+    padding:7px 11px;font-size:12px;color:#3f2a41;display:flex;gap:8px;align-items:flex-start}
   .spk-chip .t{flex:1;max-height:56px;overflow:hidden}
-  .spk-chip button{background:none;border:none;cursor:pointer;color:#6b7585;font-size:13px;padding:0}
-  .spk-in{display:flex;gap:8px;padding:12px 14px;border-top:1px solid #e3e6ee;background:#fff;align-items:flex-end}
-  .spk-in textarea{flex:1;resize:none;border:1px solid #e3e6ee;border-radius:10px;padding:9px 11px;
-    font:inherit;font-size:13.5px;max-height:110px;background:#f6f7fb;color:#1f2733}
-  .spk-in textarea:focus{outline:2px solid #5b4b9e;background:#fff}
+  .spk-chip button{background:none;border:none;cursor:pointer;color:#6a626e;font-size:13px;padding:0}
+  .spk-in{display:flex;gap:8px;padding:12px 14px;border-top:1px solid #e9dfcf;background:#fff;align-items:flex-end}
+  .spk-in textarea{flex:1;resize:none;border:1px solid #e9dfcf;border-radius:10px;padding:9px 11px;
+    font:inherit;font-size:13.5px;max-height:110px;background:#faf6ee;color:#2b2730}
+  .spk-in textarea:focus{outline:2px solid #5a3d5c;background:#fff}
   .spk-in button{border:none;border-radius:10px;cursor:pointer;padding:9px 12px;font-size:15px}
-  .spk-send{background:#5b4b9e;color:#fff}
-  .spk-send:hover{background:#3d3170}
+  .spk-send{background:#5a3d5c;color:#fff}
+  .spk-send:hover{background:#3f2a41}
   .spk-send:disabled{opacity:.5;cursor:default}
-  .spk-mic{background:#f0f1f7;border:1px solid #e3e6ee !important;color:#4a5a72}
-  .spk-mic.rec{background:#f7ebe4;border-color:#a35a33 !important;color:#a35a33;animation:spkpulse 1.2s infinite}
+  .spk-mic{background:#f3ece0;border:1px solid #e9dfcf !important;color:#554b58}
+  .spk-mic.rec{background:#f8e6dc;border-color:#a8441f !important;color:#a8441f;animation:spkpulse 1.2s infinite}
   @keyframes spkpulse{50%{box-shadow:0 0 0 6px rgba(163,90,51,.15)}}
-  .spk-setup{padding:20px 18px;display:flex;flex-direction:column;gap:12px;font-size:13.5px;color:#4a5a72;overflow-y:auto}
-  .spk-setup h4{margin:0;font-size:16px;color:#1f2733;font-family:Georgia,serif}
+  .spk-setup{padding:20px 18px;display:flex;flex-direction:column;gap:12px;font-size:13.5px;color:#554b58;overflow-y:auto}
+  .spk-setup h4{margin:0;font-size:16px;color:#2b2730;font-family:Georgia,serif}
   .spk-setup ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
-  .spk-setup input{border:1px solid #e3e6ee;border-radius:10px;padding:9px 11px;font-family:Consolas,monospace;font-size:12.5px;background:#f6f7fb}
-  .spk-setup input:focus{outline:2px solid #5b4b9e;background:#fff}
-  .spk-setup .go{background:#5b4b9e;color:#fff;border:none;border-radius:10px;padding:10px;font-size:14px;font-weight:600;cursor:pointer}
-  .spk-setup .go:hover{background:#3d3170}
-  .spk-setup .note{font-size:11.5px;color:#6b7585;background:#f0f1f7;border-radius:8px;padding:8px 11px}
-  .spk-setup a{color:#5b4b9e}
-  .spk-lbl{font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:#6b7585;margin-top:2px}
+  .spk-setup input{border:1px solid #e9dfcf;border-radius:10px;padding:9px 11px;font-family:Consolas,monospace;font-size:12.5px;background:#faf6ee}
+  .spk-setup input:focus{outline:2px solid #5a3d5c;background:#fff}
+  .spk-setup .go{background:#5a3d5c;color:#fff;border:none;border-radius:10px;padding:10px;font-size:14px;font-weight:600;cursor:pointer}
+  .spk-setup .go:hover{background:#3f2a41}
+  .spk-setup .note{font-size:11.5px;color:#6a626e;background:#f3ece0;border-radius:8px;padding:8px 11px}
+  .spk-setup a{color:#5a3d5c}
+  .spk-lbl{font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:#6a626e;margin-top:2px}
   .spk-pills{display:flex;flex-wrap:wrap;gap:6px}
-  .spk-pills button{flex:1 1 30%;min-width:96px;border:1px solid #e3e6ee;background:#f6f7fb;border-radius:10px;
+  .spk-pills button{flex:1 1 30%;min-width:96px;border:1px solid #e9dfcf;background:#faf6ee;border-radius:10px;
     padding:7px 9px;cursor:pointer;text-align:left;font-family:inherit}
-  .spk-pills button b{display:block;font-size:12px;color:#1f2733}
-  .spk-pills button span{font-size:10.5px;color:#6b7585}
-  .spk-pills button[aria-pressed="true"]{border-color:#5b4b9e;background:#ecebf6}
-  .spk-pills button[aria-pressed="true"] b{color:#3d3170}
-  .spk-model{border:1px solid #e3e6ee;border-radius:10px;padding:8px 10px;font:inherit;font-size:12.5px;background:#f6f7fb;color:#1f2733}
-  .spk-model:focus{outline:2px solid #5b4b9e;background:#fff}
-  .spk-ask{position:absolute;z-index:399;background:#5b4b9e;color:#fff;border:none;border-radius:99px;
-    padding:6px 13px;font-size:12.5px;font-weight:600;cursor:pointer;box-shadow:0 4px 14px rgba(91,75,158,.35);
+  .spk-pills button b{display:block;font-size:12px;color:#2b2730}
+  .spk-pills button span{font-size:10.5px;color:#6a626e}
+  .spk-pills button[aria-pressed="true"]{border-color:#5a3d5c;background:#f1e7ef}
+  .spk-pills button[aria-pressed="true"] b{color:#3f2a41}
+  .spk-model{border:1px solid #e9dfcf;border-radius:10px;padding:8px 10px;font:inherit;font-size:12.5px;background:#faf6ee;color:#2b2730}
+  .spk-model:focus{outline:2px solid #5a3d5c;background:#fff}
+  .spk-ask{position:absolute;z-index:399;background:#5a3d5c;color:#fff;border:none;border-radius:99px;
+    padding:6px 13px;font-size:12.5px;font-weight:600;cursor:pointer;box-shadow:0 4px 14px rgba(90,61,92,.35);
     font-family:'Segoe UI',sans-serif}
-  .spk-ask:hover{background:#3d3170}
+  .spk-ask:hover{background:#3f2a41}
   /* character animation states */
   .spk-char .core{transform-origin:50% 50%;animation:spkidle 3.2s ease-in-out infinite}
   @keyframes spkidle{0%,100%{transform:scale(1) rotate(0deg)}50%{transform:scale(1.06) rotate(6deg)}}
@@ -159,7 +159,7 @@
   <svg class="spk-char ${cls}" viewBox="0 0 48 48" aria-hidden="true">
     <g class="core">
       <path d="M24 4 L28.6 19.4 L44 24 L28.6 28.6 L24 44 L19.4 28.6 L4 24 L19.4 19.4 Z"
-            fill="#5b4b9e" stroke="#3d3170" stroke-width="1.4" stroke-linejoin="round"/>
+            fill="#5a3d5c" stroke="#3f2a41" stroke-width="1.4" stroke-linejoin="round"/>
       <g class="eye" style="transform-origin:19px 22px"><circle cx="19" cy="22" r="2.1" fill="#fff"/></g>
       <g class="eye" style="transform-origin:29px 22px"><circle cx="29" cy="22" r="2.1" fill="#fff"/></g>
       <path d="M19.5 28 Q24 31.5 28.5 28" stroke="#fff" stroke-width="1.7" fill="none" stroke-linecap="round"/>
@@ -217,7 +217,7 @@
     const level = LEVELS[cfg.level] || LEVELS.graduate;
     const length = LENGTHS[cfg.length] || LENGTHS.balanced;
     const sys =
-`You are Spark, the friendly study buddy built into "Learn with Adi" — free personal study notes where graduate engineers learn how LLMs work by building one.
+`You are Spark, the friendly study buddy built into "Learn AI by Building" — free personal study notes where graduate engineers learn how LLMs work by building one.
 The student is currently reading: "${UNIT_TITLE}".
 
 STRICT GROUNDING RULES:
@@ -384,7 +384,7 @@ ${relevantContext(question, highlight)}`;
       }));
     bodyEl().querySelector(".go").onclick = () => {
       const k = inp.value.trim();
-      if (!changing && k.length < 20) { inp.style.outline = "2px solid #a35a33"; return; }
+      if (!changing && k.length < 20) { inp.style.outline = "2px solid #a8441f"; return; }
       if (k.length >= 20) setKey(k);
       else if (changing && k === "") { try { localStorage.removeItem(KEY_LS); } catch {} }
       const pick = set => { const b = bodyEl().querySelector(`.spk-pills[data-set=${set}] button[aria-pressed=true]`); return b ? b.dataset.v : DEFAULT_CFG[set]; };

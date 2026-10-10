@@ -3,16 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Borrowing Power — Modules &amp; the Standard Library — Learn with Adi</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>">
-<link rel="stylesheet" href="../../assets/site.css?v=4">
-<link rel="stylesheet" href="../../assets/unit.css?v=4">
+<title>Borrowing Power — Modules &amp; the Standard Library — Learn AI by Building</title>
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=6">
+<link rel="stylesheet" href="../../assets/unit.css?v=6">
 </head>
 <body data-lwa-course="python-programming" data-lwa-chapter="u11" data-lwa-title="Unit 11 · Borrowing power — modules &amp; the standard library">
 <header class="masthead">
   <div class="masthead-in">
     <div class="lwa-brandrow">
-      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg" alt="Learn with Adi"></a>
+      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building"></a>
       <div class="lwa-brand-right">
         <span class="lwa-tag"><a href="index.html">Series 02 · Python Programming</a></span>
         <span data-lwa-auth></span>
@@ -51,7 +53,7 @@
   <section id="s1">
     <div class="prereq">
       <div class="pq"><b>You'll need Units 2, 5 &amp; 8</b><code>:.2f</code> money formatting from Unit 2, lists from Unit 5 (we'll pick from them and shuffle them), and strings from Unit 8. A loop from Unit 4 sneaks into the stretch.</div>
-      <div class="pq"><b>How this unit works</b>Same rhythm: each concept is a 3–4 minute read, then ~10 minutes of practice. <a href="https://colab.research.google.com/github/Aditya-402/learn-with-adi/blob/main/notebooks/python-programming/unit11.ipynb" rel="noopener">▶ Run this unit in Colab</a> if you prefer a notebook.</div>
+      <div class="pq"><b>How this unit works</b>Same rhythm: each concept is a 3–4 minute read, then ~10 minutes of practice. <a href="https://colab.research.google.com/github/Aditya-402/learn-ai-by-building/blob/main/notebooks/python-programming/unit11.ipynb" rel="noopener">▶ Run this unit in Colab</a> if you prefer a notebook.</div>
       <div class="pq"><b>A flag worth planting</b>One line in this unit — <code>random.seed(42)</code> — is the exact trick machine-learning people use to make experiments repeatable. You'll meet it again in the ML stage; today you learn why it exists.</div>
     </div>
     <div class="prose">
@@ -87,33 +89,33 @@ print(f"{side:.4f}")</div>
     </div>
     <div class="fig">
       <svg viewBox="0 0 860 240" role="img" aria-label="Importing the math module: your program gets one name, math, and reaches tools through the dot">
-        <text x="16" y="26" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6b7585" letter-spacing="1.5">THE LIBRARY CARD — WHAT import ACTUALLY DOES</text>
-        <rect x="30" y="52" width="270" height="150" rx="10" fill="#ffffff" stroke="#e3e6ee" stroke-width="1.5"/>
-        <text x="46" y="78" font-family="Segoe UI,system-ui,sans-serif" font-size="12" font-weight="700" fill="#6b7585">YOUR PROGRAM</text>
-        <rect x="46" y="90" width="238" height="30" rx="6" fill="#f0f1f7"/>
-        <text x="56" y="110" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#3d3170">import math</text>
-        <rect x="46" y="128" width="238" height="30" rx="6" fill="#f0f1f7"/>
-        <text x="56" y="148" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#1f2733">math.sqrt(16)</text>
-        <text x="46" y="188" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#2b7a78">one new name arrives: math</text>
-        <path d="M300 105 L 388 105" stroke="#5b4b9e" stroke-width="2" fill="none" marker-end="url(#arr)"/>
-        <defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#5b4b9e"/></marker></defs>
-        <text x="344" y="94" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#5b4b9e">library card</text>
-        <rect x="390" y="52" width="220" height="170" rx="10" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.5"/>
-        <text x="500" y="78" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" font-weight="700" fill="#3d3170">the math shelf</text>
-        <rect x="408" y="90" width="184" height="26" rx="6" fill="#ffffff" stroke="#e3e6ee"/>
-        <text x="418" y="108" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#1f2733">sqrt</text>
-        <rect x="408" y="122" width="184" height="26" rx="6" fill="#ffffff" stroke="#e3e6ee"/>
-        <text x="418" y="140" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#1f2733">pi</text>
-        <rect x="408" y="154" width="184" height="26" rx="6" fill="#ffffff" stroke="#e3e6ee"/>
-        <text x="418" y="172" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#1f2733">floor · ceil · …</text>
-        <text x="500" y="210" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#3d3170">a box of labeled tools</text>
-        <rect x="640" y="52" width="190" height="170" rx="10" fill="#f0f1f7" stroke="#e3e6ee" stroke-width="1.5"/>
-        <text x="735" y="78" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="12" font-weight="700" fill="#6b7585">MORE SHELVES</text>
-        <text x="656" y="106" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#4a5a72">random</text>
-        <text x="656" y="130" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#4a5a72">datetime</text>
-        <text x="656" y="154" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#4a5a72">json · csv · os</text>
-        <text x="656" y="178" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#4a5a72">… hundreds more</text>
-        <text x="735" y="210" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#2b7a78">same card opens them all</text>
+        <text x="16" y="26" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6a626e" letter-spacing="1.5">THE LIBRARY CARD — WHAT import ACTUALLY DOES</text>
+        <rect x="30" y="52" width="270" height="150" rx="10" fill="#ffffff" stroke="#e9dfcf" stroke-width="1.5"/>
+        <text x="46" y="78" font-family="Segoe UI,system-ui,sans-serif" font-size="12" font-weight="700" fill="#6a626e">YOUR PROGRAM</text>
+        <rect x="46" y="90" width="238" height="30" rx="6" fill="#f3ece0"/>
+        <text x="56" y="110" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#3f2a41">import math</text>
+        <rect x="46" y="128" width="238" height="30" rx="6" fill="#f3ece0"/>
+        <text x="56" y="148" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#2b2730">math.sqrt(16)</text>
+        <text x="46" y="188" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#2f5a45">one new name arrives: math</text>
+        <path d="M300 105 L 388 105" stroke="#5a3d5c" stroke-width="2" fill="none" marker-end="url(#arr)"/>
+        <defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#5a3d5c"/></marker></defs>
+        <text x="344" y="94" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#5a3d5c">library card</text>
+        <rect x="390" y="52" width="220" height="170" rx="10" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.5"/>
+        <text x="500" y="78" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" font-weight="700" fill="#3f2a41">the math shelf</text>
+        <rect x="408" y="90" width="184" height="26" rx="6" fill="#ffffff" stroke="#e9dfcf"/>
+        <text x="418" y="108" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b2730">sqrt</text>
+        <rect x="408" y="122" width="184" height="26" rx="6" fill="#ffffff" stroke="#e9dfcf"/>
+        <text x="418" y="140" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b2730">pi</text>
+        <rect x="408" y="154" width="184" height="26" rx="6" fill="#ffffff" stroke="#e9dfcf"/>
+        <text x="418" y="172" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b2730">floor · ceil · …</text>
+        <text x="500" y="210" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#3f2a41">a box of labeled tools</text>
+        <rect x="640" y="52" width="190" height="170" rx="10" fill="#f3ece0" stroke="#e9dfcf" stroke-width="1.5"/>
+        <text x="735" y="78" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="12" font-weight="700" fill="#6a626e">MORE SHELVES</text>
+        <text x="656" y="106" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#554b58">random</text>
+        <text x="656" y="130" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#554b58">datetime</text>
+        <text x="656" y="154" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#554b58">json · csv · os</text>
+        <text x="656" y="178" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#554b58">… hundreds more</text>
+        <text x="735" y="210" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#2f5a45">same card opens them all</text>
       </svg>
       <div class="figcap">Fig. 1 — <code>import math</code> doesn't copy code into your file; it fetches the shelf once and hands you one name. The dot in <code>math.sqrt</code> is you reaching into that box for one tool. Every other shelf works the same way.</div>
     </div>
@@ -225,17 +227,17 @@ print(random.randint(1, 6))</div>
     </div>
     <div class="fig">
       <svg viewBox="0 0 860 230" role="img" aria-label="Without a seed, each run produces a different number stream; with seed 42, every run replays the identical stream">
-        <text x="16" y="26" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6b7585" letter-spacing="1.5">THE REPLAY SWITCH — WHAT seed() PINS DOWN</text>
-        <text x="40" y="60" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#a35a33">no seed</text>
-        <rect x="40" y="72" width="330" height="44" rx="9" fill="#f7ebe4" stroke="#a35a33" stroke-width="1.2"/>
+        <text x="16" y="26" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6a626e" letter-spacing="1.5">THE REPLAY SWITCH — WHAT seed() PINS DOWN</text>
+        <text x="40" y="60" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#a8441f">no seed</text>
+        <rect x="40" y="72" width="330" height="44" rx="9" fill="#f8e6dc" stroke="#a8441f" stroke-width="1.2"/>
         <text x="52" y="99" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#5c3f28">run 1 →  3 · 6 · 2 · 5 · …</text>
-        <rect x="40" y="126" width="330" height="44" rx="9" fill="#f7ebe4" stroke="#a35a33" stroke-width="1.2"/>
+        <rect x="40" y="126" width="330" height="44" rx="9" fill="#f8e6dc" stroke="#a8441f" stroke-width="1.2"/>
         <text x="52" y="153" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#5c3f28">run 2 →  1 · 4 · 4 · 2 · …</text>
-        <text x="40" y="200" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a35a33">different start point every run — streams never match</text>
-        <text x="470" y="60" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b7a78">random.seed(42)</text>
-        <rect x="470" y="72" width="330" height="44" rx="9" fill="#e3efee" stroke="#2b7a78" stroke-width="1.2"/>
+        <text x="40" y="200" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a8441f">different start point every run — streams never match</text>
+        <text x="470" y="60" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2f5a45">random.seed(42)</text>
+        <rect x="470" y="72" width="330" height="44" rx="9" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.2"/>
         <text x="482" y="99" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#1d5654">run 1 →  n₁ · n₂ · n₃ · n₄ · …</text>
-        <rect x="470" y="126" width="330" height="44" rx="9" fill="#e3efee" stroke="#2b7a78" stroke-width="1.2"/>
+        <rect x="470" y="126" width="330" height="44" rx="9" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.2"/>
         <text x="482" y="153" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#1d5654">run 2 →  n₁ · n₂ · n₃ · n₄ · …</text>
         <text x="470" y="200" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#1d5654">pinned start point — the identical stream, every run</text>
       </svg>
@@ -674,8 +676,8 @@ print(f"Password of the day: {password}")</pre><p>Four units shake hands: a loop
 
 <footer class="foot">
   <div class="foot-in">
-    <img src="../../assets/wordmark.svg" alt="Learn with Adi" style="height:26px">
-    <span>Learn with Adi — Unit 11 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Series</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
+    <img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building" style="height:36px">
+    <span>Learn AI by Building — Unit 11 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Series</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
   </div>
 </footer>
 

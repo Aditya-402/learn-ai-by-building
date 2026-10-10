@@ -1,4 +1,4 @@
-/* Learn with Adi — two-mode unit presentation.
+/* Learn AI by Building — two-mode unit presentation.
    "Step through" (default): one scaffold at a time — a ~5-minute read + diagram + lab —
    with a progress path, Continue/Back, and per-step completion ticks.
    "Read as one page": the classic full scroll, for reference and rereading.
@@ -24,27 +24,27 @@
   body.step-mode .lwa-chapnav{display:none}
   body.step-mode.step-last .lwa-chapnav{display:flex}
   .stepbar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;background:var(--panel,#fff);
-    border:1px solid var(--line,#e3e6ee);border-radius:12px;padding:10px 16px;margin-bottom:6px}
+    border:1px solid var(--line,#e9dfcf);border-radius:12px;padding:10px 16px;margin-bottom:6px}
   .stepbar .dots{display:flex;gap:5px;align-items:center;flex-wrap:wrap}
-  .stepbar .dot{width:10px;height:10px;border-radius:50%;background:var(--subtle,#f0f1f7);
-    border:1.5px solid var(--line,#e3e6ee);cursor:pointer;padding:0}
-  .stepbar .dot.done{background:var(--teal,#2b7a78);border-color:var(--teal,#2b7a78)}
-  .stepbar .dot.cur{background:var(--accent,#5b4b9e);border-color:var(--accent-deep,#3d3170);transform:scale(1.25)}
-  .stepbar .lbl{font-size:var(--fs-sm,13px);color:var(--slate,#4a5a72)}
-  .stepbar .lbl b{color:var(--ink,#1f2733)}
+  .stepbar .dot{width:10px;height:10px;border-radius:50%;background:var(--subtle,#f3ece0);
+    border:1.5px solid var(--line,#e9dfcf);cursor:pointer;padding:0}
+  .stepbar .dot.done{background:var(--teal,#2f5a45);border-color:var(--teal,#2f5a45)}
+  .stepbar .dot.cur{background:var(--accent,#5a3d5c);border-color:var(--accent-deep,#3f2a41);transform:scale(1.25)}
+  .stepbar .lbl{font-size:var(--fs-sm,13px);color:var(--slate,#554b58)}
+  .stepbar .lbl b{color:var(--ink,#2b2730)}
   .stepbar .sp{flex:1}
-  .stepbar .mode{border:1px solid var(--line,#e3e6ee);background:var(--subtle,#f0f1f7);border-radius:999px;
-    padding:5px 13px;font-size:var(--fs-xs,12px);font-weight:600;color:var(--slate,#4a5a72);cursor:pointer}
-  .stepbar .mode:hover{border-color:var(--accent,#5b4b9e);color:var(--accent-deep,#3d3170)}
+  .stepbar .mode{border:1px solid var(--line,#e9dfcf);background:var(--subtle,#f3ece0);border-radius:999px;
+    padding:5px 13px;font-size:var(--fs-xs,12px);font-weight:600;color:var(--slate,#554b58);cursor:pointer}
+  .stepbar .mode:hover{border-color:var(--accent,#5a3d5c);color:var(--accent-deep,#3f2a41)}
   body:not(.step-mode) .stepbar .dots,body:not(.step-mode) .stepbar .lbl{display:none}
   .stepnav{display:flex;justify-content:space-between;gap:12px;margin-top:8px}
-  .stepnav button{border:1px solid var(--line,#e3e6ee);border-radius:12px;padding:13px 22px;cursor:pointer;
-    font:inherit;font-size:var(--fs-cap,14px);font-weight:600;background:var(--panel,#fff);color:var(--ink,#1f2733)}
-  .stepnav button:hover{border-color:var(--accent,#5b4b9e)}
-  .stepnav .go{background:var(--accent,#5b4b9e);border-color:var(--accent,#5b4b9e);color:#fff;flex:1;max-width:340px;text-align:center}
-  .stepnav .go:hover{background:var(--accent-deep,#3d3170)}
+  .stepnav button{border:1px solid var(--line,#e9dfcf);border-radius:12px;padding:13px 22px;cursor:pointer;
+    font:inherit;font-size:var(--fs-cap,14px);font-weight:600;background:var(--panel,#fff);color:var(--ink,#2b2730)}
+  .stepnav button:hover{border-color:var(--accent,#5a3d5c)}
+  .stepnav .go{background:var(--accent,#5a3d5c);border-color:var(--accent,#5a3d5c);color:#fff;flex:1;max-width:340px;text-align:center}
+  .stepnav .go:hover{background:var(--accent-deep,#3f2a41)}
   .stepnav .back[disabled]{opacity:.35;cursor:default}
-  .rail a .tick{color:var(--teal,#2b7a78);font-weight:700}
+  .rail a .tick{color:var(--teal,#2f5a45);font-weight:700}
   @media (max-width:640px){.stepbar{padding:9px 12px}.stepbar .lbl{display:none}}
   `;
   const st = document.createElement("style"); st.textContent = css; document.head.appendChild(st);

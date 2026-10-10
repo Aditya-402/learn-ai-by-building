@@ -3,16 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Words &amp; Text — Strings, Properly — Learn with Adi</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>">
-<link rel="stylesheet" href="../../assets/site.css?v=4">
-<link rel="stylesheet" href="../../assets/unit.css?v=4">
+<title>Words &amp; Text — Strings, Properly — Learn AI by Building</title>
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=6">
+<link rel="stylesheet" href="../../assets/unit.css?v=6">
 </head>
 <body data-lwa-course="python-programming" data-lwa-chapter="u08" data-lwa-title="Unit 8 · Words &amp; text — strings, properly">
 <header class="masthead">
   <div class="masthead-in">
     <div class="lwa-brandrow">
-      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg" alt="Learn with Adi"></a>
+      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building"></a>
       <div class="lwa-brand-right">
         <span class="lwa-tag"><a href="index.html">Series 02 · Python Programming</a></span>
         <span data-lwa-auth></span>
@@ -51,7 +53,7 @@
   <section id="s1">
     <div class="prereq">
       <div class="pq"><b>You'll need Units 4 &amp; 5</b>Indexing with <code>[0]</code> and <code>[-1]</code>, slicing with <code>[1:4]</code>, <code>len()</code>, and the for-loop. Every one of them transfers to text today, unchanged.</div>
-      <div class="pq"><b>How this unit works</b>Same rhythm: each concept is a 3–4 minute read, then ~10 minutes of practice. <a href="https://colab.research.google.com/github/Aditya-402/learn-with-adi/blob/main/notebooks/python-programming/unit8.ipynb" rel="noopener">▶ Run this unit in Colab</a> if you prefer a notebook.</div>
+      <div class="pq"><b>How this unit works</b>Same rhythm: each concept is a 3–4 minute read, then ~10 minutes of practice. <a href="https://colab.research.google.com/github/Aditya-402/learn-ai-by-building/blob/main/notebooks/python-programming/unit8.ipynb" rel="noopener">▶ Run this unit in Colab</a> if you prefer a notebook.</div>
       <div class="pq"><b>One analogy to hold</b>A string is a list of characters wearing one coat. Peek under the coat and it's Unit 5's row of boxes — you already know how to walk it.</div>
     </div>
     <div class="prose">
@@ -84,34 +86,34 @@ True</div>
     </div>
     <div class="fig">
       <svg viewBox="0 0 860 250" role="img" aria-label="The string python drawn as six indexed character boxes with positive indices above and negative indices below">
-        <text x="16" y="26" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6b7585" letter-spacing="1.5">A STRING IS A LIST OF CHARACTERS WEARING ONE COAT</text>
-        <rect x="150" y="52" width="560" height="150" rx="16" fill="none" stroke="#5b4b9e" stroke-width="1.8" stroke-dasharray="7 5"/>
-        <text x="430" y="44" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#3d3170">word = "python"  — the coat</text>
-        <text x="215" y="86" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#5b4b9e">0</text>
-        <text x="301" y="86" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#5b4b9e">1</text>
-        <text x="387" y="86" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#5b4b9e">2</text>
-        <text x="473" y="86" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#5b4b9e">3</text>
-        <text x="559" y="86" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#5b4b9e">4</text>
-        <text x="645" y="86" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#5b4b9e">5</text>
-        <rect x="180" y="96" width="70" height="56" rx="8" fill="#f0f1f7" stroke="#e3e6ee" stroke-width="1.5"/>
-        <rect x="266" y="96" width="70" height="56" rx="8" fill="#f0f1f7" stroke="#e3e6ee" stroke-width="1.5"/>
-        <rect x="352" y="96" width="70" height="56" rx="8" fill="#f0f1f7" stroke="#e3e6ee" stroke-width="1.5"/>
-        <rect x="438" y="96" width="70" height="56" rx="8" fill="#f0f1f7" stroke="#e3e6ee" stroke-width="1.5"/>
-        <rect x="524" y="96" width="70" height="56" rx="8" fill="#f0f1f7" stroke="#e3e6ee" stroke-width="1.5"/>
-        <rect x="610" y="96" width="70" height="56" rx="8" fill="#f0f1f7" stroke="#e3e6ee" stroke-width="1.5"/>
-        <text x="215" y="131" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="17" fill="#1f2733">p</text>
-        <text x="301" y="131" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="17" fill="#1f2733">y</text>
-        <text x="387" y="131" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="17" fill="#1f2733">t</text>
-        <text x="473" y="131" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="17" fill="#1f2733">h</text>
-        <text x="559" y="131" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="17" fill="#1f2733">o</text>
-        <text x="645" y="131" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="17" fill="#1f2733">n</text>
-        <text x="215" y="180" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b7a78">-6</text>
-        <text x="301" y="180" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b7a78">-5</text>
-        <text x="387" y="180" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b7a78">-4</text>
-        <text x="473" y="180" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b7a78">-3</text>
-        <text x="559" y="180" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b7a78">-2</text>
-        <text x="645" y="180" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b7a78">-1</text>
-        <text x="180" y="230" font-family="Segoe UI,system-ui,sans-serif" font-size="12" fill="#6b7585">word[0] → "p" · word[-1] → "n" · word[1:4] → "yth" · len(word) → 6</text>
+        <text x="16" y="26" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6a626e" letter-spacing="1.5">A STRING IS A LIST OF CHARACTERS WEARING ONE COAT</text>
+        <rect x="150" y="52" width="560" height="150" rx="16" fill="none" stroke="#5a3d5c" stroke-width="1.8" stroke-dasharray="7 5"/>
+        <text x="430" y="44" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#3f2a41">word = "python"  — the coat</text>
+        <text x="215" y="86" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#5a3d5c">0</text>
+        <text x="301" y="86" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#5a3d5c">1</text>
+        <text x="387" y="86" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#5a3d5c">2</text>
+        <text x="473" y="86" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#5a3d5c">3</text>
+        <text x="559" y="86" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#5a3d5c">4</text>
+        <text x="645" y="86" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#5a3d5c">5</text>
+        <rect x="180" y="96" width="70" height="56" rx="8" fill="#f3ece0" stroke="#e9dfcf" stroke-width="1.5"/>
+        <rect x="266" y="96" width="70" height="56" rx="8" fill="#f3ece0" stroke="#e9dfcf" stroke-width="1.5"/>
+        <rect x="352" y="96" width="70" height="56" rx="8" fill="#f3ece0" stroke="#e9dfcf" stroke-width="1.5"/>
+        <rect x="438" y="96" width="70" height="56" rx="8" fill="#f3ece0" stroke="#e9dfcf" stroke-width="1.5"/>
+        <rect x="524" y="96" width="70" height="56" rx="8" fill="#f3ece0" stroke="#e9dfcf" stroke-width="1.5"/>
+        <rect x="610" y="96" width="70" height="56" rx="8" fill="#f3ece0" stroke="#e9dfcf" stroke-width="1.5"/>
+        <text x="215" y="131" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="17" fill="#2b2730">p</text>
+        <text x="301" y="131" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="17" fill="#2b2730">y</text>
+        <text x="387" y="131" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="17" fill="#2b2730">t</text>
+        <text x="473" y="131" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="17" fill="#2b2730">h</text>
+        <text x="559" y="131" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="17" fill="#2b2730">o</text>
+        <text x="645" y="131" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="17" fill="#2b2730">n</text>
+        <text x="215" y="180" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2f5a45">-6</text>
+        <text x="301" y="180" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2f5a45">-5</text>
+        <text x="387" y="180" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2f5a45">-4</text>
+        <text x="473" y="180" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2f5a45">-3</text>
+        <text x="559" y="180" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2f5a45">-2</text>
+        <text x="645" y="180" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2f5a45">-1</text>
+        <text x="180" y="230" font-family="Segoe UI,system-ui,sans-serif" font-size="12" fill="#6a626e">word[0] → "p" · word[-1] → "n" · word[1:4] → "yth" · len(word) → 6</text>
       </svg>
       <div class="figcap">Fig. 1 — Unit 5's row of boxes, back again. Positive indices count from the front, negative from the back; every slicing rule carries over character for character.</div>
     </div>
@@ -396,29 +398,29 @@ print(quote.find("not"))</pre><p><code>"to"</code> appears at positions 0 and 13
     </div>
     <div class="fig">
       <svg viewBox="0 0 860 190" role="img" aria-label="Seventeen character cells showing Tea left-aligned in a width-10 lane and 12.50 right-aligned in a width-7 lane">
-        <text x="16" y="26" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6b7585" letter-spacing="1.5">TWO LANES, SEVENTEEN CELLS — f"{'Tea':&lt;10}{12.5:&gt;7.2f}"</text>
-        <rect x="40" y="50" width="460" height="52" rx="8" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.6"/>
-        <rect x="500" y="50" width="322" height="52" rx="8" fill="#e3efee" stroke="#2b7a78" stroke-width="1.6"/>
-        <text x="63" y="83" font-family="Cascadia Mono,Consolas,monospace" font-size="19" fill="#1f2733">T</text>
-        <text x="109" y="83" font-family="Cascadia Mono,Consolas,monospace" font-size="19" fill="#1f2733">e</text>
-        <text x="155" y="83" font-family="Cascadia Mono,Consolas,monospace" font-size="19" fill="#1f2733">a</text>
-        <text x="201" y="83" font-family="Cascadia Mono,Consolas,monospace" font-size="19" fill="#b6aede">·</text>
-        <text x="247" y="83" font-family="Cascadia Mono,Consolas,monospace" font-size="19" fill="#b6aede">·</text>
-        <text x="293" y="83" font-family="Cascadia Mono,Consolas,monospace" font-size="19" fill="#b6aede">·</text>
-        <text x="339" y="83" font-family="Cascadia Mono,Consolas,monospace" font-size="19" fill="#b6aede">·</text>
-        <text x="385" y="83" font-family="Cascadia Mono,Consolas,monospace" font-size="19" fill="#b6aede">·</text>
-        <text x="431" y="83" font-family="Cascadia Mono,Consolas,monospace" font-size="19" fill="#b6aede">·</text>
-        <text x="470" y="83" font-family="Cascadia Mono,Consolas,monospace" font-size="19" fill="#b6aede">·</text>
+        <text x="16" y="26" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6a626e" letter-spacing="1.5">TWO LANES, SEVENTEEN CELLS — f"{'Tea':&lt;10}{12.5:&gt;7.2f}"</text>
+        <rect x="40" y="50" width="460" height="52" rx="8" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.6"/>
+        <rect x="500" y="50" width="322" height="52" rx="8" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.6"/>
+        <text x="63" y="83" font-family="Cascadia Mono,Consolas,monospace" font-size="19" fill="#2b2730">T</text>
+        <text x="109" y="83" font-family="Cascadia Mono,Consolas,monospace" font-size="19" fill="#2b2730">e</text>
+        <text x="155" y="83" font-family="Cascadia Mono,Consolas,monospace" font-size="19" fill="#2b2730">a</text>
+        <text x="201" y="83" font-family="Cascadia Mono,Consolas,monospace" font-size="19" fill="#c9aec7">·</text>
+        <text x="247" y="83" font-family="Cascadia Mono,Consolas,monospace" font-size="19" fill="#c9aec7">·</text>
+        <text x="293" y="83" font-family="Cascadia Mono,Consolas,monospace" font-size="19" fill="#c9aec7">·</text>
+        <text x="339" y="83" font-family="Cascadia Mono,Consolas,monospace" font-size="19" fill="#c9aec7">·</text>
+        <text x="385" y="83" font-family="Cascadia Mono,Consolas,monospace" font-size="19" fill="#c9aec7">·</text>
+        <text x="431" y="83" font-family="Cascadia Mono,Consolas,monospace" font-size="19" fill="#c9aec7">·</text>
+        <text x="470" y="83" font-family="Cascadia Mono,Consolas,monospace" font-size="19" fill="#c9aec7">·</text>
         <text x="516" y="83" font-family="Cascadia Mono,Consolas,monospace" font-size="19" fill="#9ec8c6">·</text>
         <text x="558" y="83" font-family="Cascadia Mono,Consolas,monospace" font-size="19" fill="#9ec8c6">·</text>
-        <text x="600" y="83" font-family="Cascadia Mono,Consolas,monospace" font-size="19" fill="#1f2733">1</text>
-        <text x="644" y="83" font-family="Cascadia Mono,Consolas,monospace" font-size="19" fill="#1f2733">2</text>
-        <text x="688" y="83" font-family="Cascadia Mono,Consolas,monospace" font-size="19" fill="#1f2733">.</text>
-        <text x="726" y="83" font-family="Cascadia Mono,Consolas,monospace" font-size="19" fill="#1f2733">5</text>
-        <text x="770" y="83" font-family="Cascadia Mono,Consolas,monospace" font-size="19" fill="#1f2733">0</text>
-        <text x="270" y="132" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="12.5" fill="#3d3170">:&lt;10 — lane of 10, contents pushed LEFT, spaces fill the rest</text>
+        <text x="600" y="83" font-family="Cascadia Mono,Consolas,monospace" font-size="19" fill="#2b2730">1</text>
+        <text x="644" y="83" font-family="Cascadia Mono,Consolas,monospace" font-size="19" fill="#2b2730">2</text>
+        <text x="688" y="83" font-family="Cascadia Mono,Consolas,monospace" font-size="19" fill="#2b2730">.</text>
+        <text x="726" y="83" font-family="Cascadia Mono,Consolas,monospace" font-size="19" fill="#2b2730">5</text>
+        <text x="770" y="83" font-family="Cascadia Mono,Consolas,monospace" font-size="19" fill="#2b2730">0</text>
+        <text x="270" y="132" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="12.5" fill="#3f2a41">:&lt;10 — lane of 10, contents pushed LEFT, spaces fill the rest</text>
         <text x="661" y="132" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="12.5" fill="#1d5654">:&gt;7.2f — lane of 7, pushed RIGHT</text>
-        <text x="40" y="168" font-family="Segoe UI,system-ui,sans-serif" font-size="12" fill="#6b7585">Every row uses the same lanes — so every row's columns land in the same places. That's the whole trick of text tables.</text>
+        <text x="40" y="168" font-family="Segoe UI,system-ui,sans-serif" font-size="12" fill="#6a626e">Every row uses the same lanes — so every row's columns land in the same places. That's the whole trick of text tables.</text>
       </svg>
       <div class="figcap">Fig. 2 — Widths make lanes; <code>&lt;</code> and <code>&gt;</code> choose which wall the contents hug. Numbers hug the right so their digits align; names hug the left so your eye can scan them.</div>
     </div>
@@ -683,8 +685,8 @@ print(clean)</pre><p>Split shreds away every whitespace sin, join rebuilds with 
 
 <footer class="foot">
   <div class="foot-in">
-    <img src="../../assets/wordmark.svg" alt="Learn with Adi" style="height:26px">
-    <span>Learn with Adi — Unit 8 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Series</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
+    <img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building" style="height:36px">
+    <span>Learn AI by Building — Unit 8 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Series</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
   </div>
 </footer>
 

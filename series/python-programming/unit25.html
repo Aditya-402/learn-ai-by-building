@@ -3,8 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PyTorch — First Contact — Learn with Adi</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>">
+<title>PyTorch — First Contact — Learn AI by Building</title>
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
 <link rel="stylesheet" href="../../assets/site.css">
 <link rel="stylesheet" href="../../assets/unit.css">
 <style>
@@ -14,7 +16,7 @@
 .listing .ll{font-size:var(--fs-xs);letter-spacing:.13em;text-transform:uppercase;font-weight:700;color:var(--accent)}
 .listing p{font-size:var(--fs-cap);color:var(--slate)}
 .listing pre{font-family:var(--mono);font-size:var(--fs-sm);background:var(--subtle);border-radius:8px;padding:13px 16px;overflow-x:auto;margin:0;line-height:1.7;color:var(--ink)}
-.listing .out{font-family:var(--mono);font-size:var(--fs-sm);background:#23262e;color:#e8eaf0;border-radius:8px;padding:12px 16px;overflow-x:auto;margin:0;white-space:pre-wrap;line-height:1.6}
+.listing .out{font-family:var(--mono);font-size:var(--fs-sm);background:#23262e;color:#ece4d8;border-radius:8px;padding:12px 16px;overflow-x:auto;margin:0;white-space:pre-wrap;line-height:1.6}
 .listing .out::before{content:"what it prints — in Colab, not here";display:block;font-family:var(--sans);font-size:var(--fs-xs);letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:#9aa3b4;margin-bottom:6px}
 .annot{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:7px;font-size:var(--fs-cap);color:var(--slate);max-width:66ch}
 .annot li{border-left:2px solid var(--line);padding-left:12px}
@@ -27,7 +29,7 @@ a.colab:hover{background:var(--panel)}
 <header class="masthead">
   <div class="masthead-in">
     <div class="lwa-brandrow">
-      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg" alt="Learn with Adi"></a>
+      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building"></a>
       <div class="lwa-brand-right">
         <span class="lwa-tag"><a href="index.html">Series 02 · Python Programming</a></span>
         <span data-lwa-auth></span>
@@ -66,7 +68,7 @@ a.colab:hover{background:var(--panel)}
   <section id="s1">
     <div class="prereq">
       <div class="pq"><b>You'll need Unit 21 and Units 13–16</b>NumPy arrays (shape, indexing, broadcasting) and classes (<code>__init__</code>, <code>self</code>, methods, inheritance, <code>super()</code>). Everything today is those two ideas wearing a new coat.</div>
-      <div class="pq"><b>The honest bit — the notebook <i>is</i> the lab today</b>This is the one unit these notes can't run in the page. PyTorch is far too big to download into a browser, so every torch example here is a read-only listing with its output printed for you. <a href="https://colab.research.google.com/github/Aditya-402/learn-with-adi/blob/main/notebooks/python-programming/unit25.ipynb" rel="noopener">▶ Run this unit in Colab</a> — there, torch really runs, and you should have it open beside this page.</div>
+      <div class="pq"><b>The honest bit — the notebook <i>is</i> the lab today</b>This is the one unit these notes can't run in the page. PyTorch is far too big to download into a browser, so every torch example here is a read-only listing with its output printed for you. <a href="https://colab.research.google.com/github/Aditya-402/learn-ai-by-building/blob/main/notebooks/python-programming/unit25.ipynb" rel="noopener">▶ Run this unit in Colab</a> — there, torch really runs, and you should have it open beside this page.</div>
       <div class="pq"><b>Practice still happens here</b>Every checked problem below is plain Python or NumPy — shape arithmetic, derivatives by hand, class-shape drills. The ideas transfer exactly; only the import changes.</div>
     </div>
     <div class="prose">
@@ -97,27 +99,27 @@ print(a * 2)                |  print(a * 2)</div>
     </div>
     <div class="fig">
       <svg viewBox="0 0 860 260" role="img" aria-label="A tensor is an array plus a device and a gradient history">
-        <text x="16" y="26" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6b7585" letter-spacing="1.5">WHAT A TENSOR CARRIES THAT AN ARRAY DOESN'T</text>
-        <rect x="40" y="52" width="230" height="170" rx="12" fill="#f0f1f7" stroke="#e3e6ee" stroke-width="1.5"/>
-        <text x="155" y="78" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#6b7585">np.array</text>
-        <rect x="66" y="94" width="178" height="60" rx="8" fill="#ffffff" stroke="#e3e6ee" stroke-width="1.5"/>
-        <text x="155" y="118" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#1f2733">the numbers</text>
-        <text x="155" y="140" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#1f2733">shape (2, 3)</text>
-        <text x="155" y="182" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6b7585">indexing · slicing · broadcasting</text>
-        <text x="155" y="202" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6b7585">element-wise arithmetic · @</text>
-        <text x="300" y="145" font-family="Segoe UI,system-ui,sans-serif" font-size="22" fill="#5b4b9e">+</text>
-        <rect x="340" y="52" width="480" height="170" rx="12" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.5"/>
-        <text x="580" y="78" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#3d3170">torch.tensor</text>
-        <rect x="364" y="94" width="200" height="76" rx="8" fill="#ffffff" stroke="#5b4b9e" stroke-width="1.5"/>
-        <text x="464" y="118" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#3d3170">device</text>
-        <text x="464" y="140" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#1f2733">cpu · cuda</text>
-        <text x="464" y="158" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6b7585">where the maths happens</text>
-        <rect x="592" y="94" width="204" height="76" rx="8" fill="#e3efee" stroke="#2b7a78" stroke-width="1.5"/>
+        <text x="16" y="26" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6a626e" letter-spacing="1.5">WHAT A TENSOR CARRIES THAT AN ARRAY DOESN'T</text>
+        <rect x="40" y="52" width="230" height="170" rx="12" fill="#f3ece0" stroke="#e9dfcf" stroke-width="1.5"/>
+        <text x="155" y="78" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#6a626e">np.array</text>
+        <rect x="66" y="94" width="178" height="60" rx="8" fill="#ffffff" stroke="#e9dfcf" stroke-width="1.5"/>
+        <text x="155" y="118" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#2b2730">the numbers</text>
+        <text x="155" y="140" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#2b2730">shape (2, 3)</text>
+        <text x="155" y="182" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6a626e">indexing · slicing · broadcasting</text>
+        <text x="155" y="202" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6a626e">element-wise arithmetic · @</text>
+        <text x="300" y="145" font-family="Segoe UI,system-ui,sans-serif" font-size="22" fill="#5a3d5c">+</text>
+        <rect x="340" y="52" width="480" height="170" rx="12" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.5"/>
+        <text x="580" y="78" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#3f2a41">torch.tensor</text>
+        <rect x="364" y="94" width="200" height="76" rx="8" fill="#ffffff" stroke="#5a3d5c" stroke-width="1.5"/>
+        <text x="464" y="118" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#3f2a41">device</text>
+        <text x="464" y="140" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b2730">cpu · cuda</text>
+        <text x="464" y="158" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6a626e">where the maths happens</text>
+        <rect x="592" y="94" width="204" height="76" rx="8" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.5"/>
         <text x="694" y="118" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#1d5654">grad history</text>
-        <text x="694" y="140" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#1f2733">requires_grad</text>
+        <text x="694" y="140" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b2730">requires_grad</text>
         <text x="694" y="158" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#1d5654">how this number came to be</text>
-        <text x="580" y="202" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#3d3170">everything on the left, unchanged — plus these two</text>
-        <text x="430" y="246" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a35a33">Unit 21 taught you the left box. Today is only the right one.</text>
+        <text x="580" y="202" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#3f2a41">everything on the left, unchanged — plus these two</text>
+        <text x="430" y="246" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a8441f">Unit 21 taught you the left box. Today is only the right one.</text>
       </svg>
       <div class="figcap">Fig. 1 — A tensor is not a new kind of number. It is an array that also knows which processor it lives on and what arithmetic produced it.</div>
     </div>
@@ -249,30 +251,30 @@ print(x.grad)                               # 4</pre>
         <li><b>Line 3</b> — walk the trail backwards from <code>y</code>. One step to undo: squaring.</li>
         <li><b>Line 4</b> — the answer lands in <code>x.grad</code>. The slope of x² is 2x, and at x = 3 that is 6. Torch prints a bare float tensor as <code>tensor(6.)</code> — the trailing dot just means "this is a float".</li>
       </ul>
-      <a class="colab" href="https://colab.research.google.com/github/Aditya-402/learn-with-adi/blob/main/notebooks/python-programming/unit25.ipynb" rel="noopener">▶ Run this in Colab</a>
+      <a class="colab" href="https://colab.research.google.com/github/Aditya-402/learn-ai-by-building/blob/main/notebooks/python-programming/unit25.ipynb" rel="noopener">▶ Run this in Colab</a>
     </div>
 
     <div class="fig">
       <svg viewBox="0 0 860 250" role="img" aria-label="Forward pass records operations; backward pass walks them in reverse to fill x.grad">
-        <text x="16" y="26" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6b7585" letter-spacing="1.5">FORWARD LEAVES CRUMBS · BACKWARD FOLLOWS THEM HOME</text>
-        <rect x="60" y="60" width="150" height="58" rx="9" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.5"/>
-        <text x="135" y="83" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#3d3170">x</text>
-        <text x="135" y="104" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#1f2733">3.0</text>
-        <text x="135" y="136" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6b7585">requires_grad=True</text>
-        <rect x="330" y="60" width="160" height="58" rx="9" fill="#f0f1f7" stroke="#e3e6ee" stroke-width="1.5"/>
-        <text x="410" y="95" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#1f2733">square</text>
-        <rect x="610" y="60" width="150" height="58" rx="9" fill="#e3efee" stroke="#2b7a78" stroke-width="1.5"/>
+        <text x="16" y="26" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6a626e" letter-spacing="1.5">FORWARD LEAVES CRUMBS · BACKWARD FOLLOWS THEM HOME</text>
+        <rect x="60" y="60" width="150" height="58" rx="9" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.5"/>
+        <text x="135" y="83" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#3f2a41">x</text>
+        <text x="135" y="104" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#2b2730">3.0</text>
+        <text x="135" y="136" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6a626e">requires_grad=True</text>
+        <rect x="330" y="60" width="160" height="58" rx="9" fill="#f3ece0" stroke="#e9dfcf" stroke-width="1.5"/>
+        <text x="410" y="95" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#2b2730">square</text>
+        <rect x="610" y="60" width="150" height="58" rx="9" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.5"/>
         <text x="685" y="83" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#1d5654">y</text>
-        <text x="685" y="104" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#1f2733">9.0</text>
-        <line x1="212" y1="89" x2="326" y2="89" stroke="#5b4b9e" stroke-width="1.6" marker-end="url(#ah)"/>
-        <line x1="492" y1="89" x2="606" y2="89" stroke="#5b4b9e" stroke-width="1.6" marker-end="url(#ah)"/>
-        <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#5b4b9e"/></marker>
-        <marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#a35a33"/></marker></defs>
-        <text x="410" y="46" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#5b4b9e">forward — and the crumb is dropped here</text>
-        <path d="M660 128 L660 170 L160 170 L160 128" fill="none" stroke="#a35a33" stroke-width="1.6" marker-end="url(#ah2)"/>
-        <text x="410" y="190" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a35a33">y.backward() — undo the squaring, step by step</text>
-        <rect x="60" y="200" width="230" height="34" rx="8" fill="#ffffff" stroke="#a35a33" stroke-width="1.5"/>
-        <text x="175" y="223" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#1f2733">x.grad → 6.0   (that is 2x)</text>
+        <text x="685" y="104" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#2b2730">9.0</text>
+        <line x1="212" y1="89" x2="326" y2="89" stroke="#5a3d5c" stroke-width="1.6" marker-end="url(#ah)"/>
+        <line x1="492" y1="89" x2="606" y2="89" stroke="#5a3d5c" stroke-width="1.6" marker-end="url(#ah)"/>
+        <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#5a3d5c"/></marker>
+        <marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#a8441f"/></marker></defs>
+        <text x="410" y="46" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#5a3d5c">forward — and the crumb is dropped here</text>
+        <path d="M660 128 L660 170 L160 170 L160 128" fill="none" stroke="#a8441f" stroke-width="1.6" marker-end="url(#ah2)"/>
+        <text x="410" y="190" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a8441f">y.backward() — undo the squaring, step by step</text>
+        <rect x="60" y="200" width="230" height="34" rx="8" fill="#ffffff" stroke="#a8441f" stroke-width="1.5"/>
+        <text x="175" y="223" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#2b2730">x.grad → 6.0   (that is 2x)</text>
       </svg>
       <div class="figcap">Fig. 2 — The forward pass computes the answer and records the route. <code>.backward()</code> retraces it, filling in each input's <code>.grad</code>. With a million inputs the picture is wider, not different.</div>
     </div>
@@ -405,7 +407,7 @@ print(model)                                # 10</pre>
         <li><b>Line 8</b> — the last layer's answer, returned. Read the last line first: whatever <code>forward</code> returns is what the model gives you.</li>
         <li><b>Lines 9–10</b> — build one instance and print it. Torch's <code>__str__</code> lists the layers it found in the attributes — a free summary you didn't write.</li>
       </ul>
-      <a class="colab" href="https://colab.research.google.com/github/Aditya-402/learn-with-adi/blob/main/notebooks/python-programming/unit25.ipynb" rel="noopener">▶ Run this in Colab</a>
+      <a class="colab" href="https://colab.research.google.com/github/Aditya-402/learn-ai-by-building/blob/main/notebooks/python-programming/unit25.ipynb" rel="noopener">▶ Run this in Colab</a>
     </div>
 
     <div class="keyidea">
@@ -571,7 +573,7 @@ epoch 80  loss 0.0158</div>
         <li><b>Line 8</b> — <b>step.</b> The optimizer reads those <code>.grad</code> values and moves each knob a little in the direction that lowers the loss. Nothing else changes any weights — ever.</li>
       </ul>
       <p>The printed output above is what a healthy run looks like: the loss falls. In the notebook you'll watch it fall for real, on numbers you can change.</p>
-      <a class="colab" href="https://colab.research.google.com/github/Aditya-402/learn-with-adi/blob/main/notebooks/python-programming/unit25.ipynb" rel="noopener">▶ Run this in Colab</a>
+      <a class="colab" href="https://colab.research.google.com/github/Aditya-402/learn-ai-by-building/blob/main/notebooks/python-programming/unit25.ipynb" rel="noopener">▶ Run this in Colab</a>
     </div>
 
     <div class="confuse">
@@ -674,7 +676,7 @@ torch.Size([4, 1])</div>
         <li><code>layer(x)</code> — the layer called like a function. Four rows in, four rows out, one number each.</li>
         <li>Reading shapes out loud after every step is the single best debugging habit in deep learning. Most bugs are a shape you assumed and never checked.</li>
       </ul>
-      <a class="colab" href="https://colab.research.google.com/github/Aditya-402/learn-with-adi/blob/main/notebooks/python-programming/unit25.ipynb" rel="noopener">▶ Run this in Colab</a>
+      <a class="colab" href="https://colab.research.google.com/github/Aditya-402/learn-ai-by-building/blob/main/notebooks/python-programming/unit25.ipynb" rel="noopener">▶ Run this in Colab</a>
     </div>
 
     <div class="practice">
@@ -889,8 +891,8 @@ print(net.forward((4, 7)))</pre><p>You have just written, in twenty lines, the p
 
 <footer class="foot">
   <div class="foot-in">
-    <img src="../../assets/wordmark.svg" alt="Learn with Adi" style="height:26px">
-    <span>Learn with Adi — Unit 25 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Series</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
+    <img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building" style="height:36px">
+    <span>Learn AI by Building — Unit 25 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Series</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
   </div>
 </footer>
 

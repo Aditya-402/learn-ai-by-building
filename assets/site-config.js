@@ -1,4 +1,4 @@
-/* Learn with Adi — site configuration.
+/* Learn AI by Building — site configuration.
    Fill these in after creating the (free) Supabase project — see setup/SETUP.md.
    Both values are PUBLIC by design: the anon key is meant to ship to browsers;
    row-level security in the database is what protects each student's data. */

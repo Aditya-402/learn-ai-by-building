@@ -3,8 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>pandas — Tables of Data — Learn with Adi</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>">
+<title>pandas — Tables of Data — Learn AI by Building</title>
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
 <link rel="stylesheet" href="../../assets/site.css">
 <link rel="stylesheet" href="../../assets/unit.css">
 </head>
@@ -12,7 +14,7 @@
 <header class="masthead">
   <div class="masthead-in">
     <div class="lwa-brandrow">
-      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg" alt="Learn with Adi"></a>
+      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building"></a>
       <div class="lwa-brand-right">
         <span class="lwa-tag"><a href="index.html">Series 02 · Python Programming</a></span>
         <span data-lwa-auth></span>
@@ -52,7 +54,7 @@
   <section id="s1">
     <div class="prereq">
       <div class="pq"><b>You'll need Units 6, 10, 12 &amp; 21</b>Dicts (keys and values), reading and writing text files, comprehensions and <code>zip</code>, and — most of all — Unit 21's arrays, shapes and boolean masks. Everything here is those four ideas wearing a nicer coat.</div>
-      <div class="pq"><b>How this unit works</b>Same rhythm: a 3–4 minute read, then ~10 minutes of practice. The first runnable box below takes about fifteen seconds while pandas downloads — after that it's instant. <a href="https://colab.research.google.com/github/Aditya-402/learn-with-adi/blob/main/notebooks/python-programming/unit22.ipynb" rel="noopener">▶ Run this unit in Colab</a> if you prefer a notebook.</div>
+      <div class="pq"><b>How this unit works</b>Same rhythm: a 3–4 minute read, then ~10 minutes of practice. The first runnable box below takes about fifteen seconds while pandas downloads — after that it's instant. <a href="https://colab.research.google.com/github/Aditya-402/learn-ai-by-building/blob/main/notebooks/python-programming/unit22.ipynb" rel="noopener">▶ Run this unit in Colab</a> if you prefer a notebook.</div>
       <div class="pq"><b>Every box is its own program</b>The runner starts fresh each time you press Run, so each box re-imports pandas and rebuilds its table at the top. That repetition is deliberate — copy any box out and it works on its own.</div>
     </div>
     <div class="prose">
@@ -86,53 +88,53 @@ print(df.shape)</div>
     </div>
     <div class="fig">
       <svg viewBox="0 0 860 250" role="img" aria-label="A DataFrame drawn as three columns of values sharing one set of row labels">
-        <text x="16" y="24" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6b7585" letter-spacing="1.5">ONE TABLE = SEVERAL ARRAYS + ONE SHARED SET OF ROW LABELS</text>
+        <text x="16" y="24" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6a626e" letter-spacing="1.5">ONE TABLE = SEVERAL ARRAYS + ONE SHARED SET OF ROW LABELS</text>
 
-        <rect x="40" y="46" width="70" height="28" rx="6" fill="#f0f1f7" stroke="#e3e6ee" stroke-width="1.2"/>
-        <text x="75" y="65" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6b7585">index</text>
-        <rect x="122" y="46" width="150" height="28" rx="6" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.4"/>
-        <text x="197" y="65" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" font-weight="700" fill="#3d3170">name</text>
-        <rect x="284" y="46" width="100" height="28" rx="6" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.4"/>
-        <text x="334" y="65" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" font-weight="700" fill="#3d3170">class</text>
-        <rect x="396" y="46" width="100" height="28" rx="6" fill="#e3efee" stroke="#2b7a78" stroke-width="1.4"/>
+        <rect x="40" y="46" width="70" height="28" rx="6" fill="#f3ece0" stroke="#e9dfcf" stroke-width="1.2"/>
+        <text x="75" y="65" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6a626e">index</text>
+        <rect x="122" y="46" width="150" height="28" rx="6" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.4"/>
+        <text x="197" y="65" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" font-weight="700" fill="#3f2a41">name</text>
+        <rect x="284" y="46" width="100" height="28" rx="6" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.4"/>
+        <text x="334" y="65" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" font-weight="700" fill="#3f2a41">class</text>
+        <rect x="396" y="46" width="100" height="28" rx="6" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.4"/>
         <text x="446" y="65" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" font-weight="700" fill="#1d5654">score</text>
 
-        <rect x="40" y="78" width="70" height="28" rx="6" fill="#f0f1f7" stroke="#e3e6ee" stroke-width="1.2"/>
-        <text x="75" y="97" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#6b7585">0</text>
-        <rect x="122" y="78" width="150" height="28" rx="6" fill="#ffffff" stroke="#e3e6ee" stroke-width="1.2"/>
-        <text x="197" y="97" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#1f2733">Asha</text>
-        <rect x="284" y="78" width="100" height="28" rx="6" fill="#ffffff" stroke="#e3e6ee" stroke-width="1.2"/>
-        <text x="334" y="97" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#1f2733">A</text>
-        <rect x="396" y="78" width="100" height="28" rx="6" fill="#ffffff" stroke="#e3e6ee" stroke-width="1.2"/>
-        <text x="446" y="97" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#1f2733">72</text>
+        <rect x="40" y="78" width="70" height="28" rx="6" fill="#f3ece0" stroke="#e9dfcf" stroke-width="1.2"/>
+        <text x="75" y="97" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#6a626e">0</text>
+        <rect x="122" y="78" width="150" height="28" rx="6" fill="#ffffff" stroke="#e9dfcf" stroke-width="1.2"/>
+        <text x="197" y="97" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b2730">Asha</text>
+        <rect x="284" y="78" width="100" height="28" rx="6" fill="#ffffff" stroke="#e9dfcf" stroke-width="1.2"/>
+        <text x="334" y="97" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b2730">A</text>
+        <rect x="396" y="78" width="100" height="28" rx="6" fill="#ffffff" stroke="#e9dfcf" stroke-width="1.2"/>
+        <text x="446" y="97" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b2730">72</text>
 
-        <rect x="40" y="110" width="70" height="28" rx="6" fill="#f0f1f7" stroke="#e3e6ee" stroke-width="1.2"/>
-        <text x="75" y="129" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#6b7585">1</text>
-        <rect x="122" y="110" width="150" height="28" rx="6" fill="#ffffff" stroke="#e3e6ee" stroke-width="1.2"/>
-        <text x="197" y="129" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#1f2733">Ben</text>
-        <rect x="284" y="110" width="100" height="28" rx="6" fill="#ffffff" stroke="#e3e6ee" stroke-width="1.2"/>
-        <text x="334" y="129" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#1f2733">B</text>
-        <rect x="396" y="110" width="100" height="28" rx="6" fill="#ffffff" stroke="#e3e6ee" stroke-width="1.2"/>
-        <text x="446" y="129" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#1f2733">45</text>
+        <rect x="40" y="110" width="70" height="28" rx="6" fill="#f3ece0" stroke="#e9dfcf" stroke-width="1.2"/>
+        <text x="75" y="129" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#6a626e">1</text>
+        <rect x="122" y="110" width="150" height="28" rx="6" fill="#ffffff" stroke="#e9dfcf" stroke-width="1.2"/>
+        <text x="197" y="129" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b2730">Ben</text>
+        <rect x="284" y="110" width="100" height="28" rx="6" fill="#ffffff" stroke="#e9dfcf" stroke-width="1.2"/>
+        <text x="334" y="129" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b2730">B</text>
+        <rect x="396" y="110" width="100" height="28" rx="6" fill="#ffffff" stroke="#e9dfcf" stroke-width="1.2"/>
+        <text x="446" y="129" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b2730">45</text>
 
-        <rect x="40" y="142" width="70" height="28" rx="6" fill="#f0f1f7" stroke="#e3e6ee" stroke-width="1.2"/>
-        <text x="75" y="161" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#6b7585">2</text>
-        <rect x="122" y="142" width="150" height="28" rx="6" fill="#ffffff" stroke="#e3e6ee" stroke-width="1.2"/>
-        <text x="197" y="161" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#1f2733">Chitra</text>
-        <rect x="284" y="142" width="100" height="28" rx="6" fill="#ffffff" stroke="#e3e6ee" stroke-width="1.2"/>
-        <text x="334" y="161" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#1f2733">A</text>
-        <rect x="396" y="142" width="100" height="28" rx="6" fill="#ffffff" stroke="#e3e6ee" stroke-width="1.2"/>
-        <text x="446" y="161" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#1f2733">88</text>
+        <rect x="40" y="142" width="70" height="28" rx="6" fill="#f3ece0" stroke="#e9dfcf" stroke-width="1.2"/>
+        <text x="75" y="161" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#6a626e">2</text>
+        <rect x="122" y="142" width="150" height="28" rx="6" fill="#ffffff" stroke="#e9dfcf" stroke-width="1.2"/>
+        <text x="197" y="161" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b2730">Chitra</text>
+        <rect x="284" y="142" width="100" height="28" rx="6" fill="#ffffff" stroke="#e9dfcf" stroke-width="1.2"/>
+        <text x="334" y="161" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b2730">A</text>
+        <rect x="396" y="142" width="100" height="28" rx="6" fill="#ffffff" stroke="#e9dfcf" stroke-width="1.2"/>
+        <text x="446" y="161" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b2730">88</text>
 
-        <rect x="34" y="40" width="82" height="136" rx="10" fill="none" stroke="#a35a33" stroke-width="1.6" stroke-dasharray="5 4"/>
-        <text x="75" y="196" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#a35a33">the glue</text>
+        <rect x="34" y="40" width="82" height="136" rx="10" fill="none" stroke="#a8441f" stroke-width="1.6" stroke-dasharray="5 4"/>
+        <text x="75" y="196" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#a8441f">the glue</text>
 
-        <text x="540" y="66" font-family="Segoe UI,system-ui,sans-serif" font-size="12.5" fill="#1f2733">Each column is one array, of one type —</text>
-        <text x="540" y="86" font-family="Segoe UI,system-ui,sans-serif" font-size="12.5" fill="#1f2733">text here, whole numbers there.</text>
-        <text x="540" y="116" font-family="Segoe UI,system-ui,sans-serif" font-size="12.5" fill="#1f2733">The index (0, 1, 2) is what makes them</text>
-        <text x="540" y="136" font-family="Segoe UI,system-ui,sans-serif" font-size="12.5" fill="#1f2733">a <tspan font-weight="700">table</tspan> and not three unrelated lists.</text>
-        <text x="540" y="166" font-family="Segoe UI,system-ui,sans-serif" font-size="12.5" fill="#3d3170">Sort by score and the names travel with</text>
-        <text x="540" y="186" font-family="Segoe UI,system-ui,sans-serif" font-size="12.5" fill="#3d3170">them — that's the whole point.</text>
+        <text x="540" y="66" font-family="Segoe UI,system-ui,sans-serif" font-size="12.5" fill="#2b2730">Each column is one array, of one type —</text>
+        <text x="540" y="86" font-family="Segoe UI,system-ui,sans-serif" font-size="12.5" fill="#2b2730">text here, whole numbers there.</text>
+        <text x="540" y="116" font-family="Segoe UI,system-ui,sans-serif" font-size="12.5" fill="#2b2730">The index (0, 1, 2) is what makes them</text>
+        <text x="540" y="136" font-family="Segoe UI,system-ui,sans-serif" font-size="12.5" fill="#2b2730">a <tspan font-weight="700">table</tspan> and not three unrelated lists.</text>
+        <text x="540" y="166" font-family="Segoe UI,system-ui,sans-serif" font-size="12.5" fill="#3f2a41">Sort by score and the names travel with</text>
+        <text x="540" y="186" font-family="Segoe UI,system-ui,sans-serif" font-size="12.5" fill="#3f2a41">them — that's the whole point.</text>
       </svg>
       <div class="figcap">Fig. 1 — The picture to keep: a dict of arrays that all agree on their row labels. Everything else in this unit is a way of asking that picture a question.</div>
     </div>
@@ -488,50 +490,50 @@ print(len(scores), scores.count(), scores.mean())</div>
     </div>
     <div class="fig">
       <svg viewBox="0 0 860 240" role="img" aria-label="A table with one missing score, and the two different tables produced by dropna and fillna">
-        <text x="16" y="24" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6b7585" letter-spacing="1.5">ONE HOLE, TWO HONEST ANSWERS — NEITHER IS FREE</text>
+        <text x="16" y="24" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6a626e" letter-spacing="1.5">ONE HOLE, TWO HONEST ANSWERS — NEITHER IS FREE</text>
 
-        <text x="30" y="48" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#3d3170">as read from the CSV</text>
-        <rect x="30" y="58" width="230" height="26" rx="5" fill="#ffffff" stroke="#e3e6ee" stroke-width="1.2"/>
-        <text x="46" y="76" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#1f2733">Asha</text>
-        <text x="230" y="76" text-anchor="end" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#1f2733">72.0</text>
-        <rect x="30" y="86" width="230" height="26" rx="5" fill="#fbf1ea" stroke="#a35a33" stroke-width="1.5"/>
-        <text x="46" y="104" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#1f2733">Ben</text>
-        <text x="230" y="104" text-anchor="end" font-family="Cascadia Mono,Consolas,monospace" font-size="12" font-weight="700" fill="#a35a33">NaN</text>
-        <rect x="30" y="114" width="230" height="26" rx="5" fill="#ffffff" stroke="#e3e6ee" stroke-width="1.2"/>
-        <text x="46" y="132" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#1f2733">Chitra</text>
-        <text x="230" y="132" text-anchor="end" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#1f2733">88.0</text>
-        <rect x="30" y="142" width="230" height="26" rx="5" fill="#ffffff" stroke="#e3e6ee" stroke-width="1.2"/>
-        <text x="46" y="160" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#1f2733">Dev</text>
-        <text x="230" y="160" text-anchor="end" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#1f2733">61.0</text>
-        <text x="30" y="190" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a35a33">NaN is not 0 and not "" —</text>
-        <text x="30" y="207" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a35a33">it means "we don't know".</text>
+        <text x="30" y="48" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#3f2a41">as read from the CSV</text>
+        <rect x="30" y="58" width="230" height="26" rx="5" fill="#ffffff" stroke="#e9dfcf" stroke-width="1.2"/>
+        <text x="46" y="76" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b2730">Asha</text>
+        <text x="230" y="76" text-anchor="end" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b2730">72.0</text>
+        <rect x="30" y="86" width="230" height="26" rx="5" fill="#fbf1ea" stroke="#a8441f" stroke-width="1.5"/>
+        <text x="46" y="104" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b2730">Ben</text>
+        <text x="230" y="104" text-anchor="end" font-family="Cascadia Mono,Consolas,monospace" font-size="12" font-weight="700" fill="#a8441f">NaN</text>
+        <rect x="30" y="114" width="230" height="26" rx="5" fill="#ffffff" stroke="#e9dfcf" stroke-width="1.2"/>
+        <text x="46" y="132" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b2730">Chitra</text>
+        <text x="230" y="132" text-anchor="end" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b2730">88.0</text>
+        <rect x="30" y="142" width="230" height="26" rx="5" fill="#ffffff" stroke="#e9dfcf" stroke-width="1.2"/>
+        <text x="46" y="160" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b2730">Dev</text>
+        <text x="230" y="160" text-anchor="end" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b2730">61.0</text>
+        <text x="30" y="190" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a8441f">NaN is not 0 and not "" —</text>
+        <text x="30" y="207" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a8441f">it means "we don't know".</text>
 
-        <text x="330" y="48" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#3d3170">dropna()</text>
-        <rect x="330" y="58" width="200" height="26" rx="5" fill="#ffffff" stroke="#e3e6ee" stroke-width="1.2"/>
-        <text x="346" y="76" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#1f2733">Asha</text>
-        <text x="510" y="76" text-anchor="end" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#1f2733">72.0</text>
-        <rect x="330" y="86" width="200" height="26" rx="5" fill="#ffffff" stroke="#e3e6ee" stroke-width="1.2"/>
-        <text x="346" y="104" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#1f2733">Chitra</text>
-        <text x="510" y="104" text-anchor="end" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#1f2733">88.0</text>
-        <rect x="330" y="114" width="200" height="26" rx="5" fill="#ffffff" stroke="#e3e6ee" stroke-width="1.2"/>
-        <text x="346" y="132" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#1f2733">Dev</text>
-        <text x="510" y="132" text-anchor="end" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#1f2733">61.0</text>
-        <text x="330" y="190" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6b7585">3 rows. Ben's name and class</text>
-        <text x="330" y="207" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6b7585">were fine — and left with him.</text>
+        <text x="330" y="48" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#3f2a41">dropna()</text>
+        <rect x="330" y="58" width="200" height="26" rx="5" fill="#ffffff" stroke="#e9dfcf" stroke-width="1.2"/>
+        <text x="346" y="76" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b2730">Asha</text>
+        <text x="510" y="76" text-anchor="end" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b2730">72.0</text>
+        <rect x="330" y="86" width="200" height="26" rx="5" fill="#ffffff" stroke="#e9dfcf" stroke-width="1.2"/>
+        <text x="346" y="104" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b2730">Chitra</text>
+        <text x="510" y="104" text-anchor="end" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b2730">88.0</text>
+        <rect x="330" y="114" width="200" height="26" rx="5" fill="#ffffff" stroke="#e9dfcf" stroke-width="1.2"/>
+        <text x="346" y="132" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b2730">Dev</text>
+        <text x="510" y="132" text-anchor="end" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b2730">61.0</text>
+        <text x="330" y="190" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6a626e">3 rows. Ben's name and class</text>
+        <text x="330" y="207" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6a626e">were fine — and left with him.</text>
 
-        <text x="600" y="48" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#3d3170">fillna(0)</text>
-        <rect x="600" y="58" width="200" height="26" rx="5" fill="#ffffff" stroke="#e3e6ee" stroke-width="1.2"/>
-        <text x="616" y="76" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#1f2733">Asha</text>
-        <text x="780" y="76" text-anchor="end" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#1f2733">72.0</text>
-        <rect x="600" y="86" width="200" height="26" rx="5" fill="#e3efee" stroke="#2b7a78" stroke-width="1.5"/>
-        <text x="616" y="104" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#1f2733">Ben</text>
+        <text x="600" y="48" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#3f2a41">fillna(0)</text>
+        <rect x="600" y="58" width="200" height="26" rx="5" fill="#ffffff" stroke="#e9dfcf" stroke-width="1.2"/>
+        <text x="616" y="76" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b2730">Asha</text>
+        <text x="780" y="76" text-anchor="end" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b2730">72.0</text>
+        <rect x="600" y="86" width="200" height="26" rx="5" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.5"/>
+        <text x="616" y="104" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b2730">Ben</text>
         <text x="780" y="104" text-anchor="end" font-family="Cascadia Mono,Consolas,monospace" font-size="12" font-weight="700" fill="#1d5654">0.0</text>
-        <rect x="600" y="114" width="200" height="26" rx="5" fill="#ffffff" stroke="#e3e6ee" stroke-width="1.2"/>
-        <text x="616" y="132" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#1f2733">Chitra</text>
-        <text x="780" y="132" text-anchor="end" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#1f2733">88.0</text>
-        <rect x="600" y="142" width="200" height="26" rx="5" fill="#ffffff" stroke="#e3e6ee" stroke-width="1.2"/>
-        <text x="616" y="160" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#1f2733">Dev</text>
-        <text x="780" y="160" text-anchor="end" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#1f2733">61.0</text>
+        <rect x="600" y="114" width="200" height="26" rx="5" fill="#ffffff" stroke="#e9dfcf" stroke-width="1.2"/>
+        <text x="616" y="132" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b2730">Chitra</text>
+        <text x="780" y="132" text-anchor="end" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b2730">88.0</text>
+        <rect x="600" y="142" width="200" height="26" rx="5" fill="#ffffff" stroke="#e9dfcf" stroke-width="1.2"/>
+        <text x="616" y="160" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b2730">Dev</text>
+        <text x="780" y="160" text-anchor="end" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b2730">61.0</text>
         <text x="600" y="190" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#1d5654">4 rows. But one score is now</text>
         <text x="600" y="207" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#1d5654">a claim you have to defend.</text>
       </svg>
@@ -1028,8 +1030,8 @@ for who, cls, sc in zip(best["name"], best["class"], best["score"]):
 
 <footer class="foot">
   <div class="foot-in">
-    <img src="../../assets/wordmark.svg" alt="Learn with Adi" style="height:26px">
-    <span>Learn with Adi — Unit 22 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Series</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
+    <img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building" style="height:36px">
+    <span>Learn AI by Building — Unit 22 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Series</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
   </div>
 </footer>
 

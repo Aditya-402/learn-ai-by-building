@@ -1,14 +1,14 @@
-/* Learn with Adi - shared unit-page stylesheet.
+/* Learn AI by Building - shared unit-page stylesheet.
    Every unit page in a series links this instead of carrying its own copy,
    so a design change is one edit rather than twenty. Page-specific rules
    (a unit's own diagram styles) may still go in a small <style> block. */
 
 :root{
-  --ground:#f6f7fb; --panel:#ffffff; --subtle:#f0f1f7; --ink:#1f2733;
-  --muted:#6b7585; --line:#e3e6ee; --accent:#5b4b9e; --accent-deep:#3d3170;
-  --accent-wash:#ecebf6; --teal:#2b7a78; --teal-wash:#e3efee;
-  --clay:#a35a33; --clay-wash:#f7ebe4; --gold:#8a6d1c; --gold-wash:#f5f0df;
-  --slate:#4a5a72;
+  --ground:#faf6ee; --panel:#ffffff; --subtle:#f3ece0; --ink:#2b2730;
+  --muted:#6a626e; --line:#e9dfcf; --accent:#5a3d5c; --accent-deep:#3f2a41;
+  --accent-wash:#f1e7ef; --teal:#2f5a45; --teal-wash:#e4ede6;
+  --clay:#a8441f; --clay-wash:#f8e6dc; --gold:#80590f; --gold-wash:#f8ecd3;
+  --slate:#554b58;
   --serif:'Iowan Old Style','Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif;
   --sans:'Segoe UI Variable Text','Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
   --mono:'Cascadia Mono','Cascadia Code',Consolas,'SF Mono',ui-monospace,Menlo,monospace;
@@ -91,7 +91,7 @@ h4{font-family:var(--sans);font-size:var(--fs-cap);font-weight:700;letter-spacin
 }
 
 /* ---------- what you should see on screen ---------- */
-.yousee{background:#23262e;color:#e8eaf0;font-family:var(--mono);font-size:var(--fs-sm);
+.yousee{background:#23262e;color:#ece4d8;font-family:var(--mono);font-size:var(--fs-sm);
   line-height:1.65;padding:12px 16px;white-space:pre-wrap}
 .yousee b{display:block;font-family:var(--sans);font-size:var(--fs-xs);letter-spacing:.1em;
   text-transform:uppercase;color:#9aa3b5;font-weight:700;margin-bottom:6px}

@@ -3,16 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Classes IV — Properties &amp; Encapsulation — Learn with Adi</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>">
-<link rel="stylesheet" href="../../assets/site.css?v=4">
-<link rel="stylesheet" href="../../assets/unit.css?v=4">
+<title>Classes IV — Properties &amp; Encapsulation — Learn AI by Building</title>
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=6">
+<link rel="stylesheet" href="../../assets/unit.css?v=6">
 </head>
 <body data-lwa-course="python-programming" data-lwa-chapter="u16" data-lwa-title="Unit 16 · Classes IV — properties &amp; encapsulation">
 <header class="masthead">
   <div class="masthead-in">
     <div class="lwa-brandrow">
-      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg" alt="Learn with Adi"></a>
+      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building"></a>
       <div class="lwa-brand-right">
         <span class="lwa-tag"><a href="index.html">Series 02 · Python Programming</a></span>
         <span data-lwa-auth></span>
@@ -51,7 +53,7 @@
   <section id="s1">
     <div class="prereq">
       <div class="pq"><b>You'll need Units 13–15</b><code>class</code>, <code>__init__</code>, <code>self</code>, methods, the dunders that made objects print and compare, and inheritance. This unit is the fourth and last movement of that story.</div>
-      <div class="pq"><b>How this unit works</b>Same rhythm: a 3–4 minute read, then ~10 minutes of practice. <a href="https://colab.research.google.com/github/Aditya-402/learn-with-adi/blob/main/notebooks/python-programming/unit16.ipynb" rel="noopener">▶ Run this unit in Colab</a> if you prefer a notebook.</div>
+      <div class="pq"><b>How this unit works</b>Same rhythm: a 3–4 minute read, then ~10 minutes of practice. <a href="https://colab.research.google.com/github/Aditya-402/learn-ai-by-building/blob/main/notebooks/python-programming/unit16.ipynb" rel="noopener">▶ Run this unit in Colab</a> if you prefer a notebook.</div>
       <div class="pq"><b>And Unit 9's raise</b>We're about to make objects refuse bad data. Refusing means <code>raise ValueError(...)</code> inside the class and <code>try/except</code> at the call site — exactly the pair from Unit 9, finally at home.</div>
     </div>
     <div class="prose">
@@ -218,49 +220,49 @@ print(f"{c.area:.2f}")</div>
     </div>
     <div class="fig">
       <svg viewBox="0 0 860 280" role="img" aria-label="A plain attribute lets reads and writes reach the box directly; a property puts your code in the path and can refuse writes">
-        <text x="16" y="24" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6b7585" letter-spacing="1.5">TWO WAYS TO REACH A VALUE</text>
+        <text x="16" y="24" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6a626e" letter-spacing="1.5">TWO WAYS TO REACH A VALUE</text>
 
-        <text x="30" y="60" font-family="Segoe UI,system-ui,sans-serif" font-size="12.5" font-weight="700" fill="#a35a33">plain attribute — the hole in the wall</text>
-        <rect x="30" y="74" width="120" height="40" rx="8" fill="#ffffff" stroke="#e3e6ee" stroke-width="1.5"/>
-        <text x="90" y="99" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#1f2733">a.balance</text>
-        <line x1="152" y1="94" x2="238" y2="94" stroke="#a35a33" stroke-width="1.6" marker-end="url(#ar1)"/>
-        <text x="195" y="86" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#a35a33">read</text>
-        <line x1="238" y1="126" x2="152" y2="126" stroke="#a35a33" stroke-width="1.6" marker-end="url(#ar1)"/>
-        <text x="195" y="145" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#a35a33">write — unchecked</text>
-        <rect x="240" y="74" width="140" height="66" rx="9" fill="#f7ebe4" stroke="#a35a33" stroke-width="1.5"/>
+        <text x="30" y="60" font-family="Segoe UI,system-ui,sans-serif" font-size="12.5" font-weight="700" fill="#a8441f">plain attribute — the hole in the wall</text>
+        <rect x="30" y="74" width="120" height="40" rx="8" fill="#ffffff" stroke="#e9dfcf" stroke-width="1.5"/>
+        <text x="90" y="99" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b2730">a.balance</text>
+        <line x1="152" y1="94" x2="238" y2="94" stroke="#a8441f" stroke-width="1.6" marker-end="url(#ar1)"/>
+        <text x="195" y="86" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#a8441f">read</text>
+        <line x1="238" y1="126" x2="152" y2="126" stroke="#a8441f" stroke-width="1.6" marker-end="url(#ar1)"/>
+        <text x="195" y="145" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#a8441f">write — unchecked</text>
+        <rect x="240" y="74" width="140" height="66" rx="9" fill="#f8e6dc" stroke="#a8441f" stroke-width="1.5"/>
         <text x="310" y="99" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#7c4324">balance</text>
-        <text x="310" y="122" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#1f2733">-999</text>
-        <text x="310" y="166" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a35a33">nothing of yours ever runs</text>
+        <text x="310" y="122" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#2b2730">-999</text>
+        <text x="310" y="166" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a8441f">nothing of yours ever runs</text>
 
-        <line x1="430" y1="50" x2="430" y2="250" stroke="#e3e6ee" stroke-width="1.5" stroke-dasharray="5 5"/>
+        <line x1="430" y1="50" x2="430" y2="250" stroke="#e9dfcf" stroke-width="1.5" stroke-dasharray="5 5"/>
 
-        <text x="460" y="60" font-family="Segoe UI,system-ui,sans-serif" font-size="12.5" font-weight="700" fill="#3d3170">@property — the guarded window</text>
-        <rect x="460" y="74" width="120" height="40" rx="8" fill="#ffffff" stroke="#e3e6ee" stroke-width="1.5"/>
-        <text x="520" y="99" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#1f2733">a.balance</text>
-        <line x1="582" y1="94" x2="622" y2="94" stroke="#5b4b9e" stroke-width="1.6" marker-end="url(#ar2)"/>
-        <rect x="624" y="70" width="96" height="48" rx="9" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.5"/>
-        <text x="672" y="90" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11" font-weight="700" fill="#3d3170">your code</text>
-        <text x="672" y="107" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="10.5" fill="#3d3170">runs on every read</text>
-        <line x1="722" y1="94" x2="758" y2="94" stroke="#5b4b9e" stroke-width="1.6" marker-end="url(#ar2)"/>
-        <rect x="760" y="70" width="80" height="48" rx="9" fill="#e3efee" stroke="#2b7a78" stroke-width="1.5"/>
+        <text x="460" y="60" font-family="Segoe UI,system-ui,sans-serif" font-size="12.5" font-weight="700" fill="#3f2a41">@property — the guarded window</text>
+        <rect x="460" y="74" width="120" height="40" rx="8" fill="#ffffff" stroke="#e9dfcf" stroke-width="1.5"/>
+        <text x="520" y="99" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b2730">a.balance</text>
+        <line x1="582" y1="94" x2="622" y2="94" stroke="#5a3d5c" stroke-width="1.6" marker-end="url(#ar2)"/>
+        <rect x="624" y="70" width="96" height="48" rx="9" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.5"/>
+        <text x="672" y="90" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11" font-weight="700" fill="#3f2a41">your code</text>
+        <text x="672" y="107" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="10.5" fill="#3f2a41">runs on every read</text>
+        <line x1="722" y1="94" x2="758" y2="94" stroke="#5a3d5c" stroke-width="1.6" marker-end="url(#ar2)"/>
+        <rect x="760" y="70" width="80" height="48" rx="9" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.5"/>
         <text x="800" y="90" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" font-weight="700" fill="#1d5654">_balance</text>
-        <text x="800" y="108" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#1f2733">1200</text>
+        <text x="800" y="108" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b2730">1200</text>
 
-        <line x1="622" y1="150" x2="582" y2="150" stroke="#a35a33" stroke-width="1.6" marker-end="url(#ar1)"/>
-        <text x="524" y="154" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#a35a33">refused</text>
-        <g stroke="#a35a33" stroke-width="2.4" stroke-linecap="round">
+        <line x1="622" y1="150" x2="582" y2="150" stroke="#a8441f" stroke-width="1.6" marker-end="url(#ar1)"/>
+        <text x="524" y="154" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#a8441f">refused</text>
+        <g stroke="#a8441f" stroke-width="2.4" stroke-linecap="round">
           <line x1="666" y1="142" x2="682" y2="158"/><line x1="682" y1="142" x2="666" y2="158"/>
         </g>
-        <text x="700" y="154" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#a35a33">no setter →</text>
+        <text x="700" y="154" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#a8441f">no setter →</text>
         <text x="700" y="170" font-family="Cascadia Mono,Consolas,monospace" font-size="10.5" fill="#7c4324">AttributeError</text>
 
-        <rect x="30" y="196" width="810" height="58" rx="10" fill="#f0f1f7" stroke="#e3e6ee" stroke-width="1.5"/>
-        <text x="46" y="220" font-family="Segoe UI,system-ui,sans-serif" font-size="12" fill="#4a5a72">Both sides are spelled identically at the call site — <tspan font-family="Cascadia Mono,Consolas,monospace" fill="#1f2733">a.balance</tspan>, no parentheses. That is the point:</text>
-        <text x="46" y="240" font-family="Segoe UI,system-ui,sans-serif" font-size="12" fill="#4a5a72">a property lets you add a guard later without changing a single line of code that already reads the value.</text>
+        <rect x="30" y="196" width="810" height="58" rx="10" fill="#f3ece0" stroke="#e9dfcf" stroke-width="1.5"/>
+        <text x="46" y="220" font-family="Segoe UI,system-ui,sans-serif" font-size="12" fill="#554b58">Both sides are spelled identically at the call site — <tspan font-family="Cascadia Mono,Consolas,monospace" fill="#2b2730">a.balance</tspan>, no parentheses. That is the point:</text>
+        <text x="46" y="240" font-family="Segoe UI,system-ui,sans-serif" font-size="12" fill="#554b58">a property lets you add a guard later without changing a single line of code that already reads the value.</text>
 
         <defs>
-          <marker id="ar1" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,1 L7,4 L0,7 z" fill="#a35a33"/></marker>
-          <marker id="ar2" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,1 L7,4 L0,7 z" fill="#5b4b9e"/></marker>
+          <marker id="ar1" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,1 L7,4 L0,7 z" fill="#a8441f"/></marker>
+          <marker id="ar2" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,1 L7,4 L0,7 z" fill="#5a3d5c"/></marker>
         </defs>
       </svg>
       <div class="figcap">Fig. 1 — Left: the plain attribute of Units 13–15, reachable by anyone in either direction. Right: the same spelling, but every read passes through code you wrote, and a write with no setter is turned away by the language itself.</div>
@@ -603,40 +605,40 @@ Ada's Vault Learn Bank</div>
     </div>
     <div class="fig">
       <svg viewBox="0 0 860 300" role="img" aria-label="The class box sits on a shelf above the instance boxes; attribute lookup goes up, and an instance assignment creates a shadowing box">
-        <text x="16" y="24" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6b7585" letter-spacing="1.5">THE SHELF: LOOKUP GOES UP, ASSIGNMENT STAYS PUT</text>
+        <text x="16" y="24" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6a626e" letter-spacing="1.5">THE SHELF: LOOKUP GOES UP, ASSIGNMENT STAYS PUT</text>
 
-        <rect x="250" y="44" width="360" height="70" rx="10" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.8"/>
-        <text x="430" y="68" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#3d3170">class BankAccount</text>
-        <text x="430" y="94" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#1f2733">bank_name = "Learn Bank"</text>
-        <line x1="120" y1="126" x2="740" y2="126" stroke="#5b4b9e" stroke-width="2"/>
-        <text x="130" y="144" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6b7585">the shelf — one box, shared by every instance</text>
+        <rect x="250" y="44" width="360" height="70" rx="10" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.8"/>
+        <text x="430" y="68" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#3f2a41">class BankAccount</text>
+        <text x="430" y="94" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#2b2730">bank_name = "Learn Bank"</text>
+        <line x1="120" y1="126" x2="740" y2="126" stroke="#5a3d5c" stroke-width="2"/>
+        <text x="130" y="144" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6a626e">the shelf — one box, shared by every instance</text>
 
-        <rect x="120" y="176" width="190" height="86" rx="10" fill="#ffffff" stroke="#e3e6ee" stroke-width="1.6"/>
+        <rect x="120" y="176" width="190" height="86" rx="10" fill="#ffffff" stroke="#e9dfcf" stroke-width="1.6"/>
         <text x="215" y="199" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" font-weight="700" fill="#1d5654">a  (instance)</text>
-        <text x="215" y="221" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#1f2733">owner = "Ada"</text>
-        <text x="215" y="241" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#1f2733">_balance = 1200</text>
-        <line x1="215" y1="174" x2="215" y2="130" stroke="#2b7a78" stroke-width="1.8" marker-end="url(#up)"/>
+        <text x="215" y="221" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#2b2730">owner = "Ada"</text>
+        <text x="215" y="241" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#2b2730">_balance = 1200</text>
+        <line x1="215" y1="174" x2="215" y2="130" stroke="#2f5a45" stroke-width="1.8" marker-end="url(#up)"/>
         <text x="215" y="284" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#1d5654">a.bank_name → not here → look up → "Learn Bank"</text>
 
-        <rect x="360" y="176" width="170" height="86" rx="10" fill="#ffffff" stroke="#e3e6ee" stroke-width="1.6"/>
+        <rect x="360" y="176" width="170" height="86" rx="10" fill="#ffffff" stroke="#e9dfcf" stroke-width="1.6"/>
         <text x="445" y="199" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" font-weight="700" fill="#1d5654">b  (instance)</text>
-        <text x="445" y="221" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#1f2733">owner = "Grace"</text>
-        <text x="445" y="241" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#1f2733">_balance = 40</text>
-        <line x1="445" y1="174" x2="445" y2="130" stroke="#2b7a78" stroke-width="1.8" marker-end="url(#up)"/>
+        <text x="445" y="221" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#2b2730">owner = "Grace"</text>
+        <text x="445" y="241" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#2b2730">_balance = 40</text>
+        <line x1="445" y1="174" x2="445" y2="130" stroke="#2f5a45" stroke-width="1.8" marker-end="url(#up)"/>
         <text x="445" y="284" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#1d5654">same box, same answer</text>
 
-        <rect x="580" y="176" width="200" height="86" rx="10" fill="#f7ebe4" stroke="#a35a33" stroke-width="1.6"/>
+        <rect x="580" y="176" width="200" height="86" rx="10" fill="#f8e6dc" stroke="#a8441f" stroke-width="1.6"/>
         <text x="680" y="199" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" font-weight="700" fill="#7c4324">c  (after c.bank_name = …)</text>
-        <text x="680" y="221" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#1f2733">owner = "Alan"</text>
+        <text x="680" y="221" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#2b2730">owner = "Alan"</text>
         <text x="680" y="241" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" font-weight="700" fill="#7c4324">bank_name = "Alan's Vault"</text>
-        <line x1="680" y1="174" x2="680" y2="134" stroke="#a35a33" stroke-width="1.8" stroke-dasharray="4 4"/>
-        <g stroke="#a35a33" stroke-width="2.4" stroke-linecap="round">
+        <line x1="680" y1="174" x2="680" y2="134" stroke="#a8441f" stroke-width="1.8" stroke-dasharray="4 4"/>
+        <g stroke="#a8441f" stroke-width="2.4" stroke-linecap="round">
           <line x1="672" y1="146" x2="688" y2="162"/><line x1="688" y1="146" x2="672" y2="162"/>
         </g>
-        <text x="680" y="284" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#a35a33">its own box shadows the shelf — for c alone</text>
+        <text x="680" y="284" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#a8441f">its own box shadows the shelf — for c alone</text>
 
         <defs>
-          <marker id="up" markerWidth="9" markerHeight="9" refX="4.5" refY="8" orient="auto"><path d="M0.5,8 L4.5,1 L8.5,8 z" fill="#2b7a78"/></marker>
+          <marker id="up" markerWidth="9" markerHeight="9" refX="4.5" refY="8" orient="auto"><path d="M0.5,8 L4.5,1 L8.5,8 z" fill="#2f5a45"/></marker>
         </defs>
       </svg>
       <div class="figcap">Fig. 2 — Reading walks upward from the object to the class; writing always lands in the object. That asymmetry explains every class-attribute surprise you will ever meet.</div>
@@ -1127,8 +1129,8 @@ print(c.oldest_member)</textarea>
 
 <footer class="foot">
   <div class="foot-in">
-    <img src="../../assets/wordmark.svg" alt="Learn with Adi" style="height:26px">
-    <span>Learn with Adi — Unit 16 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Series</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
+    <img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building" style="height:36px">
+    <span>Learn AI by Building — Unit 16 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Series</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
   </div>
 </footer>
 

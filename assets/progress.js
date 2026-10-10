@@ -1,4 +1,4 @@
-/* Learn with Adi — learning-journey engine.
+/* Learn AI by Building — learning-journey engine.
    One store, two backends:
      - localStorage always (works signed-out, works offline)
      - Supabase when configured AND the student signs in (Google) — local merges up.

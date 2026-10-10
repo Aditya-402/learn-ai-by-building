@@ -3,16 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Classes III — Inheritance &amp; Composition — Learn with Adi</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>">
-<link rel="stylesheet" href="../../assets/site.css?v=4">
-<link rel="stylesheet" href="../../assets/unit.css?v=4">
+<title>Classes III — Inheritance &amp; Composition — Learn AI by Building</title>
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=6">
+<link rel="stylesheet" href="../../assets/unit.css?v=6">
 </head>
 <body data-lwa-course="python-programming" data-lwa-chapter="u15" data-lwa-title="Unit 15 · Classes III — inheritance &amp; composition">
 <header class="masthead">
   <div class="masthead-in">
     <div class="lwa-brandrow">
-      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg" alt="Learn with Adi"></a>
+      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building"></a>
       <div class="lwa-brand-right">
         <span class="lwa-tag"><a href="index.html">Series 02 · Python Programming</a></span>
         <span data-lwa-auth></span>
@@ -51,7 +53,7 @@
   <section id="s1">
     <div class="prereq">
       <div class="pq"><b>You'll need Units 13–14</b><code>class</code>, <code>__init__</code>, <code>self</code>, methods, and <code>__str__</code>. The <code>BankAccount</code>, <code>Player</code> and <code>Playlist</code> classes you built there come back today — as parents.</div>
-      <div class="pq"><b>How this unit works</b>Same rhythm: each concept is a 3–4 minute read, then ~10 minutes of practice. <a href="https://colab.research.google.com/github/Aditya-402/learn-with-adi/blob/main/notebooks/python-programming/unit15.ipynb" rel="noopener">▶ Run this unit in Colab</a> if you prefer a notebook.</div>
+      <div class="pq"><b>How this unit works</b>Same rhythm: each concept is a 3–4 minute read, then ~10 minutes of practice. <a href="https://colab.research.google.com/github/Aditya-402/learn-ai-by-building/blob/main/notebooks/python-programming/unit15.ipynb" rel="noopener">▶ Run this unit in Colab</a> if you prefer a notebook.</div>
       <div class="pq"><b>The one sentence to carry</b>Two classes are related either by <i>is-a</i> or by <i>has-a</i>. Say the sentence out loud and the code writes itself. That test is the whole unit.</div>
     </div>
     <div class="prose">
@@ -82,23 +84,23 @@ s.report()</div>
     </div>
     <div class="fig">
       <svg viewBox="0 0 860 296" role="img" aria-label="A child class SavingsAccount inherits every method of the parent class BankAccount; a lookup arrow shows Python checking the child first, then the parent">
-        <text x="16" y="24" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6b7585" letter-spacing="1.5">ONE ARROW UP — AND EVERY METHOD IS YOURS</text>
-        <rect x="480" y="46" width="360" height="180" rx="12" fill="#ffffff" stroke="#5b4b9e" stroke-width="1.8"/>
-        <rect x="480" y="46" width="360" height="34" rx="12" fill="#ecebf6"/>
-        <text x="660" y="69" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" font-weight="700" fill="#3d3170">class BankAccount   (the parent)</text>
-        <text x="504" y="106" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#1f2733">__init__(self, owner, balance=0)</text>
-        <text x="504" y="134" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#1f2733">deposit(self, amount)</text>
-        <text x="504" y="162" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#1f2733">withdraw(self, amount)</text>
-        <text x="504" y="190" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#1f2733">report(self)</text>
-        <text x="504" y="214" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6b7585">written once, in Unit 13</text>
-        <rect x="30" y="46" width="330" height="112" rx="12" fill="#ffffff" stroke="#2b7a78" stroke-width="1.8"/>
-        <rect x="30" y="46" width="330" height="34" rx="12" fill="#e3efee"/>
+        <text x="16" y="24" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6a626e" letter-spacing="1.5">ONE ARROW UP — AND EVERY METHOD IS YOURS</text>
+        <rect x="480" y="46" width="360" height="180" rx="12" fill="#ffffff" stroke="#5a3d5c" stroke-width="1.8"/>
+        <rect x="480" y="46" width="360" height="34" rx="12" fill="#f1e7ef"/>
+        <text x="660" y="69" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" font-weight="700" fill="#3f2a41">class BankAccount   (the parent)</text>
+        <text x="504" y="106" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#2b2730">__init__(self, owner, balance=0)</text>
+        <text x="504" y="134" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#2b2730">deposit(self, amount)</text>
+        <text x="504" y="162" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#2b2730">withdraw(self, amount)</text>
+        <text x="504" y="190" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#2b2730">report(self)</text>
+        <text x="504" y="214" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6a626e">written once, in Unit 13</text>
+        <rect x="30" y="46" width="330" height="112" rx="12" fill="#ffffff" stroke="#2f5a45" stroke-width="1.8"/>
+        <rect x="30" y="46" width="330" height="34" rx="12" fill="#e4ede6"/>
         <text x="195" y="69" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" font-weight="700" fill="#1d5654">class SavingsAccount(BankAccount)</text>
-        <text x="54" y="106" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#1f2733">pass</text>
-        <text x="54" y="132" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6b7585">nothing of its own — yet</text>
-        <path d="M360 96 L472 96" stroke="#5b4b9e" stroke-width="2" fill="none" marker-end="url(#ar15)"/>
-        <defs><marker id="ar15" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 z" fill="#5b4b9e"/></marker></defs>
-        <text x="416" y="86" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" font-weight="700" fill="#3d3170">is-a</text>
+        <text x="54" y="106" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#2b2730">pass</text>
+        <text x="54" y="132" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6a626e">nothing of its own — yet</text>
+        <path d="M360 96 L472 96" stroke="#5a3d5c" stroke-width="2" fill="none" marker-end="url(#ar15)"/>
+        <defs><marker id="ar15" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 z" fill="#5a3d5c"/></marker></defs>
+        <text x="416" y="86" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" font-weight="700" fill="#3f2a41">is-a</text>
         <rect x="30" y="196" width="810" height="76" rx="10" fill="#23262e"/>
         <text x="52" y="223" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#e8e9ee">s = SavingsAccount("Meera", 500)   →   s.deposit(250)</text>
         <text x="52" y="252" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#9fd6d4">look in SavingsAccount → not there → look in BankAccount → found → run it</text>
@@ -591,31 +593,31 @@ lib.show()</div>
     </div>
     <div class="fig">
       <svg viewBox="0 0 860 250" role="img" aria-label="Left: SavingsAccount points up to BankAccount, labelled is-a. Right: a Library object contains a list of three Book objects, labelled has-a.">
-        <text x="16" y="24" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6b7585" letter-spacing="1.5">TWO WAYS TO RELATE TWO CLASSES</text>
-        <rect x="24" y="44" width="380" height="186" rx="12" fill="#f0f1f7" stroke="#e3e6ee"/>
-        <text x="214" y="70" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#3d3170">IS-A  →  inheritance</text>
-        <rect x="122" y="86" width="184" height="42" rx="9" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.5"/>
-        <text x="214" y="112" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#3d3170">BankAccount</text>
-        <path d="M214 176 L214 134" stroke="#5b4b9e" stroke-width="2" fill="none" marker-end="url(#ar15b)"/>
-        <defs><marker id="ar15b" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 z" fill="#5b4b9e"/></marker></defs>
-        <rect x="106" y="176" width="216" height="42" rx="9" fill="#ffffff" stroke="#5b4b9e" stroke-width="1.5"/>
-        <text x="214" y="202" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#1f2733">SavingsAccount</text>
-        <text x="330" y="160" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6b7585">"a savings account</text>
-        <text x="330" y="174" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6b7585">IS a bank account" ✓</text>
-        <rect x="440" y="44" width="396" height="186" rx="12" fill="#f0f1f7" stroke="#e3e6ee"/>
+        <text x="16" y="24" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6a626e" letter-spacing="1.5">TWO WAYS TO RELATE TWO CLASSES</text>
+        <rect x="24" y="44" width="380" height="186" rx="12" fill="#f3ece0" stroke="#e9dfcf"/>
+        <text x="214" y="70" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#3f2a41">IS-A  →  inheritance</text>
+        <rect x="122" y="86" width="184" height="42" rx="9" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.5"/>
+        <text x="214" y="112" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#3f2a41">BankAccount</text>
+        <path d="M214 176 L214 134" stroke="#5a3d5c" stroke-width="2" fill="none" marker-end="url(#ar15b)"/>
+        <defs><marker id="ar15b" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 z" fill="#5a3d5c"/></marker></defs>
+        <rect x="106" y="176" width="216" height="42" rx="9" fill="#ffffff" stroke="#5a3d5c" stroke-width="1.5"/>
+        <text x="214" y="202" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b2730">SavingsAccount</text>
+        <text x="330" y="160" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6a626e">"a savings account</text>
+        <text x="330" y="174" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6a626e">IS a bank account" ✓</text>
+        <rect x="440" y="44" width="396" height="186" rx="12" fill="#f3ece0" stroke="#e9dfcf"/>
         <text x="638" y="70" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#1d5654">HAS-A  →  composition</text>
-        <rect x="470" y="86" width="336" height="126" rx="10" fill="#ffffff" stroke="#2b7a78" stroke-width="1.8"/>
+        <rect x="470" y="86" width="336" height="126" rx="10" fill="#ffffff" stroke="#2f5a45" stroke-width="1.8"/>
         <text x="486" y="108" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#1d5654">Library   name = "Adi's shelf"</text>
         <text x="486" y="130" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#1d5654">books = [ ]</text>
-        <rect x="490" y="142" width="94" height="52" rx="8" fill="#e3efee" stroke="#2b7a78" stroke-width="1.3"/>
-        <text x="537" y="163" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11" fill="#1f2733">Book</text>
-        <text x="537" y="181" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="10.5" fill="#6b7585">title/author</text>
-        <rect x="596" y="142" width="94" height="52" rx="8" fill="#e3efee" stroke="#2b7a78" stroke-width="1.3"/>
-        <text x="643" y="163" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11" fill="#1f2733">Book</text>
-        <text x="643" y="181" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="10.5" fill="#6b7585">title/author</text>
-        <rect x="702" y="142" width="94" height="52" rx="8" fill="#e3efee" stroke="#2b7a78" stroke-width="1.3"/>
-        <text x="749" y="163" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11" fill="#1f2733">Book</text>
-        <text x="749" y="181" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="10.5" fill="#6b7585">title/author</text>
+        <rect x="490" y="142" width="94" height="52" rx="8" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.3"/>
+        <text x="537" y="163" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11" fill="#2b2730">Book</text>
+        <text x="537" y="181" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="10.5" fill="#6a626e">title/author</text>
+        <rect x="596" y="142" width="94" height="52" rx="8" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.3"/>
+        <text x="643" y="163" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11" fill="#2b2730">Book</text>
+        <text x="643" y="181" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="10.5" fill="#6a626e">title/author</text>
+        <rect x="702" y="142" width="94" height="52" rx="8" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.3"/>
+        <text x="749" y="163" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11" fill="#2b2730">Book</text>
+        <text x="749" y="181" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="10.5" fill="#6a626e">title/author</text>
       </svg>
       <div class="figcap">Fig. 2 — Left, the child points up at the parent and gains its abilities. Right, one object simply holds others in a list. Both are "reuse"; only one of them is a promise about what the object <i>is</i>.</div>
     </div>
@@ -1166,8 +1168,8 @@ kp.show()</textarea>
 
 <footer class="foot">
   <div class="foot-in">
-    <img src="../../assets/wordmark.svg" alt="Learn with Adi" style="height:26px">
-    <span>Learn with Adi — Unit 15 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Series</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
+    <img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building" style="height:36px">
+    <span>Learn AI by Building — Unit 15 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Series</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
   </div>
 </footer>
 

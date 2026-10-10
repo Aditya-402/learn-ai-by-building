@@ -3,16 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Decorators &amp; Context Managers — Learn with Adi</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>">
-<link rel="stylesheet" href="../../assets/site.css?v=4">
-<link rel="stylesheet" href="../../assets/unit.css?v=4">
+<title>Decorators &amp; Context Managers — Learn AI by Building</title>
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=6">
+<link rel="stylesheet" href="../../assets/unit.css?v=6">
 </head>
 <body data-lwa-course="python-programming" data-lwa-chapter="u20" data-lwa-title="Unit 20 · Decorators &amp; context managers">
 <header class="masthead">
   <div class="masthead-in">
     <div class="lwa-brandrow">
-      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg" alt="Learn with Adi"></a>
+      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building"></a>
       <div class="lwa-brand-right">
         <span class="lwa-tag"><a href="index.html">Series 02 · Python Programming</a></span>
         <span data-lwa-auth></span>
@@ -51,7 +53,7 @@
   <section id="s1">
     <div class="prereq">
       <div class="pq"><b>You'll need Unit 19</b>Functions as values, the inner function that carries its captured box in a <i>packed lunchbox</i>, and <code>*args</code> / <code>**kwargs</code>. Every line of this unit stands on it.</div>
-      <div class="pq"><b>How this unit works</b>Same rhythm to the very end: short read, then practice. <a href="https://colab.research.google.com/github/Aditya-402/learn-with-adi/blob/main/notebooks/python-programming/unit20.ipynb" rel="noopener">▶ Run this unit in Colab</a> if you prefer a notebook.</div>
+      <div class="pq"><b>How this unit works</b>Same rhythm to the very end: short read, then practice. <a href="https://colab.research.google.com/github/Aditya-402/learn-ai-by-building/blob/main/notebooks/python-programming/unit20.ipynb" rel="noopener">▶ Run this unit in Colab</a> if you prefer a notebook.</div>
       <div class="pq"><b>An old promise</b>Unit 10 used <code>with open(...)</code> and said "the full story of <code>with</code> comes later". Later is 20.4. Bring Unit 9's try/except and Units 13–16's dunder methods with you.</div>
     </div>
     <div class="prose">
@@ -88,35 +90,35 @@ print(loud_add(2, 3))</div>
     </div>
     <div class="fig">
       <svg viewBox="0 0 860 260" role="img" aria-label="State of memory before and after loud_add = announce(add): a new inner function holds func in its lunchbox, pointing back at the original add">
-        <text x="16" y="24" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6b7585" letter-spacing="1.5">THE STATE OF MEMORY — WHAT announce(add) ACTUALLY BUILDS</text>
-        <text x="30" y="56" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#3d3170">after the two defs</text>
-        <rect x="24" y="68" width="180" height="52" rx="9" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.5"/>
-        <text x="114" y="90" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#3d3170">announce</text>
-        <text x="114" y="110" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#1f2733">a function</text>
-        <rect x="24" y="134" width="180" height="52" rx="9" fill="#e3efee" stroke="#2b7a78" stroke-width="1.5"/>
+        <text x="16" y="24" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6a626e" letter-spacing="1.5">THE STATE OF MEMORY — WHAT announce(add) ACTUALLY BUILDS</text>
+        <text x="30" y="56" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#3f2a41">after the two defs</text>
+        <rect x="24" y="68" width="180" height="52" rx="9" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.5"/>
+        <text x="114" y="90" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#3f2a41">announce</text>
+        <text x="114" y="110" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#2b2730">a function</text>
+        <rect x="24" y="134" width="180" height="52" rx="9" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.5"/>
         <text x="114" y="156" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#1d5654">add</text>
-        <text x="114" y="176" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#1f2733">a + b</text>
-        <path d="M214 128 L286 128" stroke="#5b4b9e" stroke-width="1.6" fill="none" marker-end="url(#ah20)"/>
-        <defs><marker id="ah20" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#5b4b9e"/></marker></defs>
-        <text x="250" y="118" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11" fill="#3d3170">announce(add)</text>
-        <text x="250" y="146" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6b7585">runs once, right now</text>
-        <text x="316" y="56" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#3d3170">after loud_add = announce(add)</text>
-        <rect x="310" y="68" width="230" height="118" rx="11" fill="#ffffff" stroke="#5b4b9e" stroke-width="1.8"/>
-        <text x="425" y="92" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#3d3170">loud_add  →  inner</text>
-        <rect x="330" y="106" width="190" height="62" rx="9" fill="#f5f0df" stroke="#8a6d1c" stroke-width="1.4" stroke-dasharray="5 4"/>
-        <text x="425" y="126" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" font-weight="700" fill="#8a6d1c" letter-spacing="1">THE PACKED LUNCHBOX</text>
-        <text x="425" y="150" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#1f2733">func  =  the original add</text>
-        <path d="M330 150 C 250 210, 130 210, 114 190" stroke="#2b7a78" stroke-width="1.6" fill="none" stroke-dasharray="4 4" marker-end="url(#ah20t)"/>
-        <defs><marker id="ah20t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#2b7a78"/></marker></defs>
+        <text x="114" y="176" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#2b2730">a + b</text>
+        <path d="M214 128 L286 128" stroke="#5a3d5c" stroke-width="1.6" fill="none" marker-end="url(#ah20)"/>
+        <defs><marker id="ah20" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#5a3d5c"/></marker></defs>
+        <text x="250" y="118" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11" fill="#3f2a41">announce(add)</text>
+        <text x="250" y="146" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6a626e">runs once, right now</text>
+        <text x="316" y="56" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#3f2a41">after loud_add = announce(add)</text>
+        <rect x="310" y="68" width="230" height="118" rx="11" fill="#ffffff" stroke="#5a3d5c" stroke-width="1.8"/>
+        <text x="425" y="92" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#3f2a41">loud_add  →  inner</text>
+        <rect x="330" y="106" width="190" height="62" rx="9" fill="#f8ecd3" stroke="#80590f" stroke-width="1.4" stroke-dasharray="5 4"/>
+        <text x="425" y="126" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" font-weight="700" fill="#80590f" letter-spacing="1">THE PACKED LUNCHBOX</text>
+        <text x="425" y="150" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#2b2730">func  =  the original add</text>
+        <path d="M330 150 C 250 210, 130 210, 114 190" stroke="#2f5a45" stroke-width="1.6" fill="none" stroke-dasharray="4 4" marker-end="url(#ah20t)"/>
+        <defs><marker id="ah20t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#2f5a45"/></marker></defs>
         <rect x="576" y="68" width="262" height="118" rx="11" fill="#23262e" stroke="#23262e"/>
         <text x="596" y="94" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#c8ccd6">loud_add(2, 3)</text>
         <text x="596" y="116" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#8fd7a8">-- starting --</text>
         <text x="596" y="136" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#8fd7a8">-- finished --</text>
         <text x="596" y="156" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#8fd7a8">5</text>
-        <text x="707" y="206" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6b7585">the answer still comes through</text>
+        <text x="707" y="206" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6a626e">the answer still comes through</text>
         <text x="425" y="212" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#1d5654">the coat remembers what it is wearing over</text>
-        <text x="114" y="212" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a35a33">add itself never changed</text>
-        <text x="16" y="244" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6b7585">Two functions exist afterwards, not one: the original, and a new one that knows about it.</text>
+        <text x="114" y="212" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a8441f">add itself never changed</text>
+        <text x="16" y="244" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6a626e">Two functions exist afterwards, not one: the original, and a new one that knows about it.</text>
       </svg>
       <div class="figcap">Fig. 1 — A decorator is a function factory. It runs once, builds a new function, and that new function leaves with the original tucked in its lunchbox. Every decorator in this unit is this picture.</div>
     </div>
@@ -573,24 +575,24 @@ caught outside: bad data</div>
     </div>
     <div class="fig">
       <svg viewBox="0 0 860 300" role="img" aria-label="Two paths through a with block: the clean path and the exception path both pass through __exit__">
-        <text x="16" y="24" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6b7585" letter-spacing="1.5">TWO PATHS THROUGH A with BLOCK — BOTH GO THROUGH __exit__</text>
-        <rect x="300" y="44" width="250" height="42" rx="9" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.6"/>
-        <text x="425" y="70" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#3d3170">__enter__()  → lands in y</text>
-        <path d="M425 86 L425 108" stroke="#5b4b9e" stroke-width="1.6" marker-end="url(#a4)"/>
-        <defs><marker id="a4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#5b4b9e"/></marker></defs>
-        <rect x="300" y="108" width="250" height="46" rx="9" fill="#ffffff" stroke="#e3e6ee" stroke-width="1.6"/>
-        <text x="425" y="136" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#1f2733">the indented block</text>
-        <path d="M300 131 L172 131 L172 196" stroke="#2b7a78" stroke-width="1.6" fill="none" marker-end="url(#a4t)"/>
-        <defs><marker id="a4t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#2b7a78"/></marker></defs>
+        <text x="16" y="24" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6a626e" letter-spacing="1.5">TWO PATHS THROUGH A with BLOCK — BOTH GO THROUGH __exit__</text>
+        <rect x="300" y="44" width="250" height="42" rx="9" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.6"/>
+        <text x="425" y="70" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#3f2a41">__enter__()  → lands in y</text>
+        <path d="M425 86 L425 108" stroke="#5a3d5c" stroke-width="1.6" marker-end="url(#a4)"/>
+        <defs><marker id="a4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#5a3d5c"/></marker></defs>
+        <rect x="300" y="108" width="250" height="46" rx="9" fill="#ffffff" stroke="#e9dfcf" stroke-width="1.6"/>
+        <text x="425" y="136" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#2b2730">the indented block</text>
+        <path d="M300 131 L172 131 L172 196" stroke="#2f5a45" stroke-width="1.6" fill="none" marker-end="url(#a4t)"/>
+        <defs><marker id="a4t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#2f5a45"/></marker></defs>
         <text x="176" y="118" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" font-weight="700" fill="#1d5654">finishes cleanly</text>
-        <path d="M550 131 L678 131 L678 196" stroke="#a35a33" stroke-width="1.6" fill="none" marker-end="url(#a4c)"/>
-        <defs><marker id="a4c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#a35a33"/></marker></defs>
-        <text x="682" y="118" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" font-weight="700" fill="#a35a33">raises an error</text>
-        <rect x="60" y="196" width="740" height="46" rx="9" fill="#ecebf6" stroke="#5b4b9e" stroke-width="2"/>
-        <text x="430" y="224" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" font-weight="700" fill="#3d3170">__exit__(exc_type, exc_value, traceback)   —   ALWAYS RUNS</text>
+        <path d="M550 131 L678 131 L678 196" stroke="#a8441f" stroke-width="1.6" fill="none" marker-end="url(#a4c)"/>
+        <defs><marker id="a4c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#a8441f"/></marker></defs>
+        <text x="682" y="118" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" font-weight="700" fill="#a8441f">raises an error</text>
+        <rect x="60" y="196" width="740" height="46" rx="9" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="2"/>
+        <text x="430" y="224" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" font-weight="700" fill="#3f2a41">__exit__(exc_type, exc_value, traceback)   —   ALWAYS RUNS</text>
         <text x="172" y="266" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#1d5654">all three arguments are None</text>
-        <text x="678" y="266" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a35a33">arguments describe the error, which then continues outward</text>
-        <text x="16" y="292" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6b7585">Cleanup is not something you remember to do — it is something the block cannot avoid.</text>
+        <text x="678" y="266" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a8441f">arguments describe the error, which then continues outward</text>
+        <text x="16" y="292" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6a626e">Cleanup is not something you remember to do — it is something the block cannot avoid.</text>
       </svg>
       <div class="figcap">Fig. 2 — Every exit from a <code>with</code> block passes through <code>__exit__</code>. That single guarantee is why <code>with open(...)</code> was safe back in Unit 10, and why you never had to write <code>f.close()</code>.</div>
     </div>
@@ -1058,8 +1060,8 @@ done</pre><p>Outermost first on the way in, outermost last on the way out: the <
 
 <footer class="foot">
   <div class="foot-in">
-    <img src="../../assets/wordmark.svg" alt="Learn with Adi" style="height:26px">
-    <span>Learn with Adi — Unit 20 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Series</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
+    <img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building" style="height:36px">
+    <span>Learn AI by Building — Unit 20 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Series</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
   </div>
 </footer>
 

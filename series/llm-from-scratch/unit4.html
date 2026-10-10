@@ -3,16 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Causal Masking, Dropout &amp; Multi-Head — Learn with Adi</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>">
-<link rel="stylesheet" href="../../assets/site.css?v=4">
+<title>Causal Masking, Dropout &amp; Multi-Head — Learn AI by Building</title>
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=6">
 <style>
 :root{
-  --ground:#f6f7fb; --panel:#ffffff; --subtle:#f0f1f7; --ink:#1f2733;
-  --muted:#6b7585; --line:#e3e6ee; --accent:#5b4b9e; --accent-deep:#3d3170;
-  --accent-wash:#ecebf6; --teal:#2b7a78; --teal-wash:#e3efee;
-  --clay:#a35a33; --clay-wash:#f7ebe4; --gold:#8a6d1c; --gold-wash:#f5f0df;
-  --slate:#4a5a72;
+  --ground:#faf6ee; --panel:#ffffff; --subtle:#f3ece0; --ink:#2b2730;
+  --muted:#6a626e; --line:#e9dfcf; --accent:#5a3d5c; --accent-deep:#3f2a41;
+  --accent-wash:#f1e7ef; --teal:#2f5a45; --teal-wash:#e4ede6;
+  --clay:#a8441f; --clay-wash:#f8e6dc; --gold:#80590f; --gold-wash:#f8ecd3;
+  --slate:#554b58;
   --serif:'Iowan Old Style','Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif;
   --sans:'Segoe UI Variable Text','Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
   --mono:'Cascadia Mono','Cascadia Code',Consolas,'SF Mono',ui-monospace,Menlo,monospace;
@@ -79,7 +81,7 @@ ul.plain li::marker{color:var(--accent)}
 .fig svg{width:100%;height:auto;display:block}
 .figcap{font-size:var(--fs-sm);color:var(--muted);margin-top:10px;border-top:1px dashed var(--line);padding-top:10px}
 .listing{max-width:1000px}
-.listing .lh{font-size:var(--fs-xs);letter-spacing:.12em;text-transform:uppercase;color:var(--accent-deep);font-weight:700;background:var(--accent-wash);border:1px solid #d5cfeb;border-bottom:none;border-radius:var(--r) var(--r) 0 0;padding:8px 14px}
+.listing .lh{font-size:var(--fs-xs);letter-spacing:.12em;text-transform:uppercase;color:var(--accent-deep);font-weight:700;background:var(--accent-wash);border:1px solid #e0cfdf;border-bottom:none;border-radius:var(--r) var(--r) 0 0;padding:8px 14px}
 .listing pre{border-radius:0 0 var(--r) var(--r)}
 .lh a{float:right;font-weight:700;letter-spacing:.02em;text-transform:none;color:var(--accent)}
 pre.out{background:#eef4f3;border-color:#cfe2e0;color:#1d5654}
@@ -109,7 +111,7 @@ input[type=range]{accent-color:var(--accent);width:100%}
 .slider-row{display:grid;grid-template-columns:150px minmax(0,1fr) 62px;gap:13px;align-items:center}
 .slider-row .v{font-family:var(--mono);font-size:var(--fs-cap);font-weight:700;color:var(--accent-deep);text-align:right;font-variant-numeric:tabular-nums}
 .scroll-x{overflow-x:auto}
-pre{margin:0;background:#f4f4f9;border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;overflow-x:auto;font-family:var(--mono);font-size:var(--fs-sm);line-height:1.6;color:#2c3444}
+pre{margin:0;background:#f8f3ea;border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;overflow-x:auto;font-family:var(--mono);font-size:var(--fs-sm);line-height:1.6;color:#2f2a33}
 pre .cm{color:#8a93a5;font-style:italic}
 pre .kw{color:var(--accent);font-weight:600}
 .toks{display:flex;flex-wrap:wrap;gap:6px}
@@ -120,7 +122,7 @@ pre .kw{color:var(--accent);font-weight:600}
 .mx th{background:var(--subtle);color:var(--muted);font-family:var(--sans);font-size:var(--fs-xs);text-align:center;font-weight:700}
 .mx th.rh{text-align:right;padding-right:10px}
 .mx tr.hl td{background:var(--accent-wash);border-color:var(--accent);color:var(--accent-deep);font-weight:700}
-.mx td.masked{background:repeating-linear-gradient(45deg,#f2f3f8,#f2f3f8 4px,#e8eaf2 4px,#e8eaf2 8px);color:#b3b9c6}
+.mx td.masked{background:repeating-linear-gradient(45deg,#f6f0e6,#f6f0e6 4px,#ece4d8 4px,#ece4d8 8px);color:#b3b9c6}
 .mx td.drop{background:var(--clay-wash);color:#b58a70;text-decoration:line-through}
 .headwrap{display:flex;gap:8px;flex-wrap:wrap}
 .head{border:1px solid var(--line);border-radius:var(--r);padding:10px 13px;background:var(--subtle);flex:1 1 130px}
@@ -167,7 +169,7 @@ p{text-wrap:pretty}
 <header class="masthead">
   <div class="masthead-in">
     <div class="lwa-brandrow">
-      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg" alt="Learn with Adi"></a>
+      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building"></a>
       <div class="lwa-brand-right">
         <span class="lwa-tag"><a href="index.html">Series 01 · Build an LLM from Scratch</a></span>
         <span data-lwa-auth></span>
@@ -235,61 +237,61 @@ p{text-wrap:pretty}
       <svg viewBox="0 0 740 260">
         <g font-family="Consolas,monospace" font-size="11">
         <!-- column labels -->
-        <g fill="#6b7585" text-anchor="middle">
+        <g fill="#6a626e" text-anchor="middle">
           <text x="205" y="30">Your</text><text x="285" y="30">journey</text><text x="365" y="30">starts</text><text x="445" y="30">with</text><text x="525" y="30">one</text><text x="605" y="30">step</text>
         </g>
         <!-- row labels -->
-        <g fill="#6b7585" text-anchor="end">
+        <g fill="#6a626e" text-anchor="end">
           <text x="158" y="60">Your</text><text x="158" y="96">journey</text><text x="158" y="132">starts</text><text x="158" y="168">with</text><text x="158" y="204">one</text><text x="158" y="240">step</text>
         </g>
         <!-- cells: rows i 0..5, cols j 0..5; allowed j<=i -->
         <g>
         <!-- generated grid -->
         <!-- row 0 -->
-        <rect x="170" y="44" width="70" height="26" rx="4" fill="#ecebf6" stroke="#5b4b9e"/>
-        <rect x="250" y="44" width="70" height="26" rx="4" fill="#f4d9c8" stroke="#a35a33" stroke-dasharray="3 2"/>
-        <rect x="330" y="44" width="70" height="26" rx="4" fill="#f4d9c8" stroke="#a35a33" stroke-dasharray="3 2"/>
-        <rect x="410" y="44" width="70" height="26" rx="4" fill="#f4d9c8" stroke="#a35a33" stroke-dasharray="3 2"/>
-        <rect x="490" y="44" width="70" height="26" rx="4" fill="#f4d9c8" stroke="#a35a33" stroke-dasharray="3 2"/>
-        <rect x="570" y="44" width="70" height="26" rx="4" fill="#f4d9c8" stroke="#a35a33" stroke-dasharray="3 2"/>
+        <rect x="170" y="44" width="70" height="26" rx="4" fill="#f1e7ef" stroke="#5a3d5c"/>
+        <rect x="250" y="44" width="70" height="26" rx="4" fill="#f4d9c8" stroke="#a8441f" stroke-dasharray="3 2"/>
+        <rect x="330" y="44" width="70" height="26" rx="4" fill="#f4d9c8" stroke="#a8441f" stroke-dasharray="3 2"/>
+        <rect x="410" y="44" width="70" height="26" rx="4" fill="#f4d9c8" stroke="#a8441f" stroke-dasharray="3 2"/>
+        <rect x="490" y="44" width="70" height="26" rx="4" fill="#f4d9c8" stroke="#a8441f" stroke-dasharray="3 2"/>
+        <rect x="570" y="44" width="70" height="26" rx="4" fill="#f4d9c8" stroke="#a8441f" stroke-dasharray="3 2"/>
         <!-- row 1 -->
-        <rect x="170" y="80" width="70" height="26" rx="4" fill="#ecebf6" stroke="#5b4b9e"/>
-        <rect x="250" y="80" width="70" height="26" rx="4" fill="#ecebf6" stroke="#5b4b9e"/>
-        <rect x="330" y="80" width="70" height="26" rx="4" fill="#f4d9c8" stroke="#a35a33" stroke-dasharray="3 2"/>
-        <rect x="410" y="80" width="70" height="26" rx="4" fill="#f4d9c8" stroke="#a35a33" stroke-dasharray="3 2"/>
-        <rect x="490" y="80" width="70" height="26" rx="4" fill="#f4d9c8" stroke="#a35a33" stroke-dasharray="3 2"/>
-        <rect x="570" y="80" width="70" height="26" rx="4" fill="#f4d9c8" stroke="#a35a33" stroke-dasharray="3 2"/>
+        <rect x="170" y="80" width="70" height="26" rx="4" fill="#f1e7ef" stroke="#5a3d5c"/>
+        <rect x="250" y="80" width="70" height="26" rx="4" fill="#f1e7ef" stroke="#5a3d5c"/>
+        <rect x="330" y="80" width="70" height="26" rx="4" fill="#f4d9c8" stroke="#a8441f" stroke-dasharray="3 2"/>
+        <rect x="410" y="80" width="70" height="26" rx="4" fill="#f4d9c8" stroke="#a8441f" stroke-dasharray="3 2"/>
+        <rect x="490" y="80" width="70" height="26" rx="4" fill="#f4d9c8" stroke="#a8441f" stroke-dasharray="3 2"/>
+        <rect x="570" y="80" width="70" height="26" rx="4" fill="#f4d9c8" stroke="#a8441f" stroke-dasharray="3 2"/>
         <!-- row 2 -->
-        <rect x="170" y="116" width="70" height="26" rx="4" fill="#ecebf6" stroke="#5b4b9e"/>
-        <rect x="250" y="116" width="70" height="26" rx="4" fill="#ecebf6" stroke="#5b4b9e"/>
-        <rect x="330" y="116" width="70" height="26" rx="4" fill="#ecebf6" stroke="#5b4b9e"/>
-        <rect x="410" y="116" width="70" height="26" rx="4" fill="#f4d9c8" stroke="#a35a33" stroke-dasharray="3 2"/>
-        <rect x="490" y="116" width="70" height="26" rx="4" fill="#f4d9c8" stroke="#a35a33" stroke-dasharray="3 2"/>
-        <rect x="570" y="116" width="70" height="26" rx="4" fill="#f4d9c8" stroke="#a35a33" stroke-dasharray="3 2"/>
+        <rect x="170" y="116" width="70" height="26" rx="4" fill="#f1e7ef" stroke="#5a3d5c"/>
+        <rect x="250" y="116" width="70" height="26" rx="4" fill="#f1e7ef" stroke="#5a3d5c"/>
+        <rect x="330" y="116" width="70" height="26" rx="4" fill="#f1e7ef" stroke="#5a3d5c"/>
+        <rect x="410" y="116" width="70" height="26" rx="4" fill="#f4d9c8" stroke="#a8441f" stroke-dasharray="3 2"/>
+        <rect x="490" y="116" width="70" height="26" rx="4" fill="#f4d9c8" stroke="#a8441f" stroke-dasharray="3 2"/>
+        <rect x="570" y="116" width="70" height="26" rx="4" fill="#f4d9c8" stroke="#a8441f" stroke-dasharray="3 2"/>
         <!-- row 3 -->
-        <rect x="170" y="152" width="70" height="26" rx="4" fill="#ecebf6" stroke="#5b4b9e"/>
-        <rect x="250" y="152" width="70" height="26" rx="4" fill="#ecebf6" stroke="#5b4b9e"/>
-        <rect x="330" y="152" width="70" height="26" rx="4" fill="#ecebf6" stroke="#5b4b9e"/>
-        <rect x="410" y="152" width="70" height="26" rx="4" fill="#ecebf6" stroke="#5b4b9e"/>
-        <rect x="490" y="152" width="70" height="26" rx="4" fill="#f4d9c8" stroke="#a35a33" stroke-dasharray="3 2"/>
-        <rect x="570" y="152" width="70" height="26" rx="4" fill="#f4d9c8" stroke="#a35a33" stroke-dasharray="3 2"/>
+        <rect x="170" y="152" width="70" height="26" rx="4" fill="#f1e7ef" stroke="#5a3d5c"/>
+        <rect x="250" y="152" width="70" height="26" rx="4" fill="#f1e7ef" stroke="#5a3d5c"/>
+        <rect x="330" y="152" width="70" height="26" rx="4" fill="#f1e7ef" stroke="#5a3d5c"/>
+        <rect x="410" y="152" width="70" height="26" rx="4" fill="#f1e7ef" stroke="#5a3d5c"/>
+        <rect x="490" y="152" width="70" height="26" rx="4" fill="#f4d9c8" stroke="#a8441f" stroke-dasharray="3 2"/>
+        <rect x="570" y="152" width="70" height="26" rx="4" fill="#f4d9c8" stroke="#a8441f" stroke-dasharray="3 2"/>
         <!-- row 4 -->
-        <rect x="170" y="188" width="70" height="26" rx="4" fill="#ecebf6" stroke="#5b4b9e"/>
-        <rect x="250" y="188" width="70" height="26" rx="4" fill="#ecebf6" stroke="#5b4b9e"/>
-        <rect x="330" y="188" width="70" height="26" rx="4" fill="#ecebf6" stroke="#5b4b9e"/>
-        <rect x="410" y="188" width="70" height="26" rx="4" fill="#ecebf6" stroke="#5b4b9e"/>
-        <rect x="490" y="188" width="70" height="26" rx="4" fill="#ecebf6" stroke="#5b4b9e"/>
-        <rect x="570" y="188" width="70" height="26" rx="4" fill="#f4d9c8" stroke="#a35a33" stroke-dasharray="3 2"/>
+        <rect x="170" y="188" width="70" height="26" rx="4" fill="#f1e7ef" stroke="#5a3d5c"/>
+        <rect x="250" y="188" width="70" height="26" rx="4" fill="#f1e7ef" stroke="#5a3d5c"/>
+        <rect x="330" y="188" width="70" height="26" rx="4" fill="#f1e7ef" stroke="#5a3d5c"/>
+        <rect x="410" y="188" width="70" height="26" rx="4" fill="#f1e7ef" stroke="#5a3d5c"/>
+        <rect x="490" y="188" width="70" height="26" rx="4" fill="#f1e7ef" stroke="#5a3d5c"/>
+        <rect x="570" y="188" width="70" height="26" rx="4" fill="#f4d9c8" stroke="#a8441f" stroke-dasharray="3 2"/>
         <!-- row 5 -->
-        <rect x="170" y="224" width="70" height="26" rx="4" fill="#ecebf6" stroke="#5b4b9e"/>
-        <rect x="250" y="224" width="70" height="26" rx="4" fill="#ecebf6" stroke="#5b4b9e"/>
-        <rect x="330" y="224" width="70" height="26" rx="4" fill="#ecebf6" stroke="#5b4b9e"/>
-        <rect x="410" y="224" width="70" height="26" rx="4" fill="#ecebf6" stroke="#5b4b9e"/>
-        <rect x="490" y="224" width="70" height="26" rx="4" fill="#ecebf6" stroke="#5b4b9e"/>
-        <rect x="570" y="224" width="70" height="26" rx="4" fill="#ecebf6" stroke="#5b4b9e"/>
+        <rect x="170" y="224" width="70" height="26" rx="4" fill="#f1e7ef" stroke="#5a3d5c"/>
+        <rect x="250" y="224" width="70" height="26" rx="4" fill="#f1e7ef" stroke="#5a3d5c"/>
+        <rect x="330" y="224" width="70" height="26" rx="4" fill="#f1e7ef" stroke="#5a3d5c"/>
+        <rect x="410" y="224" width="70" height="26" rx="4" fill="#f1e7ef" stroke="#5a3d5c"/>
+        <rect x="490" y="224" width="70" height="26" rx="4" fill="#f1e7ef" stroke="#5a3d5c"/>
+        <rect x="570" y="224" width="70" height="26" rx="4" fill="#f1e7ef" stroke="#5a3d5c"/>
         </g>
-        <text x="60" y="150" fill="#3d3170" font-size="12" font-weight="700" transform="rotate(-90 60 150)" text-anchor="middle" font-family="Segoe UI,sans-serif">queries (rows)</text>
-        <text x="405" y="14" fill="#3d3170" font-size="12" font-weight="700" text-anchor="middle" font-family="Segoe UI,sans-serif">attending to (columns)</text>
+        <text x="60" y="150" fill="#3f2a41" font-size="12" font-weight="700" transform="rotate(-90 60 150)" text-anchor="middle" font-family="Segoe UI,sans-serif">queries (rows)</text>
+        <text x="405" y="14" fill="#3f2a41" font-size="12" font-weight="700" text-anchor="middle" font-family="Segoe UI,sans-serif">attending to (columns)</text>
         </g>
       </svg>
       <div class="figcap">The causal mask. Purple cells are allowed; hatched clay cells — everything above the diagonal — are the future, and get erased. Row “journey” keeps only “Your” and itself. Row “step”, the last token, keeps everything.</div>
@@ -318,7 +320,7 @@ p{text-wrap:pretty}
     </div>
 
     <div class="listing">
-      <div class="lh">Route 1 in code <a href="https://colab.research.google.com/github/Aditya-402/learn-with-adi/blob/main/notebooks/llm-from-scratch/unit4.ipynb" rel="noopener" title="Open this unit's companion notebook in Google Colab — free, zero setup">▶ Run in Colab</a></div>
+      <div class="lh">Route 1 in code <a href="https://colab.research.google.com/github/Aditya-402/learn-ai-by-building/blob/main/notebooks/llm-from-scratch/unit4.ipynb" rel="noopener" title="Open this unit's companion notebook in Google Colab — free, zero setup">▶ Run in Colab</a></div>
       <pre>mask_simple   = torch.tril(torch.ones(6, 6))          <span class="cm"># 1s on/below diagonal, 0s above</span>
 masked_simple = attn_weights * mask_simple            <span class="cm"># erase the future</span>
 row_sums      = masked_simple.sum(dim=-1, keepdim=True)
@@ -336,7 +338,7 @@ masked_norm   = masked_simple / row_sums              <span class="cm"># rows su
     </div>
 
     <div class="listing">
-      <div class="lh">Route 2 in code — the version every real implementation uses <a href="https://colab.research.google.com/github/Aditya-402/learn-with-adi/blob/main/notebooks/llm-from-scratch/unit4.ipynb" rel="noopener" title="Open this unit's companion notebook in Google Colab — free, zero setup">▶ Run in Colab</a></div>
+      <div class="lh">Route 2 in code — the version every real implementation uses <a href="https://colab.research.google.com/github/Aditya-402/learn-ai-by-building/blob/main/notebooks/llm-from-scratch/unit4.ipynb" rel="noopener" title="Open this unit's companion notebook in Google Colab — free, zero setup">▶ Run in Colab</a></div>
       <pre>mask   = torch.triu(torch.ones(6, 6), diagonal=1)     <span class="cm"># 1s strictly ABOVE the diagonal</span>
 masked = attn_scores.masked_fill(mask.bool(), -torch.inf)
 attn_weights = torch.softmax(masked / keys.shape[-1]**0.5, dim=-1)</pre>
@@ -420,7 +422,7 @@ after softmax:   [0.5517, 0.4483, 0.0000, 0.0000, 0.0000, 0.0000]   # identical 
     </div>
 
     <div class="listing">
-      <div class="lh">The CausalAttention class — annotated line by line <a href="https://colab.research.google.com/github/Aditya-402/learn-with-adi/blob/main/notebooks/llm-from-scratch/unit4.ipynb" rel="noopener" title="Open this unit's companion notebook in Google Colab — free, zero setup">▶ Run in Colab</a></div>
+      <div class="lh">The CausalAttention class — annotated line by line <a href="https://colab.research.google.com/github/Aditya-402/learn-ai-by-building/blob/main/notebooks/llm-from-scratch/unit4.ipynb" rel="noopener" title="Open this unit's companion notebook in Google Colab — free, zero setup">▶ Run in Colab</a></div>
       <pre>class CausalAttention(nn.Module):
     def __init__(self, d_in, d_out, context_length, dropout, qkv_bias=False):
         super().__init__()
@@ -477,7 +479,7 @@ context_vecs.shape: torch.Size([2, 6, 2])   # 2 texts, 6 tokens, each a 2-dim co
     </div>
 
     <div class="listing">
-      <div class="lh">The MultiHeadAttentionWrapper class <a href="https://colab.research.google.com/github/Aditya-402/learn-with-adi/blob/main/notebooks/llm-from-scratch/unit4.ipynb" rel="noopener" title="Open this unit's companion notebook in Google Colab — free, zero setup">▶ Run in Colab</a></div>
+      <div class="lh">The MultiHeadAttentionWrapper class <a href="https://colab.research.google.com/github/Aditya-402/learn-ai-by-building/blob/main/notebooks/llm-from-scratch/unit4.ipynb" rel="noopener" title="Open this unit's companion notebook in Google Colab — free, zero setup">▶ Run in Colab</a></div>
       <pre>class MultiHeadAttentionWrapper(nn.Module):
     def __init__(self, d_in, d_out, context_length, dropout, num_heads, qkv_bias=False):
         super().__init__()
@@ -518,38 +520,38 @@ context_vecs.shape: torch.Size([2, 6, 4])          # d_out × num_heads = 2 × 2
 
     <div class="fig" role="img" aria-label="Shape-flow diagram of the view and transpose operations in multi-head attention">
       <svg viewBox="0 0 740 300">
-        <defs><marker id="arr3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6b7585"/></marker></defs>
+        <defs><marker id="arr3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6a626e"/></marker></defs>
         <g font-family="Consolas,monospace">
-        <rect x="10" y="20" width="212" height="58" rx="9" fill="#f0f1f7" stroke="#6b7585" stroke-width="1.5"/>
-        <text x="116" y="44" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1f2733">W_query(x)</text>
-        <text x="116" y="63" text-anchor="middle" font-size="12" fill="#3d3170">(b, 6, 4)</text>
-        <line x1="226" y1="49" x2="268" y2="49" stroke="#6b7585" stroke-width="1.5" marker-end="url(#arr3)"/>
-        <text x="247" y="38" text-anchor="middle" font-size="10" fill="#6b7585" font-family="Segoe UI,sans-serif">.view()</text>
-        <rect x="272" y="20" width="212" height="58" rx="9" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.6"/>
-        <text x="378" y="44" text-anchor="middle" font-size="12.5" font-weight="700" fill="#3d3170">split the last dim</text>
-        <text x="378" y="63" text-anchor="middle" font-size="12" fill="#3d3170">(b, 6, 2, 2) = (b, tokens, heads, head_dim)</text>
-        <line x1="488" y1="49" x2="530" y2="49" stroke="#6b7585" stroke-width="1.5" marker-end="url(#arr3)"/>
-        <text x="509" y="38" text-anchor="middle" font-size="10" fill="#6b7585" font-family="Segoe UI,sans-serif">.transpose(1,2)</text>
-        <rect x="534" y="20" width="196" height="58" rx="9" fill="#e3efee" stroke="#2b7a78" stroke-width="1.6"/>
+        <rect x="10" y="20" width="212" height="58" rx="9" fill="#f3ece0" stroke="#6a626e" stroke-width="1.5"/>
+        <text x="116" y="44" text-anchor="middle" font-size="12.5" font-weight="700" fill="#2b2730">W_query(x)</text>
+        <text x="116" y="63" text-anchor="middle" font-size="12" fill="#3f2a41">(b, 6, 4)</text>
+        <line x1="226" y1="49" x2="268" y2="49" stroke="#6a626e" stroke-width="1.5" marker-end="url(#arr3)"/>
+        <text x="247" y="38" text-anchor="middle" font-size="10" fill="#6a626e" font-family="Segoe UI,sans-serif">.view()</text>
+        <rect x="272" y="20" width="212" height="58" rx="9" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.6"/>
+        <text x="378" y="44" text-anchor="middle" font-size="12.5" font-weight="700" fill="#3f2a41">split the last dim</text>
+        <text x="378" y="63" text-anchor="middle" font-size="12" fill="#3f2a41">(b, 6, 2, 2) = (b, tokens, heads, head_dim)</text>
+        <line x1="488" y1="49" x2="530" y2="49" stroke="#6a626e" stroke-width="1.5" marker-end="url(#arr3)"/>
+        <text x="509" y="38" text-anchor="middle" font-size="10" fill="#6a626e" font-family="Segoe UI,sans-serif">.transpose(1,2)</text>
+        <rect x="534" y="20" width="196" height="58" rx="9" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.6"/>
         <text x="632" y="44" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1d5654">heads become batches</text>
         <text x="632" y="63" text-anchor="middle" font-size="12" fill="#1d5654">(b, 2, 6, 2)</text>
-        <text x="370" y="112" text-anchor="middle" font-size="11.5" fill="#6b7585" font-family="Segoe UI,sans-serif">…now each head attends independently: scores (b, heads, 6, 6), weighted values (b, heads, 6, head_dim)…</text>
-        <rect x="534" y="140" width="196" height="58" rx="9" fill="#e3efee" stroke="#2b7a78" stroke-width="1.6"/>
+        <text x="370" y="112" text-anchor="middle" font-size="11.5" fill="#6a626e" font-family="Segoe UI,sans-serif">…now each head attends independently: scores (b, heads, 6, 6), weighted values (b, heads, 6, head_dim)…</text>
+        <rect x="534" y="140" width="196" height="58" rx="9" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.6"/>
         <text x="632" y="164" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1d5654">attention output</text>
         <text x="632" y="183" text-anchor="middle" font-size="12" fill="#1d5654">(b, 2, 6, 2)</text>
-        <line x1="530" y1="169" x2="488" y2="169" stroke="#6b7585" stroke-width="1.5" marker-end="url(#arr3)"/>
-        <text x="509" y="158" text-anchor="middle" font-size="10" fill="#6b7585" font-family="Segoe UI,sans-serif">.transpose(1,2)</text>
-        <rect x="272" y="140" width="212" height="58" rx="9" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.6"/>
-        <text x="378" y="164" text-anchor="middle" font-size="12.5" font-weight="700" fill="#3d3170">tokens back in front</text>
-        <text x="378" y="183" text-anchor="middle" font-size="12" fill="#3d3170">(b, 6, 2, 2)</text>
-        <line x1="268" y1="169" x2="226" y2="169" stroke="#6b7585" stroke-width="1.5" marker-end="url(#arr3)"/>
-        <text x="247" y="158" text-anchor="middle" font-size="10" fill="#6b7585" font-family="Segoe UI,sans-serif">.contiguous().view()</text>
-        <rect x="10" y="140" width="212" height="58" rx="9" fill="#5b4b9e" stroke="#3d3170" stroke-width="1.6"/>
+        <line x1="530" y1="169" x2="488" y2="169" stroke="#6a626e" stroke-width="1.5" marker-end="url(#arr3)"/>
+        <text x="509" y="158" text-anchor="middle" font-size="10" fill="#6a626e" font-family="Segoe UI,sans-serif">.transpose(1,2)</text>
+        <rect x="272" y="140" width="212" height="58" rx="9" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.6"/>
+        <text x="378" y="164" text-anchor="middle" font-size="12.5" font-weight="700" fill="#3f2a41">tokens back in front</text>
+        <text x="378" y="183" text-anchor="middle" font-size="12" fill="#3f2a41">(b, 6, 2, 2)</text>
+        <line x1="268" y1="169" x2="226" y2="169" stroke="#6a626e" stroke-width="1.5" marker-end="url(#arr3)"/>
+        <text x="247" y="158" text-anchor="middle" font-size="10" fill="#6a626e" font-family="Segoe UI,sans-serif">.contiguous().view()</text>
+        <rect x="10" y="140" width="212" height="58" rx="9" fill="#5a3d5c" stroke="#3f2a41" stroke-width="1.6"/>
         <text x="116" y="164" text-anchor="middle" font-size="12.5" font-weight="700" fill="#ffffff">heads flattened together</text>
-        <text x="116" y="183" text-anchor="middle" font-size="12" fill="#d8d3ee">(b, 6, 4)</text>
-        <line x1="116" y1="202" x2="116" y2="238" stroke="#6b7585" stroke-width="1.5" marker-end="url(#arr3)"/>
-        <text x="168" y="224" text-anchor="middle" font-size="10" fill="#6b7585" font-family="Segoe UI,sans-serif">out_proj (linear)</text>
-        <rect x="10" y="242" width="212" height="46" rx="9" fill="#f5f0df" stroke="#8a6d1c" stroke-width="1.6"/>
+        <text x="116" y="183" text-anchor="middle" font-size="12" fill="#e2d3e1">(b, 6, 4)</text>
+        <line x1="116" y1="202" x2="116" y2="238" stroke="#6a626e" stroke-width="1.5" marker-end="url(#arr3)"/>
+        <text x="168" y="224" text-anchor="middle" font-size="10" fill="#6a626e" font-family="Segoe UI,sans-serif">out_proj (linear)</text>
+        <rect x="10" y="242" width="212" height="46" rx="9" fill="#f8ecd3" stroke="#80590f" stroke-width="1.6"/>
         <text x="116" y="262" text-anchor="middle" font-size="12.5" font-weight="700" fill="#6d5514">final output</text>
         <text x="116" y="279" text-anchor="middle" font-size="12" fill="#6d5514">(b, 6, 4)</text>
         </g>
@@ -565,7 +567,7 @@ context_vecs.shape: torch.Size([2, 6, 4])          # d_out × num_heads = 2 × 2
     </div>
 
     <div class="listing">
-      <div class="lh">MultiHeadAttention — the class Unit 5 will import <a href="https://colab.research.google.com/github/Aditya-402/learn-with-adi/blob/main/notebooks/llm-from-scratch/unit4.ipynb" rel="noopener" title="Open this unit's companion notebook in Google Colab — free, zero setup">▶ Run in Colab</a></div>
+      <div class="lh">MultiHeadAttention — the class Unit 5 will import <a href="https://colab.research.google.com/github/Aditya-402/learn-ai-by-building/blob/main/notebooks/llm-from-scratch/unit4.ipynb" rel="noopener" title="Open this unit's companion notebook in Google Colab — free, zero setup">▶ Run in Colab</a></div>
       <pre>class MultiHeadAttention(nn.Module):
     def __init__(self, d_in, d_out, context_length, dropout, num_heads, qkv_bias=False):
         super().__init__()
@@ -707,8 +709,8 @@ context_vecs.shape: torch.Size([2, 6, 2])   # here d_out=2 with 2 heads → head
 
 <footer class="foot">
   <div class="foot-in">
-    <img src="../../assets/wordmark.svg" alt="Learn with Adi" style="height:26px">
-    <span>Learn with Adi — Unit 4 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Series</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
+    <img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building" style="height:36px">
+    <span>Learn AI by Building — Unit 4 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Series</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
   </div>
 </footer>
 

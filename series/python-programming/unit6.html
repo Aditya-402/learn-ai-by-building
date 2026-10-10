@@ -3,16 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Labeled Data — Dictionaries, Tuples &amp; Sets — Learn with Adi</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>">
-<link rel="stylesheet" href="../../assets/site.css?v=4">
-<link rel="stylesheet" href="../../assets/unit.css?v=4">
+<title>Labeled Data — Dictionaries, Tuples &amp; Sets — Learn AI by Building</title>
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=6">
+<link rel="stylesheet" href="../../assets/unit.css?v=6">
 </head>
 <body data-lwa-course="python-programming" data-lwa-chapter="u06" data-lwa-title="Unit 6 · Labeled data — dictionaries, tuples &amp; sets">
 <header class="masthead">
   <div class="masthead-in">
     <div class="lwa-brandrow">
-      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg" alt="Learn with Adi"></a>
+      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building"></a>
       <div class="lwa-brand-right">
         <span class="lwa-tag"><a href="index.html">Series 02 · Python Programming</a></span>
         <span data-lwa-auth></span>
@@ -51,7 +53,7 @@
   <section id="s1">
     <div class="prereq">
       <div class="pq"><b>You'll need Units 2–5</b>Boxes and f-strings (U2), if/else (U3), for-loops (U4), and lists with their square-bracket indexing (U5). Especially U5 — this unit is its sequel.</div>
-      <div class="pq"><b>How this unit works</b>Same rhythm: each concept is a 3–4 minute read, then ~10 minutes of practice. <a href="https://colab.research.google.com/github/Aditya-402/learn-with-adi/blob/main/notebooks/python-programming/unit6.ipynb" rel="noopener">▶ Run this unit in Colab</a> if you prefer a notebook.</div>
+      <div class="pq"><b>How this unit works</b>Same rhythm: each concept is a 3–4 minute read, then ~10 minutes of practice. <a href="https://colab.research.google.com/github/Aditya-402/learn-ai-by-building/blob/main/notebooks/python-programming/unit6.ipynb" rel="noopener">▶ Run this unit in Colab</a> if you prefer a notebook.</div>
       <div class="pq"><b>New tags on old boxes</b>The labeled-box picture grows one more level: a dict is a box whose <i>inner slots</i> carry name-tags instead of slot numbers. Every trace here draws those tags.</div>
     </div>
     <div class="prose">
@@ -79,33 +81,33 @@ KeyError: 'chemistry'</div>
     </div>
     <div class="fig">
       <svg viewBox="0 0 860 232" role="img" aria-label="The same phone numbers stored in a list with numbered slots versus a dict with name-tag keys">
-        <text x="16" y="26" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6b7585" letter-spacing="1.5">THE SAME DATA, TWO CONTAINERS</text>
-        <text x="40" y="58" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#3d3170">a list — numbered slots</text>
-        <text x="95" y="82" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11" fill="#6b7585">0</text>
-        <rect x="40" y="90" width="110" height="44" rx="8" fill="#f0f1f7" stroke="#e3e6ee" stroke-width="1.5"/>
-        <text x="95" y="117" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#1f2733">98450 11111</text>
-        <text x="213" y="82" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11" fill="#6b7585">1</text>
-        <rect x="158" y="90" width="110" height="44" rx="8" fill="#f0f1f7" stroke="#e3e6ee" stroke-width="1.5"/>
-        <text x="213" y="117" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#1f2733">72004 22222</text>
-        <text x="331" y="82" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11" fill="#6b7585">2</text>
-        <rect x="276" y="90" width="110" height="44" rx="8" fill="#f0f1f7" stroke="#e3e6ee" stroke-width="1.5"/>
-        <text x="331" y="117" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#1f2733">99887 33333</text>
-        <text x="213" y="170" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a35a33">which slot was Ravi's? you have to remember</text>
-        <text x="490" y="58" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#3d3170">a dict — name-tagged slots</text>
-        <rect x="490" y="70" width="110" height="38" rx="8" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.5"/>
-        <text x="545" y="94" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" font-weight="700" fill="#3d3170">"Amma"</text>
-        <line x1="600" y1="89" x2="640" y2="89" stroke="#e3e6ee" stroke-width="1.5"/>
-        <rect x="640" y="70" width="140" height="38" rx="8" fill="#e3efee" stroke="#2b7a78" stroke-width="1.5"/>
+        <text x="16" y="26" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6a626e" letter-spacing="1.5">THE SAME DATA, TWO CONTAINERS</text>
+        <text x="40" y="58" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#3f2a41">a list — numbered slots</text>
+        <text x="95" y="82" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11" fill="#6a626e">0</text>
+        <rect x="40" y="90" width="110" height="44" rx="8" fill="#f3ece0" stroke="#e9dfcf" stroke-width="1.5"/>
+        <text x="95" y="117" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#2b2730">98450 11111</text>
+        <text x="213" y="82" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11" fill="#6a626e">1</text>
+        <rect x="158" y="90" width="110" height="44" rx="8" fill="#f3ece0" stroke="#e9dfcf" stroke-width="1.5"/>
+        <text x="213" y="117" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#2b2730">72004 22222</text>
+        <text x="331" y="82" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11" fill="#6a626e">2</text>
+        <rect x="276" y="90" width="110" height="44" rx="8" fill="#f3ece0" stroke="#e9dfcf" stroke-width="1.5"/>
+        <text x="331" y="117" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#2b2730">99887 33333</text>
+        <text x="213" y="170" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a8441f">which slot was Ravi's? you have to remember</text>
+        <text x="490" y="58" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#3f2a41">a dict — name-tagged slots</text>
+        <rect x="490" y="70" width="110" height="38" rx="8" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.5"/>
+        <text x="545" y="94" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" font-weight="700" fill="#3f2a41">"Amma"</text>
+        <line x1="600" y1="89" x2="640" y2="89" stroke="#e9dfcf" stroke-width="1.5"/>
+        <rect x="640" y="70" width="140" height="38" rx="8" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.5"/>
         <text x="710" y="94" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#1d5654">98450 11111</text>
-        <rect x="490" y="116" width="110" height="38" rx="8" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.5"/>
-        <text x="545" y="140" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" font-weight="700" fill="#3d3170">"Ravi"</text>
-        <line x1="600" y1="135" x2="640" y2="135" stroke="#e3e6ee" stroke-width="1.5"/>
-        <rect x="640" y="116" width="140" height="38" rx="8" fill="#e3efee" stroke="#2b7a78" stroke-width="1.5"/>
+        <rect x="490" y="116" width="110" height="38" rx="8" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.5"/>
+        <text x="545" y="140" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" font-weight="700" fill="#3f2a41">"Ravi"</text>
+        <line x1="600" y1="135" x2="640" y2="135" stroke="#e9dfcf" stroke-width="1.5"/>
+        <rect x="640" y="116" width="140" height="38" rx="8" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.5"/>
         <text x="710" y="140" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#1d5654">72004 22222</text>
-        <rect x="490" y="162" width="110" height="38" rx="8" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.5"/>
-        <text x="545" y="186" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" font-weight="700" fill="#3d3170">"Meera"</text>
-        <line x1="600" y1="181" x2="640" y2="181" stroke="#e3e6ee" stroke-width="1.5"/>
-        <rect x="640" y="162" width="140" height="38" rx="8" fill="#e3efee" stroke="#2b7a78" stroke-width="1.5"/>
+        <rect x="490" y="162" width="110" height="38" rx="8" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.5"/>
+        <text x="545" y="186" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" font-weight="700" fill="#3f2a41">"Meera"</text>
+        <line x1="600" y1="181" x2="640" y2="181" stroke="#e9dfcf" stroke-width="1.5"/>
+        <rect x="640" y="162" width="140" height="38" rx="8" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.5"/>
         <text x="710" y="186" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#1d5654">99887 33333</text>
         <text x="635" y="222" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#1d5654">ask by name — phone["Ravi"] — the slot finds itself</text>
       </svg>
@@ -630,8 +632,8 @@ for name in sorted(people):
 
 <footer class="foot">
   <div class="foot-in">
-    <img src="../../assets/wordmark.svg" alt="Learn with Adi" style="height:26px">
-    <span>Learn with Adi — Unit 6 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Series</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
+    <img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building" style="height:36px">
+    <span>Learn AI by Building — Unit 6 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Series</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
   </div>
 </footer>
 

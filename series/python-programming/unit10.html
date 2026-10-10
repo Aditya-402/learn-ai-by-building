@@ -3,16 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Saving Your Work — Files — Learn with Adi</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>">
-<link rel="stylesheet" href="../../assets/site.css?v=4">
-<link rel="stylesheet" href="../../assets/unit.css?v=4">
+<title>Saving Your Work — Files — Learn AI by Building</title>
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=6">
+<link rel="stylesheet" href="../../assets/unit.css?v=6">
 </head>
 <body data-lwa-course="python-programming" data-lwa-chapter="u10" data-lwa-title="Unit 10 · Saving your work — files">
 <header class="masthead">
   <div class="masthead-in">
     <div class="lwa-brandrow">
-      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg" alt="Learn with Adi"></a>
+      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building"></a>
       <div class="lwa-brand-right">
         <span class="lwa-tag"><a href="index.html">Series 02 · Python Programming</a></span>
         <span data-lwa-auth></span>
@@ -51,7 +53,7 @@
   <section id="s1">
     <div class="prereq">
       <div class="pq"><b>You'll need Units 5, 7, 8, 9</b>Lists and the to-do app (Units 5 and 7), <code>strip()</code> and the invisible characters (Unit 8), and <code>try</code>/<code>except</code> (Unit 9). All four get their payoff here.</div>
-      <div class="pq"><b>How this unit works</b>Same rhythm: each concept is a 3–4 minute read, then ~10 minutes of practice. <a href="https://colab.research.google.com/github/Aditya-402/learn-with-adi/blob/main/notebooks/python-programming/unit10.ipynb" rel="noopener">▶ Run this unit in Colab</a> if you prefer a notebook.</div>
+      <div class="pq"><b>How this unit works</b>Same rhythm: each concept is a 3–4 minute read, then ~10 minutes of practice. <a href="https://colab.research.google.com/github/Aditya-402/learn-ai-by-building/blob/main/notebooks/python-programming/unit10.ipynb" rel="noopener">▶ Run this unit in Colab</a> if you prefer a notebook.</div>
       <div class="pq"><b>Honest small print</b>In this page's runner, every ▶ Run starts with a clean disk — files from the previous Run are gone. So every demo here writes <i>and</i> reads within one program. In Colab or on your machine the file genuinely persists between runs — try it there too; that persistence is the whole point.</div>
     </div>
     <div class="prose">
@@ -84,23 +86,23 @@ print("saved")</div>
     </div>
     <div class="fig">
       <svg viewBox="0 0 860 250" role="img" aria-label="Boxes in memory vanish when the program ends; files on disk survive">
-        <text x="16" y="26" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6b7585" letter-spacing="1.5">WHERE THINGS LIVE — AND WHAT SURVIVES</text>
-        <text x="255" y="56" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#3d3170">while the program runs</text>
-        <text x="608" y="56" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#3d3170">after it ends</text>
-        <text x="16" y="102" font-family="Segoe UI,system-ui,sans-serif" font-size="12" font-weight="700" fill="#6b7585">boxes (memory)</text>
-        <rect x="185" y="72" width="230" height="52" rx="9" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.5"/>
-        <text x="300" y="93" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#3d3170">tasks</text>
-        <text x="300" y="112" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#1f2733">['milk', 'plants']</text>
-        <rect x="560" y="72" width="230" height="52" rx="9" fill="#ffffff" stroke="#e3e6ee" stroke-width="1.5" stroke-dasharray="6 5"/>
-        <text x="675" y="97" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="12" fill="#6b7585">gone</text>
-        <text x="675" y="115" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a35a33">every box evaporates — no warning</text>
-        <text x="16" y="188" font-family="Segoe UI,system-ui,sans-serif" font-size="12" font-weight="700" fill="#6b7585">files (disk)</text>
-        <rect x="185" y="152" width="230" height="66" rx="9" fill="#e3efee" stroke="#2b7a78" stroke-width="1.5"/>
+        <text x="16" y="26" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6a626e" letter-spacing="1.5">WHERE THINGS LIVE — AND WHAT SURVIVES</text>
+        <text x="255" y="56" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#3f2a41">while the program runs</text>
+        <text x="608" y="56" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#3f2a41">after it ends</text>
+        <text x="16" y="102" font-family="Segoe UI,system-ui,sans-serif" font-size="12" font-weight="700" fill="#6a626e">boxes (memory)</text>
+        <rect x="185" y="72" width="230" height="52" rx="9" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.5"/>
+        <text x="300" y="93" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#3f2a41">tasks</text>
+        <text x="300" y="112" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b2730">['milk', 'plants']</text>
+        <rect x="560" y="72" width="230" height="52" rx="9" fill="#ffffff" stroke="#e9dfcf" stroke-width="1.5" stroke-dasharray="6 5"/>
+        <text x="675" y="97" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="12" fill="#6a626e">gone</text>
+        <text x="675" y="115" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a8441f">every box evaporates — no warning</text>
+        <text x="16" y="188" font-family="Segoe UI,system-ui,sans-serif" font-size="12" font-weight="700" fill="#6a626e">files (disk)</text>
+        <rect x="185" y="152" width="230" height="66" rx="9" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.5"/>
         <text x="300" y="175" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#1d5654">notes.txt</text>
-        <text x="300" y="196" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#1f2733">buy milk / water plants</text>
-        <rect x="560" y="152" width="230" height="66" rx="9" fill="#e3efee" stroke="#2b7a78" stroke-width="1.5"/>
+        <text x="300" y="196" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b2730">buy milk / water plants</text>
+        <rect x="560" y="152" width="230" height="66" rx="9" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.5"/>
         <text x="675" y="175" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#1d5654">notes.txt</text>
-        <text x="675" y="196" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#1f2733">still there tomorrow</text>
+        <text x="675" y="196" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#2b2730">still there tomorrow</text>
       </svg>
       <div class="figcap">Fig. 1 — Memory is a whiteboard, wiped at the end of every program; the disk is a notebook. (One honest caveat: this page's practice runner wipes its little pretend disk between Runs too — Colab and your own machine keep the notebook.)</div>
     </div>
@@ -448,23 +450,23 @@ print(open("settings.json").read())</div>
     </div>
     <div class="fig">
       <svg viewBox="0 0 860 210" role="img" aria-label="json.dump turns a list into text on disk; json.load turns it back into a list">
-        <text x="16" y="26" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6b7585" letter-spacing="1.5">THE ROUND TRIP</text>
-        <rect x="30" y="75" width="210" height="70" rx="9" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.5"/>
-        <text x="135" y="100" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#3d3170">tasks — a real list</text>
-        <text x="135" y="124" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#1f2733">['milk', 'eggs']</text>
-        <line x1="245" y1="110" x2="320" y2="110" stroke="#5b4b9e" stroke-width="1.5"/>
-        <path d="M320 110 l-9 -5 v10 z" fill="#5b4b9e"/>
-        <text x="283" y="95" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#3d3170">json.dump</text>
-        <rect x="325" y="65" width="210" height="90" rx="9" fill="#23262e" stroke="#e3e6ee"/>
+        <text x="16" y="26" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6a626e" letter-spacing="1.5">THE ROUND TRIP</text>
+        <rect x="30" y="75" width="210" height="70" rx="9" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.5"/>
+        <text x="135" y="100" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#3f2a41">tasks — a real list</text>
+        <text x="135" y="124" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#2b2730">['milk', 'eggs']</text>
+        <line x1="245" y1="110" x2="320" y2="110" stroke="#5a3d5c" stroke-width="1.5"/>
+        <path d="M320 110 l-9 -5 v10 z" fill="#5a3d5c"/>
+        <text x="283" y="95" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#3f2a41">json.dump</text>
+        <rect x="325" y="65" width="210" height="90" rx="9" fill="#23262e" stroke="#e9dfcf"/>
         <text x="430" y="95" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#9aa3b2">todo.json — plain text</text>
-        <text x="430" y="124" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#e8eaf0">["milk", "eggs"]</text>
-        <line x1="540" y1="110" x2="615" y2="110" stroke="#2b7a78" stroke-width="1.5"/>
-        <path d="M615 110 l-9 -5 v10 z" fill="#2b7a78"/>
+        <text x="430" y="124" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#ece4d8">["milk", "eggs"]</text>
+        <line x1="540" y1="110" x2="615" y2="110" stroke="#2f5a45" stroke-width="1.5"/>
+        <path d="M615 110 l-9 -5 v10 z" fill="#2f5a45"/>
         <text x="578" y="95" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#1d5654">json.load</text>
-        <rect x="620" y="75" width="210" height="70" rx="9" fill="#e3efee" stroke="#2b7a78" stroke-width="1.5"/>
+        <rect x="620" y="75" width="210" height="70" rx="9" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.5"/>
         <text x="725" y="100" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#1d5654">loaded — a list again</text>
-        <text x="725" y="124" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#1f2733">['milk', 'eggs']</text>
-        <text x="430" y="185" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6b7585">the disk only ever holds text — json is the agreement that makes it unpackable</text>
+        <text x="725" y="124" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#2b2730">['milk', 'eggs']</text>
+        <text x="430" y="185" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6a626e">the disk only ever holds text — json is the agreement that makes it unpackable</text>
       </svg>
       <div class="figcap">Fig. 2 — The round trip. On disk it's text you could edit in Notepad; note JSON's double quotes versus Python's single-quote display of the same list. <code>json.load</code> rebuilds the living value, types intact.</div>
     </div>
@@ -860,8 +862,8 @@ play_round(150)</pre><p>Load-or-default, compare, save-if-better — Units 3, 7,
 
 <footer class="foot">
   <div class="foot-in">
-    <img src="../../assets/wordmark.svg" alt="Learn with Adi" style="height:26px">
-    <span>Learn with Adi — Unit 10 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Series</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
+    <img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building" style="height:36px">
+    <span>Learn AI by Building — Unit 10 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Series</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
   </div>
 </footer>
 

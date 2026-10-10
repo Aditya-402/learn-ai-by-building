@@ -1,4 +1,4 @@
--- Learn with Adi — progress table + row-level security
+-- Learn AI by Building — progress table + row-level security
 -- Run this once in the Supabase SQL editor (Dashboard → SQL Editor → New query → paste → Run).
 
 create table if not exists public.progress (

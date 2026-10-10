@@ -3,16 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Generators &amp; Laziness — Learn with Adi</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>">
-<link rel="stylesheet" href="../../assets/site.css?v=4">
-<link rel="stylesheet" href="../../assets/unit.css?v=4">
+<title>Generators &amp; Laziness — Learn AI by Building</title>
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=6">
+<link rel="stylesheet" href="../../assets/unit.css?v=6">
 </head>
 <body data-lwa-course="python-programming" data-lwa-chapter="u18" data-lwa-title="Unit 18 · Generators &amp; laziness">
 <header class="masthead">
   <div class="masthead-in">
     <div class="lwa-brandrow">
-      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg" alt="Learn with Adi"></a>
+      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building"></a>
       <div class="lwa-brand-right">
         <span class="lwa-tag"><a href="index.html">Series 02 · Python Programming</a></span>
         <span data-lwa-auth></span>
@@ -51,7 +53,7 @@
   <section id="s1">
     <div class="prereq">
       <div class="pq"><b>You'll need Unit 17</b>The iteration protocol: <code>iter()</code>, <code>next()</code>, <code>StopIteration</code>, and the bookshelf-and-bookmark picture. Everything here is that protocol, written shorter.</div>
-      <div class="pq"><b>How this unit works</b>Same rhythm: each concept is a 3–4 minute read, then ~10 minutes of practice. <a href="https://colab.research.google.com/github/Aditya-402/learn-with-adi/blob/main/notebooks/python-programming/unit18.ipynb" rel="noopener">▶ Run this unit in Colab</a> if you prefer a notebook.</div>
+      <div class="pq"><b>How this unit works</b>Same rhythm: each concept is a 3–4 minute read, then ~10 minutes of practice. <a href="https://colab.research.google.com/github/Aditya-402/learn-ai-by-building/blob/main/notebooks/python-programming/unit18.ipynb" rel="noopener">▶ Run this unit in Colab</a> if you prefer a notebook.</div>
       <div class="pq"><b>Also useful</b>Unit 12's list comprehensions (18.3 pays them off) and Unit 10's files (18.4 writes a log and reads it back in one run).</div>
     </div>
     <div class="prose">
@@ -95,45 +97,45 @@ print(next(c))</div>
     </div>
     <div class="fig">
       <svg viewBox="0 0 880 250" role="img" aria-label="Three snapshots of a generator: built and frozen before the body, frozen at the yield with n equal to 3, then resumed and frozen again with n equal to 2">
-        <text x="16" y="24" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6b7585" letter-spacing="1.5">ONE MACHINE, FROZEN THREE TIMES</text>
+        <text x="16" y="24" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6a626e" letter-spacing="1.5">ONE MACHINE, FROZEN THREE TIMES</text>
 
-        <text x="20" y="52" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#3d3170">after c = countdown(3)</text>
-        <rect x="20" y="62" width="250" height="130" rx="10" fill="#ffffff" stroke="#e3e6ee" stroke-width="1.5"/>
-        <text x="34" y="84" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#1f2733">while n &gt; 0:</text>
-        <text x="46" y="104" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#1f2733">yield n</text>
-        <text x="46" y="124" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#1f2733">n -= 1</text>
-        <rect x="34" y="138" width="96" height="34" rx="8" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.5"/>
-        <text x="82" y="159" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#3d3170">n = 3</text>
-        <path d="M14 78 L28 78" stroke="#a35a33" stroke-width="2.5"/>
-        <text x="150" y="159" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a35a33">marker before</text>
-        <text x="150" y="174" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a35a33">the first line</text>
-        <text x="145" y="212" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6b7585">nothing has run · nothing handed out</text>
+        <text x="20" y="52" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#3f2a41">after c = countdown(3)</text>
+        <rect x="20" y="62" width="250" height="130" rx="10" fill="#ffffff" stroke="#e9dfcf" stroke-width="1.5"/>
+        <text x="34" y="84" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#2b2730">while n &gt; 0:</text>
+        <text x="46" y="104" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#2b2730">yield n</text>
+        <text x="46" y="124" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#2b2730">n -= 1</text>
+        <rect x="34" y="138" width="96" height="34" rx="8" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.5"/>
+        <text x="82" y="159" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#3f2a41">n = 3</text>
+        <path d="M14 78 L28 78" stroke="#a8441f" stroke-width="2.5"/>
+        <text x="150" y="159" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a8441f">marker before</text>
+        <text x="150" y="174" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a8441f">the first line</text>
+        <text x="145" y="212" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6a626e">nothing has run · nothing handed out</text>
 
-        <text x="315" y="52" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#3d3170">after next(c) → 3</text>
-        <rect x="315" y="62" width="250" height="130" rx="10" fill="#ffffff" stroke="#e3e6ee" stroke-width="1.5"/>
-        <text x="329" y="84" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#1f2733">while n &gt; 0:</text>
-        <rect x="337" y="90" width="120" height="20" rx="5" fill="#e3efee"/>
+        <text x="315" y="52" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#3f2a41">after next(c) → 3</text>
+        <rect x="315" y="62" width="250" height="130" rx="10" fill="#ffffff" stroke="#e9dfcf" stroke-width="1.5"/>
+        <text x="329" y="84" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#2b2730">while n &gt; 0:</text>
+        <rect x="337" y="90" width="120" height="20" rx="5" fill="#e4ede6"/>
         <text x="341" y="104" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" font-weight="700" fill="#1d5654">yield n</text>
-        <text x="341" y="124" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#1f2733">n -= 1</text>
-        <rect x="329" y="138" width="96" height="34" rx="8" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.5"/>
-        <text x="377" y="159" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#3d3170">n = 3</text>
-        <path d="M309 100 L323 100" stroke="#2b7a78" stroke-width="2.5"/>
+        <text x="341" y="124" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#2b2730">n -= 1</text>
+        <rect x="329" y="138" width="96" height="34" rx="8" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.5"/>
+        <text x="377" y="159" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#3f2a41">n = 3</text>
+        <path d="M309 100 L323 100" stroke="#2f5a45" stroke-width="2.5"/>
         <text x="445" y="159" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#1d5654">frozen ON</text>
         <text x="445" y="174" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#1d5654">the yield</text>
-        <text x="440" y="212" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6b7585">handed out 3 · boxes kept</text>
+        <text x="440" y="212" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6a626e">handed out 3 · boxes kept</text>
 
-        <text x="610" y="52" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#3d3170">after next(c) → 2</text>
-        <rect x="610" y="62" width="250" height="130" rx="10" fill="#ffffff" stroke="#e3e6ee" stroke-width="1.5"/>
-        <text x="624" y="84" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#1f2733">while n &gt; 0:</text>
-        <rect x="632" y="90" width="120" height="20" rx="5" fill="#e3efee"/>
+        <text x="610" y="52" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#3f2a41">after next(c) → 2</text>
+        <rect x="610" y="62" width="250" height="130" rx="10" fill="#ffffff" stroke="#e9dfcf" stroke-width="1.5"/>
+        <text x="624" y="84" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#2b2730">while n &gt; 0:</text>
+        <rect x="632" y="90" width="120" height="20" rx="5" fill="#e4ede6"/>
         <text x="636" y="104" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" font-weight="700" fill="#1d5654">yield n</text>
-        <text x="636" y="124" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#1f2733">n -= 1</text>
-        <rect x="624" y="138" width="96" height="34" rx="8" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.5"/>
-        <text x="672" y="159" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#3d3170">n = 2</text>
-        <path d="M604 100 L618 100" stroke="#2b7a78" stroke-width="2.5"/>
+        <text x="636" y="124" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#2b2730">n -= 1</text>
+        <rect x="624" y="138" width="96" height="34" rx="8" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.5"/>
+        <text x="672" y="159" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#3f2a41">n = 2</text>
+        <path d="M604 100 L618 100" stroke="#2f5a45" stroke-width="2.5"/>
         <text x="740" y="159" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#1d5654">resumed below</text>
         <text x="740" y="174" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#1d5654">the yield, then froze</text>
-        <text x="735" y="212" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6b7585">handed out 2 · same machine, moved on</text>
+        <text x="735" y="212" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6a626e">handed out 2 · same machine, moved on</text>
       </svg>
       <div class="figcap">Fig. 1 — A generator is one machine that keeps its memory between visits. The marker is the only new idea: an ordinary function forgets everything when it returns, a generator remembers exactly where it stood.</div>
     </div>
@@ -497,39 +499,39 @@ numbered = enumerate(errors, 1)</p>
     </div>
     <div class="fig">
       <svg viewBox="0 0 880 210" role="img" aria-label="A pipeline: file to strip stage to filter stage to enumerate stage to the for loop, with pull arrows going backwards and one line flowing forwards">
-        <text x="16" y="24" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6b7585" letter-spacing="1.5">THE LAST LOOP PULLS EVERYTHING THROUGH</text>
+        <text x="16" y="24" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6a626e" letter-spacing="1.5">THE LAST LOOP PULLS EVERYTHING THROUGH</text>
 
         <rect x="20" y="56" width="130" height="52" rx="9" fill="#23262e"/>
-        <text x="85" y="79" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#e3e6ee">the file</text>
+        <text x="85" y="79" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#e9dfcf">the file</text>
         <text x="85" y="97" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="10.5" fill="#8a93a3">8 GB on disk</text>
 
-        <rect x="185" y="56" width="140" height="52" rx="9" fill="#ffffff" stroke="#5b4b9e" stroke-width="1.5"/>
-        <text x="255" y="79" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" font-weight="700" fill="#3d3170">lines</text>
-        <text x="255" y="97" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6b7585">strip()</text>
+        <rect x="185" y="56" width="140" height="52" rx="9" fill="#ffffff" stroke="#5a3d5c" stroke-width="1.5"/>
+        <text x="255" y="79" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" font-weight="700" fill="#3f2a41">lines</text>
+        <text x="255" y="97" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6a626e">strip()</text>
 
-        <rect x="360" y="56" width="140" height="52" rx="9" fill="#ffffff" stroke="#5b4b9e" stroke-width="1.5"/>
-        <text x="430" y="79" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" font-weight="700" fill="#3d3170">errors</text>
-        <text x="430" y="97" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6b7585">keep ERROR lines</text>
+        <rect x="360" y="56" width="140" height="52" rx="9" fill="#ffffff" stroke="#5a3d5c" stroke-width="1.5"/>
+        <text x="430" y="79" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" font-weight="700" fill="#3f2a41">errors</text>
+        <text x="430" y="97" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6a626e">keep ERROR lines</text>
 
-        <rect x="535" y="56" width="140" height="52" rx="9" fill="#ffffff" stroke="#5b4b9e" stroke-width="1.5"/>
-        <text x="605" y="79" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" font-weight="700" fill="#3d3170">numbered</text>
-        <text x="605" y="97" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6b7585">enumerate(…, 1)</text>
+        <rect x="535" y="56" width="140" height="52" rx="9" fill="#ffffff" stroke="#5a3d5c" stroke-width="1.5"/>
+        <text x="605" y="79" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" font-weight="700" fill="#3f2a41">numbered</text>
+        <text x="605" y="97" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6a626e">enumerate(…, 1)</text>
 
-        <rect x="710" y="56" width="150" height="52" rx="9" fill="#e3efee" stroke="#2b7a78" stroke-width="1.5"/>
+        <rect x="710" y="56" width="150" height="52" rx="9" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.5"/>
         <text x="785" y="79" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" font-weight="700" fill="#1d5654">for i, line in …</text>
         <text x="785" y="97" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#1d5654">the tap</text>
 
-        <path d="M150 74 L182 74" stroke="#e3e6ee" stroke-width="2"/>
-        <path d="M325 74 L357 74" stroke="#e3e6ee" stroke-width="2"/>
-        <path d="M500 74 L532 74" stroke="#e3e6ee" stroke-width="2"/>
-        <path d="M675 74 L707 74" stroke="#e3e6ee" stroke-width="2"/>
+        <path d="M150 74 L182 74" stroke="#e9dfcf" stroke-width="2"/>
+        <path d="M325 74 L357 74" stroke="#e9dfcf" stroke-width="2"/>
+        <path d="M500 74 L532 74" stroke="#e9dfcf" stroke-width="2"/>
+        <path d="M675 74 L707 74" stroke="#e9dfcf" stroke-width="2"/>
 
-        <path d="M700 132 L30 132" stroke="#a35a33" stroke-width="1.8" stroke-dasharray="5 4"/>
-        <path d="M30 132 l10 -5 l0 10 z" fill="#a35a33"/>
-        <text x="440" y="152" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a35a33">each request travels backwards: give me one</text>
+        <path d="M700 132 L30 132" stroke="#a8441f" stroke-width="1.8" stroke-dasharray="5 4"/>
+        <path d="M30 132 l10 -5 l0 10 z" fill="#a8441f"/>
+        <text x="440" y="152" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a8441f">each request travels backwards: give me one</text>
 
-        <path d="M30 174 L850 174" stroke="#2b7a78" stroke-width="1.8"/>
-        <path d="M850 174 l-10 -5 l0 10 z" fill="#2b7a78"/>
+        <path d="M30 174 L850 174" stroke="#2f5a45" stroke-width="1.8"/>
+        <path d="M850 174 l-10 -5 l0 10 z" fill="#2f5a45"/>
         <text x="440" y="194" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#1d5654">…and exactly one line travels forwards. Memory used: one line.</text>
       </svg>
       <div class="figcap">Fig. 2 — Four stages, one line in flight. Building the chain reads nothing; the loop at the end is what pulls. Swap the 8 GB file for an 8 KB one and the code does not change — that's the point of the shape.</div>
@@ -908,8 +910,8 @@ for t in running_total([10, 20, 5, 15]):
 
 <footer class="foot">
   <div class="foot-in">
-    <img src="../../assets/wordmark.svg" alt="Learn with Adi" style="height:26px">
-    <span>Learn with Adi — Unit 18 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Series</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
+    <img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building" style="height:36px">
+    <span>Learn AI by Building — Unit 18 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Series</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
   </div>
 </footer>
 

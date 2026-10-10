@@ -3,16 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Making Decisions — Comparisons &amp; if/else — Learn with Adi</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>">
-<link rel="stylesheet" href="../../assets/site.css?v=4">
-<link rel="stylesheet" href="../../assets/unit.css?v=4">
+<title>Making Decisions — Comparisons &amp; if/else — Learn AI by Building</title>
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=6">
+<link rel="stylesheet" href="../../assets/unit.css?v=6">
 </head>
 <body data-lwa-course="python-programming" data-lwa-chapter="u03" data-lwa-title="Unit 3 · Making decisions — comparisons &amp; if/else">
 <header class="masthead">
   <div class="masthead-in">
     <div class="lwa-brandrow">
-      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg" alt="Learn with Adi"></a>
+      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building"></a>
       <div class="lwa-brand-right">
         <span class="lwa-tag"><a href="index.html">Series 02 · Python Programming</a></span>
         <span data-lwa-auth></span>
@@ -52,7 +54,7 @@
   <section id="s1">
     <div class="prereq">
       <div class="pq"><b>You'll need Units 1–2</b>print(), input(), boxes, <code>int()</code> at the door, f-strings.</div>
-      <div class="pq"><b>How each idea works</b>A short read, then you practise. <a href="https://colab.research.google.com/github/Aditya-402/learn-with-adi/blob/main/notebooks/python-programming/unit3.ipynb" rel="noopener">▶ Run this unit in Colab</a> if you prefer a notebook.</div>
+      <div class="pq"><b>How each idea works</b>A short read, then you practise. <a href="https://colab.research.google.com/github/Aditya-402/learn-ai-by-building/blob/main/notebooks/python-programming/unit3.ipynb" rel="noopener">▶ Run this unit in Colab</a> if you prefer a notebook.</div>
       <div class="pq"><b>One run, one road</b>However many branches you write, each run walks down exactly one of them.</div>
     </div>
     <div class="prose">
@@ -221,25 +223,25 @@ Done</div>
 
     <div class="fig">
       <svg viewBox="0 0 860 300" role="img" aria-label="Flow diagram: the condition marks >= 35 forks into a taken True path printing Pass and a skipped False path printing Fail, then both roads rejoin at print Done">
-        <text x="16" y="26" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6b7585" letter-spacing="1.5">THE FORK IN THE ROAD — marks = 52</text>
-        <rect x="330" y="46" width="200" height="46" rx="9" fill="#f0f1f7" stroke="#5b4b9e" stroke-width="1.5"/>
-        <text x="430" y="74" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" font-weight="700" fill="#3d3170">marks &gt;= 35 ?</text>
-        <path d="M370 92 L215 138" stroke="#2b7a78" stroke-width="2.5" fill="none"/>
-        <polygon points="215,138 226,130 222,141" fill="#2b7a78"/>
+        <text x="16" y="26" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6a626e" letter-spacing="1.5">THE FORK IN THE ROAD — marks = 52</text>
+        <rect x="330" y="46" width="200" height="46" rx="9" fill="#f3ece0" stroke="#5a3d5c" stroke-width="1.5"/>
+        <text x="430" y="74" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" font-weight="700" fill="#3f2a41">marks &gt;= 35 ?</text>
+        <path d="M370 92 L215 138" stroke="#2f5a45" stroke-width="2.5" fill="none"/>
+        <polygon points="215,138 226,130 222,141" fill="#2f5a45"/>
         <text x="255" y="112" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#1d5654">True</text>
-        <path d="M490 92 L645 138" stroke="#e3e6ee" stroke-width="2.5" fill="none"/>
-        <polygon points="645,138 634,141 638,130" fill="#e3e6ee"/>
-        <text x="570" y="112" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#a35a33">False</text>
-        <rect x="105" y="142" width="220" height="50" rx="9" fill="#e3efee" stroke="#2b7a78" stroke-width="2"/>
+        <path d="M490 92 L645 138" stroke="#e9dfcf" stroke-width="2.5" fill="none"/>
+        <polygon points="645,138 634,141 638,130" fill="#e9dfcf"/>
+        <text x="570" y="112" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#a8441f">False</text>
+        <rect x="105" y="142" width="220" height="50" rx="9" fill="#e4ede6" stroke="#2f5a45" stroke-width="2"/>
         <text x="215" y="172" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#1d5654">print("Pass")</text>
         <text x="215" y="212" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#1d5654">the road taken this run</text>
-        <rect x="535" y="142" width="220" height="50" rx="9" fill="#ffffff" stroke="#e3e6ee" stroke-width="1.5" stroke-dasharray="5 4"/>
-        <text x="645" y="172" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#6b7585">print("Fail")</text>
-        <text x="645" y="212" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a35a33">never looked at this run</text>
-        <path d="M215 222 L400 252" stroke="#2b7a78" stroke-width="2.5" fill="none"/>
-        <path d="M645 222 L460 252" stroke="#e3e6ee" stroke-width="2" fill="none" stroke-dasharray="5 4"/>
-        <rect x="330" y="240" width="200" height="46" rx="9" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.5"/>
-        <text x="430" y="268" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#3d3170">print("Done")</text>
+        <rect x="535" y="142" width="220" height="50" rx="9" fill="#ffffff" stroke="#e9dfcf" stroke-width="1.5" stroke-dasharray="5 4"/>
+        <text x="645" y="172" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#6a626e">print("Fail")</text>
+        <text x="645" y="212" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a8441f">never looked at this run</text>
+        <path d="M215 222 L400 252" stroke="#2f5a45" stroke-width="2.5" fill="none"/>
+        <path d="M645 222 L460 252" stroke="#e9dfcf" stroke-width="2" fill="none" stroke-dasharray="5 4"/>
+        <rect x="330" y="240" width="200" height="46" rx="9" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.5"/>
+        <text x="430" y="268" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#3f2a41">print("Done")</text>
       </svg>
       <div class="figcap">Fig. 1 — One run, one road. Both branches exist in the code. Each run travels exactly one of them, and the roads rejoin at the first line back at the margin.</div>
     </div>
@@ -354,22 +356,22 @@ else:
 
     <div class="fig">
       <svg viewBox="0 0 860 250" role="img" aria-label="An elif ladder checked top to bottom for marks 78: the 90 door answers False, the 75 door answers True and is taken, the 50 door and else are never checked">
-        <text x="16" y="26" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6b7585" letter-spacing="1.5">THE LADDER, TOP TO BOTTOM — marks = 78</text>
-        <rect x="40" y="48" width="230" height="42" rx="9" fill="#ffffff" stroke="#e3e6ee" stroke-width="1.5"/>
-        <text x="155" y="74" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#1f2733">marks &gt;= 90 ?</text>
-        <text x="300" y="74" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#a35a33">False — move down</text>
-        <path d="M155 90 L155 108" stroke="#5b4b9e" stroke-width="2" fill="none"/>
-        <polygon points="155,112 150,103 160,103" fill="#5b4b9e"/>
-        <rect x="40" y="114" width="230" height="42" rx="9" fill="#e3efee" stroke="#2b7a78" stroke-width="2"/>
+        <text x="16" y="26" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6a626e" letter-spacing="1.5">THE LADDER, TOP TO BOTTOM — marks = 78</text>
+        <rect x="40" y="48" width="230" height="42" rx="9" fill="#ffffff" stroke="#e9dfcf" stroke-width="1.5"/>
+        <text x="155" y="74" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#2b2730">marks &gt;= 90 ?</text>
+        <text x="300" y="74" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#a8441f">False — move down</text>
+        <path d="M155 90 L155 108" stroke="#5a3d5c" stroke-width="2" fill="none"/>
+        <polygon points="155,112 150,103 160,103" fill="#5a3d5c"/>
+        <rect x="40" y="114" width="230" height="42" rx="9" fill="#e4ede6" stroke="#2f5a45" stroke-width="2"/>
         <text x="155" y="140" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#1d5654">marks &gt;= 75 ?</text>
         <text x="300" y="132" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#1d5654">True — take this door,</text>
         <text x="300" y="150" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#1d5654">grade = "B", ladder DONE</text>
-        <rect x="40" y="174" width="230" height="42" rx="9" fill="#ffffff" stroke="#e3e6ee" stroke-width="1.5" stroke-dasharray="5 4"/>
-        <text x="155" y="200" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#6b7585">marks &gt;= 50 ?</text>
-        <rect x="290" y="174" width="120" height="42" rx="9" fill="#ffffff" stroke="#e3e6ee" stroke-width="1.5" stroke-dasharray="5 4"/>
-        <text x="350" y="200" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#6b7585">else</text>
-        <text x="435" y="200" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a35a33">never looked at — 78 would open the &gt;= 50 door, but nobody knocks</text>
-        <text x="40" y="240" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6b7585">First True wins. That's why the strictest question must sit at the top.</text>
+        <rect x="40" y="174" width="230" height="42" rx="9" fill="#ffffff" stroke="#e9dfcf" stroke-width="1.5" stroke-dasharray="5 4"/>
+        <text x="155" y="200" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#6a626e">marks &gt;= 50 ?</text>
+        <rect x="290" y="174" width="120" height="42" rx="9" fill="#ffffff" stroke="#e9dfcf" stroke-width="1.5" stroke-dasharray="5 4"/>
+        <text x="350" y="200" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#6a626e">else</text>
+        <text x="435" y="200" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a8441f">never looked at — 78 would open the &gt;= 50 door, but nobody knocks</text>
+        <text x="40" y="240" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6a626e">First True wins. That's why the strictest question must sit at the top.</text>
       </svg>
       <div class="figcap">Fig. 2 — The ladder is checked top to bottom, and the first True door ends the whole affair. Everything below it is skipped, even doors the value could have opened.</div>
     </div>
@@ -793,8 +795,8 @@ else:
 
 <footer class="foot">
   <div class="foot-in">
-    <img src="../../assets/wordmark.svg" alt="Learn with Adi" style="height:26px">
-    <span>Learn with Adi — Unit 3 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Series</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
+    <img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building" style="height:36px">
+    <span>Learn AI by Building — Unit 3 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Series</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
   </div>
 </footer>
 

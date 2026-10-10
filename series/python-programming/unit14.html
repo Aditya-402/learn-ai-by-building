@@ -3,16 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Classes II — Objects That Feel Native — Learn with Adi</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>">
-<link rel="stylesheet" href="../../assets/site.css?v=4">
-<link rel="stylesheet" href="../../assets/unit.css?v=4">
+<title>Classes II — Objects That Feel Native — Learn AI by Building</title>
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=6">
+<link rel="stylesheet" href="../../assets/unit.css?v=6">
 </head>
 <body data-lwa-course="python-programming" data-lwa-chapter="u14" data-lwa-title="Unit 14 · Classes II — objects that feel native">
 <header class="masthead">
   <div class="masthead-in">
     <div class="lwa-brandrow">
-      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg" alt="Learn with Adi"></a>
+      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building"></a>
       <div class="lwa-brand-right">
         <span class="lwa-tag"><a href="index.html">Series 02 · Python Programming</a></span>
         <span data-lwa-auth></span>
@@ -51,7 +53,7 @@
   <section id="s1">
     <div class="prereq">
       <div class="pq"><b>You'll need Unit 13</b><code>class</code>, <code>__init__</code>, <code>self</code>, attributes and methods — plus the cookie cutter and its cookies. Everything here is a new method on classes you already know.</div>
-      <div class="pq"><b>How this unit works</b>Same rhythm: each concept is a 3–4 minute read, then ~10 minutes of practice. <a href="https://colab.research.google.com/github/Aditya-402/learn-with-adi/blob/main/notebooks/python-programming/unit14.ipynb" rel="noopener">▶ Run this unit in Colab</a> if you prefer a notebook.</div>
+      <div class="pq"><b>How this unit works</b>Same rhythm: each concept is a 3–4 minute read, then ~10 minutes of practice. <a href="https://colab.research.google.com/github/Aditya-402/learn-ai-by-building/blob/main/notebooks/python-programming/unit14.ipynb" rel="noopener">▶ Run this unit in Colab</a> if you prefer a notebook.</div>
       <div class="pq"><b>The promise being kept</b>Back in Beginner, <code>len()</code> worked on strings, lists <i>and</i> dictionaries and we called it "polite". This unit finally explains why — and lets your own classes join in.</div>
     </div>
     <div class="prose">
@@ -214,32 +216,32 @@ print(p == r)</div>
     </div>
     <div class="fig">
       <svg viewBox="0 0 860 230" role="img" aria-label="Two Point objects with identical contents living in two different boxes">
-        <text x="16" y="24" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6b7585" letter-spacing="1.5">SAME CONTENTS, DIFFERENT BOXES</text>
-        <rect x="40" y="46" width="230" height="118" rx="12" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.5"/>
-        <text x="155" y="70" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#3d3170">p  →  a Point box</text>
-        <rect x="62" y="82" width="86" height="40" rx="7" fill="#ffffff" stroke="#e3e6ee"/>
-        <text x="105" y="98" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11" fill="#6b7585">x</text>
-        <text x="105" y="114" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#1f2733">3</text>
-        <rect x="162" y="82" width="86" height="40" rx="7" fill="#ffffff" stroke="#e3e6ee"/>
-        <text x="205" y="98" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11" fill="#6b7585">y</text>
-        <text x="205" y="114" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#1f2733">4</text>
-        <text x="155" y="150" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6b7585">built on line 1</text>
-        <rect x="310" y="46" width="230" height="118" rx="12" fill="#e3efee" stroke="#2b7a78" stroke-width="1.5"/>
+        <text x="16" y="24" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6a626e" letter-spacing="1.5">SAME CONTENTS, DIFFERENT BOXES</text>
+        <rect x="40" y="46" width="230" height="118" rx="12" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.5"/>
+        <text x="155" y="70" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#3f2a41">p  →  a Point box</text>
+        <rect x="62" y="82" width="86" height="40" rx="7" fill="#ffffff" stroke="#e9dfcf"/>
+        <text x="105" y="98" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11" fill="#6a626e">x</text>
+        <text x="105" y="114" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#2b2730">3</text>
+        <rect x="162" y="82" width="86" height="40" rx="7" fill="#ffffff" stroke="#e9dfcf"/>
+        <text x="205" y="98" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11" fill="#6a626e">y</text>
+        <text x="205" y="114" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#2b2730">4</text>
+        <text x="155" y="150" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6a626e">built on line 1</text>
+        <rect x="310" y="46" width="230" height="118" rx="12" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.5"/>
         <text x="425" y="70" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#1d5654">q  →  a Point box</text>
-        <rect x="332" y="82" width="86" height="40" rx="7" fill="#ffffff" stroke="#e3e6ee"/>
-        <text x="375" y="98" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11" fill="#6b7585">x</text>
-        <text x="375" y="114" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#1f2733">3</text>
-        <rect x="432" y="82" width="86" height="40" rx="7" fill="#ffffff" stroke="#e3e6ee"/>
-        <text x="475" y="98" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11" fill="#6b7585">y</text>
-        <text x="475" y="114" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#1f2733">4</text>
-        <text x="425" y="150" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6b7585">built on line 2</text>
+        <rect x="332" y="82" width="86" height="40" rx="7" fill="#ffffff" stroke="#e9dfcf"/>
+        <text x="375" y="98" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11" fill="#6a626e">x</text>
+        <text x="375" y="114" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#2b2730">3</text>
+        <rect x="432" y="82" width="86" height="40" rx="7" fill="#ffffff" stroke="#e9dfcf"/>
+        <text x="475" y="98" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11" fill="#6a626e">y</text>
+        <text x="475" y="114" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#2b2730">4</text>
+        <text x="425" y="150" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6a626e">built on line 2</text>
         <rect x="586" y="46" width="250" height="118" rx="12" fill="#23262e"/>
-        <text x="604" y="72" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#e8e6f2">p == q</text>
+        <text x="604" y="72" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#f0e6ee">p == q</text>
         <text x="604" y="96" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#9aa4b8">no __eq__  →  same box?</text>
         <text x="604" y="114" font-family="Cascadia Mono,Consolas,monospace" font-size="13" font-weight="700" fill="#e39a72">False</text>
         <text x="604" y="136" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#9aa4b8">with __eq__  →  same x, y?</text>
         <text x="604" y="154" font-family="Cascadia Mono,Consolas,monospace" font-size="13" font-weight="700" fill="#7fc9a6">True</text>
-        <text x="16" y="200" font-family="Segoe UI,system-ui,sans-serif" font-size="12.5" fill="#4a5a72">Writing <tspan font-family="Cascadia Mono,Consolas,monospace" fill="#3d3170">__eq__</tspan> does not change the objects. It changes the QUESTION that <tspan font-family="Cascadia Mono,Consolas,monospace" fill="#3d3170">==</tspan> asks about them.</text>
+        <text x="16" y="200" font-family="Segoe UI,system-ui,sans-serif" font-size="12.5" fill="#554b58">Writing <tspan font-family="Cascadia Mono,Consolas,monospace" fill="#3f2a41">__eq__</tspan> does not change the objects. It changes the QUESTION that <tspan font-family="Cascadia Mono,Consolas,monospace" fill="#3f2a41">==</tspan> asks about them.</text>
       </svg>
       <div class="figcap">Fig. 1 — By default <code>==</code> asks "which box?" — an identity question. <code>__eq__</code> replaces it with a contents question of your own design.</div>
     </div>
@@ -364,38 +366,38 @@ print(Card("Two", "spades") in hand)</pre><p>Here's the reveal one section early
       <svg viewBox="0 0 860 300" role="img" aria-label="Built-in functions knocking on an object to find its dunder methods">
         <defs>
           <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-            <path d="M 0 0 L 10 5 L 0 10 z" fill="#5b4b9e"/>
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#5a3d5c"/>
           </marker>
         </defs>
-        <text x="16" y="24" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6b7585" letter-spacing="1.5">BUILT-INS ARE POLITE KNOCKERS</text>
-        <text x="46" y="52" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" font-weight="700" fill="#a35a33" letter-spacing="1">WHAT YOU WRITE</text>
-        <text x="428" y="52" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" font-weight="700" fill="#3d3170" letter-spacing="1">WHAT PYTHON ASKS YOUR OBJECT</text>
+        <text x="16" y="24" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6a626e" letter-spacing="1.5">BUILT-INS ARE POLITE KNOCKERS</text>
+        <text x="46" y="52" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" font-weight="700" fill="#a8441f" letter-spacing="1">WHAT YOU WRITE</text>
+        <text x="428" y="52" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" font-weight="700" fill="#3f2a41" letter-spacing="1">WHAT PYTHON ASKS YOUR OBJECT</text>
         <rect x="40" y="62" width="230" height="38" rx="8" fill="#23262e"/>
-        <text x="58" y="86" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#e8e6f2">len(playlist)</text>
-        <line x1="278" y1="81" x2="412" y2="81" stroke="#5b4b9e" stroke-width="1.6" marker-end="url(#ah)"/>
-        <text x="345" y="74" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="10.5" fill="#6b7585">knock</text>
-        <rect x="422" y="62" width="270" height="38" rx="8" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.5"/>
-        <text x="440" y="86" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#3d3170">playlist.__len__()</text>
+        <text x="58" y="86" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#f0e6ee">len(playlist)</text>
+        <line x1="278" y1="81" x2="412" y2="81" stroke="#5a3d5c" stroke-width="1.6" marker-end="url(#ah)"/>
+        <text x="345" y="74" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="10.5" fill="#6a626e">knock</text>
+        <rect x="422" y="62" width="270" height="38" rx="8" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.5"/>
+        <text x="440" y="86" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#3f2a41">playlist.__len__()</text>
         <rect x="40" y="112" width="230" height="38" rx="8" fill="#23262e"/>
-        <text x="58" y="136" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#e8e6f2">print(money)</text>
-        <line x1="278" y1="131" x2="412" y2="131" stroke="#5b4b9e" stroke-width="1.6" marker-end="url(#ah)"/>
-        <rect x="422" y="112" width="270" height="38" rx="8" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.5"/>
-        <text x="440" y="136" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#3d3170">money.__str__()</text>
+        <text x="58" y="136" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#f0e6ee">print(money)</text>
+        <line x1="278" y1="131" x2="412" y2="131" stroke="#5a3d5c" stroke-width="1.6" marker-end="url(#ah)"/>
+        <rect x="422" y="112" width="270" height="38" rx="8" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.5"/>
+        <text x="440" y="136" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#3f2a41">money.__str__()</text>
         <rect x="40" y="162" width="230" height="38" rx="8" fill="#23262e"/>
-        <text x="58" y="186" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#e8e6f2">p == q</text>
-        <line x1="278" y1="181" x2="412" y2="181" stroke="#5b4b9e" stroke-width="1.6" marker-end="url(#ah)"/>
-        <rect x="422" y="162" width="270" height="38" rx="8" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.5"/>
-        <text x="440" y="186" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#3d3170">p.__eq__(q)</text>
+        <text x="58" y="186" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#f0e6ee">p == q</text>
+        <line x1="278" y1="181" x2="412" y2="181" stroke="#5a3d5c" stroke-width="1.6" marker-end="url(#ah)"/>
+        <rect x="422" y="162" width="270" height="38" rx="8" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.5"/>
+        <text x="440" y="186" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#3f2a41">p.__eq__(q)</text>
         <rect x="40" y="212" width="230" height="38" rx="8" fill="#23262e"/>
-        <text x="58" y="236" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#e8e6f2">a + b</text>
-        <line x1="278" y1="231" x2="412" y2="231" stroke="#5b4b9e" stroke-width="1.6" marker-end="url(#ah)"/>
-        <rect x="422" y="212" width="270" height="38" rx="8" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.5"/>
-        <text x="440" y="236" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#3d3170">a.__add__(b)</text>
-        <rect x="706" y="62" width="130" height="188" rx="10" fill="#e3efee" stroke="#2b7a78" stroke-width="1.5"/>
+        <text x="58" y="236" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#f0e6ee">a + b</text>
+        <line x1="278" y1="231" x2="412" y2="231" stroke="#5a3d5c" stroke-width="1.6" marker-end="url(#ah)"/>
+        <rect x="422" y="212" width="270" height="38" rx="8" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.5"/>
+        <text x="440" y="236" font-family="Cascadia Mono,Consolas,monospace" font-size="13" fill="#3f2a41">a.__add__(b)</text>
+        <rect x="706" y="62" width="130" height="188" rx="10" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.5"/>
         <text x="771" y="132" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="12" font-weight="700" fill="#1d5654">your class</text>
         <text x="771" y="152" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="12" fill="#1d5654">answers</text>
         <text x="771" y="172" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="12" fill="#1d5654">the door</text>
-        <text x="16" y="282" font-family="Segoe UI,system-ui,sans-serif" font-size="12.5" fill="#4a5a72">No registration, no permission. Implement the name and the feature switches on.</text>
+        <text x="16" y="282" font-family="Segoe UI,system-ui,sans-serif" font-size="12.5" fill="#554b58">No registration, no permission. Implement the name and the feature switches on.</text>
       </svg>
       <div class="figcap">Fig. 2 — The protocol. The left column is the code you and every other Python programmer write; the right is the question Python turns it into. Your classes get to answer.</div>
     </div>
@@ -942,8 +944,8 @@ print(a + b)</pre><p>Keep this class. It comes back twice: in the bridge unit wh
 
 <footer class="foot">
   <div class="foot-in">
-    <img src="../../assets/wordmark.svg" alt="Learn with Adi" style="height:26px">
-    <span>Learn with Adi — Unit 14 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Series</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
+    <img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building" style="height:36px">
+    <span>Learn AI by Building — Unit 14 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Series</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
   </div>
 </footer>
 

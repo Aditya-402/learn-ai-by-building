@@ -3,8 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>scikit-learn — The Shape of an ML Library — Learn with Adi</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>">
+<title>scikit-learn — The Shape of an ML Library — Learn AI by Building</title>
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
 <link rel="stylesheet" href="../../assets/site.css">
 <link rel="stylesheet" href="../../assets/unit.css">
 </head>
@@ -12,7 +14,7 @@
 <header class="masthead">
   <div class="masthead-in">
     <div class="lwa-brandrow">
-      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg" alt="Learn with Adi"></a>
+      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building"></a>
       <div class="lwa-brand-right">
         <span class="lwa-tag"><a href="index.html">Series 02 · Python Programming</a></span>
         <span data-lwa-auth></span>
@@ -51,7 +53,7 @@
   <section id="s1">
     <div class="prereq">
       <div class="pq"><b>You'll need Unit 21</b>Arrays and, above all, <code>.shape</code> — rows and columns. That one habit is the whole of 24.2, and it is where beginners lose their first afternoon.</div>
-      <div class="pq"><b>How this unit works</b>Same rhythm as always: a short read, then practice. <a href="https://colab.research.google.com/github/Aditya-402/learn-with-adi/blob/main/notebooks/python-programming/unit24.ipynb" rel="noopener">▶ Run this unit in Colab</a> if you prefer a notebook. The first worked example below downloads scikit-learn into the page — give it about fifteen seconds, once. Everything after it is instant.</div>
+      <div class="pq"><b>How this unit works</b>Same rhythm as always: a short read, then practice. <a href="https://colab.research.google.com/github/Aditya-402/learn-ai-by-building/blob/main/notebooks/python-programming/unit24.ipynb" rel="noopener">▶ Run this unit in Colab</a> if you prefer a notebook. The first worked example below downloads scikit-learn into the page — give it about fifteen seconds, once. Everything after it is instant.</div>
       <div class="pq"><b>The boundary — read this twice</b>These notes teach the <i>grammar</i> of an ML library: the words, the order, the shapes. They do <b>not</b> teach what a model is, how learning happens, or how to judge a model honestly. That is the Machine Learning stage, and it is next. Here you learn the controls; there you open the engine.</div>
     </div>
     <div class="prose">
@@ -83,26 +85,26 @@ print(model.predict([[8]]))</div>
     </div>
     <div class="fig">
       <svg viewBox="0 0 880 250" role="img" aria-label="The four beats: make an estimator, fit on examples, predict for new rows, score against known answers">
-        <text x="16" y="26" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6b7585" letter-spacing="1.5">THE FOUR BEATS — THE SAME FOR EVERY ESTIMATOR</text>
-        <rect x="24" y="56" width="180" height="80" rx="10" fill="#ffffff" stroke="#5b4b9e" stroke-width="1.5"/>
-        <text x="114" y="82" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" font-weight="700" fill="#6b7585">1 · MAKE</text>
-        <text x="114" y="106" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#3d3170">DecisionTree</text>
-        <text x="114" y="123" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#3d3170">Classifier()</text>
-        <path d="M208 96 L232 96" stroke="#e3e6ee" stroke-width="2"/><path d="M226 91 L234 96 L226 101 Z" fill="#5b4b9e"/>
-        <rect x="236" y="56" width="180" height="80" rx="10" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.5"/>
-        <text x="326" y="82" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" font-weight="700" fill="#6b7585">2 · LEARN</text>
-        <text x="326" y="108" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" font-weight="700" fill="#3d3170">fit(X, y)</text>
-        <text x="326" y="126" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6b7585">rows + their answers</text>
-        <path d="M420 96 L444 96" stroke="#e3e6ee" stroke-width="2"/><path d="M438 91 L446 96 L438 101 Z" fill="#5b4b9e"/>
-        <rect x="448" y="56" width="180" height="80" rx="10" fill="#e3efee" stroke="#2b7a78" stroke-width="1.5"/>
-        <text x="538" y="82" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" font-weight="700" fill="#6b7585">3 · ANSWER</text>
+        <text x="16" y="26" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6a626e" letter-spacing="1.5">THE FOUR BEATS — THE SAME FOR EVERY ESTIMATOR</text>
+        <rect x="24" y="56" width="180" height="80" rx="10" fill="#ffffff" stroke="#5a3d5c" stroke-width="1.5"/>
+        <text x="114" y="82" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" font-weight="700" fill="#6a626e">1 · MAKE</text>
+        <text x="114" y="106" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#3f2a41">DecisionTree</text>
+        <text x="114" y="123" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#3f2a41">Classifier()</text>
+        <path d="M208 96 L232 96" stroke="#e9dfcf" stroke-width="2"/><path d="M226 91 L234 96 L226 101 Z" fill="#5a3d5c"/>
+        <rect x="236" y="56" width="180" height="80" rx="10" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.5"/>
+        <text x="326" y="82" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" font-weight="700" fill="#6a626e">2 · LEARN</text>
+        <text x="326" y="108" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" font-weight="700" fill="#3f2a41">fit(X, y)</text>
+        <text x="326" y="126" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6a626e">rows + their answers</text>
+        <path d="M420 96 L444 96" stroke="#e9dfcf" stroke-width="2"/><path d="M438 91 L446 96 L438 101 Z" fill="#5a3d5c"/>
+        <rect x="448" y="56" width="180" height="80" rx="10" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.5"/>
+        <text x="538" y="82" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" font-weight="700" fill="#6a626e">3 · ANSWER</text>
         <text x="538" y="108" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" font-weight="700" fill="#1d5654">predict(X_new)</text>
-        <text x="538" y="126" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6b7585">rows, no answers</text>
-        <path d="M632 96 L656 96" stroke="#e3e6ee" stroke-width="2"/><path d="M650 91 L658 96 L650 101 Z" fill="#5b4b9e"/>
-        <rect x="660" y="56" width="180" height="80" rx="10" fill="#f0f1f7" stroke="#e3e6ee" stroke-width="1.5"/>
-        <text x="750" y="82" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" font-weight="700" fill="#6b7585">4 · MARK</text>
-        <text x="750" y="108" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" font-weight="700" fill="#1f2733">score(X, y)</text>
-        <text x="750" y="126" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6b7585">fraction it got right</text>
+        <text x="538" y="126" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6a626e">rows, no answers</text>
+        <path d="M632 96 L656 96" stroke="#e9dfcf" stroke-width="2"/><path d="M650 91 L658 96 L650 101 Z" fill="#5a3d5c"/>
+        <rect x="660" y="56" width="180" height="80" rx="10" fill="#f3ece0" stroke="#e9dfcf" stroke-width="1.5"/>
+        <text x="750" y="82" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" font-weight="700" fill="#6a626e">4 · MARK</text>
+        <text x="750" y="108" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="13" font-weight="700" fill="#2b2730">score(X, y)</text>
+        <text x="750" y="126" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6a626e">fraction it got right</text>
         <rect x="24" y="168" width="816" height="60" rx="10" fill="#23262e"/>
         <text x="44" y="194" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#e8e9ee">model = DecisionTreeClassifier(random_state=0)   ·   model.fit(X, y)</text>
         <text x="44" y="215" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#e8e9ee">model.predict(X_new)   ·   model.score(X_test, y_test)</text>
@@ -222,44 +224,44 @@ print(flat.shape, flat.reshape(-1, 1).shape)</div>
     </div>
     <div class="fig">
       <svg viewBox="0 0 880 268" role="img" aria-label="X as a table of rows and feature columns beside y as a single column of answers">
-        <text x="16" y="26" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6b7585" letter-spacing="1.5">HOW SCIKIT-LEARN PICTURES YOUR DATA</text>
-        <text x="40" y="56" font-family="Cascadia Mono,Consolas,monospace" font-size="13" font-weight="700" fill="#3d3170">X — what you know</text>
-        <text x="40" y="74" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6b7585">2-D · shape (4, 2) · rows = samples, columns = features</text>
-        <rect x="40" y="86" width="130" height="30" rx="6" fill="#f0f1f7" stroke="#e3e6ee"/>
-        <rect x="170" y="86" width="130" height="30" rx="6" fill="#f0f1f7" stroke="#e3e6ee"/>
-        <text x="105" y="106" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#6b7585">hours</text>
-        <text x="235" y="106" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#6b7585">classes</text>
-        <rect x="40" y="118" width="130" height="30" fill="#ffffff" stroke="#5b4b9e" stroke-width="1.2"/>
-        <rect x="170" y="118" width="130" height="30" fill="#ffffff" stroke="#5b4b9e" stroke-width="1.2"/>
-        <text x="105" y="138" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#1f2733">1</text>
-        <text x="235" y="138" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#1f2733">4</text>
-        <rect x="40" y="148" width="130" height="30" fill="#ffffff" stroke="#5b4b9e" stroke-width="1.2"/>
-        <rect x="170" y="148" width="130" height="30" fill="#ffffff" stroke="#5b4b9e" stroke-width="1.2"/>
-        <text x="105" y="168" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#1f2733">3</text>
-        <text x="235" y="168" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#1f2733">7</text>
-        <rect x="40" y="178" width="130" height="30" fill="#ffffff" stroke="#5b4b9e" stroke-width="1.2"/>
-        <rect x="170" y="178" width="130" height="30" fill="#ffffff" stroke="#5b4b9e" stroke-width="1.2"/>
-        <text x="105" y="198" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#1f2733">7</text>
-        <text x="235" y="198" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#1f2733">16</text>
-        <rect x="40" y="208" width="130" height="30" fill="#ffffff" stroke="#5b4b9e" stroke-width="1.2"/>
-        <rect x="170" y="208" width="130" height="30" fill="#ffffff" stroke="#5b4b9e" stroke-width="1.2"/>
-        <text x="105" y="228" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#1f2733">9</text>
-        <text x="235" y="228" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#1f2733">18</text>
-        <text x="352" y="140" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="18" fill="#5b4b9e">↔</text>
-        <text x="352" y="160" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="10.5" fill="#6b7585">same</text>
-        <text x="352" y="174" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="10.5" fill="#6b7585">order</text>
+        <text x="16" y="26" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6a626e" letter-spacing="1.5">HOW SCIKIT-LEARN PICTURES YOUR DATA</text>
+        <text x="40" y="56" font-family="Cascadia Mono,Consolas,monospace" font-size="13" font-weight="700" fill="#3f2a41">X — what you know</text>
+        <text x="40" y="74" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6a626e">2-D · shape (4, 2) · rows = samples, columns = features</text>
+        <rect x="40" y="86" width="130" height="30" rx="6" fill="#f3ece0" stroke="#e9dfcf"/>
+        <rect x="170" y="86" width="130" height="30" rx="6" fill="#f3ece0" stroke="#e9dfcf"/>
+        <text x="105" y="106" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#6a626e">hours</text>
+        <text x="235" y="106" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#6a626e">classes</text>
+        <rect x="40" y="118" width="130" height="30" fill="#ffffff" stroke="#5a3d5c" stroke-width="1.2"/>
+        <rect x="170" y="118" width="130" height="30" fill="#ffffff" stroke="#5a3d5c" stroke-width="1.2"/>
+        <text x="105" y="138" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#2b2730">1</text>
+        <text x="235" y="138" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#2b2730">4</text>
+        <rect x="40" y="148" width="130" height="30" fill="#ffffff" stroke="#5a3d5c" stroke-width="1.2"/>
+        <rect x="170" y="148" width="130" height="30" fill="#ffffff" stroke="#5a3d5c" stroke-width="1.2"/>
+        <text x="105" y="168" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#2b2730">3</text>
+        <text x="235" y="168" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#2b2730">7</text>
+        <rect x="40" y="178" width="130" height="30" fill="#ffffff" stroke="#5a3d5c" stroke-width="1.2"/>
+        <rect x="170" y="178" width="130" height="30" fill="#ffffff" stroke="#5a3d5c" stroke-width="1.2"/>
+        <text x="105" y="198" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#2b2730">7</text>
+        <text x="235" y="198" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#2b2730">16</text>
+        <rect x="40" y="208" width="130" height="30" fill="#ffffff" stroke="#5a3d5c" stroke-width="1.2"/>
+        <rect x="170" y="208" width="130" height="30" fill="#ffffff" stroke="#5a3d5c" stroke-width="1.2"/>
+        <text x="105" y="228" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#2b2730">9</text>
+        <text x="235" y="228" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#2b2730">18</text>
+        <text x="352" y="140" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="18" fill="#5a3d5c">↔</text>
+        <text x="352" y="160" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="10.5" fill="#6a626e">same</text>
+        <text x="352" y="174" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="10.5" fill="#6a626e">order</text>
         <text x="404" y="56" font-family="Cascadia Mono,Consolas,monospace" font-size="13" font-weight="700" fill="#1d5654">y — what you want</text>
-        <text x="404" y="74" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6b7585">1-D · shape (4,) · one answer per row of X</text>
-        <rect x="404" y="86" width="110" height="30" rx="6" fill="#f0f1f7" stroke="#e3e6ee"/>
-        <text x="459" y="106" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#6b7585">passed</text>
-        <rect x="404" y="118" width="110" height="30" fill="#e3efee" stroke="#2b7a78" stroke-width="1.2"/>
-        <text x="459" y="138" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#1f2733">0</text>
-        <rect x="404" y="148" width="110" height="30" fill="#e3efee" stroke="#2b7a78" stroke-width="1.2"/>
-        <text x="459" y="168" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#1f2733">0</text>
-        <rect x="404" y="178" width="110" height="30" fill="#e3efee" stroke="#2b7a78" stroke-width="1.2"/>
-        <text x="459" y="198" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#1f2733">1</text>
-        <rect x="404" y="208" width="110" height="30" fill="#e3efee" stroke="#2b7a78" stroke-width="1.2"/>
-        <text x="459" y="228" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#1f2733">1</text>
+        <text x="404" y="74" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6a626e">1-D · shape (4,) · one answer per row of X</text>
+        <rect x="404" y="86" width="110" height="30" rx="6" fill="#f3ece0" stroke="#e9dfcf"/>
+        <text x="459" y="106" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="11.5" fill="#6a626e">passed</text>
+        <rect x="404" y="118" width="110" height="30" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.2"/>
+        <text x="459" y="138" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#2b2730">0</text>
+        <rect x="404" y="148" width="110" height="30" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.2"/>
+        <text x="459" y="168" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#2b2730">0</text>
+        <rect x="404" y="178" width="110" height="30" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.2"/>
+        <text x="459" y="198" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#2b2730">1</text>
+        <rect x="404" y="208" width="110" height="30" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.2"/>
+        <text x="459" y="228" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#2b2730">1</text>
         <rect x="566" y="86" width="274" height="152" rx="10" fill="#23262e"/>
         <text x="586" y="114" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#9fa6b8">the one rule</text>
         <text x="586" y="142" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#e8e9ee">X.shape[0] == y.shape[0]</text>
@@ -884,8 +886,8 @@ for row, guess in zip(new_rows, model.predict(new_rows)):
 
 <footer class="foot">
   <div class="foot-in">
-    <img src="../../assets/wordmark.svg" alt="Learn with Adi" style="height:26px">
-    <span>Learn with Adi — Unit 24 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Series</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
+    <img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building" style="height:36px">
+    <span>Learn AI by Building — Unit 24 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Series</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
   </div>
 </footer>
 

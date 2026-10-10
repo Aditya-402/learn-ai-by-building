@@ -1,4 +1,4 @@
-# Learn with Adi
+# Learn AI by Building
 
 Free, hands-on study notes for graduate engineers. Static site — no build step, no framework; every page is plain HTML/CSS/JS.
 

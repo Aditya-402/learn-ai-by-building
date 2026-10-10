@@ -3,8 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>matplotlib &amp; seaborn — Seeing Your Data — Learn with Adi</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>">
+<title>matplotlib &amp; seaborn — Seeing Your Data — Learn AI by Building</title>
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
 <link rel="stylesheet" href="../../assets/site.css">
 <link rel="stylesheet" href="../../assets/unit.css">
 <style>
@@ -19,7 +21,7 @@
 <header class="masthead">
   <div class="masthead-in">
     <div class="lwa-brandrow">
-      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg" alt="Learn with Adi"></a>
+      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building"></a>
       <div class="lwa-brand-right">
         <span class="lwa-tag"><a href="index.html">Series 02 · Python Programming</a></span>
         <span data-lwa-auth></span>
@@ -59,7 +61,7 @@
   <section id="s1">
     <div class="prereq">
       <div class="pq"><b>You'll need Units 21–22</b>NumPy arrays and, more importantly, pandas DataFrames and <code>groupby</code>. Nearly every chart here is drawn from a table you already know how to build.</div>
-      <div class="pq"><b>How this unit works</b>Same rhythm: a 3-minute read, then ~10 minutes of practice. <a href="https://colab.research.google.com/github/Aditya-402/learn-with-adi/blob/main/notebooks/python-programming/unit23.ipynb" rel="noopener">▶ Run this unit in Colab</a> — and for §23.5 you'll <i>need</i> the notebook.</div>
+      <div class="pq"><b>How this unit works</b>Same rhythm: a 3-minute read, then ~10 minutes of practice. <a href="https://colab.research.google.com/github/Aditya-402/learn-ai-by-building/blob/main/notebooks/python-programming/unit23.ipynb" rel="noopener">▶ Run this unit in Colab</a> — and for §23.5 you'll <i>need</i> the notebook.</div>
       <div class="pq"><b>What runs here, what doesn't</b>matplotlib runs right in this page: any figure your code draws appears as a picture under the output — no extra line needed. seaborn does not, and never will; those listings are read-only, so open the notebook for them.</div>
     </div>
     <div class="prose">
@@ -92,27 +94,27 @@ plt.ylabel("Pages")</div>
     </div>
     <div class="fig">
       <svg viewBox="0 0 860 275" role="img" aria-label="The same line chart twice: unlabelled on the left, fully labelled on the right">
-        <text x="40" y="32" font-family="Segoe UI,system-ui,sans-serif" font-size="12.5" font-weight="700" fill="#a35a33" letter-spacing="1.4">WITHOUT LABELS</text>
-        <rect x="40" y="60" width="340" height="150" rx="8" fill="#ffffff" stroke="#e3e6ee" stroke-width="1.5"/>
-        <line x1="55" y1="60" x2="55" y2="210" stroke="#e3e6ee" stroke-width="1.5"/>
-        <line x1="55" y1="210" x2="375" y2="210" stroke="#e3e6ee" stroke-width="1.5"/>
-        <polyline points="70,190 140,150 210,165 280,110 350,80" fill="none" stroke="#5b4b9e" stroke-width="2.5"/>
-        <circle cx="70" cy="190" r="3.5" fill="#5b4b9e"/><circle cx="140" cy="150" r="3.5" fill="#5b4b9e"/>
-        <circle cx="210" cy="165" r="3.5" fill="#5b4b9e"/><circle cx="280" cy="110" r="3.5" fill="#5b4b9e"/>
-        <circle cx="350" cy="80" r="3.5" fill="#5b4b9e"/>
-        <text x="210" y="256" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a35a33">something went up. what? measured how? over what?</text>
+        <text x="40" y="32" font-family="Segoe UI,system-ui,sans-serif" font-size="12.5" font-weight="700" fill="#a8441f" letter-spacing="1.4">WITHOUT LABELS</text>
+        <rect x="40" y="60" width="340" height="150" rx="8" fill="#ffffff" stroke="#e9dfcf" stroke-width="1.5"/>
+        <line x1="55" y1="60" x2="55" y2="210" stroke="#e9dfcf" stroke-width="1.5"/>
+        <line x1="55" y1="210" x2="375" y2="210" stroke="#e9dfcf" stroke-width="1.5"/>
+        <polyline points="70,190 140,150 210,165 280,110 350,80" fill="none" stroke="#5a3d5c" stroke-width="2.5"/>
+        <circle cx="70" cy="190" r="3.5" fill="#5a3d5c"/><circle cx="140" cy="150" r="3.5" fill="#5a3d5c"/>
+        <circle cx="210" cy="165" r="3.5" fill="#5a3d5c"/><circle cx="280" cy="110" r="3.5" fill="#5a3d5c"/>
+        <circle cx="350" cy="80" r="3.5" fill="#5a3d5c"/>
+        <text x="210" y="256" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a8441f">something went up. what? measured how? over what?</text>
 
         <text x="470" y="32" font-family="Segoe UI,system-ui,sans-serif" font-size="12.5" font-weight="700" fill="#1d5654" letter-spacing="1.4">WITH THREE MORE LINES OF CODE</text>
-        <text x="640" y="52" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="12.5" font-weight="700" fill="#1f2733">Pages read this week</text>
-        <rect x="470" y="60" width="340" height="150" rx="8" fill="#ffffff" stroke="#e3e6ee" stroke-width="1.5"/>
-        <line x1="485" y1="60" x2="485" y2="210" stroke="#e3e6ee" stroke-width="1.5"/>
-        <line x1="485" y1="210" x2="805" y2="210" stroke="#e3e6ee" stroke-width="1.5"/>
-        <polyline points="500,190 570,150 640,165 710,110 780,80" fill="none" stroke="#5b4b9e" stroke-width="2.5"/>
-        <circle cx="500" cy="190" r="3.5" fill="#5b4b9e"/><circle cx="570" cy="150" r="3.5" fill="#5b4b9e"/>
-        <circle cx="640" cy="165" r="3.5" fill="#5b4b9e"/><circle cx="710" cy="110" r="3.5" fill="#5b4b9e"/>
-        <circle cx="780" cy="80" r="3.5" fill="#5b4b9e"/>
-        <text x="640" y="232" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" font-weight="600" fill="#3d3170">Day</text>
-        <text x="462" y="135" text-anchor="middle" transform="rotate(-90 462 135)" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" font-weight="600" fill="#3d3170">Pages</text>
+        <text x="640" y="52" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="12.5" font-weight="700" fill="#2b2730">Pages read this week</text>
+        <rect x="470" y="60" width="340" height="150" rx="8" fill="#ffffff" stroke="#e9dfcf" stroke-width="1.5"/>
+        <line x1="485" y1="60" x2="485" y2="210" stroke="#e9dfcf" stroke-width="1.5"/>
+        <line x1="485" y1="210" x2="805" y2="210" stroke="#e9dfcf" stroke-width="1.5"/>
+        <polyline points="500,190 570,150 640,165 710,110 780,80" fill="none" stroke="#5a3d5c" stroke-width="2.5"/>
+        <circle cx="500" cy="190" r="3.5" fill="#5a3d5c"/><circle cx="570" cy="150" r="3.5" fill="#5a3d5c"/>
+        <circle cx="640" cy="165" r="3.5" fill="#5a3d5c"/><circle cx="710" cy="110" r="3.5" fill="#5a3d5c"/>
+        <circle cx="780" cy="80" r="3.5" fill="#5a3d5c"/>
+        <text x="640" y="232" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" font-weight="600" fill="#3f2a41">Day</text>
+        <text x="462" y="135" text-anchor="middle" transform="rotate(-90 462 135)" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" font-weight="600" fill="#3f2a41">Pages</text>
         <text x="640" y="256" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#1d5654">a claim a reader can check — and argue with</text>
       </svg>
       <div class="figcap">Fig. 1 — Identical data, identical drawing code. The right-hand pad had <code>title</code>, <code>xlabel</code> and <code>ylabel</code> added; that is the whole difference. Adopt it as a rule: no chart leaves your screen unlabelled.</div>
@@ -226,35 +228,35 @@ print("Best month:", best)</pre><p><code>max(sales)</code> finds the biggest num
     </div>
     <div class="fig">
       <svg viewBox="0 0 860 225" role="img" aria-label="Four small charts: line, bar, scatter and histogram, each with the question it answers">
-        <rect x="20" y="46" width="175" height="110" rx="8" fill="#ffffff" stroke="#e3e6ee" stroke-width="1.5"/>
-        <polyline points="35,140 70,105 105,120 140,75 180,60" fill="none" stroke="#5b4b9e" stroke-width="2.5"/>
-        <text x="107" y="180" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#3d3170">line</text>
-        <text x="107" y="200" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6b7585">change over time</text>
+        <rect x="20" y="46" width="175" height="110" rx="8" fill="#ffffff" stroke="#e9dfcf" stroke-width="1.5"/>
+        <polyline points="35,140 70,105 105,120 140,75 180,60" fill="none" stroke="#5a3d5c" stroke-width="2.5"/>
+        <text x="107" y="180" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#3f2a41">line</text>
+        <text x="107" y="200" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6a626e">change over time</text>
 
-        <rect x="235" y="46" width="175" height="110" rx="8" fill="#ffffff" stroke="#e3e6ee" stroke-width="1.5"/>
-        <rect x="250" y="106" width="24" height="40" fill="#5b4b9e"/>
-        <rect x="285" y="76" width="24" height="70" fill="#5b4b9e"/>
-        <rect x="320" y="91" width="24" height="55" fill="#5b4b9e"/>
-        <rect x="355" y="56" width="24" height="90" fill="#5b4b9e"/>
-        <text x="322" y="180" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#3d3170">bar</text>
-        <text x="322" y="200" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6b7585">compare categories</text>
+        <rect x="235" y="46" width="175" height="110" rx="8" fill="#ffffff" stroke="#e9dfcf" stroke-width="1.5"/>
+        <rect x="250" y="106" width="24" height="40" fill="#5a3d5c"/>
+        <rect x="285" y="76" width="24" height="70" fill="#5a3d5c"/>
+        <rect x="320" y="91" width="24" height="55" fill="#5a3d5c"/>
+        <rect x="355" y="56" width="24" height="90" fill="#5a3d5c"/>
+        <text x="322" y="180" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#3f2a41">bar</text>
+        <text x="322" y="200" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6a626e">compare categories</text>
 
-        <rect x="450" y="46" width="175" height="110" rx="8" fill="#ffffff" stroke="#e3e6ee" stroke-width="1.5"/>
-        <circle cx="470" cy="138" r="4" fill="#2b7a78"/><circle cx="490" cy="126" r="4" fill="#2b7a78"/>
-        <circle cx="510" cy="130" r="4" fill="#2b7a78"/><circle cx="530" cy="113" r="4" fill="#2b7a78"/>
-        <circle cx="550" cy="118" r="4" fill="#2b7a78"/><circle cx="562" cy="100" r="4" fill="#2b7a78"/>
-        <circle cx="585" cy="92" r="4" fill="#2b7a78"/><circle cx="605" cy="72" r="4" fill="#2b7a78"/>
+        <rect x="450" y="46" width="175" height="110" rx="8" fill="#ffffff" stroke="#e9dfcf" stroke-width="1.5"/>
+        <circle cx="470" cy="138" r="4" fill="#2f5a45"/><circle cx="490" cy="126" r="4" fill="#2f5a45"/>
+        <circle cx="510" cy="130" r="4" fill="#2f5a45"/><circle cx="530" cy="113" r="4" fill="#2f5a45"/>
+        <circle cx="550" cy="118" r="4" fill="#2f5a45"/><circle cx="562" cy="100" r="4" fill="#2f5a45"/>
+        <circle cx="585" cy="92" r="4" fill="#2f5a45"/><circle cx="605" cy="72" r="4" fill="#2f5a45"/>
         <text x="537" y="180" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#1d5654">scatter</text>
-        <text x="537" y="200" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6b7585">two numbers, related?</text>
+        <text x="537" y="200" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6a626e">two numbers, related?</text>
 
-        <rect x="665" y="46" width="175" height="110" rx="8" fill="#ffffff" stroke="#e3e6ee" stroke-width="1.5"/>
-        <rect x="680" y="116" width="30" height="30" fill="#3d3170"/>
-        <rect x="710" y="86" width="30" height="60" fill="#3d3170"/>
-        <rect x="740" y="56" width="30" height="90" fill="#3d3170"/>
-        <rect x="770" y="91" width="30" height="55" fill="#3d3170"/>
-        <rect x="800" y="121" width="30" height="25" fill="#3d3170"/>
-        <text x="752" y="180" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#3d3170">histogram</text>
-        <text x="752" y="200" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6b7585">shape of one column</text>
+        <rect x="665" y="46" width="175" height="110" rx="8" fill="#ffffff" stroke="#e9dfcf" stroke-width="1.5"/>
+        <rect x="680" y="116" width="30" height="30" fill="#3f2a41"/>
+        <rect x="710" y="86" width="30" height="60" fill="#3f2a41"/>
+        <rect x="740" y="56" width="30" height="90" fill="#3f2a41"/>
+        <rect x="770" y="91" width="30" height="55" fill="#3f2a41"/>
+        <rect x="800" y="121" width="30" height="25" fill="#3f2a41"/>
+        <text x="752" y="180" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#3f2a41">histogram</text>
+        <text x="752" y="200" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6a626e">shape of one column</text>
       </svg>
       <div class="figcap">Fig. 2 — Bar and histogram look like cousins and are not: a bar chart's bars are <i>categories</i> you chose and can be reordered freely, while a histogram's bars are <i>ranges of one number</i>, touching, in the only order they can be. That is why histogram bars are drawn with no gaps.</div>
     </div>
@@ -401,7 +403,7 @@ plt.ylabel("Number of students")</pre><p>Few bins: a smooth hump, and detail is 
       <p><b>The idea, in plain words.</b> Three knobs, and you will use all three constantly:</p>
       <ul class="plain">
         <li><b>Size.</b> <code>plt.figure(figsize=(8, 4))</code> — width and height in inches, set <i>before</i> you draw. Wide and short suits time-lines; tall suits horizontal bars with long names.</li>
-        <li><b>Colour and marker.</b> <code>plt.plot(x, y, color="#5b4b9e", marker="o")</code>. Colour names (<code>"teal"</code>, <code>"crimson"</code>) work too, and <code>marker</code> puts a shape on each data point so a reader can see where the real measurements are, as opposed to the line that merely joins them.</li>
+        <li><b>Colour and marker.</b> <code>plt.plot(x, y, color="#5a3d5c", marker="o")</code>. Colour names (<code>"teal"</code>, <code>"crimson"</code>) work too, and <code>marker</code> puts a shape on each data point so a reader can see where the real measurements are, as opposed to the line that merely joins them.</li>
         <li><b>A legend.</b> Give each series a <code>label="Chennai"</code> when you draw it, then call <code>plt.legend()</code> once, at the end. The legend is a box matching each label to its line — and it appears only if you ask; labels alone draw nothing.</li>
       </ul>
       <p>One honest note on colour, and it matters more than it sounds. Roughly one person in twelve sees red and green as much the same, and plenty of charts get printed in black and white or screenshotted through a filter. So <b>never let colour be the only difference</b>: pair it with a marker shape or a dash style (<code>linestyle="--"</code>), and where the chart is simple enough, label the line directly on the picture rather than making the reader glance back and forth to a legend at all. Colour should be the pleasant reinforcement of a distinction, not the distinction itself.</p>
@@ -409,8 +411,8 @@ plt.ylabel("Number of students")</pre><p>Few bins: a smooth hump, and detail is 
     <div class="trace">
       <div class="dl">Trace it by hand — two lines on one pad</div>
       <div class="m">plt.figure(figsize=(7, 4))
-plt.plot(months, chennai, color="#5b4b9e", marker="o", label="Chennai")
-plt.plot(months, pune, color="#2b7a78", marker="s", label="Pune")
+plt.plot(months, chennai, color="#5a3d5c", marker="o", label="Chennai")
+plt.plot(months, pune, color="#2f5a45", marker="s", label="Pune")
 plt.legend()</div>
       <p><b>Line 1:</b> a new pad, seven inches by four. Anything drawn from now on lands here.</p>
       <p><b>Line 2:</b> the first line is drawn, purple, with a round marker on each month. The <code>label</code> is written on a sticky note and filed — nothing about it is visible yet.</p>
@@ -433,8 +435,8 @@ chennai = [120, 132, 128, 145, 150]
 pune = [95, 101, 118, 112, 130]
 
 plt.figure(figsize=(7, 4))
-plt.plot(months, chennai, color="#5b4b9e", marker="o", label="Chennai")
-plt.plot(months, pune, color="#2b7a78", marker="s", label="Pune")
+plt.plot(months, chennai, color="#5a3d5c", marker="o", label="Chennai")
+plt.plot(months, pune, color="#2f5a45", marker="s", label="Pune")
 plt.title("Monthly sales, two cities")
 plt.xlabel("Month")
 plt.ylabel("Sales (thousands)")
@@ -464,8 +466,8 @@ tea = [30, 34, 33, 40, 46, 51]
 coffee = [22, 28, 35, 38, 37, 44]
 
 plt.figure(figsize=(7, 4))
-plt.plot(month, tea, color="#5b4b9e", marker="o", label="Tea")
-plt.plot(month, coffee, color="#2b7a78", marker="s", linestyle="--", label="Coffee")
+plt.plot(month, tea, color="#5a3d5c", marker="o", label="Tea")
+plt.plot(month, coffee, color="#2f5a45", marker="s", linestyle="--", label="Coffee")
 plt.title("Cups sold per month")
 plt.xlabel("Month number")
 plt.ylabel("Cups sold")
@@ -534,7 +536,7 @@ sales = pd.DataFrame({
 })
 print(sales)
 
-sales.plot(kind="bar", x="city", y="sales", color="#5b4b9e", legend=False)
+sales.plot(kind="bar", x="city", y="sales", color="#5a3d5c", legend=False)
 plt.title("Sales by city")
 plt.xlabel("City")
 plt.ylabel("Sales (thousands)")</textarea>
@@ -564,7 +566,7 @@ rain = pd.DataFrame({
     "rain_mm": [45, 120, 180, 160, 210],
 })
 
-rain.plot(kind="bar", x="month", y="rain_mm", color="#2b7a78", legend=False)
+rain.plot(kind="bar", x="month", y="rain_mm", color="#2f5a45", legend=False)
 plt.title("Monsoon rainfall by month")
 plt.xlabel("Month")
 plt.ylabel("Rainfall (mm)")</pre><p>The line emphasises the rise-and-fall; the bars emphasise "October was the wettest". Same data, different sentence. That choice is yours and you should make it on purpose.</p></details>
@@ -589,7 +591,7 @@ print(by_city)
         <details><summary>Show solution</summary><pre>by_city = df.groupby("city")["sales"].mean()
 print(by_city)
 
-by_city.plot(kind="bar", color="#5b4b9e")
+by_city.plot(kind="bar", color="#5a3d5c")
 plt.title("Average daily sales by city")
 plt.xlabel("City")
 plt.ylabel("Mean sales (thousands)")</pre><p>Group, aggregate, plot — three ideas, three lines, and the group names travel from the table to the axis without you touching them. This is the motion you will repeat for years.</p></details>
@@ -628,7 +630,7 @@ for name, value in by_city.items():
       <p>Two more gifts. First, its defaults are simply better-looking than raw matplotlib's — softer palette, grid lines, no fiddling. Second, and more useful: <code>hue=</code>. Name a third column as <code>hue</code> and seaborn splits every mark by that column, colours each group and builds the legend, in one word. Doing that by hand is the loop-and-offset misery above.</p>
       <div class="aside">
         <div class="lbl">Read-only from here to the end of this section</div>
-        seaborn cannot run in this page — it isn't one of the libraries the in-page Python can fetch, and that will not change. So the three listings below are for reading, not for running. Every one of them works as written in the notebook: <a href="https://colab.research.google.com/github/Aditya-402/learn-with-adi/blob/main/notebooks/python-programming/unit23.ipynb" rel="noopener">▶ open Unit 23 in Colab</a>, where seaborn is already installed, and type them out there. This is the honest state of things, not a limitation worth hiding.
+        seaborn cannot run in this page — it isn't one of the libraries the in-page Python can fetch, and that will not change. So the three listings below are for reading, not for running. Every one of them works as written in the notebook: <a href="https://colab.research.google.com/github/Aditya-402/learn-ai-by-building/blob/main/notebooks/python-programming/unit23.ipynb" rel="noopener">▶ open Unit 23 in Colab</a>, where seaborn is already installed, and type them out there. This is the honest state of things, not a limitation worth hiding.
       </div>
     </div>
 
@@ -721,7 +723,7 @@ print()
 by_subject = marks.groupby("subject")["marks"].mean()
 print(by_subject)
 
-by_subject.plot(kind="bar", color="#5b4b9e", figsize=(6, 4))
+by_subject.plot(kind="bar", color="#5a3d5c", figsize=(6, 4))
 plt.title("Average mark by subject")
 plt.xlabel("Subject")
 plt.ylabel("Average mark")</textarea>
@@ -789,13 +791,13 @@ marks = pd.DataFrame({
 by_student = marks.groupby("name")["marks"].sum()
 
 plt.figure()
-by_subject.plot(kind="bar", color="#5b4b9e")
+by_subject.plot(kind="bar", color="#5a3d5c")
 plt.title("Average mark by subject")
 plt.xlabel("Subject")
 plt.ylabel("Average mark")
 
 plt.figure()
-by_student.plot(kind="bar", color="#2b7a78")
+by_student.plot(kind="bar", color="#2f5a45")
 plt.title("Total marks by student")
 plt.xlabel("Student")
 plt.ylabel("Total marks")</pre><p>Two groupings, two pads, two labelled pictures — and a study you could hand to someone. The bars for Asha (238) and Meera (237) are so close that the picture alone can't separate them, which is precisely why beat 2 exists.</p></details>
@@ -833,7 +835,7 @@ days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 count = [3, 2, 4, 3, 5, 1, 2]
 
 plt.figure(figsize=(7, 4))
-plt.bar(days, count, color="#5b4b9e")
+plt.bar(days, count, color="#5a3d5c")
 plt.title(heading)
 plt.xlabel("Day of the week")
 plt.ylabel("Cups of coffee")</pre><p>A title can be a variable like anything else — which is how one plotting function ends up serving twenty different reports.</p></details>
@@ -856,7 +858,7 @@ import matplotlib.pyplot as plt
 
 scores = [55, 62, 68, 71, 71, 74, 78, 82, 85, 91]
 
-plt.hist(scores, bins=5, color="#5b4b9e")
+plt.hist(scores, bins=5, color="#5a3d5c")
 plt.title("Spread of test scores")
 plt.xlabel("Score")
 plt.ylabel("Number of students")
@@ -883,8 +885,8 @@ y2025 = [220, 240, 265, 250, 280, 300]
 y2026 = [180, 210, 260, 290, 340, 410]
 
 plt.figure(figsize=(8, 4))
-plt.plot(months, y2025, color="#5b4b9e", marker="o", label="2025")
-plt.plot(months, y2026, color="#2b7a78", marker="s", linestyle="--", label="2026")
+plt.plot(months, y2025, color="#5a3d5c", marker="o", label="2025")
+plt.plot(months, y2026, color="#2f5a45", marker="s", linestyle="--", label="2026")
 plt.title("Monthly visitors, 2025 against 2026")
 plt.xlabel("Month")
 plt.ylabel("Visitors (thousands)")
@@ -912,7 +914,7 @@ games = pd.DataFrame({
 for team, total in by_team.items():
     print(f"Team {team}: {total}")
 
-by_team.plot(kind="bar", color="#5b4b9e")
+by_team.plot(kind="bar", color="#5a3d5c")
 plt.title("Total points by team")
 plt.xlabel("Team")
 plt.ylabel("Total points")</pre><p>A wins on total, 45 to 42 — but plot <code>week</code> against <code>points</code> for each team as a line chart and a different story appears: A is climbing every week while B collapses from 20 to 8. Totals hide direction. Two charts of one table, two conclusions, both true — which is the last and best argument for looking at your data instead of only summarising it.</p></details>
@@ -973,8 +975,8 @@ plt.ylabel("Total points")</pre><p>A wins on total, 45 to 42 — but plot <code>
 
 <footer class="foot">
   <div class="foot-in">
-    <img src="../../assets/wordmark.svg" alt="Learn with Adi" style="height:26px">
-    <span>Learn with Adi — Unit 23 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Series</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
+    <img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building" style="height:36px">
+    <span>Learn AI by Building — Unit 23 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Series</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
   </div>
 </footer>
 

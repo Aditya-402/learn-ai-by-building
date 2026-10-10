@@ -3,16 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>When Things Break — Errors &amp; Debugging — Learn with Adi</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>">
-<link rel="stylesheet" href="../../assets/site.css?v=4">
-<link rel="stylesheet" href="../../assets/unit.css?v=4">
+<title>When Things Break — Errors &amp; Debugging — Learn AI by Building</title>
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=6">
+<link rel="stylesheet" href="../../assets/unit.css?v=6">
 </head>
 <body data-lwa-course="python-programming" data-lwa-chapter="u09" data-lwa-title="Unit 9 · When things break — errors &amp; debugging">
 <header class="masthead">
   <div class="masthead-in">
     <div class="lwa-brandrow">
-      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg" alt="Learn with Adi"></a>
+      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building"></a>
       <div class="lwa-brand-right">
         <span class="lwa-tag"><a href="index.html">Series 02 · Python Programming</a></span>
         <span data-lwa-auth></span>
@@ -51,7 +53,7 @@
   <section id="s1">
     <div class="prereq">
       <div class="pq"><b>You'll need Units 1 &amp; 4</b>Unit 1's "read the last line first" habit graduates today, and Unit 4's <code>while</code> loop finally gets its promised payoff — the retry pattern.</div>
-      <div class="pq"><b>How this unit works</b>Same rhythm: each concept is a 3–4 minute read, then ~10 minutes of practice. <a href="https://colab.research.google.com/github/Aditya-402/learn-with-adi/blob/main/notebooks/python-programming/unit9.ipynb" rel="noopener">▶ Run this unit in Colab</a> — errors there show the full, honest traceback.</div>
+      <div class="pq"><b>How this unit works</b>Same rhythm: each concept is a 3–4 minute read, then ~10 minutes of practice. <a href="https://colab.research.google.com/github/Aditya-402/learn-ai-by-building/blob/main/notebooks/python-programming/unit9.ipynb" rel="noopener">▶ Run this unit in Colab</a> — errors there show the full, honest traceback.</div>
       <div class="pq"><b>Bring the to-do app</b>Units 5 and 7 built it; today it gets armour-plated. By the end of 9.5, no amount of user mischief will crash it.</div>
     </div>
     <div class="prose">
@@ -91,30 +93,30 @@ TypeError: unsupported operand type(s) for /: 'str' and 'int'</div>
     </div>
     <div class="fig">
       <svg viewBox="0 0 880 320" role="img" aria-label="Anatomy of a traceback: read the last line first, then the bottom frame, then walk up the call chain">
-        <text x="16" y="26" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6b7585" letter-spacing="1.5">HOW TO READ A TRACEBACK</text>
+        <text x="16" y="26" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6a626e" letter-spacing="1.5">HOW TO READ A TRACEBACK</text>
         <rect x="16" y="42" width="536" height="252" rx="10" fill="#23262e"/>
         <text x="34" y="74" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#9aa0b4">Traceback (most recent call last):</text>
-        <text x="34" y="100" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#c9cede">  File "bill.py", line 8, in &lt;module&gt;</text>
+        <text x="34" y="100" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#d8cdbd">  File "bill.py", line 8, in &lt;module&gt;</text>
         <text x="34" y="122" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#8f95a8">    print_share("900", 3)</text>
-        <text x="34" y="148" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#c9cede">  File "bill.py", line 5, in print_share</text>
+        <text x="34" y="148" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#d8cdbd">  File "bill.py", line 5, in print_share</text>
         <text x="34" y="170" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#8f95a8">    each = share_per_person(total, people)</text>
-        <text x="34" y="196" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#c9cede">  File "bill.py", line 2, in share_per_person</text>
+        <text x="34" y="196" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#d8cdbd">  File "bill.py", line 2, in share_per_person</text>
         <text x="34" y="218" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#8f95a8">    return total / people</text>
         <text x="34" y="252" font-family="Cascadia Mono,Consolas,monospace" font-size="12" font-weight="700" fill="#f0a58f">TypeError: unsupported operand type(s)</text>
         <text x="34" y="272" font-family="Cascadia Mono,Consolas,monospace" font-size="12" font-weight="700" fill="#f0a58f">for /: 'str' and 'int'</text>
-        <line x1="568" y1="258" x2="556" y2="258" stroke="#a35a33" stroke-width="2"/>
-        <text x="576" y="254" font-family="Segoe UI,system-ui,sans-serif" font-size="12.5" font-weight="700" fill="#a35a33">① read me first</text>
-        <text x="576" y="272" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a35a33">the WHAT — error type + reason</text>
-        <line x1="568" y1="208" x2="556" y2="208" stroke="#5b4b9e" stroke-width="2"/>
-        <text x="576" y="204" font-family="Segoe UI,system-ui,sans-serif" font-size="12.5" font-weight="700" fill="#3d3170">② bottom frame = crash site</text>
-        <text x="576" y="222" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#3d3170">the newest call — where it died</text>
-        <line x1="600" y1="176" x2="600" y2="100" stroke="#2b7a78" stroke-width="2" stroke-dasharray="4 3"/>
-        <path d="M 600 100 L 595 110 L 605 110 Z" fill="#2b7a78"/>
+        <line x1="568" y1="258" x2="556" y2="258" stroke="#a8441f" stroke-width="2"/>
+        <text x="576" y="254" font-family="Segoe UI,system-ui,sans-serif" font-size="12.5" font-weight="700" fill="#a8441f">① read me first</text>
+        <text x="576" y="272" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a8441f">the WHAT — error type + reason</text>
+        <line x1="568" y1="208" x2="556" y2="208" stroke="#5a3d5c" stroke-width="2"/>
+        <text x="576" y="204" font-family="Segoe UI,system-ui,sans-serif" font-size="12.5" font-weight="700" fill="#3f2a41">② bottom frame = crash site</text>
+        <text x="576" y="222" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#3f2a41">the newest call — where it died</text>
+        <line x1="600" y1="176" x2="600" y2="100" stroke="#2f5a45" stroke-width="2" stroke-dasharray="4 3"/>
+        <path d="M 600 100 L 595 110 L 605 110 Z" fill="#2f5a45"/>
         <text x="614" y="128" font-family="Segoe UI,system-ui,sans-serif" font-size="12.5" font-weight="700" fill="#1d5654">③ walk up the chain</text>
         <text x="614" y="146" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#1d5654">how the bad value travelled —</text>
         <text x="614" y="162" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#1d5654">the top frame is the oldest call</text>
-        <text x="576" y="82" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6b7585">"most recent call last" — Python</text>
-        <text x="576" y="98" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6b7585">tells you the reading order itself</text>
+        <text x="576" y="82" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6a626e">"most recent call last" — Python</text>
+        <text x="576" y="98" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#6a626e">tells you the reading order itself</text>
       </svg>
       <div class="figcap">Fig. 1 — Anatomy of a traceback. Three moves, always the same: last line for the <i>what</i>, bottom frame for the <i>where</i>, then upward for the <i>how</i>. The wall of text becomes a breadcrumb trail.</div>
     </div>
@@ -354,26 +356,26 @@ Program still alive.</div>
     </div>
     <div class="fig">
       <svg viewBox="0 0 880 250" role="img" aria-label="Two paths through try/except: success skips the except block; a ValueError jumps to it; both paths continue afterwards">
-        <text x="16" y="26" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6b7585" letter-spacing="1.5">TWO PATHS THROUGH THE SAME CODE</text>
-        <rect x="30" y="70" width="230" height="90" rx="10" fill="#ffffff" stroke="#5b4b9e" stroke-width="1.5"/>
-        <text x="145" y="98" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#3d3170">try:</text>
-        <text x="145" y="120" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#1f2733">age = int(text)</text>
-        <text x="145" y="142" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6b7585">the risky line</text>
-        <rect x="330" y="160" width="230" height="66" rx="10" fill="#f7ebe4" stroke="#a35a33" stroke-width="1.5"/>
+        <text x="16" y="26" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#6a626e" letter-spacing="1.5">TWO PATHS THROUGH THE SAME CODE</text>
+        <rect x="30" y="70" width="230" height="90" rx="10" fill="#ffffff" stroke="#5a3d5c" stroke-width="1.5"/>
+        <text x="145" y="98" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#3f2a41">try:</text>
+        <text x="145" y="120" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" fill="#2b2730">age = int(text)</text>
+        <text x="145" y="142" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" fill="#6a626e">the risky line</text>
+        <rect x="330" y="160" width="230" height="66" rx="10" fill="#f8e6dc" stroke="#a8441f" stroke-width="1.5"/>
         <text x="445" y="186" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12.5" font-weight="700" fill="#7c4324">except ValueError:</text>
         <text x="445" y="208" text-anchor="middle" font-family="Cascadia Mono,Consolas,monospace" font-size="12" fill="#5c3f28">print("Numbers only")</text>
-        <rect x="640" y="70" width="210" height="90" rx="10" fill="#e3efee" stroke="#2b7a78" stroke-width="1.5"/>
+        <rect x="640" y="70" width="210" height="90" rx="10" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.5"/>
         <text x="745" y="106" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#1d5654">the program</text>
         <text x="745" y="126" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="13" font-weight="700" fill="#1d5654">carries on</text>
-        <line x1="260" y1="100" x2="632" y2="100" stroke="#2b7a78" stroke-width="2"/>
-        <path d="M 632 100 L 622 95 L 622 105 Z" fill="#2b7a78"/>
+        <line x1="260" y1="100" x2="632" y2="100" stroke="#2f5a45" stroke-width="2"/>
+        <path d="M 632 100 L 622 95 L 622 105 Z" fill="#2f5a45"/>
         <text x="446" y="90" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" font-weight="700" fill="#1d5654">converts fine → except is skipped</text>
-        <path d="M 200 160 Q 230 193 322 193" fill="none" stroke="#a35a33" stroke-width="2"/>
-        <path d="M 322 193 L 312 188 L 312 198 Z" fill="#a35a33"/>
-        <text x="212" y="215" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" font-weight="700" fill="#a35a33">ValueError!</text>
-        <path d="M 560 180 Q 640 175 700 166" fill="none" stroke="#a35a33" stroke-width="2"/>
-        <path d="M 700 166 L 689 165 L 693 174 Z" fill="#a35a33"/>
-        <text x="652" y="200" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a35a33">…then rejoins</text>
+        <path d="M 200 160 Q 230 193 322 193" fill="none" stroke="#a8441f" stroke-width="2"/>
+        <path d="M 322 193 L 312 188 L 312 198 Z" fill="#a8441f"/>
+        <text x="212" y="215" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" font-weight="700" fill="#a8441f">ValueError!</text>
+        <path d="M 560 180 Q 640 175 700 166" fill="none" stroke="#a8441f" stroke-width="2"/>
+        <path d="M 700 166 L 689 165 L 693 174 Z" fill="#a8441f"/>
+        <text x="652" y="200" font-family="Segoe UI,system-ui,sans-serif" font-size="11.5" fill="#a8441f">…then rejoins</text>
       </svg>
       <div class="figcap">Fig. 2 — The two paths through <code>try</code>/<code>except</code>. Success takes the high road and never touches the except block; the named error takes the detour — and both roads lead on. Nobody dies.</div>
     </div>
@@ -880,8 +882,8 @@ print(f"Rejected: {rejects}")</pre><p>12 + 7 + 9 = 28, one reject. The net sits 
 
 <footer class="foot">
   <div class="foot-in">
-    <img src="../../assets/wordmark.svg" alt="Learn with Adi" style="height:26px">
-    <span>Learn with Adi — Unit 9 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Series</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
+    <img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building" style="height:36px">
+    <span>Learn AI by Building — Unit 9 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Series</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
   </div>
 </footer>
 

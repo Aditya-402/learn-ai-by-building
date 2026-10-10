@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Why learn coding when AI writes code? — Learn AI by Building</title>
+<meta name="description" content="An AI wrote two programs. Both ran. One of them was wrong. Can you spot which one, and what does that tell you about learning to code today?">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=6">
+<link rel="stylesheet" href="../../assets/unit.css?v=6">
+<link rel="stylesheet" href="../../assets/blog.css?v=2">
+</head>
+<body data-lwa-course="blog" data-lwa-chapter="why-learn-coding-when-ai-writes-code">
+<header class="masthead">
+  <div class="masthead-in">
+    <div class="lwa-brandrow">
+      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building"></a>
+      <div class="lwa-brand-right">
+        <span class="lwa-tag"><a href="../index.html">Blog</a></span>
+        <span data-lwa-auth></span>
+      </div>
+    </div>
+    <div class="title-block">
+      <span class="blog-label why">Why does it exist?</span>
+      <h1>Why learn coding when AI writes code?</h1>
+      <p class="standfirst">An AI wrote two programs. Both ran. One of them was wrong. Can you spot which one, and what does that tell you about learning to code today?</p>
+      <div class="facts">
+        <div><b>Read</b>~6 min</div>
+        <div><b>Watch</b>4:51 video</div>
+        <div><b>Practice</b>runs right here</div>
+        <div><b>Published</b>8 Oct 2026</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="rail" aria-label="Sections">
+    <div class="rail-h">Contents</div>
+    <a href="#video" class="on">Watch the video</a>
+    <a href="#s1">A question students keep asking me</a>
+    <a href="#s2">First, let's be fair to the AI</a>
+    <a href="#s3">The reveal: it ran, and it was wrong</a>
+    <a href="#s4">The auto ride</a>
+    <a href="#s5">Agentic AI: the fresher</a>
+    <a href="#s6">What coding really trains</a>
+    <a href="#s7">The honest cost</a>
+    <a href="#homework">Your homework</a>
+    <a href="#related">Related</a>
+  </nav>
+
+  <main>
+
+  <section id="video">
+    <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/ueVmOee5h6I?rel=0" title="Why learn coding when AI writes code?"
+      allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+    <p class="video-cap">Prefer to watch? This post goes with the video (4:51). <a href="https://www.youtube.com/watch?v=ueVmOee5h6I" rel="noopener">Open it on YouTube</a>, where you can also leave a comment.</p>
+  </section>
+
+  <section id="s1">
+    <div class="prose">
+      <h2>A question students keep asking me</h2>
+      <p>Of late, students keep asking me this one question. <i>"Sir, AI writes code now. Should I still learn coding?"</i></p>
+      <p>That's a very nice question. Let me answer it with one small test.</p>
+      <p>Say you and your friends go out for dinner. The rule is simple. Everyone pays an equal share. Say an AI gives you these two programs. One of them is wrong.</p>
+    </div>
+    <div class="vs">
+      <div><h4>Program A</h4><p class="flow">share = bill ÷ friends</p></div>
+      <div><h4>Program B</h4><p class="flow">share = 500</p></div>
+    </div>
+    <div class="prose">
+      <p><b>Stop here, and find the wrong one.</b> Hold on to your answer.</p>
+    </div>
+  </section>
+
+  <section id="s2">
+    <div class="prose">
+      <h2>First, let's be fair to the AI</h2>
+      <p>You ask it for a program. In ten seconds, you get it. It runs. Many times, it is even correct.</p>
+      <p>But it writes both right and wrong things. And the wrong ones don't always look wrong.</p>
+      <p>Here are both programs. Press <b>▶ Run</b>. The bill is two thousand rupees, and there are four friends.</p>
+      <div class="pyrun" data-id="whycode-bill">
+        <textarea spellcheck="false">bill = 2000
+friends = 4
+
+share_a = bill / friends   # program A
+share_b = 500              # program B
+
+print("A says:", share_a)
+print("B says:", share_b)</textarea>
+      </div>
+      <p>A says five hundred. B says five hundred. Both correct, right?</p>
+    </div>
+  </section>
+
+  <section id="s3">
+    <div class="prose">
+      <h2>The reveal: it ran, and it was wrong</h2>
+      <p>Now a fifth friend joins. Same bill. Change <code>friends = 4</code> to <code>friends = 5</code>, and run it again.</p>
+      <p>A says four hundred. B still says five hundred. Did you find it? B never followed the rule. It only matched last week's answer.</p>
+    </div>
+    <div class="keyidea">
+      <div class="lbl">No crash. No error. Still wrong.</div>
+      Nothing crashed. No error came. The program ran perfectly, and it was still wrong. Someone at that table pays from his own pocket, and nobody knows why.
+    </div>
+    <div class="prose">
+      <p>And the only person who can catch it is someone who can read those two lines.</p>
+    </div>
+  </section>
+
+  <section id="s4">
+    <div class="prose">
+      <h2>The auto ride</h2>
+      <p>Let's try to understand this in another way. Say you took an auto to go somewhere new. The driver takes a turn you have never seen. If you know the road, you ask him why. If you don't, you simply pay the meter.</p>
+      <p>Code is the same. If you cannot read the road, you will not notice the wrong turn.</p>
+      <p>Reading the code an AI wrote, and judging it line by line, is what we call <b>code review</b>.</p>
+      <p>So with Generative AI, your job does not disappear. It shifts. From typing the code, to reading it and judging it.</p>
+    </div>
+  </section>
+
+  <section id="s5">
+    <div class="prose">
+      <h2>Agentic AI: the fresher</h2>
+      <p>Now, Agentic AI goes one step further. An agent does not stop at writing code. It plans, picks a tool, acts, checks the result, and goes again.</p>
+      <p>So, if the AI can do all this on its own, do you need to know even less?</p>
+      <p>Say you joined a company as a fresher. You get a role, an objective, and some tools. That, effectively, is what an agent is.</p>
+      <p>Now tell me. Would any team lead give a fresher full access on day one, without checking the work? No, right? Someone who knows the job checks the work. With agents, that someone is you.</p>
+      <p>And to check the work, you must know the job yourself. This is what we call keeping a <b>human in the loop</b>.</p>
+    </div>
+  </section>
+
+  <section id="s6">
+    <div class="prose">
+      <h2>What coding really trains</h2>
+      <p>So what does knowing the job really mean? A program is a set of well defined instructions. Learning to code trains you to think in exact steps, with no ambiguity.</p>
+      <p>And that same skill makes your prompts sharp. A vague instruction gets you a vague program.</p>
+      <p>In a nutshell, the AI types faster than you. But you decide what is right.</p>
+    </div>
+    <div class="keyidea">
+      <div class="lbl">True even if the AI becomes perfect</div>
+      This does not depend on the AI being weak. Even if it writes perfect code one day, someone still has to say exactly what is needed. And someone has to judge whether it was done right.
+    </div>
+  </section>
+
+  <section id="s7">
+    <div class="prose">
+      <h2>The honest cost</h2>
+      <p>Deciding what is right is a skill, and every skill has a cost. Learning to code takes time. You will fail many times. There is no shortcut around it, and I am not going to pretend there is one.</p>
+      <p>And not every problem needs code, or an agent. Start with the problem, then pick the tool. Fit for purpose thinking, not trend first thinking.</p>
+      <p>So, AI can write the code. But you still need to understand what that code is supposed to do, and whether it is correct.</p>
+    </div>
+  </section>
+
+  <section id="homework">
+    <div class="next">
+      <div class="lbl">Your homework</div>
+      <h3>Read it, change it, predict it</h3>
+      <p style="font-size:var(--fs-cap);color:var(--slate)">Take one program that an AI wrote for you. Read it, line by line. Change one number. Predict the output, then run it. No program of your own yet? Use the one below: predict first, then press <b>▶ Run</b>.</p>
+      <div class="pyrun" data-id="whycode-predict">
+        <textarea spellcheck="false">bill = 2000
+friends = 5
+tip = 10   # percent
+
+total = bill + bill * tip / 100
+share = total / friends
+print("Each pays:", share)</textarea>
+      </div>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:12px">If your prediction was wrong, that is good. That is exactly where the learning starts.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:10px"><i>Come back and tell me under the video: what did the AI get wrong, that you caught? And in the first test, did you pick program B?</i></p>
+    </div>
+  </section>
+
+  <section id="related">
+    <div class="prose"><h2>Related</h2></div>
+    <div class="blog-list"><a class="blog-item" href="../why-ai-when-we-have-traditional-coding/"><span class="blog-label why">Blog · Why does it exist?</span><h3>Why AI, when we have traditional coding?</h3></a></div>
+  </section>
+
+
+  <div class="lwa-chapnav">
+    <a href="../index.html"><span class="k">← Blog</span><span class="t">All posts</span></a>
+    <a href="https://www.youtube.com/watch?v=ueVmOee5h6I" rel="noopener"><span class="k">Watch →</span><span class="t">The video on YouTube</span></a>
+  </div>
+
+  </main>
+</div>
+
+<footer class="foot">
+  <div class="foot-in">
+    <img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building" style="height:36px">
+    <span>Learn AI by Building — Blog · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="../index.html" style="color:var(--accent)">Blog</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
+  </div>
+</footer>
+<script src="../../assets/site-config.js"></script>
+<script src="../../assets/progress.js"></script>
+<script src="../../assets/pyrun.js"></script>
+</body>
+</html>

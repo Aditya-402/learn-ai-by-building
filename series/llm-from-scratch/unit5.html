@@ -3,16 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Assembling a GPT — Learn with Adi</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>">
-<link rel="stylesheet" href="../../assets/site.css?v=4">
+<title>Assembling a GPT — Learn AI by Building</title>
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=6">
 <style>
 :root{
-  --ground:#f6f7fb; --panel:#ffffff; --subtle:#f0f1f7; --ink:#1f2733;
-  --muted:#6b7585; --line:#e3e6ee; --accent:#5b4b9e; --accent-deep:#3d3170;
-  --accent-wash:#ecebf6; --teal:#2b7a78; --teal-wash:#e3efee;
-  --clay:#a35a33; --clay-wash:#f7ebe4; --gold:#8a6d1c; --gold-wash:#f5f0df;
-  --slate:#4a5a72;
+  --ground:#faf6ee; --panel:#ffffff; --subtle:#f3ece0; --ink:#2b2730;
+  --muted:#6a626e; --line:#e9dfcf; --accent:#5a3d5c; --accent-deep:#3f2a41;
+  --accent-wash:#f1e7ef; --teal:#2f5a45; --teal-wash:#e4ede6;
+  --clay:#a8441f; --clay-wash:#f8e6dc; --gold:#80590f; --gold-wash:#f8ecd3;
+  --slate:#554b58;
   --serif:'Iowan Old Style','Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif;
   --sans:'Segoe UI Variable Text','Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
   --mono:'Cascadia Mono','Cascadia Code',Consolas,'SF Mono',ui-monospace,Menlo,monospace;
@@ -94,7 +96,7 @@ input[type=number]{font-family:var(--mono);font-size:var(--fs-sm);width:78px;pad
 .slider-row{display:grid;grid-template-columns:154px minmax(0,1fr) 68px;gap:13px;align-items:center}
 .slider-row .v{font-family:var(--mono);font-size:var(--fs-cap);font-weight:700;color:var(--accent-deep);text-align:right;font-variant-numeric:tabular-nums}
 .scroll-x{overflow-x:auto}
-pre{margin:0;background:#f4f4f9;border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;overflow-x:auto;font-family:var(--mono);font-size:var(--fs-sm);line-height:1.6;color:#2c3444}
+pre{margin:0;background:#f8f3ea;border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;overflow-x:auto;font-family:var(--mono);font-size:var(--fs-sm);line-height:1.6;color:#2f2a33}
 pre .cm{color:#8a93a5;font-style:italic}
 pre .kw{color:var(--accent);font-weight:600}
 table{border-collapse:collapse;width:100%;font-size:var(--fs-cap)}
@@ -127,7 +129,7 @@ tr:last-child td{border-bottom:none}
 /* charts */
 .chart{width:100%;height:auto;display:block;background:var(--subtle);border:1px solid var(--line);border-radius:var(--r)}
 .chart .ax{stroke:#c9ceda;stroke-width:1}
-.chart .grid{stroke:#e0e3ec;stroke-width:1}
+.chart .grid{stroke:#e6ddcf;stroke-width:1}
 .chart text{font-family:var(--sans);font-size:10px;fill:var(--muted)}
 .chart .curve{fill:none;stroke-width:2.5}
 
@@ -151,7 +153,7 @@ tr:last-child td{border-bottom:none}
 .gtk{font-family:var(--mono);font-size:var(--fs-sm);background:var(--subtle);border:1px solid var(--line);border-radius:6px;padding:5px 9px}
 .gtk .gid{display:block;font-size:.66rem;color:var(--muted);text-align:center}
 .gtk.new{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:700}
-.gtk.new .gid{color:#d8d3ee}
+.gtk.new .gid{color:#e2d3e1}
 
 .q-card{border:1px solid var(--line);border-radius:var(--r);padding:17px;background:var(--panel)}
 .q-card .qq{font-weight:600;margin-bottom:12px;font-size:var(--fs-cap)}
@@ -176,13 +178,13 @@ tr:last-child td{border-bottom:none}
 
 p{text-wrap:pretty}
 .prereq{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin-bottom:6px}
-.pq{border:1px solid var(--line);border-left:3px solid var(--teal,#2b7a78);border-radius:0 10px 10px 0;background:var(--panel);padding:12px 14px;font-size:var(--fs-sm);color:var(--slate,#4a5a72)}
+.pq{border:1px solid var(--line);border-left:3px solid var(--teal,#2f5a45);border-radius:0 10px 10px 0;background:var(--panel);padding:12px 14px;font-size:var(--fs-sm);color:var(--slate,#554b58)}
 .pq b{display:block;color:var(--ink);font-size:var(--fs-cap);margin-bottom:4px}
-.derive{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--teal,#2b7a78);border-radius:0 10px 10px 0;padding:16px 20px;max-width:66ch}
-.derive .dl{font-size:var(--fs-xs);letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--teal,#2b7a78);margin-bottom:8px}
-.derive p{font-size:var(--fs-cap);color:var(--slate,#4a5a72);margin:6px 0}
+.derive{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--teal,#2f5a45);border-radius:0 10px 10px 0;padding:16px 20px;max-width:66ch}
+.derive .dl{font-size:var(--fs-xs);letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--teal,#2f5a45);margin-bottom:8px}
+.derive p{font-size:var(--fs-cap);color:var(--slate,#554b58);margin:6px 0}
 .derive .m{font-family:var(--mono);font-size:var(--fs-sm);background:var(--subtle);border-radius:6px;padding:9px 13px;margin:8px 0;overflow-x:auto;color:var(--ink)}
-.confuse{border-left:3px solid var(--clay,#a35a33);background:var(--clay-wash,#f7ebe4);padding:16px 20px;border-radius:0 10px 10px 0;max-width:66ch}
+.confuse{border-left:3px solid var(--clay,#a8441f);background:var(--clay-wash,#f8e6dc);padding:16px 20px;border-radius:0 10px 10px 0;max-width:66ch}
 .confuse .lbl{font-size:var(--fs-xs);letter-spacing:.13em;text-transform:uppercase;font-weight:700;color:#7c4324;margin-bottom:6px}
 .confuse p{font-size:var(--fs-cap);color:#5c3f28}
 .fig{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;max-width:900px;box-shadow:var(--shadow)}
@@ -206,7 +208,7 @@ p{text-wrap:pretty}
 <header class="masthead">
   <div class="masthead-in">
     <div class="lwa-brandrow">
-      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg" alt="Learn with Adi"></a>
+      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building"></a>
       <div class="lwa-brand-right">
         <span class="lwa-tag"><a href="index.html">Series 01 · Build an LLM from Scratch</a></span>
         <span data-lwa-auth></span>
@@ -247,7 +249,7 @@ p{text-wrap:pretty}
     <div class="prereq">
       <div class="pq"><b>Unit 2 — the input pipeline</b>Token IDs, embeddings, positions: the tensor this model eats. <a href="unit2.html">Refresh here</a>.</div>
       <div class="pq"><b>Units 3–4 — attention</b>This unit imports the <code>MultiHeadAttention</code> class exactly as built in <a href="unit4.html">Unit 4</a>. If .view/.transpose still feel foggy, reread its shape journey first.</div>
-      <div class="pq"><b>Run the code (optional)</b>The companion notebook assembles the whole 163M-parameter model and generates text — <a href="https://colab.research.google.com/github/Aditya-402/learn-with-adi/blob/main/notebooks/llm-from-scratch/unit5.ipynb" rel="noopener">▶ open it in Google Colab</a>, free, laptop-friendly.</div>
+      <div class="pq"><b>Run the code (optional)</b>The companion notebook assembles the whole 163M-parameter model and generates text — <a href="https://colab.research.google.com/github/Aditya-402/learn-ai-by-building/blob/main/notebooks/llm-from-scratch/unit5.ipynb" rel="noopener">▶ open it in Google Colab</a>, free, laptop-friendly.</div>
     </div>
     <div class="prose">
       <h2>The shape of the whole thing</h2>
@@ -402,37 +404,37 @@ p{text-wrap:pretty}
 
     <div class="fig" role="img" aria-label="Diagram of one transformer block">
       <svg viewBox="0 0 760 220">
-        <defs><marker id="aru5a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6b7585"/></marker></defs>
+        <defs><marker id="aru5a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6a626e"/></marker></defs>
         <g font-family="Consolas,monospace" font-size="11.5">
-        <rect x="10" y="88" width="96" height="50" rx="9" fill="#f0f1f7" stroke="#6b7585" stroke-width="1.5"/>
-        <text x="58" y="109" text-anchor="middle" font-size="12" font-weight="700" fill="#1f2733" font-family="Georgia,serif">x in</text>
-        <text x="58" y="127" text-anchor="middle" fill="#6b7585">(b, n, 768)</text>
-        <line x1="110" y1="113" x2="140" y2="113" stroke="#6b7585" stroke-width="1.5" marker-end="url(#aru5a)"/>
-        <rect x="144" y="88" width="90" height="50" rx="9" fill="#e3efee" stroke="#2b7a78" stroke-width="1.6"/>
+        <rect x="10" y="88" width="96" height="50" rx="9" fill="#f3ece0" stroke="#6a626e" stroke-width="1.5"/>
+        <text x="58" y="109" text-anchor="middle" font-size="12" font-weight="700" fill="#2b2730" font-family="Georgia,serif">x in</text>
+        <text x="58" y="127" text-anchor="middle" fill="#6a626e">(b, n, 768)</text>
+        <line x1="110" y1="113" x2="140" y2="113" stroke="#6a626e" stroke-width="1.5" marker-end="url(#aru5a)"/>
+        <rect x="144" y="88" width="90" height="50" rx="9" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.6"/>
         <text x="189" y="115" text-anchor="middle" font-size="12" font-weight="700" fill="#1d5654" font-family="Georgia,serif">LayerNorm</text>
-        <line x1="238" y1="113" x2="268" y2="113" stroke="#6b7585" stroke-width="1.5" marker-end="url(#aru5a)"/>
-        <rect x="272" y="88" width="128" height="50" rx="9" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.6"/>
-        <text x="336" y="109" text-anchor="middle" font-size="12" font-weight="700" fill="#3d3170" font-family="Georgia,serif">Masked multi-head</text>
-        <text x="336" y="127" text-anchor="middle" fill="#6b7585">attention (Unit 4)</text>
-        <circle cx="437" cy="113" r="13" fill="#f7ebe4" stroke="#a35a33" stroke-width="1.6"/>
-        <text x="437" y="118" text-anchor="middle" font-size="14" font-weight="700" fill="#a35a33">+</text>
-        <line x1="404" y1="113" x2="421" y2="113" stroke="#6b7585" stroke-width="1.5" marker-end="url(#aru5a)"/>
-        <path d="M 58 88 L 58 40 L 437 40 L 437 97" stroke="#a35a33" stroke-width="1.5" fill="none" stroke-dasharray="4 3" marker-end="url(#aru5a)"/>
-        <text x="247" y="30" text-anchor="middle" fill="#a35a33" font-size="10.5" font-family="Segoe UI,sans-serif">shortcut: x skips ahead and is added back</text>
-        <line x1="453" y1="113" x2="483" y2="113" stroke="#6b7585" stroke-width="1.5" marker-end="url(#aru5a)"/>
-        <rect x="487" y="88" width="90" height="50" rx="9" fill="#e3efee" stroke="#2b7a78" stroke-width="1.6"/>
+        <line x1="238" y1="113" x2="268" y2="113" stroke="#6a626e" stroke-width="1.5" marker-end="url(#aru5a)"/>
+        <rect x="272" y="88" width="128" height="50" rx="9" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.6"/>
+        <text x="336" y="109" text-anchor="middle" font-size="12" font-weight="700" fill="#3f2a41" font-family="Georgia,serif">Masked multi-head</text>
+        <text x="336" y="127" text-anchor="middle" fill="#6a626e">attention (Unit 4)</text>
+        <circle cx="437" cy="113" r="13" fill="#f8e6dc" stroke="#a8441f" stroke-width="1.6"/>
+        <text x="437" y="118" text-anchor="middle" font-size="14" font-weight="700" fill="#a8441f">+</text>
+        <line x1="404" y1="113" x2="421" y2="113" stroke="#6a626e" stroke-width="1.5" marker-end="url(#aru5a)"/>
+        <path d="M 58 88 L 58 40 L 437 40 L 437 97" stroke="#a8441f" stroke-width="1.5" fill="none" stroke-dasharray="4 3" marker-end="url(#aru5a)"/>
+        <text x="247" y="30" text-anchor="middle" fill="#a8441f" font-size="10.5" font-family="Segoe UI,sans-serif">shortcut: x skips ahead and is added back</text>
+        <line x1="453" y1="113" x2="483" y2="113" stroke="#6a626e" stroke-width="1.5" marker-end="url(#aru5a)"/>
+        <rect x="487" y="88" width="90" height="50" rx="9" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.6"/>
         <text x="532" y="115" text-anchor="middle" font-size="12" font-weight="700" fill="#1d5654" font-family="Georgia,serif">LayerNorm</text>
-        <line x1="581" y1="113" x2="611" y2="113" stroke="#6b7585" stroke-width="1.5" marker-end="url(#aru5a)"/>
-        <rect x="615" y="88" width="90" height="50" rx="9" fill="#f5f0df" stroke="#8a6d1c" stroke-width="1.6"/>
+        <line x1="581" y1="113" x2="611" y2="113" stroke="#6a626e" stroke-width="1.5" marker-end="url(#aru5a)"/>
+        <rect x="615" y="88" width="90" height="50" rx="9" fill="#f8ecd3" stroke="#80590f" stroke-width="1.6"/>
         <text x="660" y="109" text-anchor="middle" font-size="12" font-weight="700" fill="#6d5514" font-family="Georgia,serif">FeedForward</text>
-        <text x="660" y="127" text-anchor="middle" fill="#6b7585">768→3072→768</text>
-        <circle cx="729" cy="180" r="13" fill="#f7ebe4" stroke="#a35a33" stroke-width="1.6"/>
-        <text x="729" y="185" text-anchor="middle" font-size="14" font-weight="700" fill="#a35a33">+</text>
-        <path d="M 660 138 L 660 180 L 713 180" stroke="#6b7585" stroke-width="1.5" fill="none" marker-end="url(#aru5a)"/>
-        <path d="M 453 126 L 453 205 L 729 205 L 729 196" stroke="#a35a33" stroke-width="1.5" fill="none" stroke-dasharray="4 3" marker-end="url(#aru5a)"/>
-        <text x="560" y="220" text-anchor="middle" fill="#a35a33" font-size="10.5" font-family="Segoe UI,sans-serif">second shortcut around the feed-forward pair</text>
-        <text x="120" y="180" fill="#6b7585" font-size="11.5" font-family="Segoe UI,sans-serif">out: (b, n, 768) — same shape as in,</text>
-        <text x="120" y="198" fill="#6b7585" font-size="11.5" font-family="Segoe UI,sans-serif">which is why 12 of these stack cleanly</text>
+        <text x="660" y="127" text-anchor="middle" fill="#6a626e">768→3072→768</text>
+        <circle cx="729" cy="180" r="13" fill="#f8e6dc" stroke="#a8441f" stroke-width="1.6"/>
+        <text x="729" y="185" text-anchor="middle" font-size="14" font-weight="700" fill="#a8441f">+</text>
+        <path d="M 660 138 L 660 180 L 713 180" stroke="#6a626e" stroke-width="1.5" fill="none" marker-end="url(#aru5a)"/>
+        <path d="M 453 126 L 453 205 L 729 205 L 729 196" stroke="#a8441f" stroke-width="1.5" fill="none" stroke-dasharray="4 3" marker-end="url(#aru5a)"/>
+        <text x="560" y="220" text-anchor="middle" fill="#a8441f" font-size="10.5" font-family="Segoe UI,sans-serif">second shortcut around the feed-forward pair</text>
+        <text x="120" y="180" fill="#6a626e" font-size="11.5" font-family="Segoe UI,sans-serif">out: (b, n, 768) — same shape as in,</text>
+        <text x="120" y="198" fill="#6a626e" font-size="11.5" font-family="Segoe UI,sans-serif">which is why 12 of these stack cleanly</text>
         </g>
       </svg>
       <div class="figcap">One transformer block: normalise → attend → add the shortcut → normalise → feed-forward → add the shortcut. Shapes never change, so blocks stack like LEGO — GPT-2 small stacks twelve.</div>
@@ -611,8 +613,8 @@ p{text-wrap:pretty}
 
 <footer class="foot">
   <div class="foot-in">
-    <img src="../../assets/wordmark.svg" alt="Learn with Adi" style="height:26px">
-    <span>Learn with Adi — Unit 5 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Series</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
+    <img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building" style="height:36px">
+    <span>Learn AI by Building — Unit 5 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Series</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
   </div>
 </footer>
 

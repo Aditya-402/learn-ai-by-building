@@ -1,4 +1,4 @@
-/* Learn with Adi — in-page Python practice runner (Pyodide).
+/* Learn AI by Building — in-page Python practice runner (Pyodide).
    Zero-install: real CPython compiled to WebAssembly, loaded lazily from the
    jsDelivr CDN the first time a student presses Run (≈6 MB, cached after that).
 
@@ -40,33 +40,33 @@
 
   /* ---------------- styles ---------------- */
   var css = "\
-.pyrun{background:var(--panel,#fff);border:1px solid var(--line,#e3e6ee);border-radius:12px;overflow:hidden}\
-.pyrun.ok{border-color:var(--teal,#2b7a78)}\
+.pyrun{background:var(--panel,#fff);border:1px solid var(--line,#e9dfcf);border-radius:12px;overflow:hidden}\
+.pyrun.ok{border-color:var(--teal,#2f5a45)}\
 .pyrun .pr-bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:8px 12px;\
-  border-bottom:1px solid var(--line,#e3e6ee);background:var(--subtle,#f0f1f7)}\
+  border-bottom:1px solid var(--line,#e9dfcf);background:var(--subtle,#f3ece0)}\
 .pyrun .pr-bar .sp{flex:1}\
 .pyrun .pr-btn{font:inherit;font-size:var(--fs-sm,13px);font-weight:600;cursor:pointer;\
-  border:1px solid var(--line,#e3e6ee);border-radius:8px;padding:6px 14px;\
-  background:var(--panel,#fff);color:var(--ink,#1f2733);transition:border-color .15s}\
-.pyrun .pr-btn:hover{border-color:var(--accent,#5b4b9e)}\
-.pyrun .pr-btn.run{background:var(--accent,#5b4b9e);border-color:var(--accent,#5b4b9e);color:#fff}\
-.pyrun .pr-btn.run:hover{background:var(--accent-deep,#3d3170)}\
+  border:1px solid var(--line,#e9dfcf);border-radius:8px;padding:6px 14px;\
+  background:var(--panel,#fff);color:var(--ink,#2b2730);transition:border-color .15s}\
+.pyrun .pr-btn:hover{border-color:var(--accent,#5a3d5c)}\
+.pyrun .pr-btn.run{background:var(--accent,#5a3d5c);border-color:var(--accent,#5a3d5c);color:#fff}\
+.pyrun .pr-btn.run:hover{background:var(--accent-deep,#3f2a41)}\
 .pyrun .pr-btn:disabled{opacity:.45;cursor:default}\
-.pyrun .pr-st{font-size:var(--fs-xs,12px);color:var(--muted,#6b7585)}\
-.pyrun .pr-st.ok{color:var(--teal,#2b7a78);font-weight:700}\
-.pyrun .pr-st.no{color:var(--clay,#a35a33);font-weight:700}\
+.pyrun .pr-st{font-size:var(--fs-xs,12px);color:var(--muted,#6a626e)}\
+.pyrun .pr-st.ok{color:var(--teal,#2f5a45);font-weight:700}\
+.pyrun .pr-st.no{color:var(--clay,#a8441f);font-weight:700}\
 .pyrun textarea{display:block;width:100%;border:none;border-radius:0;background:var(--panel,#fff);\
   font-family:var(--mono,ui-monospace,monospace);font-size:var(--fs-cap,14px);line-height:1.7;\
-  color:var(--ink,#1f2733);padding:14px 16px;resize:vertical;min-height:52px;box-sizing:border-box}\
-.pyrun textarea:focus{outline:none;background:#fdfdff}\
+  color:var(--ink,#2b2730);padding:14px 16px;resize:vertical;min-height:52px;box-sizing:border-box}\
+.pyrun textarea:focus{outline:none;background:#fefcf7}\
 .pyrun .pr-in{display:flex;align-items:center;gap:10px;padding:8px 16px;\
-  border-top:1px dashed var(--line,#e3e6ee);background:var(--subtle,#f0f1f7)}\
+  border-top:1px dashed var(--line,#e9dfcf);background:var(--subtle,#f3ece0)}\
 .pyrun .pr-in label{font-size:var(--fs-xs,12px);letter-spacing:.09em;text-transform:uppercase;\
-  font-weight:700;color:var(--muted,#6b7585);white-space:nowrap}\
+  font-weight:700;color:var(--muted,#6a626e);white-space:nowrap}\
 .pyrun .pr-in input{flex:1;font-family:var(--mono,ui-monospace,monospace);font-size:var(--fs-sm,13px);\
-  border:1px solid var(--line,#e3e6ee);border-radius:7px;padding:6px 10px;background:var(--panel,#fff);color:var(--ink,#1f2733)}\
-.pyrun .pr-in input:read-only{background:var(--subtle,#f0f1f7);color:var(--muted,#6b7585)}\
-.pyrun .pr-out{display:none;border-top:1px solid var(--line,#e3e6ee);background:#23262e;color:#e8eaf0;\
+  border:1px solid var(--line,#e9dfcf);border-radius:7px;padding:6px 10px;background:var(--panel,#fff);color:var(--ink,#2b2730)}\
+.pyrun .pr-in input:read-only{background:var(--subtle,#f3ece0);color:var(--muted,#6a626e)}\
+.pyrun .pr-out{display:none;border-top:1px solid var(--line,#e9dfcf);background:#23262e;color:#ece4d8;\
   font-family:var(--mono,ui-monospace,monospace);font-size:var(--fs-sm,13px);line-height:1.65;\
   padding:12px 16px;white-space:pre-wrap;word-break:break-word;max-height:300px;overflow:auto}\
 .pyrun .pr-out.show{display:block}\

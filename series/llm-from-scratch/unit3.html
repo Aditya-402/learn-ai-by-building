@@ -3,16 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>How Attention Actually Works — Learn with Adi</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>">
-<link rel="stylesheet" href="../../assets/site.css?v=4">
+<title>How Attention Actually Works — Learn AI by Building</title>
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=6">
 <style>
 :root{
-  --ground:#f6f7fb; --panel:#ffffff; --subtle:#f0f1f7; --ink:#1f2733;
-  --muted:#6b7585; --line:#e3e6ee; --accent:#5b4b9e; --accent-deep:#3d3170;
-  --accent-wash:#ecebf6; --teal:#2b7a78; --teal-wash:#e3efee;
-  --clay:#a35a33; --clay-wash:#f7ebe4; --gold:#8a6d1c; --gold-wash:#f5f0df;
-  --slate:#4a5a72;
+  --ground:#faf6ee; --panel:#ffffff; --subtle:#f3ece0; --ink:#2b2730;
+  --muted:#6a626e; --line:#e9dfcf; --accent:#5a3d5c; --accent-deep:#3f2a41;
+  --accent-wash:#f1e7ef; --teal:#2f5a45; --teal-wash:#e4ede6;
+  --clay:#a8441f; --clay-wash:#f8e6dc; --gold:#80590f; --gold-wash:#f8ecd3;
+  --slate:#554b58;
   --serif:'Iowan Old Style','Palatino Linotype',Palatino,'Book Antiqua',Georgia,serif;
   --sans:'Segoe UI Variable Text','Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
   --mono:'Cascadia Mono','Cascadia Code',Consolas,'SF Mono',ui-monospace,Menlo,monospace;
@@ -90,7 +92,7 @@ ul.plain li::marker{color:var(--accent)}
 .figcap{font-size:var(--fs-sm);color:var(--muted);margin-top:10px;border-top:1px dashed var(--line);padding-top:10px}
 
 .listing{max-width:1000px}
-.listing .lh{font-size:var(--fs-xs);letter-spacing:.12em;text-transform:uppercase;color:var(--accent-deep);font-weight:700;background:var(--accent-wash);border:1px solid #d5cfeb;border-bottom:none;border-radius:var(--r) var(--r) 0 0;padding:8px 14px}
+.listing .lh{font-size:var(--fs-xs);letter-spacing:.12em;text-transform:uppercase;color:var(--accent-deep);font-weight:700;background:var(--accent-wash);border:1px solid #e0cfdf;border-bottom:none;border-radius:var(--r) var(--r) 0 0;padding:8px 14px}
 .listing pre{border-radius:0 0 var(--r) var(--r)}
 .lh a{float:right;font-weight:700;letter-spacing:.02em;text-transform:none;color:var(--accent)}
 pre.out{background:#eef4f3;border-color:#cfe2e0;color:#1d5654}
@@ -124,7 +126,7 @@ input[type=number]:focus{background:var(--panel)}
 .slider-row{display:grid;grid-template-columns:150px minmax(0,1fr) 62px;gap:13px;align-items:center}
 .slider-row .v{font-family:var(--mono);font-size:var(--fs-cap);font-weight:700;color:var(--accent-deep);text-align:right;font-variant-numeric:tabular-nums}
 .scroll-x{overflow-x:auto}
-pre{margin:0;background:#f4f4f9;border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;overflow-x:auto;font-family:var(--mono);font-size:var(--fs-sm);line-height:1.6;color:#2c3444}
+pre{margin:0;background:#f8f3ea;border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;overflow-x:auto;font-family:var(--mono);font-size:var(--fs-sm);line-height:1.6;color:#2f2a33}
 pre .cm{color:#8a93a5;font-style:italic}
 pre .kw{color:var(--accent);font-weight:600}
 
@@ -133,14 +135,14 @@ pre .kw{color:var(--accent);font-weight:600}
 .tk.q{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:700}
 .tk.sm{font-size:var(--fs-xs);padding:3px 7px}
 .tk .ix{display:block;font-size:.66rem;color:var(--muted);text-align:center}
-.tk.q .ix{color:#d8d3ee}
+.tk.q .ix{color:#e2d3e1}
 
 .mx{border-collapse:separate;border-spacing:0;font-family:var(--mono);font-size:var(--fs-sm)}
 .mx td,.mx th{border:1px solid var(--line);padding:5px 9px;text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
 .mx th{background:var(--subtle);color:var(--muted);font-family:var(--sans);font-size:var(--fs-xs);text-align:center;font-weight:700}
 .mx th.rh{text-align:right;padding-right:10px}
 .mx tr.hl td{background:var(--accent-wash);border-color:var(--accent);color:var(--accent-deep);font-weight:700}
-.mx td.masked{background:repeating-linear-gradient(45deg,#f2f3f8,#f2f3f8 4px,#e8eaf2 4px,#e8eaf2 8px);color:#b3b9c6}
+.mx td.masked{background:repeating-linear-gradient(45deg,#f6f0e6,#f6f0e6 4px,#ece4d8 4px,#ece4d8 8px);color:#b3b9c6}
 
 .heat{border-collapse:separate;border-spacing:2px}
 .heat td{width:58px;height:34px;text-align:center;border-radius:5px;font-family:var(--mono);font-size:var(--fs-xs);font-variant-numeric:tabular-nums;cursor:pointer;border:1px solid transparent}
@@ -204,7 +206,7 @@ p{text-wrap:pretty}
 <header class="masthead">
   <div class="masthead-in">
     <div class="lwa-brandrow">
-      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg" alt="Learn with Adi"></a>
+      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building"></a>
       <div class="lwa-brand-right">
         <span class="lwa-tag"><a href="index.html">Series 01 · Build an LLM from Scratch</a></span>
         <span data-lwa-auth></span>
@@ -331,7 +333,7 @@ p{text-wrap:pretty}
     </div>
 
     <div class="listing">
-      <div class="lh">The input — six tokens, embedded <a href="https://colab.research.google.com/github/Aditya-402/learn-with-adi/blob/main/notebooks/llm-from-scratch/unit3.ipynb" rel="noopener" title="Open this unit's companion notebook in Google Colab — free, zero setup">▶ Run in Colab</a></div>
+      <div class="lh">The input — six tokens, embedded <a href="https://colab.research.google.com/github/Aditya-402/learn-ai-by-building/blob/main/notebooks/llm-from-scratch/unit3.ipynb" rel="noopener" title="Open this unit's companion notebook in Google Colab — free, zero setup">▶ Run in Colab</a></div>
       <pre>import torch
 inputs = torch.tensor(
   [[0.43, 0.15, 0.89], <span class="cm"># Your     x(1)</span>
@@ -360,7 +362,7 @@ inputs = torch.tensor(
     </div>
 
     <div class="listing">
-      <div class="lh">The same thing in code <a href="https://colab.research.google.com/github/Aditya-402/learn-with-adi/blob/main/notebooks/llm-from-scratch/unit3.ipynb" rel="noopener" title="Open this unit's companion notebook in Google Colab — free, zero setup">▶ Run in Colab</a></div>
+      <div class="lh">The same thing in code <a href="https://colab.research.google.com/github/Aditya-402/learn-ai-by-building/blob/main/notebooks/llm-from-scratch/unit3.ipynb" rel="noopener" title="Open this unit's companion notebook in Google Colab — free, zero setup">▶ Run in Colab</a></div>
       <pre>query = inputs[1]                            <span class="cm"># x(2), "journey" — Python counts from 0</span>
 attn_scores_2 = torch.empty(inputs.shape[0])
 for i, x_i in enumerate(inputs):
@@ -422,18 +424,18 @@ print(attn_scores_2)</pre>
 
     <div class="fig" role="img" aria-label="Diagram: six token vectors scaled by their attention weights and stacked into one context vector">
       <svg viewBox="0 0 740 190">
-        <defs><marker id="arrb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6b7585"/></marker></defs>
+        <defs><marker id="arrb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6a626e"/></marker></defs>
         <g font-family="Consolas,monospace" font-size="11">
           <!-- full-size bars = embeddings, scaled bars = weighted -->
-          <g text-anchor="middle" fill="#6b7585">
+          <g text-anchor="middle" fill="#6a626e">
             <text x="70" y="20">Your</text><text x="170" y="20">journey</text><text x="270" y="20">starts</text><text x="370" y="20">with</text><text x="470" y="20">one</text><text x="570" y="20">step</text>
           </g>
           <!-- original vectors (ghost) -->
-          <g fill="#e3e6ee">
+          <g fill="#e9dfcf">
             <rect x="45" y="30" width="50" height="60" rx="5"/><rect x="145" y="30" width="50" height="60" rx="5"/><rect x="245" y="30" width="50" height="60" rx="5"/><rect x="345" y="30" width="50" height="60" rx="5"/><rect x="445" y="30" width="50" height="60" rx="5"/><rect x="545" y="30" width="50" height="60" rx="5"/>
           </g>
           <!-- weighted portions, heights ∝ weight/0.24 of 60 -->
-          <g fill="#5b4b9e">
+          <g fill="#5a3d5c">
             <rect x="45" y="55.4" width="50" height="34.6" rx="5" opacity=".75"/>
             <rect x="145" y="30.6" width="50" height="59.4" rx="5"/>
             <rect x="245" y="31.7" width="50" height="58.3" rx="5" opacity=".95"/>
@@ -441,21 +443,21 @@ print(attn_scores_2)</pre>
             <rect x="445" y="63" width="50" height="27" rx="5" opacity=".65"/>
             <rect x="545" y="50.5" width="50" height="39.5" rx="5" opacity=".8"/>
           </g>
-          <g text-anchor="middle" fill="#3d3170" font-weight="700">
+          <g text-anchor="middle" fill="#3f2a41" font-weight="700">
             <text x="70" y="106">×0.1385</text><text x="170" y="106">×0.2379</text><text x="270" y="106">×0.2333</text><text x="370" y="106">×0.1240</text><text x="470" y="106">×0.1082</text><text x="570" y="106">×0.1581</text>
           </g>
           <!-- plus signs -->
-          <g fill="#6b7585" font-size="15" text-anchor="middle" font-weight="700">
+          <g fill="#6a626e" font-size="15" text-anchor="middle" font-weight="700">
             <text x="120" y="65">+</text><text x="220" y="65">+</text><text x="320" y="65">+</text><text x="420" y="65">+</text><text x="520" y="65">+</text>
           </g>
-          <line x1="600" y1="60" x2="648" y2="60" stroke="#6b7585" stroke-width="1.6" marker-end="url(#arrb)"/>
-          <text x="624" y="48" text-anchor="middle" fill="#6b7585" font-size="13" font-weight="700">=</text>
-          <rect x="652" y="30" width="76" height="60" rx="7" fill="#5b4b9e" stroke="#3d3170" stroke-width="1.6"/>
+          <line x1="600" y1="60" x2="648" y2="60" stroke="#6a626e" stroke-width="1.6" marker-end="url(#arrb)"/>
+          <text x="624" y="48" text-anchor="middle" fill="#6a626e" font-size="13" font-weight="700">=</text>
+          <rect x="652" y="30" width="76" height="60" rx="7" fill="#5a3d5c" stroke="#3f2a41" stroke-width="1.6"/>
           <text x="690" y="57" text-anchor="middle" fill="#ffffff" font-size="13" font-weight="700">z(2)</text>
-          <text x="690" y="75" text-anchor="middle" fill="#d8d3ee" font-size="9.5">the new</text>
-          <text x="690" y="86" text-anchor="middle" fill="#d8d3ee" font-size="9.5">“journey”</text>
-          <text x="370" y="140" text-anchor="middle" fill="#6b7585" font-size="11.5" font-family="Segoe UI,sans-serif">Grey = each word's full embedding. Purple = the share of it that makes it into the mix.</text>
-          <text x="370" y="160" text-anchor="middle" fill="#6b7585" font-size="11.5" font-family="Segoe UI,sans-serif">Big-weight words dominate the blend; small-weight words barely tint it.</text>
+          <text x="690" y="75" text-anchor="middle" fill="#e2d3e1" font-size="9.5">the new</text>
+          <text x="690" y="86" text-anchor="middle" fill="#e2d3e1" font-size="9.5">“journey”</text>
+          <text x="370" y="140" text-anchor="middle" fill="#6a626e" font-size="11.5" font-family="Segoe UI,sans-serif">Grey = each word's full embedding. Purple = the share of it that makes it into the mix.</text>
+          <text x="370" y="160" text-anchor="middle" fill="#6a626e" font-size="11.5" font-family="Segoe UI,sans-serif">Big-weight words dominate the blend; small-weight words barely tint it.</text>
         </g>
       </svg>
       <div class="figcap">The weighted sum as paint-mixing: six vectors, each contributing its percentage, added into one new vector — mostly “journey” and “starts”, faintly “one”.</div>
@@ -511,33 +513,33 @@ print(attn_scores_2)</pre>
 
     <div class="fig" role="img" aria-label="Diagram of the three-step attention pipeline in matrix form">
       <svg viewBox="0 0 740 150">
-        <defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6b7585"/></marker></defs>
-        <rect x="8" y="38" width="120" height="64" rx="9" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.6"/>
-        <text x="68" y="64" text-anchor="middle" font-size="15" font-weight="700" fill="#3d3170" font-family="Georgia,serif">X</text>
-        <text x="68" y="84" text-anchor="middle" font-size="11" fill="#6b7585" font-family="Consolas,monospace">(6, 3)</text>
-        <line x1="132" y1="70" x2="192" y2="70" stroke="#6b7585" stroke-width="1.5" marker-end="url(#arr)"/>
-        <text x="162" y="58" text-anchor="middle" font-size="10.5" fill="#6b7585">X @ X.T</text>
-        <rect x="196" y="38" width="120" height="64" rx="9" fill="#f0f1f7" stroke="#e3e6ee" stroke-width="1.6"/>
-        <text x="256" y="64" text-anchor="middle" font-size="15" font-weight="700" fill="#1f2733" font-family="Georgia,serif">scores ω</text>
-        <text x="256" y="84" text-anchor="middle" font-size="11" fill="#6b7585" font-family="Consolas,monospace">(6, 6)</text>
-        <line x1="320" y1="70" x2="380" y2="70" stroke="#6b7585" stroke-width="1.5" marker-end="url(#arr)"/>
-        <text x="350" y="58" text-anchor="middle" font-size="10.5" fill="#6b7585">softmax rows</text>
-        <rect x="384" y="38" width="120" height="64" rx="9" fill="#e3efee" stroke="#2b7a78" stroke-width="1.6"/>
+        <defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6a626e"/></marker></defs>
+        <rect x="8" y="38" width="120" height="64" rx="9" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.6"/>
+        <text x="68" y="64" text-anchor="middle" font-size="15" font-weight="700" fill="#3f2a41" font-family="Georgia,serif">X</text>
+        <text x="68" y="84" text-anchor="middle" font-size="11" fill="#6a626e" font-family="Consolas,monospace">(6, 3)</text>
+        <line x1="132" y1="70" x2="192" y2="70" stroke="#6a626e" stroke-width="1.5" marker-end="url(#arr)"/>
+        <text x="162" y="58" text-anchor="middle" font-size="10.5" fill="#6a626e">X @ X.T</text>
+        <rect x="196" y="38" width="120" height="64" rx="9" fill="#f3ece0" stroke="#e9dfcf" stroke-width="1.6"/>
+        <text x="256" y="64" text-anchor="middle" font-size="15" font-weight="700" fill="#2b2730" font-family="Georgia,serif">scores ω</text>
+        <text x="256" y="84" text-anchor="middle" font-size="11" fill="#6a626e" font-family="Consolas,monospace">(6, 6)</text>
+        <line x1="320" y1="70" x2="380" y2="70" stroke="#6a626e" stroke-width="1.5" marker-end="url(#arr)"/>
+        <text x="350" y="58" text-anchor="middle" font-size="10.5" fill="#6a626e">softmax rows</text>
+        <rect x="384" y="38" width="120" height="64" rx="9" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.6"/>
         <text x="444" y="64" text-anchor="middle" font-size="15" font-weight="700" fill="#1d5654" font-family="Georgia,serif">weights α</text>
-        <text x="444" y="84" text-anchor="middle" font-size="11" fill="#6b7585" font-family="Consolas,monospace">(6, 6)</text>
-        <line x1="508" y1="70" x2="568" y2="70" stroke="#6b7585" stroke-width="1.5" marker-end="url(#arr)"/>
-        <text x="538" y="58" text-anchor="middle" font-size="10.5" fill="#6b7585">α @ X</text>
-        <rect x="572" y="38" width="120" height="64" rx="9" fill="#5b4b9e" stroke="#3d3170" stroke-width="1.6"/>
+        <text x="444" y="84" text-anchor="middle" font-size="11" fill="#6a626e" font-family="Consolas,monospace">(6, 6)</text>
+        <line x1="508" y1="70" x2="568" y2="70" stroke="#6a626e" stroke-width="1.5" marker-end="url(#arr)"/>
+        <text x="538" y="58" text-anchor="middle" font-size="10.5" fill="#6a626e">α @ X</text>
+        <rect x="572" y="38" width="120" height="64" rx="9" fill="#5a3d5c" stroke="#3f2a41" stroke-width="1.6"/>
         <text x="632" y="64" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff" font-family="Georgia,serif">Z</text>
-        <text x="632" y="84" text-anchor="middle" font-size="11" fill="#d8d3ee" font-family="Consolas,monospace">(6, 3)</text>
-        <text x="68" y="126" text-anchor="middle" font-size="10.5" fill="#6b7585">six embeddings in</text>
-        <text x="632" y="126" text-anchor="middle" font-size="10.5" fill="#6b7585">six context vectors out</text>
+        <text x="632" y="84" text-anchor="middle" font-size="11" fill="#e2d3e1" font-family="Consolas,monospace">(6, 3)</text>
+        <text x="68" y="126" text-anchor="middle" font-size="10.5" fill="#6a626e">six embeddings in</text>
+        <text x="632" y="126" text-anchor="middle" font-size="10.5" fill="#6a626e">six context vectors out</text>
       </svg>
       <div class="figcap">The whole simplified mechanism as three matrix operations. Row i of the (6,6) matrices belongs to token i as the query; the shapes are the bookkeeping that keeps you honest.</div>
     </div>
 
     <div class="listing">
-      <div class="lh">Three lines replace all the loops <a href="https://colab.research.google.com/github/Aditya-402/learn-with-adi/blob/main/notebooks/llm-from-scratch/unit3.ipynb" rel="noopener" title="Open this unit's companion notebook in Google Colab — free, zero setup">▶ Run in Colab</a></div>
+      <div class="lh">Three lines replace all the loops <a href="https://colab.research.google.com/github/Aditya-402/learn-ai-by-building/blob/main/notebooks/llm-from-scratch/unit3.ipynb" rel="noopener" title="Open this unit's companion notebook in Google Colab — free, zero setup">▶ Run in Colab</a></div>
       <pre>attn_scores  = inputs @ inputs.T                      <span class="cm"># (6,3) @ (3,6) → (6,6), all-pairs dots</span>
 attn_weights = torch.softmax(attn_scores, dim=-1)     <span class="cm"># softmax each ROW (dim=-1 = last dim)</span>
 all_context  = attn_weights @ inputs                  <span class="cm"># (6,6) @ (6,3) → (6,3), six blends</span></pre>
@@ -604,34 +606,34 @@ tensor([[0.4421, 0.5931, 0.5790],
 
     <div class="fig" role="img" aria-label="Diagram: one token projected through three weight matrices into query, key and value vectors">
       <svg viewBox="0 0 740 240">
-        <defs><marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6b7585"/></marker></defs>
-        <rect x="10" y="88" width="150" height="64" rx="9" fill="#f0f1f7" stroke="#6b7585" stroke-width="1.5"/>
-        <text x="85" y="114" text-anchor="middle" font-size="14" font-weight="700" fill="#1f2733" font-family="Georgia,serif">x(2) “journey”</text>
-        <text x="85" y="134" text-anchor="middle" font-size="11" fill="#6b7585" font-family="Consolas,monospace">(3,)  [0.55 0.87 0.66]</text>
-        <line x1="164" y1="104" x2="278" y2="45" stroke="#6b7585" stroke-width="1.5" marker-end="url(#arr2)"/>
-        <line x1="164" y1="120" x2="278" y2="120" stroke="#6b7585" stroke-width="1.5" marker-end="url(#arr2)"/>
-        <line x1="164" y1="136" x2="278" y2="195" stroke="#6b7585" stroke-width="1.5" marker-end="url(#arr2)"/>
-        <rect x="282" y="16" width="132" height="56" rx="9" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.6"/>
-        <text x="348" y="39" text-anchor="middle" font-size="13" font-weight="700" fill="#3d3170" font-family="Consolas,monospace">@ W_query</text>
-        <text x="348" y="58" text-anchor="middle" font-size="11" fill="#6b7585" font-family="Consolas,monospace">(3, 2) trainable</text>
-        <rect x="282" y="92" width="132" height="56" rx="9" fill="#e3efee" stroke="#2b7a78" stroke-width="1.6"/>
+        <defs><marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6a626e"/></marker></defs>
+        <rect x="10" y="88" width="150" height="64" rx="9" fill="#f3ece0" stroke="#6a626e" stroke-width="1.5"/>
+        <text x="85" y="114" text-anchor="middle" font-size="14" font-weight="700" fill="#2b2730" font-family="Georgia,serif">x(2) “journey”</text>
+        <text x="85" y="134" text-anchor="middle" font-size="11" fill="#6a626e" font-family="Consolas,monospace">(3,)  [0.55 0.87 0.66]</text>
+        <line x1="164" y1="104" x2="278" y2="45" stroke="#6a626e" stroke-width="1.5" marker-end="url(#arr2)"/>
+        <line x1="164" y1="120" x2="278" y2="120" stroke="#6a626e" stroke-width="1.5" marker-end="url(#arr2)"/>
+        <line x1="164" y1="136" x2="278" y2="195" stroke="#6a626e" stroke-width="1.5" marker-end="url(#arr2)"/>
+        <rect x="282" y="16" width="132" height="56" rx="9" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.6"/>
+        <text x="348" y="39" text-anchor="middle" font-size="13" font-weight="700" fill="#3f2a41" font-family="Consolas,monospace">@ W_query</text>
+        <text x="348" y="58" text-anchor="middle" font-size="11" fill="#6a626e" font-family="Consolas,monospace">(3, 2) trainable</text>
+        <rect x="282" y="92" width="132" height="56" rx="9" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.6"/>
         <text x="348" y="115" text-anchor="middle" font-size="13" font-weight="700" fill="#1d5654" font-family="Consolas,monospace">@ W_key</text>
-        <text x="348" y="134" text-anchor="middle" font-size="11" fill="#6b7585" font-family="Consolas,monospace">(3, 2) trainable</text>
-        <rect x="282" y="168" width="132" height="56" rx="9" fill="#f5f0df" stroke="#8a6d1c" stroke-width="1.6"/>
+        <text x="348" y="134" text-anchor="middle" font-size="11" fill="#6a626e" font-family="Consolas,monospace">(3, 2) trainable</text>
+        <rect x="282" y="168" width="132" height="56" rx="9" fill="#f8ecd3" stroke="#80590f" stroke-width="1.6"/>
         <text x="348" y="191" text-anchor="middle" font-size="13" font-weight="700" fill="#6d5514" font-family="Consolas,monospace">@ W_value</text>
-        <text x="348" y="210" text-anchor="middle" font-size="11" fill="#6b7585" font-family="Consolas,monospace">(3, 2) trainable</text>
-        <line x1="418" y1="44" x2="500" y2="44" stroke="#6b7585" stroke-width="1.5" marker-end="url(#arr2)"/>
-        <line x1="418" y1="120" x2="500" y2="120" stroke="#6b7585" stroke-width="1.5" marker-end="url(#arr2)"/>
-        <line x1="418" y1="196" x2="500" y2="196" stroke="#6b7585" stroke-width="1.5" marker-end="url(#arr2)"/>
-        <rect x="504" y="16" width="224" height="56" rx="9" fill="#ecebf6" stroke="#5b4b9e" stroke-width="1.6"/>
-        <text x="616" y="39" text-anchor="middle" font-size="13" font-weight="700" fill="#3d3170" font-family="Georgia,serif">q(2) — the seeker</text>
-        <text x="616" y="58" text-anchor="middle" font-size="11" fill="#6b7585" font-family="Consolas,monospace">(2,)  [0.4306 1.4551]</text>
-        <rect x="504" y="92" width="224" height="56" rx="9" fill="#e3efee" stroke="#2b7a78" stroke-width="1.6"/>
+        <text x="348" y="210" text-anchor="middle" font-size="11" fill="#6a626e" font-family="Consolas,monospace">(3, 2) trainable</text>
+        <line x1="418" y1="44" x2="500" y2="44" stroke="#6a626e" stroke-width="1.5" marker-end="url(#arr2)"/>
+        <line x1="418" y1="120" x2="500" y2="120" stroke="#6a626e" stroke-width="1.5" marker-end="url(#arr2)"/>
+        <line x1="418" y1="196" x2="500" y2="196" stroke="#6a626e" stroke-width="1.5" marker-end="url(#arr2)"/>
+        <rect x="504" y="16" width="224" height="56" rx="9" fill="#f1e7ef" stroke="#5a3d5c" stroke-width="1.6"/>
+        <text x="616" y="39" text-anchor="middle" font-size="13" font-weight="700" fill="#3f2a41" font-family="Georgia,serif">q(2) — the seeker</text>
+        <text x="616" y="58" text-anchor="middle" font-size="11" fill="#6a626e" font-family="Consolas,monospace">(2,)  [0.4306 1.4551]</text>
+        <rect x="504" y="92" width="224" height="56" rx="9" fill="#e4ede6" stroke="#2f5a45" stroke-width="1.6"/>
         <text x="616" y="115" text-anchor="middle" font-size="13" font-weight="700" fill="#1d5654" font-family="Georgia,serif">k(2) — the advertisement</text>
-        <text x="616" y="134" text-anchor="middle" font-size="11" fill="#6b7585" font-family="Consolas,monospace">(2,)  [0.4433 1.1419]</text>
-        <rect x="504" y="168" width="224" height="56" rx="9" fill="#f5f0df" stroke="#8a6d1c" stroke-width="1.6"/>
+        <text x="616" y="134" text-anchor="middle" font-size="11" fill="#6a626e" font-family="Consolas,monospace">(2,)  [0.4433 1.1419]</text>
+        <rect x="504" y="168" width="224" height="56" rx="9" fill="#f8ecd3" stroke="#80590f" stroke-width="1.6"/>
         <text x="616" y="191" text-anchor="middle" font-size="13" font-weight="700" fill="#6d5514" font-family="Georgia,serif">v(2) — the content</text>
-        <text x="616" y="210" text-anchor="middle" font-size="11" fill="#6b7585" font-family="Consolas,monospace">(2,)  [0.3951 1.0037]</text>
+        <text x="616" y="210" text-anchor="middle" font-size="11" fill="#6a626e" font-family="Consolas,monospace">(2,)  [0.3951 1.0037]</text>
       </svg>
       <div class="figcap">One token, three roles, three trainable projections. Every token in the sentence gets all three. The numbers shown are the real values <code>torch.manual_seed(123)</code> produces — you'll compute them below.</div>
     </div>
@@ -643,7 +645,7 @@ tensor([[0.4421, 0.5931, 0.5790],
     </div>
 
     <div class="listing">
-      <div class="lh">Initialising the three matrices — and their actual values <a href="https://colab.research.google.com/github/Aditya-402/learn-with-adi/blob/main/notebooks/llm-from-scratch/unit3.ipynb" rel="noopener" title="Open this unit's companion notebook in Google Colab — free, zero setup">▶ Run in Colab</a></div>
+      <div class="lh">Initialising the three matrices — and their actual values <a href="https://colab.research.google.com/github/Aditya-402/learn-ai-by-building/blob/main/notebooks/llm-from-scratch/unit3.ipynb" rel="noopener" title="Open this unit's companion notebook in Google Colab — free, zero setup">▶ Run in Colab</a></div>
       <pre>torch.manual_seed(123)
 W_query = torch.nn.Parameter(torch.rand(d_in, d_out), requires_grad=False)
 W_key   = torch.nn.Parameter(torch.rand(d_in, d_out), requires_grad=False)
@@ -735,7 +737,7 @@ W_query = [[0.2961, 0.5166],      W_key = [[0.1366, 0.1025],      W_value = [[0.
     </div>
 
     <div class="listing">
-      <div class="lh">The SelfAttention_v1 class — stop 2 on the route <a href="https://colab.research.google.com/github/Aditya-402/learn-with-adi/blob/main/notebooks/llm-from-scratch/unit3.ipynb" rel="noopener" title="Open this unit's companion notebook in Google Colab — free, zero setup">▶ Run in Colab</a></div>
+      <div class="lh">The SelfAttention_v1 class — stop 2 on the route <a href="https://colab.research.google.com/github/Aditya-402/learn-ai-by-building/blob/main/notebooks/llm-from-scratch/unit3.ipynb" rel="noopener" title="Open this unit's companion notebook in Google Colab — free, zero setup">▶ Run in Colab</a></div>
       <pre>import torch.nn as nn
 
 class SelfAttention_v1(nn.Module):                        <span class="cm"># nn.Module = PyTorch's building block</span>
@@ -772,7 +774,7 @@ tensor([[0.2996, 0.8053],
     </div>
 
     <div class="listing">
-      <div class="lh">SelfAttention_v2 — the nn.Linear version, stop 3 on the route <a href="https://colab.research.google.com/github/Aditya-402/learn-with-adi/blob/main/notebooks/llm-from-scratch/unit3.ipynb" rel="noopener" title="Open this unit's companion notebook in Google Colab — free, zero setup">▶ Run in Colab</a></div>
+      <div class="lh">SelfAttention_v2 — the nn.Linear version, stop 3 on the route <a href="https://colab.research.google.com/github/Aditya-402/learn-ai-by-building/blob/main/notebooks/llm-from-scratch/unit3.ipynb" rel="noopener" title="Open this unit's companion notebook in Google Colab — free, zero setup">▶ Run in Colab</a></div>
       <pre>class SelfAttention_v2(nn.Module):
     def __init__(self, d_in, d_out, qkv_bias=False):
         super().__init__()
@@ -871,8 +873,8 @@ tensor([[-0.0739,  0.0713],
 
 <footer class="foot">
   <div class="foot-in">
-    <img src="../../assets/wordmark.svg" alt="Learn with Adi" style="height:26px">
-    <span>Learn with Adi — Unit 3 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Series</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
+    <img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building" style="height:36px">
+    <span>Learn AI by Building — Unit 3 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Series</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
   </div>
 </footer>
 
@@ -1039,7 +1041,7 @@ function renderMat(){
   M.forEach((row,i)=>{
     h+="<tr><th class='rh'>"+TOKENS[i]+"</th>"+row.map((v,j)=>{
       const a=(v-lo)/(hi-lo||1);
-      return "<td data-i='"+i+"' data-j='"+j+"' style='background:rgba(91,75,158,"+(0.08+a*0.72).toFixed(3)+
+      return "<td data-i='"+i+"' data-j='"+j+"' style='background:rgba(90,61,92,"+(0.08+a*0.72).toFixed(3)+
         ");color:"+(a>0.55?"#fff":"var(--ink)")+"'>"+(matMode==="scores"?f2(v):f4(v))+"</td>";
     }).join("")+"</tr>";
   });
