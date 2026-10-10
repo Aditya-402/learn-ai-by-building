@@ -149,7 +149,7 @@ h3.sub{font-family:var(--lwa-sans);font-size:12px;letter-spacing:.12em;text-tran
 @media (max-width:640px){ .lwa-brand-right{width:100%;justify-content:space-between} }
 
 /* ---------- the landing page (10 Oct 2026): charcoal top bar, the motto, the section tiles ---------- */
-header.top{background:#231f26;border-bottom:0}
+header.top{background:#3a1620;border-bottom:0}   /* maroon, matching the YouTube banner (10 Oct 2026) */
 header.top .lwa-auth button{background:transparent;color:#faf6ee;border-color:rgba(250,246,238,.35)}
 header.top .lwa-auth button:hover{border-color:#e3a63a;box-shadow:none}
 .hero .crumb{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--lwa-accent);margin-bottom:6px}
