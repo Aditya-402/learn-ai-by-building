@@ -147,3 +147,22 @@ h3.sub{font-family:var(--lwa-sans);font-size:12px;letter-spacing:.12em;text-tran
 .lwa-journey a:hover{text-decoration:underline}
 
 @media (max-width:640px){ .lwa-brand-right{width:100%;justify-content:space-between} }
+
+/* ---------- the landing page (10 Oct 2026): charcoal top bar, the motto, the section tiles ---------- */
+header.top{background:#231f26;border-bottom:0}
+header.top .lwa-auth button{background:transparent;color:#faf6ee;border-color:rgba(250,246,238,.35)}
+header.top .lwa-auth button:hover{border-color:#e3a63a;box-shadow:none}
+.hero .crumb{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--lwa-accent);margin-bottom:6px}
+.hero .crumb a{color:inherit;text-decoration:none}
+.doors{margin:8px 0 38px}
+.doors .h{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--lwa-muted);margin-bottom:12px}
+.door-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.door{position:relative;display:flex;flex-direction:column;gap:6px;text-decoration:none;color:var(--lwa-ink);background:#fff;
+  border:1px solid var(--lwa-line);border-radius:16px;padding:18px 18px 16px;border-top:5px solid var(--c);min-height:190px;transition:transform .15s,box-shadow .15s}
+a.door:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(43,39,48,.10)}
+.door .ic{width:40px;height:40px;color:var(--c)} .door h3{font:600 20px var(--lwa-serif);margin:4px 0 0}
+.door p{font-size:13.5px;color:var(--lwa-muted);margin:0;flex:1} .door .st{font-size:12px;font-weight:700;color:var(--c)}
+.door .go{position:absolute;right:16px;bottom:12px;font-size:20px;color:var(--c)}
+.door.soon{opacity:.62;border-top-style:dashed}
+.door.plum{--c:#5a3d5c}.door.terracotta{--c:#a8441f}.door.forest{--c:#2f5a45}.door.mustard{--c:#80590f}
+@media(max-width:1000px){.door-grid{grid-template-columns:repeat(2,1fr)}} @media(max-width:560px){.door-grid{grid-template-columns:1fr}}
