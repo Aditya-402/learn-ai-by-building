@@ -54,9 +54,9 @@
   <main>
 
   <section id="video">
-    <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/ueVmOee5h6I?rel=0" title="Why learn coding when AI writes code?"
+    <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/hsvDCwUhs74?rel=0" title="Why learn coding when AI writes code?"
       allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
-    <p class="video-cap">Prefer to watch? This post goes with the video (4:51). <a href="https://www.youtube.com/watch?v=ueVmOee5h6I" rel="noopener">Open it on YouTube</a>, where you can also leave a comment.</p>
+    <p class="video-cap">Prefer to watch? This post goes with the video (4:51). <a href="https://www.youtube.com/watch?v=hsvDCwUhs74" rel="noopener">Open it on YouTube</a>, where you can also leave a comment.</p>
   </section>
 
   <section id="s1">
@@ -66,7 +66,10 @@
       <p>That's a very nice question. Let me answer it with one small test.</p>
       <p>Say you and your friends go out for dinner. The rule is simple. Everyone pays an equal share. Say an AI gives you these two programs. One of them is wrong.</p>
     </div>
-    <div class="vs">
+    <div class="prints">
+      <img src="img/dinner4.svg" alt="Four friends at dinner, and the bill on the table">
+    </div>
+        <div class="vs">
       <div><h4>Program A</h4><p class="flow">share = bill ÷ friends</p></div>
       <div><h4>Program B</h4><p class="flow">share = 500</p></div>
     </div>
@@ -80,6 +83,12 @@
       <h2>First, let's be fair to the AI</h2>
       <p>You ask it for a program. In ten seconds, you get it. It runs. Many times, it is even correct.</p>
       <p>But it writes both right and wrong things. And the wrong ones don't always look wrong.</p>
+    </div>
+    <div class="prints">
+      <img src="img/bill2000.svg" alt="The bill: 2,000 rupees">
+      <div class="figcap">Two thousand rupees, four friends.</div>
+    </div>
+    <div class="prose">
       <p>Here are both programs. Press <b>▶ Run</b>. The bill is two thousand rupees, and there are four friends.</p>
       <div class="pyrun" data-id="whycode-bill">
         <textarea spellcheck="false">bill = 2000
@@ -99,6 +108,12 @@ print("B says:", share_b)</textarea>
     <div class="prose">
       <h2>The reveal: it ran, and it was wrong</h2>
       <p>Now a fifth friend joins. Same bill. Change <code>friends = 4</code> to <code>friends = 5</code>, and run it again.</p>
+    </div>
+    <div class="prints">
+      <img src="img/dinner5.svg" alt="A fifth friend pulls up a chair">
+      <div class="figcap">Same bill. One more friend.</div>
+    </div>
+    <div class="prose">
       <p>A says four hundred. B still says five hundred. Did you find it? B never followed the rule. It only matched last week's answer.</p>
     </div>
     <div class="keyidea">
@@ -114,6 +129,13 @@ print("B says:", share_b)</textarea>
     <div class="prose">
       <h2>The auto ride</h2>
       <p>Let's try to understand this in another way. Say you took an auto to go somewhere new. The driver takes a turn you have never seen. If you know the road, you ask him why. If you don't, you simply pay the meter.</p>
+    </div>
+    <div class="prints">
+      <img src="img/auto.svg" alt="An auto-rickshaw with its meter">
+      <img src="img/route.svg" alt="Your usual way, and the turn you never saw">
+      <div class="figcap">Know the road, and you ask why. Don't, and you pay the meter.</div>
+    </div>
+    <div class="prose">
       <p>Code is the same. If you cannot read the road, you will not notice the wrong turn.</p>
       <p>Reading the code an AI wrote, and judging it line by line, is what we call <b>code review</b>.</p>
       <p>So with Generative AI, your job does not disappear. It shifts. From typing the code, to reading it and judging it.</p>
@@ -126,7 +148,17 @@ print("B says:", share_b)</textarea>
       <p>Now, Agentic AI goes one step further. An agent does not stop at writing code. It plans, picks a tool, acts, checks the result, and goes again.</p>
       <p>So, if the AI can do all this on its own, do you need to know even less?</p>
       <p>Say you joined a company as a fresher. You get a role, an objective, and some tools. That, effectively, is what an agent is.</p>
+    </div>
+    <div class="prints">
+      <img src="img/fresher.svg" alt="A fresher on day one: ID badge, laptop, a role, an objective, some tools">
+    </div>
+    <div class="prose">
       <p>Now tell me. Would any team lead give a fresher full access on day one, without checking the work? No, right? Someone who knows the job checks the work. With agents, that someone is you.</p>
+    </div>
+    <div class="prints">
+      <img src="img/teamlead.svg" alt="A team lead checking the fresher's work, line by line">
+    </div>
+    <div class="prose">
       <p>And to check the work, you must know the job yourself. This is what we call keeping a <b>human in the loop</b>.</p>
     </div>
   </section>
@@ -158,6 +190,7 @@ print("B says:", share_b)</textarea>
       <div class="lbl">Your homework</div>
       <h3>Read it, change it, predict it</h3>
       <p style="font-size:var(--fs-cap);color:var(--slate)">Take one program that an AI wrote for you. Read it, line by line. Change one number. Predict the output, then run it. No program of your own yet? Use the one below: predict first, then press <b>▶ Run</b>.</p>
+      <div class="prints"><img src="img/predict.svg" alt="A program an AI wrote, and a sticky note: my guess"></div>
       <div class="pyrun" data-id="whycode-predict">
         <textarea spellcheck="false">bill = 2000
 friends = 5
@@ -174,13 +207,13 @@ print("Each pays:", share)</textarea>
 
   <section id="related">
     <div class="prose"><h2>Related</h2></div>
-    <div class="blog-list"><a class="blog-item" href="../why-ai-when-we-have-traditional-coding/"><span class="blog-label why">Blog · Why does it exist?</span><h3>Why AI, when we have traditional coding?</h3></a></div>
+    <div class="blog-list"><a class="blog-item" href="../why-ai-when-we-have-traditional-coding/"><span class="blog-label why">Blog · Why does it exist?</span><h3>Why AI, when we have traditional coding?</h3></a><a class="blog-item" href="../why-python-for-ai/"><span class="blog-label why">Blog · Why does it exist?</span><h3>Why Python for AI?</h3></a></div>
   </section>
 
 
   <div class="lwa-chapnav">
     <a href="../index.html"><span class="k">← Blog</span><span class="t">All posts</span></a>
-    <a href="https://www.youtube.com/watch?v=ueVmOee5h6I" rel="noopener"><span class="k">Watch →</span><span class="t">The video on YouTube</span></a>
+    <a href="https://www.youtube.com/watch?v=hsvDCwUhs74" rel="noopener"><span class="k">Watch →</span><span class="t">The video on YouTube</span></a>
   </div>
 
   </main>
