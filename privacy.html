@@ -11,7 +11,11 @@
 <style>
 body{margin:0;background:var(--lwa-ground);color:var(--lwa-ink);font-family:var(--lwa-sans);line-height:1.65}
 .wrap{max-width:760px;margin:0 auto;padding:0 22px}
-header.top{background:var(--lwa-panel);border-bottom:1px solid var(--lwa-line)}
+header.top{background:#3a1620;border-bottom:0}   /* the maroon top bar of the home page (20 Oct 2026) */
+header.top .lwa-home img{height:48px;width:auto;display:block}
+header.top .lwa-tag,header.top .lwa-tag a{color:#faf6ee;text-decoration:none}
+header.top .lwa-tag a:hover{color:#e3a63a}
+@media (max-width:640px){header.top .lwa-home img{height:40px}}
 .top-in{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 0}
 h1{font-family:var(--lwa-serif);font-size:30px;margin:40px 0 8px}
 h2{font-family:var(--lwa-serif);font-size:20px;margin:26px 0 6px}
@@ -23,7 +27,7 @@ a{color:var(--lwa-accent)}
 <body>
 <header class="top">
   <div class="wrap top-in">
-    <a class="lwa-home" href="index.html" style="display:inline-flex"><img src="assets/wordmark.svg?v=2" alt="Learn AI by Building" style="height:32px"></a>
+    <a class="lwa-home" href="index.html" style="display:inline-flex"><img src="assets/wordmark-maroon.svg?v=1" alt="Learn AI by Building"></a>
   </div>
 </header>
 <div class="wrap">

@@ -39,3 +39,12 @@
 .blog-item h3{font-size:var(--fs-xl);margin:6px 0}
 .blog-item p{color:var(--slate);font-size:var(--fs-cap)}
 .blog-item .meta{font-size:var(--fs-sm);color:var(--muted);margin-top:8px}
+
+/* the maroon top bar and cream hero of the home page, on every blog page (19 Oct 2026) */
+header.top .top-in{max-width:1124px;margin:0 auto;padding:16px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+header.top .lwa-home img{height:48px;display:block}
+header.top .lwa-tag a{color:#faf6ee;text-decoration:none}
+header.top .lwa-tag a:hover{color:#e3a63a}
+body[data-lwa-course="blog"] .masthead{background:var(--ground)}
+body[data-lwa-course="blog"] .masthead-in{padding-top:34px}
+@media (max-width:640px){ header.top .top-in{padding:12px 20px} header.top .lwa-home img{height:40px} }

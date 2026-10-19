@@ -257,17 +257,29 @@ p{text-wrap:pretty}
 }
 @media (prefers-reduced-motion:reduce){*{animation-duration:.001ms !important;transition-duration:.001ms !important}}
 </style>
+<style>
+header.top{background:#3a1620;border-bottom:0}   /* the maroon top bar of the home page (20 Oct 2026) */
+header.top .lwa-home img{height:48px;width:auto;display:block}
+header.top .lwa-tag,header.top .lwa-tag a{color:#faf6ee;text-decoration:none}
+header.top .lwa-tag a:hover{color:#e3a63a}
+@media (max-width:640px){header.top .lwa-home img{height:40px}}
+header.top .top-in{max-width:1440px;margin:0 auto;padding:16px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.masthead{background:var(--ground)}
+@media (max-width:640px){header.top .top-in{padding:12px 20px}}
+</style>
 </head>
 <body data-lwa-course="llm-from-scratch" data-lwa-chapter="ch02" data-lwa-title="Unit 2 · From Text to Tensors">
-<header class="masthead">
-  <div class="masthead-in">
-    <div class="lwa-brandrow">
-      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building"></a>
+<header class="top">
+  <div class="top-in">
+      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark-maroon.svg?v=1" alt="Learn AI by Building"></a>
       <div class="lwa-brand-right">
         <span class="lwa-tag"><a href="index.html">Series 01 · Build an LLM from Scratch</a></span>
         <span data-lwa-auth></span>
       </div>
     </div>
+</header>
+<header class="masthead">
+  <div class="masthead-in">
     <div class="title-block">
       <div class="eyebrow">Build an LLM from Scratch · Unit 2</div>
       <h1>From Text to Tensors</h1>
