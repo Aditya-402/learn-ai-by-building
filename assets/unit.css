@@ -163,3 +163,10 @@ button{font:inherit;cursor:pointer}
 }
 @media (prefers-reduced-motion:reduce){*{animation-duration:.001ms !important;transition-duration:.001ms !important}}
 
+
+/* the maroon top bar of the home page, on the course pages (20 Oct 2026; same rules as blog.css) */
+header.top .top-in{max-width:1124px;margin:0 auto;padding:16px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+header.top .lwa-home img{height:48px;display:block}
+header.top .lwa-tag a{color:#faf6ee;text-decoration:none}
+header.top .lwa-tag a:hover{color:#e3a63a}
+@media (max-width:640px){ header.top .top-in{padding:12px 20px} header.top .lwa-home img{height:40px} }

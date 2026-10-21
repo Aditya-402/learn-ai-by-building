@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How do I get my own Gemini API key, and connect Spark? — Learn AI by Building</title>
+<meta name="description" content="Create your own key in Google AI Studio, copy it, and delete it when you are done. Then give it to Spark, the study buddy on this site, and ask your first question. Every step is shown on a real screen.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=8">
+<link rel="stylesheet" href="../../assets/unit.css?v=7">
+<link rel="stylesheet" href="../../assets/blog.css?v=6">
+</head>
+<body data-lwa-course="blog" data-lwa-chapter="get-your-gemini-api-key-and-connect-spark">
+<header class="top"><div class="top-in"><a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark-maroon.svg?v=1" alt="Learn AI by Building"></a><div class="lwa-brand-right"><span class="lwa-tag"><a href="../index.html">Blog</a></span><span data-lwa-auth></span></div></div></header>
+<header class="masthead">
+  <div class="masthead-in">
+    <div class="title-block">
+      <span class="blog-label how">How do I…?</span>
+      <h1>How do I get my own Gemini API key, and connect Spark?</h1>
+      <p class="standfirst">Create your own key in Google AI Studio, copy it, and delete it when you are done. Then give it to Spark, the study buddy on this site, and ask your first question. Every step is shown on a real screen.</p>
+      <div class="facts">
+        <div><b>Read</b>~5 min</div>
+        <div><b>Watch</b>3:31 video</div>
+        <div><b>Steps</b>3 + 4, each on screen</div>
+        <div><b>Published</b>20 Oct 2026</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="rail" aria-label="Sections">
+    <div class="rail-h">Contents</div>
+    <a class="on" href="#video">Watch the video</a>
+    <a href="#why-a-key">Why you need a key</a>
+    <a href="#get-the-key">Get your Gemini API key</a>
+    <a href="#safe">Keep your key safe</a>
+    <a href="#use-with-spark">Use your key with Spark</a>
+    <a href="#wrong">When Spark goes wrong</a>
+    <a href="#homework">Your homework</a>
+    <a href="#related">Related</a>
+    <a href="#refs">References</a>
+  </nav>
+
+  <main>
+
+  <section id="video">
+    <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/pPT4R7Y6vTw?rel=0" title="How do I get my own Gemini API key, and connect Spark?"
+      allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+    <p class="video-cap">Prefer to watch? This post goes with the video (3:31). <a href="https://www.youtube.com/watch?v=pPT4R7Y6vTw" rel="noopener">Open it on YouTube</a>, where you can also leave a comment.</p>
+  </section>
+
+
+  <section id="why-a-key">
+    <div class="prose">
+      <h2>Why you need a key</h2>
+      <p>Any program that asks Google's Gemini a question needs a key: your own code, an app, or Spark, the study buddy on this site. So why a key at all? Let's try to understand.</p>
+      <p>Say you join a library. The books are there for everyone. But to borrow one, you show your own card. The card says who is borrowing, and how many books that person may take.</p>
+      <p>Gemini works the same way. Each question to it uses a little of Google's computing. Your key tells Google the question is yours. Google also sets how much each key may ask, per minute and per day. Those limits change, so check them in AI Studio.</p>
+      <p>That card is what we call an <b>API key</b>. First, <a href="#get-the-key">get your key</a>. Then, if you are learning with us, <a href="#use-with-spark">give it to Spark</a>.</p>
+    </div>
+  </section>
+
+  <section id="get-the-key">
+    <div class="prose">
+      <h2>Get your Gemini API key</h2>
+      <p>Three steps, all in Google AI Studio.</p>
+    </div>
+
+    <div class="step"><span class="n">1</span><h3>Create the key</h3>
+      <p>Open <a href="https://aistudio.google.com/api-keys" rel="noopener">Google AI Studio → API keys</a> and sign in with your Google account. Click <b>Create API key</b>.</p></div>
+    <figure class="shot"><img src="img/1a-open-create-api-key.gif" alt="The API keys page in Google AI Studio; the view moves in to Create API key, top right, and a ring marks the click." loading="lazy" width="724" height="420"></figure>
+    <div class="prose">
+      <p>Give your key a name you will recognise, like <i>Learn AI by Building</i>. Keep the <b>Default Gemini Project</b>, or create a project of your own, as here. Then click <b>Create key</b>.</p>
+    </div>
+    <figure class="shot"><img src="img/1b-name-it-and-create.gif" alt="The Create a new key dialog: the key is named, a new project is created, and Create key is clicked." loading="lazy" width="724" height="420"><figcaption>The waits are cut out: the typing, and the spinners.</figcaption></figure>
+
+    <div class="step"><span class="n">2</span><h3>Copy the key</h3>
+      <p>The key appears in <b>API key details</b>. Click <b>Copy key</b>, or the copy icon beside it. Now paste it wherever you need it.</p></div>
+    <figure class="shot"><img src="img/2-copy-the-key.gif" alt="The API key details dialog showing the key, under a label saying it is deleted at the end; the pointer clicks the copy icon." loading="lazy" width="724" height="420"><figcaption>This key was deleted at the end of the recording. When you do this, it is the one moment your key shows in full: make sure nobody else can see your screen.</figcaption></figure>
+
+    <div class="step"><span class="n">3</span><h3>Delete a key, when you are done with it</h3>
+      <p>Come back here when you stop using a key, or when someone else may have seen it. On the API keys page, open the <b>⋮</b> menu on the key's row. Click <b>Delete key</b>, then <b>Delete</b>.</p></div>
+    <figure class="shot"><img src="img/7-delete-the-key.gif" alt="The API keys page: the menu on the first row offers Delete key; a dialog asks to confirm, and the key is gone from the list." loading="lazy" width="724" height="420"><figcaption>The wait while Google deletes the key is cut out.</figcaption></figure>
+    <div class="prose">
+      <p>Deleting cannot be undone. Anything using that key stops working. To carry on, make a new key, and use the new one instead.</p>
+      <p><b>AI Studio will not let you create a key?</b> Check that you are 18 or older, that your Google account has your age verified, and that you are in a country where it works.</p>
+    </div>
+  </section>
+
+  <section id="safe">
+    <div class="prose">
+      <h2>Keep your key safe</h2>
+      <p>Your key is like a password. Whoever has it can ask Gemini as you, and use up your limits.</p>
+      <ul>
+        <li><b>Never share it.</b> Not in a chat, an email, a screenshot or a comment.</li>
+        <li><b>Only paste it where you trust the page.</b> On this site, that is Spark, and nowhere else.</li>
+        <li><b>If it may have leaked, delete it</b> (step 3, above), and make a new one.</li>
+      </ul>
+      <p>How programs use a key safely, and why it never goes into shared code, comes later in the course.</p>
+      <p>That is your key. If you came for the key alone, you are done. To use it on this site, read on.</p>
+    </div>
+  </section>
+
+  <section id="use-with-spark">
+    <div class="prose">
+      <h2>Use your key with Spark</h2>
+      <p>Every lesson on this site has Spark, our study buddy. Spark thinks with Gemini, using your own key. You give it the key once; it stays in this browser, and goes only to Google, together with your question.</p>
+    </div>
+
+    <div class="step"><span class="n">1</span><h3>Open Spark</h3>
+      <p>Open any lesson, for example <a href="../../series/python-by-building/chapter0.html">Chapter 0</a>. Press the round <b>✦ Spark</b> button at the bottom right.</p></div>
+    <figure class="shot"><img src="img/3-open-spark.gif" alt="A lesson page; the view moves in to the Spark button at the bottom right, which opens the Spark panel asking for a Gemini API key." loading="lazy" width="724" height="420"></figure>
+
+    <div class="step"><span class="n">2</span><h3>Paste your key</h3>
+      <p>Paste the key into <b>Your Gemini API key</b>. It shows only as dots. Press <b>Save key &amp; start</b>. (If you came in through <b>⚙ settings</b>, the button says <b>Save settings</b>.)</p></div>
+    <figure class="shot"><img src="img/4-paste-and-save.gif" alt="Spark settings: the key is pasted and shows as dots; Save settings is pressed and the chat opens." loading="lazy" width="724" height="420"></figure>
+    <div class="prose">
+      <p>Chrome may offer <b>"Save password?"</b> when you paste it. Choose <b>Never</b>. The key is not a password for this site.</p>
+    </div>
+
+    <div class="step"><span class="n">3</span><h3>Ask a question</h3>
+      <p>Type something into <b>Ask about this unit</b> and press the arrow. Start simple: <i>Hello Spark</i>.</p></div>
+    <figure class="shot"><img src="img/5-ask-a-question.gif" alt="The question Hello Spark is typed and sent; Spark shows that it is thinking." loading="lazy" width="724" height="420"></figure>
+
+    <div class="step"><span class="n">4</span><h3>See the answer</h3>
+      <p>Spark answers from the page you are on. Then ask it something real, like <i>Summarise this page in three sentences</i>.</p></div>
+    <figure class="shot"><img src="img/6-see-the-answer.gif" alt="Spark replies to Hello Spark, then summarises the page in three sentences." loading="lazy" width="724" height="420"><figcaption>The waits are cut out: the typing, and the spinners.</figcaption></figure>
+    <div class="prose">
+      <p><b>On a shared computer, clear the key before you leave.</b> Open Spark's <b>⚙ settings</b>, empty the key box, and press <b>Save settings</b>.</p>
+    </div>
+  </section>
+
+  <section id="wrong">
+    <div class="prose">
+      <h2>When Spark goes wrong</h2>
+      <p>Read the message first. Spark tells you what Google said.</p>
+      <ul>
+        <li><b>"That API key was rejected by Google — let's re-enter it."</b> Part of the key was missed, or a space came along, or the key was deleted. Copy it again with <b>Copy key</b>, and paste it again.</li>
+        <li><b>"The quota for your key is used up for now — wait a minute and try again."</b> You asked more than your key may ask in a minute. Wait, and ask again. AI Studio's <b>Rate Limit</b> page shows your limits.</li>
+        <li><b>A message from Google about your location or region.</b> The Gemini API does not work in your country yet. The list of countries is in the references.</li>
+        <li><b>Spark says nothing at all.</b> Check your internet connection, reload the page, and try once more.</li>
+      </ul>
+      <p>Still stuck? Use Gemini chat at <a href="https://gemini.google.com" rel="noopener">gemini.google.com</a> for now, and come back to Spark later.</p>
+    </div>
+  </section>
+
+  <section id="homework">
+    <div class="next">
+      <div class="lbl">Your homework</div>
+      <h3>Ask, then check</h3>
+      <p style="font-size:var(--fs-cap);color:var(--slate)">Open <a href="../../series/python-by-building/chapter0.html">Chapter 0</a>, connect Spark, and ask it one question about the page. Then check its answer against the page itself. Was it right?</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:10px"><i>One question for you: what is the first thing you asked Spark?</i></p>
+    </div>
+  </section>
+
+  <section id="related">
+    <div class="prose"><h2>Related</h2></div>
+    <div class="blog-list"><a class="blog-item" href="../../series/python-by-building/chapter0.html"><span class="blog-label how">Series · Python, by building</span><h3>Chapter 0: How we learn, and getting set up</h3></a><a class="blog-item" href="../why-learn-coding-when-ai-writes-code/"><span class="blog-label how">Blog · Why does it exist?</span><h3>Why learn coding when AI writes code?</h3></a></div>
+  </section>
+
+  <section class="lwa-refs" id="refs">
+    <div class="prose">
+      <h2>References</h2>
+      <p>Where each rule on this page comes from. Checked on 20 Oct 2026.</p>
+    </div>
+    <ol>
+      <li><b>Google</b> — <i>Gemini API: Using API keys</i>. <span class="why">Where keys are created (AI Studio, API keys page), and the advice to treat a key like a password.</span> <a href="https://ai.google.dev/gemini-api/docs/api-key" rel="noopener">link</a></li>
+      <li><b>Google</b> — <i>Gemini API Additional Terms of Service</i>. <span class="why">You must be 18 or older, and use the API from an available region.</span> <a href="https://ai.google.dev/gemini-api/terms" rel="noopener">link</a></li>
+      <li><b>Google</b> — <i>Gemini API: Available regions</i>. <span class="why">The countries where Google AI Studio and the Gemini API work (India is one), and why access can be blocked.</span> <a href="https://ai.google.dev/gemini-api/docs/available-regions" rel="noopener">link</a></li>
+      <li><b>Google</b> — <i>Gemini API: Rate limits</i>. <span class="why">How much a key can ask, per minute and per day; the limits change, so check here.</span> <a href="https://ai.google.dev/gemini-api/docs/rate-limits" rel="noopener">link</a></li>
+      <li><b>Google</b> — <i>Gemini API: Troubleshooting</i>. <span class="why">What to do when a key is rejected, blocked or reported as leaked: make a new one.</span> <a href="https://ai.google.dev/gemini-api/docs/troubleshooting" rel="noopener">link</a></li>
+      </ol>
+  </section>
+
+  <div class="lwa-chapnav">
+    <a href="../index.html"><span class="k">← Blog</span><span class="t">All posts</span></a>
+    <a href="https://www.youtube.com/watch?v=pPT4R7Y6vTw" rel="noopener"><span class="k">Watch →</span><span class="t">The video on YouTube</span></a>
+  </div>
+
+  </main>
+</div>
+
+<footer class="foot">
+  <div class="foot-in">
+    <img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building" style="height:36px">
+    <span>Learn AI by Building — Blog · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="../index.html" style="color:var(--accent)">Blog</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
+  </div>
+</footer>
+<script src="../../assets/site-config.js"></script>
+<script src="../../assets/progress.js?v=2"></script>
+<script src="../../assets/pyrun.js?v=2"></script>
+</body>
+</html>

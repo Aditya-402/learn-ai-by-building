@@ -257,7 +257,7 @@ ${relevantContext(question, highlight)}`;
       try {
         const e = await res.json();
         if (res.status === 400 && /API key/i.test(e.error?.message || "")) msg = "BADKEY";
-        else if (res.status === 429) msg = "Google's free quota for your key is exhausted for now — wait a minute and try again.";
+        else if (res.status === 429) msg = "The quota for your key is used up for now — wait a minute and try again.";
         else if (e.error?.message) msg = e.error.message.slice(0, 200);
       } catch {}
       throw new Error(msg);
@@ -333,23 +333,33 @@ ${relevantContext(question, highlight)}`;
 
   function bodyEl() { return panel.querySelector(".spk-body"); }
 
+  // the step-by-step guide to getting a key (blog, "How do I…?", 20 Oct 2026), found from where this script lives,
+  // so the link is right on pages at any folder depth
+  const GUIDE = (() => {
+    const s = document.currentScript || [...document.scripts].find(x => /assets\/spark\.js/.test(x.src));
+    try { return new URL("../blog/get-your-gemini-api-key-and-connect-spark/", s.src).href; }
+    catch { return "https://aditya-402.github.io/learn-ai-by-building/blog/get-your-gemini-api-key-and-connect-spark/"; }
+  })();
+  const AISTUDIO = "https://aistudio.google.com/api-keys";
+
   function renderSetup(changing) {
     const cfg = getCfg();
     const intro = changing ? "" : `
         <h4>Hi, I'm Spark ✨</h4>
         <p style="margin:0">I'm the study buddy for these notes. Highlight anything on the page and ask me about it — typing or speaking — and I'll explain it differently. I only know <b>this unit</b>; I won't wander off.</p>
-        <p style="margin:0">I think with Google's Gemini using <b>your own free API key</b>, so the (tiny) cost is yours and nothing passes through anyone else's server:</p>
+        <p style="margin:0">I think with Google's Gemini using <b>your own API key</b>, so it is yours alone and nothing passes through anyone else's server:</p>
         <ol>
-          <li>Open <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener">Google AI Studio → API keys</a> (free Google account)</li>
+          <li>Open <a href="${AISTUDIO}" target="_blank" rel="noopener">Google AI Studio → API keys</a> with your Google account</li>
           <li>Click <b>Create API key</b> and copy it</li>
           <li>Paste it here:</li>
-        </ol>`;
+        </ol>
+        <p style="margin:0">First time? <a href="${GUIDE}" target="_blank" rel="noopener">Our step-by-step guide</a> shows every click.</p>`;
     bodyEl().innerHTML = `
       <div class="spk-setup">
         ${intro || "<h4>Spark settings</h4>"}
         <label class="spk-lbl">Your Gemini API key</label>
         <input type="password" class="spk-keyin" placeholder="AIza…" autocomplete="off">
-        ${changing ? '<div class="note" style="padding:5px 11px">Need a key? <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener">Google AI Studio → Create API key</a> (free). Clear the field and save to remove your key from this browser.</div>' : ""}
+        ${changing ? `<div class="note" style="padding:5px 11px">Need a key? Get one from <a href="${AISTUDIO}" target="_blank" rel="noopener">Google AI Studio → API keys</a> with your Google account; <a href="${GUIDE}" target="_blank" rel="noopener">our step-by-step guide</a> shows every click. Clear the field and save to remove your key from this browser.</div>` : ""}
         <label class="spk-lbl">Explain things for…</label>
         <div class="spk-pills" data-set="level">${Object.entries(LEVELS).map(([k, v]) =>
           `<button type="button" data-v="${k}" aria-pressed="${k === cfg.level}"><b>${v.name}</b><span>${v.hint}</span></button>`).join("")}</div>
@@ -360,7 +370,7 @@ ${relevantContext(question, highlight)}`;
         <select class="spk-model"><option value="">loading models…</option></select>
         <div class="note" style="padding:5px 11px">The list comes live from Google for <i>your</i> key, so it stays current as models come and go. Default = the cheapest available (flash-lite family) — students don't need a pro model; the level &amp; length settings above shape the answers.</div>
         <button type="button" class="go">${changing ? "Save settings" : "Save key & start"}</button>
-        <div class="note">Everything here is stored only in this browser (localStorage). The key is sent only to Google, together with your questions and the relevant parts of this unit. Gemini's free tier comfortably covers studying.</div>
+        <div class="note">Everything here is stored only in this browser (localStorage). The key is sent only to Google, together with your questions and the relevant parts of this unit.</div>
       </div>`;
     const inp = bodyEl().querySelector(".spk-keyin");
     if (getKey()) inp.value = getKey();

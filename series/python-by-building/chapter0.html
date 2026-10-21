@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 0 · How we learn, and getting set up — Learn AI by Building</title>
+<meta name="description" content="Start of the Python course: how we learn Python by building one app, your first program, your first error, and your own key for Spark, the study buddy on every page.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=8">
+<link rel="stylesheet" href="../../assets/unit.css?v=7">
+</head>
+<body data-lwa-course="python-by-building" data-lwa-chapter="chapter0" data-lwa-title="Chapter 0 · How we learn, and getting set up">
+<header class="top"><div class="top-in">
+  <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark-maroon.svg?v=1" alt="Learn AI by Building"></a>
+  <div class="lwa-brand-right"><span class="lwa-tag"><a href="index.html">Python, by building</a></span><span data-lwa-auth></span></div>
+</div></header>
+<header class="masthead">
+  <div class="masthead-in">
+    <div class="title-block">
+      <div class="eyebrow">Python, by building · Our Trip Planner · Chapter 0</div>
+      <h1>How we learn, and getting set up</h1>
+      <p class="standfirst">Before the first line of the app: how this course works, your first program, your first red error, and your own key for Spark, the study buddy beside every lesson.</p>
+      <div class="facts">
+        <div><b>One sitting</b>~15 min read, ~20 min practice</div>
+        <div><b>4 ideas</b>each: a short read, then practice</div>
+        <div><b>6 exercises</b>AI shows · AI helps · no AI</div>
+        <div><b>Nothing to install</b>real Python, in this page</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="rail" aria-label="Sections">
+    <a class="rnav-back" href="index.html"><span class="ico">←</span><span class="lbl">All chapters</span></a>
+    <div class="rail-h">Contents</div>
+    <a href="#s1" class="on">0.1 How we learn here</a>
+    <a href="#s2">0.2 Your first run</a>
+    <a href="#s3">0.3 When it goes red</a>
+    <a href="#s4">0.4 Your own key, and Spark</a>
+    <a href="#s5">0.5 Practice</a>
+    <a href="#quiz">Check yourself</a>
+    <a href="#gloss">Glossary</a>
+  </nav>
+
+  <main>
+
+  <!-- ============ 0.1 ============ -->
+  <section id="s1">
+    <div class="prereq">
+      <div class="pq"><b>Nothing is assumed</b>Never written a line of code? You are exactly the person this course is written for.</div>
+      <div class="pq"><b>Goes with the video</b>Episode 0, "Start here: how this course works". The video shows it; this page teaches it again, slowly, with practice.</div>
+      <div class="pq"><b>Progress is optional</b>Sign in (top right) and your journey follows you across devices. Everything works without an account too.</div>
+    </div>
+    <div class="prose">
+      <span class="sec-num">0.1</span>
+      <h2>How we learn here</h2>
+      <span class="rtag"><span>Read · ~4 min</span></span>
+      <p>So, how will you learn Python here? Let's try to understand.</p>
+      <p>We learn Python by building one app: <b>Our Trip Planner</b>. Four friends plan a weekend trip from Bengaluru. By the end, the app asks where we are going, takes our expenses, splits the bill, checks the budget and finds the weather there. You will have built every line of it, and most of it by yourself.</p>
+      <p>But the app is not the goal. Learning Python is the goal. The app is the reason we learn each thing, at the moment we need it.</p>
+      <p>Say you moved to a hostel and had to cook for yourself. Nobody gave you a cookery syllabus. You wanted tea, so you learned tea. Then rice, because you were hungry. Each dish came when you needed it, and you never forgot it.</p>
+      <p>Every chapter works the same way:</p>
+    </div>
+    <div class="keyidea">
+      <div class="lbl">How every chapter works</div>
+      a feature we want → we try it with what we know → we get stuck → we discover a new tool → other ways, and our pick → the feature works
+    </div>
+    <div class="prose">
+      <p>The point where what you know runs out is what we call a <b>challenge</b>. Programmers also call it a <b>bottleneck</b>. Every challenge is the start of the next lesson.</p>
+      <p>We are learning Python in the AI era. So you use AI from the very first day. But how you use it changes, inside every chapter:</p>
+      <ol>
+        <li><b>AI shows.</b> It writes the code; you read it, run it, and break it.</li>
+        <li><b>AI helps.</b> You write; you ask only when you are stuck.</li>
+        <li><b>No AI.</b> The last exercises are yours alone.</li>
+      </ol>
+      <p>That last step matters most. If you cannot write it without AI, you cannot check what AI writes for you.</p>
+      <p>Each chapter lives in two places. The video teaches each idea while we build the Trip Planner. This page teaches the same ideas again, with many practice exercises. And here you build a second app, by yourself: a <b>Weekly Grocery Run</b>, one step every chapter. Chapters 1 to 6 run right here in the page. From chapter 7, we move to your own Windows computer.</p>
+    </div>
+  </section>
+
+  <!-- ============ 0.2 ============ -->
+  <section id="s2">
+    <div class="prose">
+      <span class="sec-num">0.2</span>
+      <h2>Your first run</h2>
+      <span class="rtag"><span>Read · ~2 min</span><span class="pr">Practice · ~5 min</span></span>
+      <p>Enough talk. Let's run something.</p>
+      <p>The box below holds a program: one line of Python. Press <b>▶ Run</b>. The dark panel under it is the <b>output</b>: what the program shows you.</p>
+      <div class="pyrun" data-id="c0-hello">
+        <textarea spellcheck="false">print("Hello")</textarea>
+      </div>
+      <p>Now change the word inside the quotes to your own name, and press Run again. Change, run, look. That small loop is most of programming.</p>
+      <p>Made a mess? <b>↻ Reset</b> brings back the starting code.</p>
+      <p>This is real Python, rebuilt to run inside your browser. Nothing to install. Ideally, you would download Python from python.org; for chapters 1 to 6, it is already here for you.</p>
+    </div>
+  </section>
+
+  <!-- ============ 0.3 ============ -->
+  <section id="s3">
+    <div class="prose">
+      <span class="sec-num">0.3</span>
+      <h2>When it goes red</h2>
+      <span class="rtag"><span>Read · ~2 min</span><span class="pr">Practice · ~5 min</span></span>
+      <p>So what happens when something is wrong? Let's break it on purpose.</p>
+      <p>This program is missing its closing bracket. Run it.</p>
+      <div class="pyrun" data-id="c0-red">
+        <textarea spellcheck="false">print("Hello"</textarea>
+      </div>
+      <p>Red text. That is an <b>error message</b>. It is not the computer breaking. It is Python telling you where it got stuck, and why.</p>
+      <p>Read it from the bottom. The last line says what went wrong: <code>'(' was never closed</code>. Just above it, the line number says where to look.</p>
+      <p>Want the full story of what happens when you press Run, and why one missing bracket stops the whole program? Read <a href="../../blog/what-is-a-python-program/">What is a Python program?</a>, with its own short video.</p>
+    </div>
+    <div class="confuse">
+      <div class="lbl">Careful here</div>
+      <p>An error is not a failure. Every programmer sees dozens a day. The skill is reading them, and you will practise it in every chapter.</p>
+    </div>
+  </section>
+
+  <!-- ============ 0.4 ============ -->
+  <section id="s4">
+    <div class="prose">
+      <span class="sec-num">0.4</span>
+      <h2>Your own key, and Spark</h2>
+      <span class="rtag"><span>Read · ~3 min</span><span class="pr">Practice · ~10 min</span></span>
+      <p>Every lesson in this course has <b>Spark</b>, our study buddy: the round ✦ star button at the bottom right of this page. Spark explains things right beside the lesson, using what is on the page.</p>
+      <p>Spark thinks with Google's Gemini, using <b>your own key</b>. You get the key once, from Google AI Studio, with your Google account, and use it along the way, for your learning.</p>
+      <p>Getting your key takes about five minutes, and seven small steps. Each one is shown on a real screen in <a href="../../blog/get-your-gemini-api-key-and-connect-spark/">How do I get my own Gemini API key, and connect Spark?</a> Follow it, then come back here.</p>
+      <p>Then say hello. Press the <b>✦ Spark</b> button and ask: <i>"What does the Run button do?"</i></p>
+    </div>
+    <div class="keyidea">
+      <div class="lbl">Your key is like a password</div>
+      Give it to Spark, and to no one else. It stays only in this browser. On a shared computer, open Spark's <b>⚙ settings</b>, empty the key box and press <b>Save settings</b>, before you leave.
+    </div>
+    <div class="prose">
+      <p>Stuck on the key? Use Gemini chat at <a href="https://gemini.google.com" rel="noopener">gemini.google.com</a> for now, and come back to Spark later. What a key really is, and why it stays a secret, is a whole chapter later on. For now, it is simply yours.</p>
+    </div>
+  </section>
+
+  <!-- ============ 0.5 ============ -->
+  <section id="s5">
+    <div class="prose">
+      <span class="sec-num">0.5</span>
+      <h2>Practice</h2>
+      <span class="rtag"><span class="pr">Practice · ~20 min</span></span>
+      <p>Six short exercises. The first two let AI show you; the middle two, AI only helps; the last two are yours alone.</p>
+    </div>
+    <div class="practice">
+      <div class="p-card">
+        <div class="ph"><span class="pn">0 · P1 · AI shows</span><span class="pt">Ask Spark for a program</span></div>
+        <p class="pd">Ask Spark for a one-line program that says hello. Paste its line here, and run it.</p>
+        <div class="pyrun" data-id="c0-p1"><textarea spellcheck="false"># paste Spark's line here</textarea></div>
+      </div>
+      <div class="p-card">
+        <div class="ph"><span class="pn">0 · P2 · AI shows</span><span class="pt">Ask what an error is</span></div>
+        <p class="pd">Highlight <b>error message</b> in 0.3 and ask Spark about it. Write its answer in your own words.</p>
+      </div>
+      <div class="p-card">
+        <div class="ph"><span class="pn">0 · P3 · AI helps</span><span class="pt">Three lines</span></div>
+        <p class="pd">Print these three lines, in this order. Ask Spark only if you are stuck. Then press <b>✓ Check</b>.</p>
+        <div class="want">Hello
+I am learning Python
+by building an app</div>
+        <div class="pyrun" data-id="c0-p3" data-expect="Hello\nI am learning Python\nby building an app"><textarea spellcheck="false">print("Hello")</textarea></div>
+        <details><summary>Show solution</summary><pre>print("Hello")
+print("I am learning Python")
+print("by building an app")</pre><p>One print() for each line, top to bottom.</p></details>
+      </div>
+      <div class="p-card">
+        <div class="ph"><span class="pn">0 · P4 · AI helps</span><span class="pt">Your trip card, by hand</span></div>
+        <p class="pd">Print a tiny trip card: where you would go, and with whom. Two lines, your own words.</p>
+        <div class="pyrun" data-id="c0-p4"><textarea spellcheck="false">print("Trip to: ")
+print("With: ")</textarea></div>
+      </div>
+      <div class="p-card">
+        <div class="ph"><span class="pn">0 · P5 · No AI</span><span class="pt">Break it, read it</span></div>
+        <p class="pd">Delete the closing quote, and run it. Write what the error's last line says, in your words.</p>
+        <div class="pyrun" data-id="c0-p5"><textarea spellcheck="false">print("Goa")</textarea></div>
+      </div>
+      <div class="p-card">
+        <div class="ph"><span class="pn">0 · P6 · No AI</span><span class="pt">Fix it</span></div>
+        <p class="pd">This program is broken in one place. Find it, fix it, and press <b>✓ Check</b>.</p>
+        <div class="pyrun" data-id="c0-p6" data-expect="Our Trip Planner"><textarea spellcheck="false">print("Our Trip Planner)</textarea></div>
+        <details><summary>Show solution</summary><pre>print("Our Trip Planner")</pre><p>The closing quote was missing, so Python could not tell where the text ends.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section id="quiz">
+    <div class="prose">
+      <h2>Check yourself</h2>
+      <p>Four questions. A wrong answer here is worth more than a right one: read the explanation either way.</p>
+    </div>
+    <div class="stack" id="quiz-box"></div>
+    <div class="score" id="quiz-score" hidden></div>
+  </section>
+
+  <!-- ============ GLOSSARY ============ -->
+  <section id="gloss">
+    <div class="prose">
+      <h2>Glossary</h2>
+      <p>Every word from today that you will need again.</p>
+    </div>
+    <dl class="gloss" id="gloss-list"></dl>
+  </section>
+
+  <!-- ============ NEXT ============ -->
+  <section>
+    <div class="next">
+      <div class="lbl">Before you go to Chapter 1</div>
+      <h3>Think of one small app</h3>
+      <p style="font-size:var(--fs-cap);color:var(--slate)">Think of one small app you would like to build for yourself, one day. Write it down. By the end of this course, you will know how to start it.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:10px">In <b>Chapter 1: Greet us, and remember the trip</b>, the Trip Planner learns to talk to us, and to listen. And you start your own Weekly Grocery Run.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:10px"><i>One question for you: what small app would you build for yourself? Tell me under the video.</i></p>
+    </div>
+  </section>
+
+  <!-- ============ REFERENCES ============ -->
+  <section class="lwa-refs" id="refs">
+    <div class="prose">
+      <h2>References</h2>
+      <p>Where to read more on today's ground.</p>
+    </div>
+    <ol>
+      <li><b>Google</b> — <i>Google AI Studio: API keys</i>. <span class="why">Where you create your own Gemini API key, with your Google account.</span> <a href="https://aistudio.google.com/api-keys" rel="noopener">aistudio.google.com</a></li>
+      <li><b>Google</b> — <i>Gemini API: pricing and rate limits</i>. <span class="why">What your key can use, and its limits; they change, so check here.</span> <a href="https://ai.google.dev/gemini-api/docs/rate-limits" rel="noopener">ai.google.dev</a></li>
+      <li><b>Pyodide</b> — <i>Pyodide 0.26.4</i>. <span class="why">The real Python (3.12) that runs inside this page.</span> <a href="https://pyodide.org/en/0.26.4/" rel="noopener">pyodide.org</a></li>
+      <li><b>The Python Tutorial</b> — <i>§3 An Informal Introduction to Python</i>. <span class="why">The official first steps, in the language's own voice.</span> <a href="https://docs.python.org/3/tutorial/introduction.html" rel="noopener">docs.python.org</a></li>
+    </ol>
+  </section>
+
+  <div class="lwa-chapnav">
+    <a href="index.html"><span class="k">← Course</span><span class="t">Python, by building: all chapters</span></a>
+    <button type="button" class="lwa-complete" data-lwa-complete><span class="k">Progress</span><span class="t">Mark this chapter complete</span></button>
+    <a href="index.html"><span class="k">Next · coming soon</span><span class="t">Chapter 1 · Greet us, and remember the trip</span></a>
+  </div>
+
+  </main>
+</div>
+
+<footer class="foot">
+  <div class="foot-in">
+    <img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building" style="height:36px">
+    <span>Learn AI by Building — Chapter 0 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Course</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
+  </div>
+</footer>
+
+<script>
+"use strict";
+/* ============ Quiz ============ */
+const QUIZ = [
+  {q:"In this course, what starts every chapter?",
+   o:["A list of topics to memorise","A feature we want to add to the app","A test","A video you must watch twice"],
+   a:1,
+   e:"A feature we want. We try it with what we know, get stuck, and that challenge is where the new piece of Python comes in."},
+  {q:"What is a challenge (a bottleneck) here?",
+   o:["A mistake you should be ashamed of","The point where what you know runs out","A hard exam question","A broken computer"],
+   a:1,
+   e:"It is where your current tools stop being enough. Every challenge is the start of the next lesson."},
+  {q:"A red error appears. What has happened?",
+   o:["The computer is damaged","Python stopped where it got stuck, and is telling you where and why","Your work is deleted","You must start again from chapter 0"],
+   a:1,
+   e:"An error is a message. Read its last line first: what went wrong. Then the line number: where to look."},
+  {q:"Who should you give your Gemini API key to?",
+   o:["Anyone who asks for it","Spark, and no one else","Your friends, so they can use it too","Paste it into any website that needs AI"],
+   a:1,
+   e:"Your key is like a password. Give it to Spark here, and to no one else; on a shared computer, clear it before you leave."}
+];
+const quizBox = document.getElementById("quiz-box");
+const scoreEl = document.getElementById("quiz-score");
+let answered = 0, correct = 0;
+QUIZ.forEach((item,qi)=>{
+  const card = document.createElement("div");
+  card.className = "q-card";
+  card.innerHTML = "<div class='qq'>"+(qi+1)+". "+item.q+"</div>";
+  const opts = document.createElement("div");
+  opts.className = "opts";
+  item.o.forEach((text,oi)=>{
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "opt"; b.textContent = text;
+    b.addEventListener("click",()=>{
+      if(card.dataset.done) return;
+      card.dataset.done = "1";
+      answered++;
+      if(oi === item.a) correct++;
+      [...opts.children].forEach((el,j)=>{
+        el.disabled = true;
+        if(j === item.a) el.classList.add("right");
+        else if(j === oi) el.classList.add("wrong");
+      });
+      const ex = document.createElement("div");
+      ex.className = "explain";
+      ex.innerHTML = (oi === item.a ? "<b>Correct.</b> " : "<b>Not quite.</b> ") + item.e;
+      card.appendChild(ex);
+      if(answered === QUIZ.length){
+        scoreEl.hidden = false;
+        scoreEl.textContent = "You scored "+correct+" out of "+QUIZ.length+
+          (correct === QUIZ.length ? " — every one. You are set up and ready to build."
+           : " — read the ones you missed once more; they are all in 0.1 to 0.4.");
+      }
+    });
+    opts.appendChild(b);
+  });
+  card.appendChild(opts);
+  quizBox.appendChild(card);
+});
+
+/* ============ Glossary ============ */
+const GLOSSARY = [
+  ["Program","A list of exact steps the computer follows, top to bottom."],
+  ["Python","The language we write in. It reads almost like English."],
+  ["Run","Hand the program to Python, so it carries the steps out."],
+  ["Output","What the program shows you when it runs: the dark panel under the code."],
+  ["Error message","Python telling you where it got stuck, and why. Read the last line first."],
+  ["Challenge (bottleneck)","The point where what you know runs out. The start of the next lesson."],
+  ["Spark","The study buddy beside every lesson, thinking with Gemini using your own key."],
+  ["API key","Your own key from Google AI Studio that lets Spark use Gemini for you. Like a password: give it only to Spark."]
+];
+document.getElementById("gloss-list").innerHTML = GLOSSARY.map(([t,d])=>
+  "<div class='gcard'><dt>"+t+"</dt><dd>"+d+"</dd></div>").join("");
+
+/* ============ Scrollspy ============ */
+const links = [...document.querySelectorAll(".rail a:not(.rnav-back)")];
+const targets = links.map(a=>document.querySelector(a.getAttribute("href"))).filter(Boolean);
+function syncRail(){
+  const line = window.innerHeight * 0.28;
+  let active = targets[0];
+  for(const t of targets){
+    if(t.getBoundingClientRect().top <= line) active = t;
+  }
+  if(window.innerHeight + window.scrollY >= document.body.scrollHeight - 4){
+    active = targets[targets.length-1];
+  }
+  links.forEach(a=>a.classList.toggle("on", a.getAttribute("href") === "#"+active.id));
+}
+let ticking = false;
+addEventListener("scroll",()=>{
+  if(ticking) return;
+  ticking = true;
+  requestAnimationFrame(()=>{ syncRail(); ticking = false; });
+},{passive:true});
+addEventListener("resize", syncRail);
+syncRail();
+</script>
+<script src="../../assets/site-config.js"></script>
+<script src="../../assets/progress.js?v=2"></script>
+<script src="../../assets/unitnav.js?v=1"></script>
+<script src="../../assets/pyrun.js?v=2"></script>
+<script src="../../assets/stepper.js"></script>
+<script src="../../assets/spark.js?v=2" defer></script>
+</body>
+</html>

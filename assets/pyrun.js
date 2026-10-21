@@ -20,6 +20,14 @@
        <textarea spellcheck="false">print("Hello")</textarea>
      </div>
 
+   input() without data-stdin is interactive (20 Oct 2026, for the Python course): when the
+   program asks, the output shows the prompt and a box to type in; Enter runs the program
+   again from the top with the answers so far ("ask, then replay"). It needs no special
+   server headers, so it works on GitHub Pages and next to YouTube embeds. The pause is a
+   BaseException, so a learner's own `except Exception:` never swallows it, and random is
+   seeded once per run so a replay gives the same numbers. Blocks WITH data-stdin keep their
+   fixed answers, so checked exercises behave exactly as before.
+
    Solved state is stored per unit in localStorage under
    "lwa-pyrun::<course>::<chapter>" and re-rendered on load. */
 (function () {
@@ -75,6 +83,9 @@
 .pyrun .pr-out img.pr-fig{display:block;max-width:100%;height:auto;margin:10px 0 2px;\
   background:#fff;border-radius:8px;padding:6px}\
 .pyrun .pr-out.has-fig{max-height:none}\
+.pyrun .pr-out .pr-ask{font:inherit;color:#fff;background:transparent;border:none;\
+  border-bottom:1px dashed #9aa3b5;outline:none;min-width:10ch;padding:0 2px;margin:0}\
+.pyrun .pr-out .pr-ask:focus{border-bottom-color:#e3a63a}\
 ";
   var st = document.createElement("style"); st.textContent = css; document.head.appendChild(st);
 
@@ -85,13 +96,29 @@
 
   /* ---------------- worker-based executor ---------------- */
   var PREAMBLE = [
-    "import builtins, os",
+    "import builtins, os, sys, random as _lwa_random",
     "os.environ['MPLBACKEND'] = 'AGG'",   // draw plots to an image buffer, not a canvas
     "_lwa_stdin = []",
-    "def _lwa_set_stdin(lines):",
-    "    global _lwa_stdin",
+    "_lwa_interactive = False",
+    "_lwa_waiting = False",
+    // a BaseException, so a learner's `except Exception:` cannot swallow the pause
+    "class _LWAWaitInput(BaseException):",
+    "    pass",
+    "def _lwa_set_stdin(lines, interactive=False, seed=None):",
+    "    global _lwa_stdin, _lwa_interactive, _lwa_waiting",
     "    _lwa_stdin = [str(x) for x in lines]",
+    "    _lwa_interactive = bool(interactive)",
+    "    _lwa_waiting = False",
+    "    if seed is not None:",
+    "        _lwa_random.seed(seed)",       // same numbers on every replay of one run
+    "_lwa_prompt = ''",
     "def _lwa_input(prompt=''):",
+    "    global _lwa_waiting, _lwa_prompt",
+    "    if not _lwa_stdin and _lwa_interactive:",
+    // the prompt goes to the page directly: an unfinished line is held back by stdout
+    "        _lwa_prompt = str(prompt)",
+    "        _lwa_waiting = True",
+    "        raise _LWAWaitInput()",
     "    print(prompt, end='')",
     "    v = _lwa_stdin.pop(0) if _lwa_stdin else ''",
     "    print(v)",
@@ -135,7 +162,7 @@
     '      .catch(function(){})',
     '      .then(function(){',
     '        postMessage({type:"running", id: msg.id});',
-    '        py.globals.get("_lwa_set_stdin")(py.toPy(msg.stdin || []));',
+    '        py.globals.get("_lwa_set_stdin")(py.toPy(msg.stdin || []), !!msg.interactive, msg.seed == null ? null : msg.seed);',
     '        var buf = [];',
     '        py.setStdout({batched:function(s){ buf.push(s); }});',
     '        py.setStderr({batched:function(s){ buf.push(s); }});',
@@ -143,13 +170,17 @@
     // fresh namespace per run so one problem never leaks boxes into the next
     '        try { py.runPython(msg.code, {globals: py.toPy({})}); }',
     '        catch (e) { err = String(e && e.message || e); }',
+    // paused at input() with no answer yet: not an error, the page asks and replays
+    '        var needInput = false;',
+    '        try { needInput = !!py.globals.get("_lwa_waiting"); } catch (e) {}',
+    '        if (needInput) { err = null; try { buf.push(String(py.globals.get("_lwa_prompt"))); } catch (e) {} }',
     '        try {',
     '          py.runPython(FIGCODE);',
     '          var fp = py.globals.get("_lwa_figs");',
     '          if (fp) { figs = fp.toJs(); if (fp.destroy) fp.destroy(); }',
     '        } catch (e) {}',
     '        py.setStdout(); py.setStderr();',
-    '        postMessage({type:"result", id: msg.id, ok: !err, text: buf.join("\\n"), err: err, figs: figs});',
+    '        postMessage({type:"result", id: msg.id, ok: !err, text: buf.join("\\n"), err: err, figs: figs, needInput: needInput});',
     '      });',
     '  });',
     '};'
@@ -200,7 +231,8 @@
     return workerReady;
   }
 
-  function runInWorker(code, stdin, onStatus) {
+  function runInWorker(code, stdin, onStatus, opts) {
+    opts = opts || {};
     return ensureWorker(onStatus).then(function (w) {
       onStatus("Running …");
       return new Promise(function (resolve, reject) {
@@ -217,7 +249,7 @@
           onTimeout: onTimeout,
           timer: setTimeout(onTimeout, RUN_TIMEOUT_MS)
         };
-        w.postMessage({ id: id, code: code, stdin: stdin });
+        w.postMessage({ id: id, code: code, stdin: stdin, interactive: !!opts.interactive, seed: opts.seed == null ? null : opts.seed });
       });
     });
   }
@@ -309,8 +341,44 @@
       out.classList.add("show");
       out.textContent = "";
       var setStatus = function (m) { stat.className = "pr-st"; stat.textContent = m; };
-      return runInWorker(code, stdinLines(), setStatus)
-        .then(function (r) {
+      // no fixed "Program input" box: input() asks in the page, and each answer replays the run
+      var interactive = !stdinInput, answers = [], seed = Math.floor(Math.random() * 1e9);
+
+      function ask(text) {
+        out.innerHTML = "";
+        out.appendChild(document.createTextNode(text));
+        var inp = document.createElement("input");
+        inp.type = "text"; inp.className = "pr-ask"; inp.autocomplete = "off"; inp.spellcheck = false;
+        inp.setAttribute("aria-label", "Your answer to the program");
+        out.appendChild(inp);
+        var tip = document.createElement("div");
+        tip.className = "hint";
+        tip.textContent = "Type your answer and press Enter.";
+        out.appendChild(tip);
+        stat.className = "pr-st"; stat.textContent = "Waiting for your answer …";
+        inp.focus();
+        return new Promise(function (resolve) {
+          inp.addEventListener("keydown", function (e) {
+            if (e.key !== "Enter") return;
+            e.preventDefault();
+            answers.push(inp.value);
+            inp.disabled = true;
+            resolve(step());
+          });
+        });
+      }
+
+      function step() {
+        return runInWorker(code, interactive ? answers : stdinLines(), setStatus,
+                           interactive ? { interactive: true, seed: seed } : null)
+          .then(function (r) {
+            if (r.needInput) return ask(r.text);
+            return finish(r);
+          }, failed);
+      }
+      return step();
+
+      function finish(r) {
           if (!r.ok) {
             out.innerHTML = "";
             if (r.text) out.appendChild(document.createTextNode(r.text + "\n"));
@@ -331,8 +399,9 @@
           showFigures(out, figs);
           if (!box.classList.contains("ok")) { stat.className = "pr-st"; stat.textContent = "Ran ✓"; }
           return { ok: true, text: r.text };
-        })
-        .catch(function (e) {
+      }
+
+      function failed(e) {
           var msg = String(e && e.message || e);
           out.classList.add("show");
           if (msg === "__timeout__") {
@@ -354,7 +423,7 @@
             stat.className = "pr-st no"; stat.textContent = "Could not run";
           }
           return { ok: false, text: "" };
-        });
+      }
     }
 
     bar.querySelector(".run").onclick = exec;

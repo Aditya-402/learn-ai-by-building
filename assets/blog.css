@@ -7,6 +7,17 @@
   font-weight:700;color:var(--accent);background:var(--accent-wash);border-radius:999px;padding:5px 12px;margin-bottom:14px}
 .blog-label.why{color:var(--clay);background:var(--clay-wash)}
 .blog-label.what{color:var(--teal);background:var(--teal-wash)}
+.blog-label.how{color:var(--accent-deep);background:var(--accent-wash)}   /* "How do I…?" (20 Oct 2026) */
+
+/* a how-to step: the number, what to do, then the screen recording of it (a GIF, full column width) */
+.step{display:grid;grid-template-columns:40px 1fr;gap:4px 14px;align-items:start;margin:22px 0 8px;max-width:100%}
+.step .n{grid-row:span 2;width:34px;height:34px;border-radius:50%;background:var(--accent);color:#fff;font-weight:700;
+  display:flex;align-items:center;justify-content:center;font-size:15px}
+.step h3{margin:4px 0 0;font-size:var(--fs-lg)}
+.step p{margin:2px 0 0}
+.shot{margin:-14px 0 0;max-width:100%}   /* sits close under its step text: the section gap and the GIF's own 10px margin are enough */
+.shot img{display:block;max-width:100%;height:auto}   /* each GIF carries its own card, ground and caption (20 Oct 2026) */
+.shot figcaption{font-size:var(--fs-sm);color:var(--muted);margin-top:6px}
 
 /* the video that goes with the post: 16:9, full column width */
 .video{position:relative;width:100%;aspect-ratio:16/9;border-radius:var(--r-lg);overflow:hidden;background:#000;

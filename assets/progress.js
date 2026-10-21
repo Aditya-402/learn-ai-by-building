@@ -23,7 +23,7 @@
   }
   function saveLocal(d) { try { localStorage.setItem(LS_KEY, JSON.stringify(d)); } catch {} }
 
-  // shape: { [course]: { [chapter]: {t:title, c:completed, q:quizScore, qt:quizTotal, s:scrollPct, u:updatedISO} } }
+  // shape: { [course]: { [chapter]: {t:title, p:pagePath (this device only), c:completed, q:quizScore, qt:quizTotal, s:scrollPct, u:updatedISO} } }
   let data = loadLocal();
   let supabase = null, user = null;
 
@@ -176,10 +176,12 @@
           if (r.u && (!latest || r.u > latest.u)) latest = { course, ch, ...r };
         }
       if (!latest) {
-        el.innerHTML = "<div class='h'>Your journey</div><div class='row'>Nothing started yet — pick a course below and dive in.</div>";
+        el.innerHTML = "<div class='h'>Your journey</div><div class='row'>Nothing started yet — pick one below and dive in.</div>";
         return;
       }
-      const href = el.getAttribute("data-lwa-root") ? el.getAttribute("data-lwa-root") + "series/" + latest.course + "/" + latest.ch + ".html" : latest.ch + ".html";
+      // the page itself, as recorded on this device; else its file name from the id (u01 -> unit1.html)
+      const page = String(latest.ch).replace(/^u0*(\d+)$/, "unit$1") + ".html";
+      const href = latest.p || (el.getAttribute("data-lwa-root") ? el.getAttribute("data-lwa-root") + "series/" + latest.course + "/" + page : page);
       el.innerHTML = "<div class='h'>Your journey</div><div class='row'><span>Last visited: <b>" +
         escapeHtml(latest.t || latest.ch) + "</b>" + (latest.c ? " (completed)" : "") +
         (latest.q != null ? " · quiz " + latest.q + "/" + latest.qt : "") +
@@ -192,7 +194,7 @@
   /* ---------------- chapter-page auto tracking ---------------- */
   if (COURSE && CHAPTER) {
     // record the visit
-    update(COURSE, CHAPTER, { t: TITLE });
+    update(COURSE, CHAPTER, { t: TITLE, p: location.pathname });
 
     // reading progress bar + scroll% (throttled, saved on change of >2%)
     const bar = document.createElement("div");
