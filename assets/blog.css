@@ -56,6 +56,5 @@ header.top .top-in{max-width:1124px;margin:0 auto;padding:16px 28px;display:flex
 header.top .lwa-home img{height:48px;display:block}
 header.top .lwa-tag a{color:#faf6ee;text-decoration:none}
 header.top .lwa-tag a:hover{color:#e3a63a}
-body[data-lwa-course="blog"] .masthead{background:var(--ground)}
 body[data-lwa-course="blog"] .masthead-in{padding-top:34px}
 @media (max-width:640px){ header.top .top-in{padding:12px 20px} header.top .lwa-home img{height:40px} }

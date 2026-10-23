@@ -9,8 +9,8 @@
 <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
 <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
 <link rel="stylesheet" href="../../assets/site.css?v=8">
-<link rel="stylesheet" href="../../assets/unit.css?v=7">
-<link rel="stylesheet" href="../../assets/blog.css?v=6">
+<link rel="stylesheet" href="../../assets/unit.css?v=8">
+<link rel="stylesheet" href="../../assets/blog.css?v=7">
 </head>
 <body data-lwa-course="blog" data-lwa-chapter="why-python-for-ai">
 <header class="top"><div class="top-in"><a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark-maroon.svg?v=1" alt="Learn AI by Building"></a><div class="lwa-brand-right"><span class="lwa-tag"><a href="../index.html">Blog</a></span><span data-lwa-auth></span></div></div></header>
@@ -322,6 +322,7 @@ print("NumPy was about", round(loop_time / numpy_time), "times faster")</textare
       <p>Every number on this page, and where it comes from. Checked on 11 Oct 2026.</p>
     </div>
     <ol>
+      <li><b>Measured for this post</b> — <i>Loop vs NumPy, on my laptop, 10 Oct 2026</i>. <span class="why">Intel Core i7-1185G7 (11th gen), 32 GB RAM, Windows 11, Python 3.13.7, NumPy 2.2.6, no graphics card: 10 million price x quantity, plain loop 1.16 s, NumPy np.dot 0.010 s (median of 5 runs).</span></li>
       <li><b>Python Software Foundation</b> — <i>Python glossary: interpreted</i>. <span class="why">Interpreted languages &quot;generally also run more slowly&quot; than compiled ones.</span> <a href="https://docs.python.org/3/glossary.html" rel="noopener">link</a></li>
       <li><b>Peters, T.</b> — <i>PEP 20, The Zen of Python (2004)</i>. <span class="why">&quot;Readability counts.&quot;</span> <a href="https://peps.python.org/pep-0020/" rel="noopener">link</a></li>
       <li><b>NumPy</b> — <i>What is NumPy?</i>. <span class="why">NumPy&#x27;s work is &quot;executed by pre-compiled C code&quot;.</span> <a href="https://numpy.org/doc/stable/user/whatisnumpy.html" rel="noopener">link</a></li>
@@ -355,6 +356,6 @@ print("NumPy was about", round(loop_time / numpy_time), "times faster")</textare
 </footer>
 <script src="../../assets/site-config.js"></script>
 <script src="../../assets/progress.js?v=2"></script>
-<script src="../../assets/pyrun.js?v=2"></script>
+<script src="../../assets/pyrun.js?v=3"></script>
 </body>
 </html>

@@ -217,7 +217,7 @@
     const level = LEVELS[cfg.level] || LEVELS.graduate;
     const length = LENGTHS[cfg.length] || LENGTHS.balanced;
     const sys =
-`You are Spark, the friendly study buddy built into "Learn AI by Building" — free personal study notes where graduate engineers learn how LLMs work by building one.
+`You are Spark, the friendly study buddy built into "Learn AI by Building" — free pages where learners understand Python and AI by building things.
 The student is currently reading: "${UNIT_TITLE}".
 
 STRICT GROUNDING RULES:

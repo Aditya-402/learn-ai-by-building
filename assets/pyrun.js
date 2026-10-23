@@ -398,6 +398,8 @@
             : (figs.length ? "" : "(the program ran, but printed nothing)");
           showFigures(out, figs);
           if (!box.classList.contains("ok")) { stat.className = "pr-st"; stat.textContent = "Ran ✓"; }
+          // the step bar ticks a chapter step only when its practice has been run (Adi, 22 Oct 2026)
+          document.dispatchEvent(new CustomEvent("lwa:pyrun-ran", { detail: { id: id } }));
           return { ok: true, text: r.text };
       }
 

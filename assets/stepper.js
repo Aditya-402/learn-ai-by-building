@@ -55,6 +55,13 @@
   let stt = loadSt();               // {cur:idx, done:[idx,...]}
   let cur = Number.isInteger(stt.cur) ? Math.min(stt.cur, steps.length - 1) : 0;
   let done = new Set(stt.done || []);
+  // Chapter pages (not the old units): a step with practice is ticked only when every practice block in it has been
+  // run, so progress means practice done (Adi, 22 Oct 2026). Steps without practice tick on moving on, as before.
+  const PRACTICE_TICKS = /^chapter/.test(UNIT);
+  const ran = new Set(stt.ran || []);
+  const practiceOf = steps.map(s => [...s.querySelectorAll(".pyrun[data-id]")].map(b => b.getAttribute("data-id")));
+  const practised = i => practiceOf[i].every(id => ran.has(id));
+  const canTick = i => !PRACTICE_TICKS || practised(i);
   const getMode = () => { try { return localStorage.getItem(MODE_LS) || "step"; } catch { return "step"; } };
   const setModeLS = m => { try { localStorage.setItem(MODE_LS, m); } catch {} };
 
@@ -89,7 +96,8 @@
     bar.innerHTML =
       `<div class="dots">${steps.map((_, i) =>
         `<button type="button" class="dot${done.has(i) ? " done" : ""}${i === cur ? " cur" : ""}" title="${META[i].label}" aria-label="Go to: ${META[i].label}"></button>`).join("")}</div>` +
-      `<span class="lbl">Step <b>${cur + 1}</b> of ${steps.length} · <b>${META[cur].label}</b> · ~${META[cur].mins} min</span>` +
+      `<span class="lbl">Step <b>${cur + 1}</b> of ${steps.length} · <b>${META[cur].label}</b>` +   // one time estimate per page, at the top (Adi, 22 Oct 2026)
+      (PRACTICE_TICKS && !done.has(cur) && practiceOf[cur].length ? ` · run the practice to tick this step` : ``) + `</span>` +
       `<span class="sp"></span>` +
       `<button type="button" class="mode">${mode === "step" ? "☰ Read as one page" : "▣ Step through this unit"}</button>`;
     bar.querySelectorAll(".dot").forEach((d, i) => d.onclick = () => go(i));
@@ -114,20 +122,22 @@
       else if (t) t.remove();
       if (mode === "step") a.classList.toggle("on", idx === cur);
     });
-    saveSt({ cur, done: [...done] });
+    saveSt({ cur, done: [...done], ran: [...ran] });
   }
 
   function go(i, markDone) {
-    if (markDone) done.add(cur);
+    if (markDone && canTick(cur)) done.add(cur);
     cur = Math.max(0, Math.min(steps.length - 1, i));
     render();
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    // to the top of the lesson, not of the page: the masthead took 60% of the screen and hid the step (Adi, 22 Oct 2026)
+    window.scrollTo({ top: Math.max(0, bar.getBoundingClientRect().top + window.scrollY - 12), behavior: "smooth" });
   }
 
   nav.querySelector(".back").onclick = () => go(cur - 1);
   nav.querySelector(".go").onclick = () => {
     if (cur === steps.length - 1) {
-      done.add(cur); render();
+      if (canTick(cur)) done.add(cur);
+      render();
       const btn = document.querySelector("[data-lwa-complete]");
       if (btn && !btn.classList.contains("is-done")) btn.click();   // feed the journey
       setModeLS("read"); render();                                  // land on the full page
@@ -161,6 +171,16 @@
       tick = false;
     });
   }, { passive: true });
+
+  // a practice block was run (or checked correct): tick every chapter step whose practice is now all done
+  function onRan(e) {
+    if (!PRACTICE_TICKS || !e.detail || !e.detail.id) return;
+    ran.add(String(e.detail.id));
+    practiceOf.forEach((ids, i) => { if (ids.length && practised(i)) done.add(i); });
+    render();
+  }
+  document.addEventListener("lwa:pyrun-ran", onRan);
+  document.addEventListener("lwa:pyrun-solved", onRan);
 
   render();
 })();
