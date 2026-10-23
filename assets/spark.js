@@ -14,13 +14,16 @@
   const KEY_LS = "lwa-gemini-key";
   const CFG_LS = "lwa-spark-settings";
   const UNIT_TITLE = document.body.getAttribute("data-lwa-title") || document.title;
+  // Chapter pages list what has been taught up to them; Spark then writes example programs using only that
+  // (Adi, 20 Oct 2026: "the AI itself keeps learning first"). Pages without the list behave as before.
+  const TAUGHT = (document.body.getAttribute("data-lwa-taught") || "").trim();
 
   /* ---- student-tunable settings ----
      Answers vary via the system prompt (level & length). The model IS choosable —
      Google deprecates models over time, so the dropdown is populated LIVE from the
      ListModels API with the student's key; the default is always the cheapest
      (flash-lite family) available to that key. */
-  const FALLBACK_MODELS = ["gemini-2.5-flash-lite", "gemini-2.5-flash", "gemini-2.5-pro"];
+  const FALLBACK_MODELS = ["gemini-3.5-flash-lite", "gemini-3.5-flash", "gemini-3.5-pro"];
   const MODELS_LS = "lwa-gemini-models";
 
   function modelRank(name) { // lower = cheaper = preferred default
@@ -231,6 +234,12 @@ STYLE:
 - Explain like a patient friend, not a textbook.
 - When one of the page's interactive labs demonstrates the point, tell the student to try it ("open Lab 5 and set W_value to zero").
 - Plain text only: no markdown headers or bullets, no LaTeX. Keep symbols simple (q·k, √d_k).
+${TAUGHT ? `
+WRITING PROGRAMS (this is a chapter of a series; the learner has learned only what is listed below):
+- When the student asks for a program, an example or a line of code, write it: short, complete, and runnable in the page's Python (it runs in the browser: no files from their computer, no installs).
+- Use ONLY these Python features, the ones taught so far: ${TAUGHT}. Nothing else, even if it would be shorter or neater.
+- If the task truly needs something not taught yet, say so kindly in one sentence, name the chapter where it comes if the page says, and give the closest program that uses only what they know.
+- Put the code on its own lines, with no backticks or markdown, so it can be copied straight into a practice box. Then say in one sentence what it will print.` : ""}
 
 UNIT CONTENT:
 ${relevantContext(question, highlight)}`;
