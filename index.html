@@ -12,6 +12,10 @@
 <style>
 body{margin:0;background:var(--lwa-ground);color:var(--lwa-ink);font-family:var(--lwa-sans);line-height:1.6}
 .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+.top-right{display:inline-flex;align-items:center;gap:10px}
+.connect-btn{font-family:var(--lwa-sans);font-size:12.5px;font-weight:600;text-decoration:none;color:#3a1620;background:#e3a63a;
+  border-radius:999px;padding:7px 16px;border:1px solid #e3a63a}   /* the way in for workshop visitors (Adi, 24 Oct 2026) */
+.connect-btn:hover{background:#faf6ee;border-color:#faf6ee}
 header.top{background:#3a1620;border-bottom:0}   /* maroon top bar, matching the YouTube banner (10 Oct 2026) */
 .top-in{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 0;flex-wrap:wrap}
 .hero{padding:52px 0 40px}
@@ -33,7 +37,7 @@ footer{border-top:1px solid var(--lwa-line);margin-top:48px;background:var(--lwa
 <header class="top">
   <div class="wrap top-in">
     <a class="lwa-home" href="index.html" style="display:inline-flex"><img src="assets/wordmark-maroon.svg?v=1" alt="Learn AI by Building" style="height:48px"></a>
-    <span data-lwa-auth></span>
+    <div class="top-right"><a class="connect-btn" href="connect.html">Connect</a><span data-lwa-auth></span></div>
   </div>
 </header>
 
@@ -59,7 +63,7 @@ footer{border-top:1px solid var(--lwa-line);margin-top:48px;background:var(--lwa
 <footer>
   <div class="wrap foot-in">
     <span style="display:inline-flex;align-items:center;gap:10px"><img src="assets/wordmark.svg?v=2" alt=""> </span>
-    <span>Made by Adi · <a href="blog/get-your-gemini-api-key-and-connect-spark/">How do I get a Gemini API key?</a> · <a href="privacy.html">Privacy</a></span>
+    <span>Made by Adi · <a href="connect.html">Connect</a> · <a href="blog/get-your-gemini-api-key-and-connect-spark/">How do I get a Gemini API key?</a> · <a href="privacy.html">Privacy</a></span>
   </div>
 </footer>
 
