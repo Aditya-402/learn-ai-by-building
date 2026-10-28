@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>How do I get my own Gemini API key, and connect Spark? — Learn AI by Building</title>
-<meta name="description" content="Create your own key in Google AI Studio, copy it, and delete it when you are done. Then give it to Spark, the study buddy on this site, and ask your first question. Every step is shown on a real screen.">
+<meta name="description" content="Want to use Gemini in your own code, or with Spark, the study buddy on this site? By the end, you will have your own key from Google AI Studio, know how to keep it safe, and have Spark answering your first question.">
 <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
 <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
@@ -19,7 +19,7 @@
     <div class="title-block">
       <span class="blog-label how">How do I…?</span>
       <h1>How do I get my own Gemini API key, and connect Spark?</h1>
-      <p class="standfirst">Create your own key in Google AI Studio, copy it, and delete it when you are done. Then give it to Spark, the study buddy on this site, and ask your first question. Every step is shown on a real screen.</p>
+      <p class="standfirst">Want to use Gemini in your own code, or with Spark, the study buddy on this site? By the end, you will have your own key from Google AI Studio, know how to keep it safe, and have Spark answering your first question.</p>
       <div class="facts">
         <div><b>Read</b>~5 min</div>
         <div><b>Watch</b>3:31 video</div>
@@ -57,8 +57,9 @@
     <div class="prose">
       <h2>Why you need a key</h2>
       <p>Any program that asks Google's Gemini a question needs a key: your own code, an app, or Spark, the study buddy on this site. So why a key at all? Let's try to understand.</p>
-      <p>Say you join a library. The books are there for everyone. But to borrow one, you show your own card. The card says who is borrowing, and how many books that person may take.</p>
-      <p>Gemini works the same way. Each question to it uses a little of Google's computing. Your key tells Google the question is yours. Google also sets how much each key may ask, per minute and per day. Those limits change, so check them in AI Studio.</p>
+      <p>Say you join a library. The books are there for everyone, but to borrow one, you show your own card. The card says who is borrowing, and how many books that person may take.</p>
+      <p>Gemini works the same way. Each question you send uses a little of Google's computing, and your key tells Google that the question is yours.</p>
+      <p>Google also sets how much each key may ask, per minute and per day. Those limits change from time to time, so check them in AI Studio.</p>
       <p>That card is what we call an <b>API key</b>. First, <a href="#get-the-key">get your key</a>. Then, if you are learning with us, <a href="#use-with-spark">give it to Spark</a>.</p>
     </div>
   </section>
@@ -66,80 +67,87 @@
   <section id="get-the-key">
     <div class="prose">
       <h2>Get your Gemini API key</h2>
-      <p>Three steps, all in Google AI Studio.</p>
+      <p>It takes three steps, all in Google AI Studio.</p>
     </div>
 
     <div class="step"><span class="n">1</span><h3>Create the key</h3>
-      <p>Open <a href="https://aistudio.google.com/api-keys" rel="noopener">Google AI Studio → API keys</a> and sign in with your Google account. Click <b>Create API key</b>.</p></div>
+      <p>Open <a href="https://aistudio.google.com/api-keys" rel="noopener">Google AI Studio → API keys</a> and sign in with your Google account. Then click <b class="ui">Create API key</b>.</p></div>
     <figure class="shot"><video class="clip" src="img/1a-open-create-api-key.mp4" poster="img/1a-open-create-api-key-poster.jpg" controls muted playsinline preload="metadata" aria-label="The API keys page in Google AI Studio; the view moves in to Create API key, top right, and a ring marks the click." width="724" height="420" style="display:block;max-width:100%;height:auto"></video></figure>
     <div class="prose">
-      <p>Give your key a name you will recognise, like <i>Learn AI by Building</i>. Keep the <b>Default Gemini Project</b>, or create a project of your own, as here. Then click <b>Create key</b>.</p>
+      <p>Give your key a name you will recognise, such as <i>Learn AI by Building</i>. Keep the <b class="ui">Default Gemini Project</b>, or create a project of your own, as in the recording. Then click <b class="ui">Create key</b>.</p>
     </div>
     <figure class="shot"><video class="clip" src="img/1b-name-it-and-create.mp4" poster="img/1b-name-it-and-create-poster.jpg" controls muted playsinline preload="metadata" aria-label="The Create a new key dialog: the key is named, a new project is created, and Create key is clicked." width="724" height="420" style="display:block;max-width:100%;height:auto"></video><figcaption>The waits are cut out: the typing, and the spinners.</figcaption></figure>
 
     <div class="step"><span class="n">2</span><h3>Copy the key</h3>
-      <p>The key appears in <b>API key details</b>. Click <b>Copy key</b>, or the copy icon beside it. Now paste it wherever you need it.</p></div>
-    <figure class="shot"><video class="clip" src="img/2-copy-the-key.mp4" poster="img/2-copy-the-key-poster.jpg" controls muted playsinline preload="metadata" aria-label="The API key details dialog showing the key, under a label saying it is deleted at the end; the pointer clicks the copy icon." width="724" height="420" style="display:block;max-width:100%;height:auto"></video><figcaption>This key was deleted at the end of the recording. When you do this, it is the one moment your key shows in full: make sure nobody else can see your screen.</figcaption></figure>
+      <p>The key appears in <b class="ui">API key details</b>. Click <b class="ui">Copy key</b>, or the copy icon beside it, and paste the key wherever you need it.</p></div>
+    <figure class="shot"><video class="clip" src="img/2-copy-the-key.mp4" poster="img/2-copy-the-key-poster.jpg" controls muted playsinline preload="metadata" aria-label="The API key details dialog showing the key, under a label saying it is deleted at the end; the pointer clicks the copy icon." width="724" height="420" style="display:block;max-width:100%;height:auto"></video><figcaption>This key was deleted at the end of the recording. When you do this, it is the one moment your key shows in full, so make sure nobody else can see your screen.</figcaption></figure>
 
     <div class="step"><span class="n">3</span><h3>Delete a key, when you are done with it</h3>
-      <p>Come back here when you stop using a key, or when someone else may have seen it. On the API keys page, open the <b>⋮</b> menu on the key's row. Click <b>Delete key</b>, then <b>Delete</b>.</p></div>
+      <p>Come back here when you stop using a key, or when someone else may have seen it. On the API keys page, open the <b class="ui">⋮</b> menu on the key's row, click <b class="ui">Delete key</b>, then <b class="ui">Delete</b>.</p></div>
     <figure class="shot"><video class="clip" src="img/7-delete-the-key.mp4" poster="img/7-delete-the-key-poster.jpg" controls muted playsinline preload="metadata" aria-label="The API keys page: the menu on the first row offers Delete key; a dialog asks to confirm, and the key is gone from the list." width="724" height="420" style="display:block;max-width:100%;height:auto"></video><figcaption>The wait while Google deletes the key is cut out.</figcaption></figure>
     <div class="prose">
-      <p>Deleting cannot be undone. Anything using that key stops working. To carry on, make a new key, and use the new one instead.</p>
-      <p><b>AI Studio will not let you create a key?</b> Check that you are 18 or older, that your Google account has your age verified, and that you are in a country where it works.</p>
+      <p>Deleting cannot be undone, and anything using that key stops working. To carry on, make a new key and use the new one instead.</p>
+    </div>
+    <div class="confuse">
+      <div class="lbl">AI Studio will not let you create a key?</div>
+      <p>Check that you are 18 or older, and that your Google account has your age verified. Also check that you are in a country where the Gemini API works.</p>
     </div>
   </section>
 
   <section id="safe">
     <div class="prose">
       <h2>Keep your key safe</h2>
-      <p>Your key is like a password. Whoever has it can ask Gemini as you, and use up your limits.</p>
+      <p>Your key is like a password: whoever has it can ask Gemini as you, and use up your limits.</p>
       <ul>
-        <li><b>Never share it.</b> Not in a chat, an email, a screenshot or a comment.</li>
-        <li><b>Only paste it where you trust the page.</b> On this site, that is Spark, and nowhere else.</li>
-        <li><b>If it may have leaked, delete it</b> (step 3, above), and make a new one.</li>
+        <li><b>Never share it</b>, not in a chat, an email, a screenshot or a comment.</li>
+        <li><b>Paste it only where you trust the page.</b> On this site, that is Spark, and nowhere else.</li>
+        <li><b>If it may have leaked, delete it</b> (step 3 above), and make a new one.</li>
       </ul>
       <p>How programs use a key safely, and why it never goes into shared code, comes later in the series.</p>
-      <p>That is your key. If you came for the key alone, you are done. To use it on this site, read on.</p>
+      <p>That is your key. If you came for the key alone, you are done; to use it on this site, read on.</p>
     </div>
   </section>
 
   <section id="use-with-spark">
     <div class="prose">
       <h2>Use your key with Spark</h2>
-      <p>Every lesson on this site has Spark, our study buddy. Spark thinks with Gemini, using your own key. You give it the key once; it stays in this browser, and goes only to Google, together with your question.</p>
+      <p>Every lesson on this site has Spark, our study buddy, and Spark thinks with Gemini using your own key. You give it the key once. It stays in this browser, and it goes only to Google, together with your question.</p>
     </div>
 
     <div class="step"><span class="n">1</span><h3>Open Spark</h3>
-      <p>Open any lesson, for example <a href="../../series/python-by-building/chapter0.html">Chapter 0</a>. Press the round <b>✦ Spark</b> button at the bottom right.</p></div>
+      <p>Open any lesson, for example <a href="../../series/python-by-building/chapter0.html">Chapter 0</a>, and press the round <b class="ui">✦ Spark</b> button at the bottom right.</p></div>
     <figure class="shot"><video class="clip" src="img/3-open-spark.mp4" poster="img/3-open-spark-poster.jpg" controls muted playsinline preload="metadata" aria-label="A lesson page; the view moves in to the Spark button at the bottom right, which opens the Spark panel asking for a Gemini API key." width="724" height="420" style="display:block;max-width:100%;height:auto"></video></figure>
 
     <div class="step"><span class="n">2</span><h3>Paste your key</h3>
-      <p>Paste the key into <b>Your Gemini API key</b>. It shows only as dots. Press <b>Save key &amp; start</b>. (If you came in through <b>⚙ settings</b>, the button says <b>Save settings</b>.)</p></div>
+      <p>Paste the key into <b class="ui">Your Gemini API key</b>, where it shows only as dots. Then press <b class="ui">Save key &amp; start</b>. If you came in through <b class="ui">⚙ settings</b>, the button says <b class="ui">Save settings</b> instead.</p></div>
     <figure class="shot"><video class="clip" src="img/4-paste-and-save.mp4" poster="img/4-paste-and-save-poster.jpg" controls muted playsinline preload="metadata" aria-label="Spark settings: the key is pasted and shows as dots; Save settings is pressed and the chat opens." width="724" height="420" style="display:block;max-width:100%;height:auto"></video></figure>
     <div class="prose">
-      <p>Chrome may offer <b>"Save password?"</b> when you paste it. Choose <b>Never</b>. The key is not a password for this site.</p>
+      <p>Chrome may offer <b class="ui">Save password?</b> when you paste the key. Choose <b class="ui">Never</b>, because the key is not a password for this site.</p>
     </div>
 
     <div class="step"><span class="n">3</span><h3>Ask a question</h3>
-      <p>Type something into <b>Ask about this unit</b> and press the arrow. Start simple: <i>Hello Spark</i>.</p></div>
+      <p>Type into <b class="ui">Ask about this unit</b> and press the arrow. Start simple, with <i>Hello Spark</i>.</p></div>
     <figure class="shot"><video class="clip" src="img/5-ask-a-question.mp4" poster="img/5-ask-a-question-poster.jpg" controls muted playsinline preload="metadata" aria-label="The question Hello Spark is typed and sent; Spark shows that it is thinking." width="724" height="420" style="display:block;max-width:100%;height:auto"></video></figure>
 
     <div class="step"><span class="n">4</span><h3>See the answer</h3>
-      <p>Spark answers from the page you are on. Then ask it something real, like <i>Summarise this page in three sentences</i>.</p></div>
-    <figure class="shot"><video class="clip" src="img/6-see-the-answer.mp4" poster="img/6-see-the-answer-poster.jpg" controls muted playsinline preload="metadata" aria-label="Spark replies to Hello Spark, then summarises the page in three sentences." width="724" height="420" style="display:block;max-width:100%;height:auto"></video><figcaption>The waits are cut out: the typing, and the spinners.</figcaption></figure>
-    <div class="prose">
-      <p><b>On a shared computer, clear the key before you leave.</b> Open Spark's <b>⚙ settings</b>, empty the key box, and press <b>Save settings</b>.</p>
+      <p>Spark answers from the page you are on. Then ask it something real.</p></div>
+    <div class="yousee"><b>Try one of these in Spark</b>Summarise this page in three sentences.
+Explain the highlighted line as if I am new to coding.
+Give me one question to test what I learned here.</div>
+    <figure class="shot" style="margin-top:14px"><video class="clip" src="img/6-see-the-answer.mp4" poster="img/6-see-the-answer-poster.jpg" controls muted playsinline preload="metadata" aria-label="Spark replies to Hello Spark, then summarises the page in three sentences." width="724" height="420" style="display:block;max-width:100%;height:auto"></video><figcaption>The waits are cut out: the typing, and the spinners.</figcaption></figure>
+    <div class="confuse">
+      <div class="lbl">On a shared computer</div>
+      <p>Clear the key before you leave. Open Spark's <b class="ui">⚙ settings</b>, empty the key box, and press <b class="ui">Save settings</b>.</p>
     </div>
   </section>
 
   <section id="wrong">
     <div class="prose">
       <h2>When Spark goes wrong</h2>
-      <p>Read the message first. Spark tells you what Google said.</p>
+      <p>Read the message first, because Spark tells you what Google said. Here is what each message means, and what to do.</p>
       <ul>
-        <li><b>"That API key was rejected by Google — let's re-enter it."</b> Part of the key was missed, or a space came along, or the key was deleted. Copy it again with <b>Copy key</b>, and paste it again.</li>
-        <li><b>"The quota for your key is used up for now — wait a minute and try again."</b> You asked more than your key may ask in a minute. Wait, and ask again. AI Studio's <b>Rate Limit</b> page shows your limits.</li>
+        <li><b class="ui">"That API key was rejected by Google — let's re-enter it."</b> Part of the key was missed, a space came along, or the key was deleted. Copy it again with <b class="ui">Copy key</b>, and paste it again.</li>
+        <li><b class="ui">"The quota for your key is used up for now — wait a minute and try again."</b> You asked more than your key may ask in a minute. Wait, and ask again; AI Studio's <b class="ui">Rate Limit</b> page shows your limits.</li>
         <li><b>A message from Google about your location or region.</b> The Gemini API does not work in your country yet. The list of countries is in the references.</li>
         <li><b>Spark says nothing at all.</b> Check your internet connection, reload the page, and try once more.</li>
       </ul>
@@ -151,8 +159,10 @@
     <div class="next">
       <div class="lbl">Your homework</div>
       <h3>Ask, then check</h3>
-      <p style="font-size:var(--fs-cap);color:var(--slate)">Open <a href="../../series/python-by-building/chapter0.html">Chapter 0</a>, connect Spark, and ask it one question about the page. Then check its answer against the page itself. Was it right?</p>
-      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:10px"><i>One question for you: what is the first thing you asked Spark?</i></p>
+      <p style="font-size:var(--fs-cap);color:var(--slate)"><b>The goal:</b> use Spark, and check it instead of trusting it.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>The steps:</b> open <a href="../../series/python-by-building/chapter0.html">Chapter 0</a>, connect Spark, and ask it one question about the page. Then check its answer against the page itself.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>Guess first:</b> before you read the answer, do you expect Spark to get it right?</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:10px"><i>One question for you: what is the first thing you asked Spark, and was it right?</i></p>
     </div>
   </section>
 
