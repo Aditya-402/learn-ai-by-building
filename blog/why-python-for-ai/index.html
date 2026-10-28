@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Why Python for AI? — Learn AI by Building</title>
-<meta name="description" content="Python is slow. Its own documentation says so. So why does almost all of AI run on it? A scooter, a stopwatch and a car that listens answer it.">
+<meta name="description" content="Python is slow, and its own documentation says so, yet almost all of AI runs on it. By the end, you will know who really does the heavy work, how fast it is, and when Python is the wrong choice.">
 <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
 <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
@@ -19,9 +19,9 @@
     <div class="title-block">
       <span class="blog-label why">Why does it exist?</span>
       <h1>Why Python for AI?</h1>
-      <p class="standfirst">Python is slow. Its own documentation says so. So why does almost all of AI run on it? A scooter, a stopwatch and a car that listens answer it.</p>
+      <p class="standfirst">Python is slow, and its own documentation says so, yet almost all of AI runs on it. By the end, you will know who really does the heavy work, how fast it is, and when Python is the wrong choice.</p>
       <div class="facts">
-        <div><b>Read</b>~8 min</div>
+        <div><b>Read</b>~7 min</div>
         <div><b>Watch</b>7:52 video</div>
         <div><b>Practice</b>runs right here</div>
         <div><b>Published</b>11 Oct 2026</div>
@@ -61,8 +61,7 @@
   <section id="s1">
     <div class="prose">
       <h2>A strange fact</h2>
-      <p>Python is a slow language. Its own documentation says so. And yet, almost all of AI is built with it.</p>
-      <p>At most of my workshops, students ask me this.</p>
+      <p>Python is a slow language, and <a href="https://docs.python.org/3/glossary.html" rel="noopener">its own documentation says so</a>. Yet almost all of AI is built with it. At most of my workshops, students ask me about this.</p>
     </div>
     <div class="prints">
       <img src="img/workshop.svg" alt="Students with their hands up: Is AI Python?">
@@ -71,83 +70,98 @@
       <ul>
         <li>Is AI Python?</li>
         <li>Is Python AI?</li>
-        <li>Why not the other languages we already have, for AI?</li>
+        <li>Why not use the other languages we already have, for AI?</li>
         <li>What is so special about Python?</li>
       </ul>
-      <p>Good questions. And here is the puzzle inside them. Languages like C and Java run faster than Python.</p>
-      <p><b>Before you read on, decide.</b> AI runs billions of calculations. Why would it pick the slower language? Hold on to your guess.</p>
+      <p>These are good questions, and there is a puzzle inside them. Languages like C and Java run faster than Python, while AI runs billions of calculations.</p>
+    </div>
+    <div class="p-card">
+      <div class="ph"><span class="pn">Decide first</span><span class="pt">Why would AI pick the slower language?</span></div>
+      <div class="pd">Make your guess before you read on. The section "Who does the heavy work?" answers it.</div>
     </div>
   </section>
 
   <section id="s2">
     <div class="prose">
       <h2>It reads like English</h2>
-      <p>Let's start with the person, not the computer. Say you want the computer to say hello.</p>
+      <p>Let's start with the person, not the computer. Say you want the computer to print one word: Hello.</p>
     </div>
     <div class="vs">
       <div><h4>Python: one line</h4><p class="flow">print("Hello")</p></div>
       <div><h4>Java: five lines</h4><p class="flow">public class Hello {<br>&nbsp;&nbsp;public static void main(String[] a) {<br>&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("Hello");<br>&nbsp;&nbsp;}<br>}</p></div>
     </div>
     <div class="prose">
-      <p>Same job. Most of the Java lines are not about hello at all. Press <b>▶ Run</b>, then change the word, and run it again.</p>
-      <div class="pyrun" data-id="whypy-hello" data-expect="Hello">
-        <textarea spellcheck="false">print("Hello")</textarea>
-      </div>
-      <p>Now, why does that matter for AI? Because AI work is not written from fixed rules. You start with an assumption. You run an experiment. You look at the results, and build on them. Then you go round again, many times.</p>
+      <p>Both programs do the same job, but most of the Java lines have nothing to do with hello. Try the Python one: press Run, change the word on the line marked <code># edit here</code>, and run it again.</p>
+    </div>
+    <div class="pyrun" data-id="whypy-hello" data-expect="Hello">
+      <textarea spellcheck="false">print("Hello")    # edit here: change the word inside the quotes</textarea>
+    </div>
+    <div class="prose">
+      <p>Why does that matter for AI? Because AI work is not written from fixed rules. You start with an assumption, run an experiment, look at the results and build on them. Then you go round again, many times.</p>
     </div>
     <div class="vs">
       <div style="grid-column:1/-1"><h4>How AI work really goes</h4><p class="flow">start with an assumption → run an experiment → look at the results → build on them → and round again</p></div>
     </div>
     <div class="prose">
-      <p>Python reads close to plain English. You change one line, and run it again, straight away. So every try is quick. And in AI, quick tries matter most.</p>
+      <p>Python reads close to plain English, so you can change one line and run it again straight away. Every try is quick, and in AI, quick tries matter most.</p>
     </div>
     <div class="keyidea">
       <div class="lbl">Readability counts</div>
-      Python even has this written into its own rules, the Zen of Python: "Readability counts."
+      Python even has this written into its own rules, <a href="https://peps.python.org/pep-0020/" rel="noopener">the Zen of Python</a>: "Readability counts."
     </div>
   </section>
 
   <section id="s3">
     <div class="prose">
       <h2>Who does the heavy work?</h2>
-      <p>But we still have our puzzle. If Python is slow, who does all that heavy work?</p>
-      <p>Say you ride a scooter to college. You turn the key and twist the accelerator. That's all. Underneath, the engine does the hard work. You never touch it. And you still reach on time.</p>
+      <p>That still leaves our puzzle: if Python is slow, who does all the heavy work?</p>
+      <p>Say you ride a scooter to college. You turn the key and twist the accelerator, and that is all you do. Underneath, the engine does the hard work, and you never touch it. You still reach on time.</p>
     </div>
     <div class="prints">
       <img src="img/scooter.svg" alt="A scooter: Python is your hand on the accelerator, C and C++ is the engine">
       <div class="figcap">Python is your hand on the accelerator. C and C++ is the engine.</div>
     </div>
     <div class="prose">
-      <p>Python is your hand on the accelerator. You twist it, and the engine does the work. The engine is fast code, written in C and C++. On graphics cards, it is CUDA. The heavy maths runs there, not in Python.</p>
-      <p>This fast code, packed so that Python can call it, is what we call a <b>library</b>. NumPy and PyTorch are two of them.</p>
+      <p>Python is your hand on the accelerator. You twist it, and an engine of fast code, written in C and C++, does the work. On graphics cards, that engine is CUDA. The heavy maths runs there, not in Python.</p>
+      <p>Fast code packed so that Python can call it is what we call a <b>library</b>. NumPy and PyTorch are two of them: NumPy's work is <a href="https://numpy.org/doc/stable/user/whatisnumpy.html" rel="noopener">done by pre-compiled C code</a>, and <a href="https://arxiv.org/abs/1912.01703" rel="noopener">most of PyTorch is written in C++</a>.</p>
     </div>
   </section>
 
   <section id="s4">
     <div class="prose">
       <h2>Let's time it</h2>
-      <p>Say a shop has ten million bills. Price times quantity, all added up. I asked an AI to do it two ways: a plain Python loop, and the same job handed to NumPy.</p>
+      <p>Say a shop has 10 million bills, and you want price times quantity, all added up. I asked an AI to write this two ways: a plain Python loop, and the same job handed to NumPy.</p>
     </div>
     <div class="prints">
       <img src="img/bills.svg" alt="A stack of shop bills, times ten million">
       <img src="img/laptop.svg" alt="My laptop">
     </div>
     <div class="prose">
-      <p>I ran it on my own laptop. An Intel Core i7, eleventh generation (i7-1185G7). 32 GB of RAM. Windows 11, Python 3.13, NumPy 2.2. No graphics card, only the processor. I ran each version five times, and took the middle one, what we call the <b>median</b>.</p>
+      <p>I ran both on my own laptop, using only the processor, with no graphics card.</p>
     </div>
+    <table>
+      <tr><th>Laptop</th><th>Software</th><th>Method</th></tr>
+      <tr><td>Intel Core i7-1185G7 (11th generation), 32 GB RAM</td><td>Windows 11, Python 3.13, NumPy 2.2</td><td>Each version run 5 times; the middle result (the <b>median</b>) kept</td></tr>
+    </table>
     <div class="prints">
       <img src="img/bar-loop.svg" alt="Plain Python loop: 1.16 seconds">
       <img src="img/bar-numpy.svg" alt="NumPy: 0.010 seconds">
-      <div class="figcap">Same answer. Plain loop 1.16 s, NumPy 0.010 s. About a hundred times faster.</div>
+      <div class="figcap">Same answer. Plain loop 1.16 s, NumPy 0.010 s: about 100 times faster.</div>
     </div>
     <div class="prose">
-      <p>Same answer. About a hundred times faster, because the work moved out of Python, into C. So yes, Python is slow. But AI in Python is not.</p>
-      <p>Now try it yourself, right here. This page runs a smaller Python inside your browser, so it is slower than a laptop, and your numbers will differ. Look at the gap, not the seconds.</p>
-      <div class="pyrun" data-id="whypy-time">
-        <textarea spellcheck="false">import time
+      <p>Both gave the same answer, but NumPy was about 100 times faster, because the work moved out of Python and into C. So yes, Python is slow, but AI in Python is not.</p>
+    </div>
+    <div class="worked">
+      <div class="wl">Try it: time it in your browser</div>
+      <p><b>The goal:</b> see the gap between a plain loop and NumPy for yourself.</p>
+      <p><b>The steps:</b> press Run and wait a few seconds. Then, on the line marked <code># edit here</code>, make the number of bills smaller or bigger and run again.</p>
+      <p><b>Guess first:</b> with 10 times fewer bills, will the gap shrink, grow, or stay about the same?</p>
+    </div>
+    <div class="pyrun" data-id="whypy-time">
+      <textarea spellcheck="false">import time
 import numpy as np
 
-n = 1_000_000                       # one million bills
+n = 1_000_000                       # edit here: the number of bills, try 100_000
 price = [i % 500 + 10 for i in range(n)]
 qty = [i % 5 + 1 for i in range(n)]
 
@@ -169,7 +183,9 @@ print("plain loop:", round(loop_time, 3), "s")
 print("NumPy:     ", round(numpy_time, 4), "s")
 print("same answer:", total == total_np)
 print("NumPy was about", round(loop_time / numpy_time), "times faster")</textarea>
-      </div>
+    </div>
+    <div class="prose">
+      <p><b>What you should see:</b> "same answer: True", and NumPy many times faster than the loop. This page runs a smaller Python inside your browser, so your seconds will differ from my laptop's. Look at the gap, not the seconds.</p>
     </div>
     <div class="keyidea">
       <div class="lbl">Key idea</div>
@@ -180,14 +196,14 @@ print("NumPy was about", round(loop_time / numpy_time), "times faster")</textare
   <section id="s5">
     <div class="prose">
       <h2>How it became the language of AI</h2>
-      <p>Python was not built for AI. Guido van Rossum started it in 1989, in the Netherlands, as a simple everyday language. And no, it is not named after the snake. It is named after a comedy show, Monty Python.</p>
+      <p>Python was not built for AI. Guido van Rossum started it in 1989, in the Netherlands, as a simple everyday language. And no, it is not named after the snake: <a href="https://docs.python.org/3/faq/general.html" rel="noopener">it is named after a comedy show</a>, Monty Python.</p>
     </div>
     <div class="prints">
       <img src="img/snake.svg" alt="A python snake, crossed out">
       <img src="img/comedy-tv.svg" alt="A TV with a laughing face: a comedy show">
     </div>
     <div class="prose">
-      <p>Then the tools came, one after another.</p>
+      <p>Then the tools for AI arrived, one after another.</p>
     </div>
     <div class="prints">
       <img src="img/brick-numpy.svg" alt="NumPy, 2005">
@@ -196,7 +212,7 @@ print("NumPy was about", round(loop_time / numpy_time), "times faster")</textare
       <img src="img/brick-pytorch.svg" alt="PyTorch, 2016">
     </div>
     <div class="prose">
-      <p>Each new tool made the next one easier to build. More people came, and built more tools. Many tools, and the people who build them: this is what we call an <b>ecosystem</b>.</p>
+      <p>Each new tool made the next one easier to build, so more people came and built still more tools. Many tools, together with the people who build them, form what we call an <b>ecosystem</b>.</p>
     </div>
   </section>
 
@@ -204,12 +220,13 @@ print("NumPy was about", round(loop_time / numpy_time), "times faster")</textare
     <div class="prose">
       <h2>The numbers</h2>
       <p>So where does Python stand today? Here are the numbers, checked in October 2026.</p>
-      <ul>
-        <li><b>New AI projects on GitHub:</b> nearly half are written in Python.</li>
-        <li><b>AI research code:</b> out of every hundred papers that shared their code, about 62 used PyTorch. TensorFlow, just 2.</li>
-        <li><b>People learning to code:</b> 72 in every hundred use Python. That is number one.</li>
-      </ul>
     </div>
+    <table>
+      <tr><th>What was measured</th><th>Python's share</th></tr>
+      <tr><td><a href="https://github.blog/news-insights/octoverse/octoverse-a-new-developer-joins-github-every-second-as-ai-leads-typescript-to-1/" rel="noopener">New AI projects on GitHub</a></td><td>nearly half</td></tr>
+      <tr><td><a href="https://web.archive.org/web/20250609230938/https://paperswithcode.com/api/stats/?type=quarter&amp;from=2021-03-01&amp;to=2025-03-31" rel="noopener">AI research papers that shared their code</a></td><td>about 62 in 100 used PyTorch; TensorFlow just 2</td></tr>
+      <tr><td><a href="https://survey.stackoverflow.co/2025/technology" rel="noopener">People learning to code</a></td><td>72 in 100 use Python, the most of any language</td></tr>
+    </table>
     <div class="prints">
       <img src="img/pie-half.svg" alt="Nearly half">
       <img src="img/bar-pytorch.svg" alt="PyTorch: 62 of 100 papers">
@@ -217,29 +234,20 @@ print("NumPy was about", round(loop_time / numpy_time), "times faster")</textare
       <img src="img/dots-72.svg" alt="72 of 100 dots filled">
     </div>
     <div class="prose">
-      <p>But is Python the most used language in the world? It depends who you ask.</p>
-      <ul>
-        <li><b>TIOBE index</b> (it counts web searches): number one.</li>
-        <li><b>Stack Overflow's developer survey:</b> number four.</li>
-        <li><b>GitHub:</b> number two.</li>
-      </ul>
+      <p>But is Python the most used language in the world? That depends on who you ask. The <a href="https://www.tiobe.com/tiobe-index/" rel="noopener">TIOBE index</a>, which counts web searches, puts it at number 1. Stack Overflow's developer survey puts it at number 4, and GitHub at number 2.</p>
     </div>
     <div class="keyidea">
       <div class="lbl">Key idea</div>
-      Python is not number one everywhere. But for AI, it is the first choice.
+      Python is not number 1 everywhere. But for AI, it is the first choice.
     </div>
   </section>
 
   <section id="s7">
     <div class="prose">
       <h2>The honest cost</h2>
-      <p>So far, the good side. Now, what does Python cost?</p>
-      <p>First, write your own loops over big data, and you feel the slowness. A hundred times, as we just saw.</p>
-      <p>Second, Python is not the answer for every job.</p>
-      <ul>
-        <li>Android apps are mostly written in Kotlin.</li>
-        <li>Websites in your browser run on JavaScript.</li>
-      </ul>
+      <p>That is the good side. Now, what does Python cost?</p>
+      <p>First, when you write your own loops over big data, you feel the slowness: about 100 times, as the timing showed.</p>
+      <p>Second, Python is not the answer for every job. Android apps are <a href="https://developer.android.com/kotlin/first" rel="noopener">mostly written in Kotlin</a>, and websites in your browser run on JavaScript.</p>
     </div>
     <div class="prints">
       <img src="img/devices.svg" alt="A phone app and a browser window">
@@ -249,15 +257,15 @@ print("NumPy was about", round(loop_time / numpy_time), "times faster")</textare
   <section id="s8">
     <div class="prose">
       <h2>From my own work</h2>
-      <p>I have lived this myself. In 2019, I worked on a deep learning project in the automotive world. Cars with driver assistance, called ADAS, already had cameras as their eyes. We were building their ears.</p>
+      <p>I have lived this myself. In 2019, I worked on a deep learning project in the automotive world. Cars with driver assistance, called ADAS, already had cameras as their eyes, and we were building their ears.</p>
     </div>
     <div class="prints">
       <img src="img/adas-car.svg" alt="A car with a camera behind the windscreen, microphone clusters at the lamps, and a siren behind">
       <div class="figcap">Camera = eyes. Four microphone clusters, at the head and tail lamps = ears.</div>
     </div>
     <div class="prose">
-      <p>Because when you drive, you don't only see things that need your attention. You also hear them. A horn is a warning. A siren means an emergency, for someone.</p>
-      <p>We trained the model in Python. But to run it inside the car's controller, we wrote the libraries underneath in C, and flashed them in.</p>
+      <p>When you drive, you don't only see the things that need your attention; you also hear them. A horn is a warning, and a siren means an emergency for someone.</p>
+      <p>We trained the model in Python. But to run it inside the car's controller, we wrote the libraries underneath in C and flashed them onto the chip.</p>
     </div>
     <div class="prints">
       <img src="img/train-to-chip.svg" alt="Trained in Python on a laptop, runs in the car in C">
@@ -270,25 +278,28 @@ print("NumPy was about", round(loop_time / numpy_time), "times faster")</textare
         <li>It has libraries for almost everything.</li>
         <li>A huge community keeps helping each other.</li>
       </ol>
-      <p>So use Python to build and try AI. And other tools, where the job needs them.</p>
+      <p>So use Python to build and try AI, and other tools where the job needs them.</p>
     </div>
   </section>
 
   <section id="s9">
     <div class="prose">
       <h2>When AI writes the code</h2>
-      <p>One last question. If AI writes the code anyway, does the language even matter?</p>
-      <p>In this year's Stack Overflow survey, Python came first as the language people use AI tools with. Just ahead of JavaScript. And the best known tests of AI coding are in Python.</p>
-      <p>So very often, the code AI hands you will be Python. And someone has to read it. Check it. And fix it, when it breaks.</p>
-      <p>That someone is you.</p>
+      <p>One last question: if AI writes the code anyway, does the language even matter?</p>
+      <p>In this year's Stack Overflow survey, Python came first as <a href="https://survey.stackoverflow.co/2026/technology/data/languages" rel="noopener">the language people use AI tools with</a>, just ahead of JavaScript. And the best-known tests of AI coding, such as <a href="https://arxiv.org/abs/2310.06770" rel="noopener">SWE-bench</a>, are in Python.</p>
+      <p>So very often, the code an AI hands you will be Python. Someone has to read it, check it, and fix it when it breaks. That someone is you.</p>
     </div>
   </section>
 
   <section id="s10">
     <div class="prose">
       <h2>The takeaway</h2>
-      <p>So, why Python for AI? Not for speed. Python only looks fast, because faster engines in C run under its hood. It wins because it is easy to read, and quick to try.</p>
-      <p>But this leaves you with a question. When AI hands you a Python program, can you read it?</p>
+      <ol>
+        <li>Python is not chosen for speed. It only looks fast, because engines written in C run under its hood.</li>
+        <li>It wins because it is easy to read and quick to try, and AI work is many quick tries.</li>
+        <li>AI does not belong to one language: Python to build and try, other tools where the job needs them.</li>
+      </ol>
+      <p>That leaves you with a question. When an AI hands you a Python program, can you read it?</p>
     </div>
   </section>
 
@@ -296,18 +307,19 @@ print("NumPy was about", round(loop_time / numpy_time), "times faster")</textare
     <div class="next">
       <div class="lbl">Your homework</div>
       <h3>Count the lines, then mark the words</h3>
-      <p style="font-size:var(--fs-cap);color:var(--slate)">Ask any AI for a program that adds up your monthly expenses. Once in Python, and once in Java. Put them side by side.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate)">Ask any AI app for a program that adds up your monthly expenses, once in Python and once in Java. You can paste this, and then change "Python" to "Java":</p>
     </div>
+    <div class="yousee"><b>Paste this into any AI app</b>Write a short Python program that adds up my monthly expenses: rent 8000, food 4000, travel 1500, phone 500. Print the total.</div>
     <div class="prints">
       <img src="img/expenses.svg" alt="My monthly expenses: rent, food, travel, phone, total?">
     </div>
     <div class="next">
       <ol style="font-size:var(--fs-cap);color:var(--slate)">
-        <li>Count the lines of each.</li>
+        <li>Put the two programs side by side, and count the lines of each.</li>
         <li>Mark every word you cannot explain.</li>
       </ol>
       <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:12px">Don't worry if you mark a lot. That list is where your learning starts.</p>
-      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:10px"><i>One question for you: how many lines did each one take, and which one could you explain to a friend? And your guess from the start: was it right? Tell me under the video.</i></p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:10px"><i>One question for you: how many lines did each one take, and which one could you explain to a friend? And your guess at the start, about the slower language: was it right? Tell me under the video.</i></p>
     </div>
   </section>
 
@@ -355,8 +367,9 @@ print("NumPy was about", round(loop_time / numpy_time), "times faster")</textare
   </div>
 </footer>
 <script src="../../assets/site-config.js"></script>
-<script src="../../assets/analytics.js?v=1" defer></script>
 <script src="../../assets/progress.js?v=2"></script>
-<script src="../../assets/pyrun.js?v=3"></script>
+<script src="../../assets/pyrun.js?v=2"></script>
+<script src="../../assets/railspy.js?v=1"></script>
+<script src="../../assets/analytics.js?v=1" defer></script>
 </body>
 </html>

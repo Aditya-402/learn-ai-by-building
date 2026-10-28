@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>What is a Python program? — Learn AI by Building</title>
-<meta name="description" content="Three lines of Python, one missing bracket on the last line, and nothing prints at all. Why? A careful cook, an interpreter between two people, and a puzzle you can run right here answer it.">
+<meta name="description" content="Three lines of Python, one missing bracket on the last line, and nothing prints at all: why? By the end, you will know what a Python program is and what really happens when you press Run.">
 <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
 <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
@@ -19,7 +19,7 @@
     <div class="title-block">
       <span class="blog-label what">What is it?</span>
       <h1>What is a Python program?</h1>
-      <p class="standfirst">Three lines of Python, one missing bracket on the last line, and nothing prints at all. Why? A careful cook, an interpreter between two people, and a puzzle you can run right here answer it.</p>
+      <p class="standfirst">Three lines of Python, one missing bracket on the last line, and nothing prints at all: why? By the end, you will know what a Python program is and what really happens when you press Run.</p>
       <div class="facts">
         <div><b>Read</b>~6 min</div>
         <div><b>Watch</b>5:39 video</div>
@@ -61,24 +61,30 @@
   <section id="s1">
     <div class="prose">
       <h2>A small puzzle</h2>
-      <p>Let's start with a small puzzle. Here is a program with three lines. Line one prints Hello. Line two prints Line two. And line three is missing its closing bracket.</p>
-      <p><b>Before you press Run, decide.</b> What will you see? Write your guess down somewhere. Then run it.</p>
-      <div class="pyrun" data-id="whatpy-puzzle">
-        <textarea spellcheck="false">print("Hello")
+      <p>Let's start with a small puzzle. Here is a program with 3 lines. Line 1 prints Hello, line 2 prints Line two, and line 3 is missing its closing bracket.</p>
+    </div>
+    <div class="worked">
+      <div class="wl">Try it: the puzzle</div>
+      <p><b>Guess first:</b> before you press Run, decide what you will see. Will Hello and Line two print before the problem, or not? Write your guess down somewhere.</p>
+      <p><b>The step:</b> then press Run, and compare.</p>
+    </div>
+    <div class="pyrun" data-id="whatpy-puzzle">
+      <textarea spellcheck="false">print("Hello")
 print("Line two")
 print("Bye"</textarea>
-      </div>
-      <p>Surprised? Hold on to that feeling. To understand it, we need to know what a Python program really is. Let's try to understand.</p>
+    </div>
+    <div class="prose">
+      <p>Were you surprised? To understand what happened, we need to know what a Python program really is. Let's try to understand.</p>
     </div>
   </section>
 
   <section id="s2">
     <div class="prose">
       <h2>Python means two things</h2>
-      <p>First, what is Python? When programmers say Python, they mean two things. Let's take English as an example.</p>
-      <p>English has words, and grammar rules for putting them together. "Get me water" makes sense. "Water get me" does not. Same words. One change in order, and the meaning is gone.</p>
-      <p>Python, the language, is the same. A set of words, and the rules for writing them. These grammar rules are what we call <b>syntax</b>.</p>
-      <p>The second thing is the interpreter. In English, an interpreter is the person who stands between two people who don't share a language.</p>
+      <p>First, what is Python? When programmers say Python, they mean two things. English is a good way to see both.</p>
+      <p>English has words, and grammar rules for putting them together. "Get me water" makes sense, but "Water get me" does not. The words are the same; one change in order, and the meaning is gone.</p>
+      <p>Python, the language, works the same way: a set of words, and the rules for writing them. These grammar rules are what we call <b>syntax</b>.</p>
+      <p>The second thing is the interpreter. In everyday English, an interpreter is the person who stands between two people who don't share a language.</p>
     </div>
     <div class="prints">
       <img src="img/interp-people.svg" alt="An interpreter between two people: Bonjour on one side, Hello on the other">
@@ -86,7 +92,7 @@ print("Bye"</textarea>
       <div class="figcap">An interpreter stands between two sides. Python's interpreter stands between you and the computer.</div>
     </div>
     <div class="prose">
-      <p>Python's interpreter does the same job. It stands between you and the computer, like a broker. It reads what you wrote, and gets the computer to do it.</p>
+      <p>Python's interpreter does the same job. Like a broker, it stands between you and the computer. It reads what you wrote, and gets the computer to do it.</p>
       <p>So when you press Run, you are not talking to the computer directly. You are handing your program to the interpreter.</p>
     </div>
   </section>
@@ -94,7 +100,7 @@ print("Bye"</textarea>
   <section id="s3">
     <div class="prose">
       <h2>So, what is a Python program?</h2>
-      <p>It is just text. You type it, and save it in a file whose name ends in <code>.py</code>, like <code>hello.py</code>. That file is your program.</p>
+      <p>A Python program is just text. You type it, and save it in a file whose name <a href="https://docs.python.org/3/tutorial/modules.html" rel="noopener">ends in .py</a>, like <code>hello.py</code>. That file is your program.</p>
     </div>
     <div class="prints">
       <img src="img/hello-py.svg" alt="A text file named hello.py">
@@ -107,19 +113,19 @@ print("Bye"</textarea>
   <section id="s4">
     <div class="prose">
       <h2>What happens when you press Run</h2>
-      <p>Let's follow one program, from your keyboard to the screen.</p>
+      <p>Follow one program from your keyboard to the screen, in three moves.</p>
     </div>
     <div class="vs">
       <div style="grid-column:1/-1"><h4>When you press Run</h4><p class="flow">it reads the whole file → turns it into simple steps → runs them, top to bottom</p></div>
     </div>
     <div class="prose">
-      <p>The interpreter reads the whole file, from the first line to the last, and checks the grammar. Then it turns it into small, simple steps. Only then does it start running them, top to bottom.</p>
-      <p>These simple steps are what we call <b>bytecode</b>. You never see them, and you don't need to.</p>
+      <p>The interpreter first reads the whole file, from the first line to the last, and checks the grammar. Then it turns your code into small, simple steps. Only then does it start running those steps, top to bottom.</p>
+      <p>These simple steps are what we call <b><a href="https://docs.python.org/3/glossary.html" rel="noopener">bytecode</a></b>. You never see them, and you don't need to.</p>
     </div>
     <details class="peek">
       <summary>Curious? Peek at the bytecode (optional)</summary>
       <div class="prose">
-        <p>Python has a tool that shows the simple steps it makes from your code. Run this, and you will see the steps for one line, <code>print("Hello")</code>. Don't try to learn them. Just notice that one line of yours becomes several small steps.</p>
+        <p>Python has <a href="https://docs.python.org/3/library/dis.html" rel="noopener">a tool called dis</a> that shows the simple steps it makes from your code. Press Run to see the steps for one line, <code>print("Hello")</code>. Don't try to learn them; just notice that one line of yours becomes several small steps.</p>
         <div class="pyrun" data-id="whatpy-bytecode">
           <textarea spellcheck="false">import dis
 dis.dis('print("Hello")')</textarea>
@@ -131,7 +137,7 @@ dis.dis('print("Hello")')</textarea>
   <section id="s5">
     <div class="prose">
       <h2>The careful cook</h2>
-      <p>Say you are cooking from a new recipe. A careful cook reads the whole recipe first. If one sentence makes no sense, he doesn't start at all.</p>
+      <p>Say you are cooking from a new recipe. A careful cook reads the whole recipe first. If one sentence in it makes no sense, he doesn't start cooking at all.</p>
     </div>
     <div class="prints">
       <img src="img/cook-reads.svg" alt="A cook reading the whole recipe card, the stove still off">
@@ -139,87 +145,101 @@ dis.dis('print("Hello")')</textarea>
       <div class="figcap">First he reads it all. One line makes no sense, so he never starts.</div>
     </div>
     <div class="prose">
-      <p>If the recipe reads fine, he starts at step one, and cooks step by step, top to bottom.</p>
-      <p>Python, the interpreter, is that careful cook. Reading the whole recipe first is what we call <b>compiling</b>. Cooking it step by step is what we call <b>interpreting</b>.</p>
+      <p>If the recipe reads fine, he starts at step 1 and cooks step by step, top to bottom.</p>
+      <p>Python's interpreter is that careful cook. Reading the whole recipe first is what we call <b>compiling</b>. Cooking it step by step is what we call <b>interpreting</b>.</p>
     </div>
     <div class="keyidea">
       <div class="lbl">Key idea</div>
-      Python's interpreter does two jobs, every time you press Run. First it compiles: it reads it all. Then it interprets: it runs it, step by step.
+      Every time you press Run, Python's interpreter does two jobs. First it compiles: it reads the whole file. Then it interprets: it runs it, step by step.
     </div>
   </section>
 
   <section id="s6">
     <div class="prose">
       <h2>The puzzle, answered</h2>
-      <p>Now, back to the puzzle. Line three is missing its bracket, so the grammar check fails. The interpreter doesn't run the program. Not one line runs. Nothing is printed, not even Hello.</p>
-      <p>A grammar mistake is what we call a <b>syntax error</b>. One anywhere in the file, and nothing runs.</p>
-      <p>Now add the missing bracket at the end of line three, and run it again.</p>
-      <div class="pyrun" data-id="whatpy-fixed" data-expect="Hello\nLine two\nBye">
-        <textarea spellcheck="false">print("Hello")
+      <p>Now back to the puzzle. Line 3 is missing its bracket, so the grammar check fails, and the interpreter never starts running. Not one line runs, so nothing is printed, not even Hello.</p>
+    </div>
+    <div class="yousee"><b>What the puzzle shows</b>SyntaxError: '(' was never closed</div>
+    <div class="prose">
+      <p>A grammar mistake is what we call a <b><a href="https://docs.python.org/3/tutorial/errors.html" rel="noopener">syntax error</a></b>. One syntax error anywhere in the file, and nothing runs.</p>
+    </div>
+    <div class="worked">
+      <div class="wl">Try it: fix the bracket</div>
+      <p><b>The step:</b> on the line marked <code># edit here</code>, add the missing <code>)</code> right after <code>"Bye"</code>. Then press Run.</p>
+      <p><b>Guess first:</b> how many lines will print now?</p>
+    </div>
+    <div class="pyrun" data-id="whatpy-fixed" data-expect="Hello\nLine two\nBye">
+      <textarea spellcheck="false">print("Hello")
 print("Line two")
-print("Bye"</textarea>
-      </div>
-      <p>All three lines run. The grammar check passed, so the cook started cooking.</p>
+print("Bye"    # edit here: add the missing ) after "Bye"</textarea>
+    </div>
+    <div class="yousee"><b>What you should see</b>Hello
+Line two
+Bye</div>
+    <div class="prose">
+      <p><b>What it means:</b> all 3 lines run, because the grammar check passed and the cook started cooking.</p>
     </div>
     <div class="confuse">
       <div class="lbl">Careful here</div>
-      <p>You may read that an interpreter runs code line by line. If you guessed "Hello" and "Line two" for the puzzle, you were thinking exactly that. Many people describe an interpreter that way. For Python, it is only half the story. Python compiles the whole file first. That is why nothing printed.</p>
+      <p>You may read that an interpreter runs code line by line. If you guessed that Hello and Line two would print, you were thinking exactly that. For Python, it is only half the story: Python compiles the whole file first, which is why nothing printed.</p>
     </div>
   </section>
 
   <section id="s7">
     <div class="prose">
       <h2>How is this different from C?</h2>
-      <p>So what does a compiler do in a language like C? It stops after the first job. It turns your whole program into a separate program file, an <code>.exe</code> on Windows. You run that file later, as many times as you like.</p>
+      <p>So what does a compiler do in a language like C? It stops after the first job. It turns your whole program into a separate program file, an <code>.exe</code> on Windows, which you can run later as many times as you like.</p>
     </div>
     <div class="vs">
       <div><h4>Python</h4><p class="flow">press Run → compile → interpret<br>both jobs, every time you press Run</p></div>
       <div><h4>C</h4><p class="flow">compile → a separate program file<br>you run that file later</p></div>
     </div>
     <div class="prose">
-      <p>You don't need C to learn Python. It is only here so that the word <i>compiler</i> means something to you, the next time you meet it.</p>
+      <p>You don't need C to learn Python. It is here only so that the word <i>compiler</i> means something to you the next time you meet it.</p>
     </div>
   </section>
 
   <section id="s8">
     <div class="prose">
       <h2>Where the interpreter comes from</h2>
-      <p>Now, where do you get this interpreter? Ideally, you download it from <a href="https://www.python.org/downloads/" rel="noopener">python.org</a>, and install it on your computer. That download is the interpreter. The one from python.org is called <b>CPython</b>, because it is written in C.</p>
+      <p>Where do you get this interpreter? Normally, you download it from <a href="https://www.python.org/downloads/" rel="noopener">python.org</a> and install it on your computer. That download is the interpreter. It is called <b>CPython</b>, because <a href="https://docs.python.org/3/reference/introduction.html" rel="noopener">it is written in C</a>.</p>
     </div>
     <div class="prints">
       <img src="img/download.svg" alt="Downloading the Python interpreter from python.org onto a laptop">
     </div>
     <div class="prose">
-      <p>But for the ease of learning, we have already put the interpreter on our website. Every Run button on this page is that same Python, rebuilt to run inside your browser. Open the page, type your code, and press Run. Nothing to install.</p>
+      <p>To make learning easy, we have already put the interpreter on our website. Every Run button on this page is that same Python, <a href="https://pyodide.org/en/0.26.4/index.html" rel="noopener">rebuilt to run inside your browser</a>. Open the page, type your code and press Run, with nothing to install.</p>
     </div>
   </section>
 
   <section id="s9">
     <div class="prose">
       <h2>Python 3, and what comes with it</h2>
-      <p>One more thing, before you search the internet for help. Python has two major versions, Python 2 and Python 3. Python 3 is the latest. Python 2 was retired on 1 January 2020. So we use Python 3, and skip old code written for Python 2.</p>
-      <p>Python also comes with a box of ready made tools. For dates, for maths, for files, and many more. This is what we call the <b>standard library</b>. Two of them, in two lines:</p>
-      <div class="pyrun" data-id="whatpy-stdlib">
-        <textarea spellcheck="false">import math
+      <p>One more thing before you search the internet for help. Python has two major versions, Python 2 and Python 3. <a href="https://www.python.org/doc/sunset-python-2/" rel="noopener">Python 2 was retired on 1 January 2020</a>, so we use Python 3 and skip old code written for Python 2.</p>
+      <p>Python also comes with a box of ready-made tools for dates, maths, files and much more. This box is what we call the <b>standard library</b>. Here are two of its tools, used in two lines.</p>
+    </div>
+    <div class="pyrun" data-id="whatpy-stdlib">
+      <textarea spellcheck="false">import math
 from datetime import date
 
-print(math.sqrt(144))
+print(math.sqrt(144))    # edit here: try another number
 print(date.today())</textarea>
-      </div>
-      <p>And outside that box, there is a public shelf of extra tools, written by other people. It is called <b>PyPI</b>, and it held over nine hundred thousand of them this month. We will learn to use that shelf later, when our programs need it.</p>
+    </div>
+    <div class="prose">
+      <p><b>What you should see:</b> 12.0, the square root of 144, and then today's date.</p>
+      <p>Outside that box, there is a public shelf of extra tools written by other people. It is called <a href="https://pypi.org/" rel="noopener">PyPI</a>, and it held over 900,000 of them this month. We will learn to use that shelf later, when our programs need it.</p>
     </div>
   </section>
 
   <section id="s10">
     <div class="prose">
       <h2>The takeaway</h2>
-      <p>So, what is a Python program? Just three things to remember.</p>
       <ol>
-        <li>It is text, in a <code>.py</code> file, written to Python's grammar.</li>
+        <li>A Python program is text, in a <code>.py</code> file, written to Python's grammar.</li>
         <li>The interpreter compiles the whole file first, and checks that grammar.</li>
-        <li>Then it interprets it, step by step, top to bottom.</li>
+        <li>Then it interprets the program, step by step, top to bottom.</li>
       </ol>
-      <p>But this leaves you with a question. If every line follows the grammar, does that mean the program does what you wanted?</p>
+      <p>That leaves you with a question. If every line follows the grammar, does that mean the program does what you wanted?</p>
     </div>
   </section>
 
@@ -227,9 +247,9 @@ print(date.today())</textarea>
     <div class="next">
       <div class="lbl">Your homework</div>
       <h3>Break it, predict it, run it</h3>
-      <p style="font-size:var(--fs-cap);color:var(--slate)">This is the practice page for the video. Everything runs right here.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate)"><b>The goal:</b> see for yourself where Python stops reading. Everything runs right here.</p>
       <ol style="font-size:var(--fs-cap);color:var(--slate)">
-        <li>In the box below, delete the closing bracket on line 3.</li>
+        <li>In the box below, delete the closing bracket on line 3, the line marked <code># edit here first</code>.</li>
         <li>Before you press Run, write down what you think will print.</li>
         <li>Run it.</li>
         <li>Press Reset. Now delete the closing bracket on line 1 instead, and try again.</li>
@@ -237,9 +257,9 @@ print(date.today())</textarea>
     </div>
     <div class="prose">
       <div class="pyrun" data-id="whatpy-homework">
-        <textarea spellcheck="false">print("One")
+        <textarea spellcheck="false">print("One")      # edit here second: delete this )
 print("Two")
-print("Three")</textarea>
+print("Three")    # edit here first: delete this )</textarea>
       </div>
     </div>
     <div class="next">
@@ -288,8 +308,9 @@ print("Three")</textarea>
   </div>
 </footer>
 <script src="../../assets/site-config.js"></script>
-<script src="../../assets/analytics.js?v=1" defer></script>
 <script src="../../assets/progress.js?v=2"></script>
-<script src="../../assets/pyrun.js?v=3"></script>
+<script src="../../assets/pyrun.js?v=2"></script>
+<script src="../../assets/railspy.js?v=1"></script>
+<script src="../../assets/analytics.js?v=1" defer></script>
 </body>
 </html>
