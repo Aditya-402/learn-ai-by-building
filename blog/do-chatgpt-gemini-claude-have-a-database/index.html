@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Do ChatGPT, Gemini and Claude have a database? — Learn AI by Building</title>
+<meta name="description" content="When ChatGPT, Gemini or Claude answers you in 2 seconds, did it look the answer up in a database? By the end of this post, you will know what the engine inside really keeps, what the app around it stores, and why that difference matters.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=8">
+<link rel="stylesheet" href="../../assets/unit.css?v=8">
+<link rel="stylesheet" href="../../assets/blog.css?v=7">
+</head>
+<body data-lwa-course="blog" data-lwa-chapter="do-chatgpt-gemini-claude-have-a-database">
+<header class="top"><div class="top-in"><a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark-maroon.svg?v=1" alt="Learn AI by Building"></a><div class="lwa-brand-right"><span class="lwa-tag"><a href="../index.html">Blog</a></span><span data-lwa-auth></span></div></div></header>
+<header class="masthead">
+  <div class="masthead-in">
+    <div class="title-block">
+      <span class="blog-label what">What is it?</span>
+      <h1>Do ChatGPT, Gemini and Claude have a database?</h1>
+      <p class="standfirst">When ChatGPT, Gemini or Claude answers you in 2 seconds, did it look the answer up in a database? By the end of this post, you will know what the engine inside really keeps, what the app around it stores, and why that difference matters.</p>
+      <div class="facts">
+        <div><b>Read</b>~8 min</div>
+        <div><b>Watch</b>7:39 video</div>
+        <div><b>Practice</b>runs right here</div>
+        <div><b>Published</b>28 Oct 2026</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="rail" aria-label="Sections">
+    <div class="rail-h">Contents</div>
+    <a class="on" href="#video">Watch the video</a>
+    <a href="#s1">A quick question</a>
+    <a href="#s2">Is it a search?</a>
+    <a href="#s3">Think of an exam</a>
+    <a href="#s4">The engine learns the same way</a>
+    <a href="#s5">What happens when you ask</a>
+    <a href="#s6">Where would a database even fit?</a>
+    <a href="#s7">The engine has a name: LLM</a>
+    <a href="#s8">The app around the engine</a>
+    <a href="#s9">The price of guessing</a>
+    <a href="#s10">The takeaway</a>
+    <a href="#homework">Your homework</a>
+    <a href="#related">Related</a>
+    <a href="#refs">References</a>
+  </nav>
+
+  <main>
+
+  <section id="video">
+    <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/erl1822qozQ?rel=0" title="Do ChatGPT, Gemini and Claude have a database?"
+      allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+    <p class="video-cap">Prefer to watch? This post goes with the video (7:39). <a href="https://www.youtube.com/watch?v=erl1822qozQ" rel="noopener">Open it on YouTube</a>, where you can also leave a comment.</p>
+  </section>
+
+
+  <section id="s1">
+    <div class="prose">
+      <h2>A quick question</h2>
+      <p>You type a question into ChatGPT, Gemini or Claude, and the answer comes back in about 2 seconds. Where did that answer come from? Did the tool look it up in a database?</p>
+    </div>
+    <div class="p-card">
+      <div class="ph"><span class="pn">Decide first</span><span class="pt">Yes or no: does it look the answer up in a database?</span></div>
+      <div class="pd">Pick one before you read on. Later on this page, we test it with a real tool.</div>
+    </div>
+  </section>
+
+  <section id="s2">
+    <div class="prose">
+      <h2>Is it a search?</h2>
+      <p>Most students say yes, because it feels like a search. You ask, and the information comes back.</p>
+      <p>But think about how a database search really works. If the data is there, the matching rows come out. If it is not there, you get "not found". A database never makes up a row.</p>
+    </div>
+    <div class="vs">
+      <div><h4>A database search</h4><p class="flow">data is there → the matching rows<br>data is missing → "not found"</p></div>
+      <div><h4>An AI chat tool</h4><p class="flow">it knows → an answer<br>it doesn't know → still an answer</p></div>
+    </div>
+    <div class="prose">
+      <p>These tools rarely say they don't know. They answer confidently, even when they are wrong. So the answer is not really coming from a database, and something else is going on. Let's try to understand what exactly is happening.</p>
+    </div>
+  </section>
+
+  <section id="s3">
+    <div class="prose">
+      <h2>Think of an exam</h2>
+      <p>Say you appeared for an exam. You read a question on the paper and write the answer. Your textbook is shut, so you are writing from your preparation.</p>
+    </div>
+    <div class="prints">
+      <img src="img/exam-write.svg" alt="A student writing an answer, with the textbook shut on the desk">
+    </div>
+    <div class="prose">
+      <p>How did you know the answer? You studied the topics, and you solved practice papers again and again. That practice is what lets you answer by yourself.</p>
+    </div>
+    <div class="prints">
+      <img src="img/practice.svg" alt="A stack of practice papers with ticks and crosses, next to the answer key">
+    </div>
+    <div class="prose">
+      <p>Now say a question comes up that you never prepared for. You won't leave it blank. You will write something, and it may be right or it may be wrong.</p>
+    </div>
+    <div class="prints">
+      <img src="img/exam-unknown.svg" alt="The student, unsure, writing something anyway on a question he never prepared for">
+      <div class="figcap">Keep this exam in mind. The engine inside these tools works much the same way.</div>
+    </div>
+  </section>
+
+  <section id="s4">
+    <div class="prose">
+      <h2>The engine learns the same way</h2>
+      <p>The engine inside these tools learns like a student with practice papers. It reads a huge amount of text, again and again. Each time, it sees some words and guesses the word that comes next.</p>
+    </div>
+    <div class="p-card">
+      <div class="ph"><span class="pn">Your turn</span><span class="pt">Fill the blank: Johny Johny, yes ____</span></div>
+      <details><summary>Show the answer</summary><p>Papa. You knew it because you have heard the rhyme so many times. That is a next-word guess, learned from practice.</p></details>
+    </div>
+    <div class="prose">
+      <p>The engine plays this guessing game billions of times. After each guess it adjusts a little, and slowly it learns the patterns of the language.</p>
+    </div>
+    <div class="worked">
+      <div class="wl">Try it: a tiny next-word guesser</div>
+      <p><b>The goal:</b> see how guessing from what you have seen works, and where it breaks. You don't need to know Python for this.</p>
+      <p><b>The steps:</b> press Run once. Then find the line marked <code># edit here</code>, change <code>"yes"</code> to <code>"ha"</code>, and press Run again. Last, change it to <code>"pizza"</code>.</p>
+      <p><b>Guess first:</b> the word "pizza" is not in the rhyme. Before you run it, what do you think the guesser will say?</p>
+    </div>
+    <div class="pyrun" data-id="db-guesser" data-expect="After yes it has seen: ['papa']\nIts guess: papa">
+      <textarea spellcheck="false">text = """johny johny yes papa
+eating sugar no papa
+telling lies no papa
+open your mouth ha ha ha"""
+
+words = text.split()
+after = {}
+for a, b in zip(words, words[1:]):
+    after.setdefault(a, []).append(b)
+
+word = "yes"    # edit here: change "yes" to "ha", then to "pizza"
+seen = after.get(word, [])
+guess = max(set(seen), key=seen.count) if seen else "no idea"
+print("After", word, "it has seen:", seen)
+print("Its guess:", guess)</textarea>
+    </div>
+    <div class="yousee"><b>What you should see</b>word = "yes"    →  Its guess: papa
+word = "ha"     →  Its guess: ha
+word = "pizza"  →  Its guess: no idea</div>
+    <div class="prose">
+      <p><b>What it means:</b> our toy keeps a small table of which word came after which, so it can honestly say "no idea". A real engine keeps no such table, only numbers. So it always writes something, like you with the exam question you never prepared for.</p>
+    </div>
+  </section>
+
+  <section id="s5">
+    <div class="prose">
+      <h2>What happens when you ask</h2>
+    </div>
+    <div class="vs">
+      <div style="grid-column:1/-1"><h4>When you ask a question</h4><p class="flow">text → numbers → a huge model → numbers → text</p></div>
+    </div>
+    <div class="prose">
+      <p>When you ask a question, your text is first turned into numbers. Those numbers go into the model, which is itself a huge collection of numbers. Some maths runs on them, and out comes another set of numbers.</p>
+      <p>That result is turned back into text, one word at a time. Each word is the model's best guess for what comes next.</p>
+    </div>
+  </section>
+
+  <section id="s6">
+    <div class="prose">
+      <h2>Where would a database even fit?</h2>
+      <p>So what does the model keep from all that reading? It keeps no text, only numbers: billions of them, tuned to the patterns in the text. Could those numbers hold a full copy of everything it read? Let's check with real numbers.</p>
+      <p>Meta trained its open model, Llama 3, on <a href="https://ai.meta.com/blog/meta-llama-3/" rel="noopener">over 15 trillion tokens</a>. A token is a piece of a word, and <a href="https://help.openai.com/en/articles/4936856" rel="noopener">one token is about 4 characters</a> of English. The rest is our own arithmetic:</p>
+    </div>
+    <table>
+      <tr><th>What</th><th>Size</th><th>How we got it</th></tr>
+      <tr><td>The text Llama 3 was trained on</td><td>about 60 TB</td><td>15 trillion tokens × 4 characters each</td></tr>
+      <tr><td>The smaller trained Llama 3 model</td><td>about 16 GB</td><td>8 billion numbers × 2 bytes each</td></tr>
+    </table>
+    <div class="prints">
+      <img src="img/sizes.svg" alt="A mountain of books labelled 60 TB of text, next to a small box labelled 16 GB model">
+    </div>
+    <div class="prose">
+      <p>60 TB of text cannot fit into 16 GB, a space about 3,750 times smaller. So the training text is not copied into the model. What the model keeps is the patterns in that text.</p>
+      <p>There is one exception. Think of a song in a language you don't know. You can still sing it word for word, without knowing what it means. The engine is similar with text it saw very often: that text <a href="https://arxiv.org/abs/2012.07805" rel="noopener">can come back exactly</a>.</p>
+    </div>
+    <div class="prints">
+      <img src="img/song.svg" alt="The friend singing a song, word for word">
+    </div>
+    <div class="prose">
+      <p>So there is no database inside the engine, but it is not a blank slate either. OpenAI says the same in plain words: its models <a href="https://openai.com/policies/how-chatgpt-and-our-foundation-models-are-developed/" rel="noopener">do not store copies of the data they were trained on</a>.</p>
+    </div>
+  </section>
+
+  <section id="s7">
+    <div class="prose">
+      <h2>The engine has a name: LLM</h2>
+      <p>This predictive engine inside the tools has a name. It is called a <b>large language model</b>, or an <b>LLM</b>.</p>
+      <p>An LLM holds everything it learned as numbers, which are called its parameters. So that kind of memory is called <b><a href="https://arxiv.org/abs/2005.11401" rel="noopener">parametric memory</a></b>.</p>
+    </div>
+  </section>
+
+  <section id="s8">
+    <div class="prose">
+      <h2>The app around the engine</h2>
+      <p>So is ChatGPT an LLM? Not exactly. ChatGPT is the app you talk to, and the LLM is the engine inside it.</p>
+    </div>
+    <div class="prints">
+      <img src="img/app-engine.svg" alt="An app window with a gear inside it, labelled the engine: an LLM">
+    </div>
+    <table>
+      <tr><th>The app</th><th>The engine inside</th></tr>
+      <tr><td>ChatGPT</td><td>GPT models</td></tr>
+      <tr><td>Gemini</td><td>Gemini models</td></tr>
+      <tr><td>Claude</td><td>Opus, Sonnet, Haiku</td></tr>
+      <tr><td>Grok</td><td>Grok models</td></tr>
+    </table>
+    <div class="prose">
+      <p>Here is the important part: the engine does not remember your chat. Every time you ask, the app sends the whole conversation so far, along with your new question. The engine reads all of it, and answers.</p>
+      <p>So who does the remembering? The app does. It <a href="https://help.openai.com/en/articles/8590148" rel="noopener">saves your chats and keeps a Memory</a> of what you shared.</p>
+      <p>The app can also search the web and read a file you upload. Then it packs the right pieces in with your question and hands them to the engine.</p>
+    </div>
+    <div class="prints">
+      <img src="img/orchestrate.svg" alt="Your chats, Memory, the web and your files are packed in with your question and handed to the LLM">
+    </div>
+    <div class="prose">
+      <p>Engineers call this arranging around the engine <b>orchestration</b>. The engine itself still has no database.</p>
+    </div>
+  </section>
+
+  <section id="s9">
+    <div class="prose">
+      <h2>The price of guessing</h2>
+      <p>Is guessing from patterns a bad thing? No. Because the engine works with patterns instead of stored pages, it can explain an idea in fresh words, not just fetch a saved one. But that ability comes with two costs.</p>
+      <p>First, it can be confidently wrong, like you with the exam question you never prepared for. OpenAI's own researchers say these models are <a href="https://openai.com/index/why-language-models-hallucinate/" rel="noopener">rewarded for guessing</a>, instead of saying "I don't know".</p>
+      <p>Second, its learning stops on a date. To test this, I used Gemini 3.8 Flash in Google AI Studio, with Google Search switched off. I asked: has the movie Avatar: Fire and Ash been released?</p>
+    </div>
+    <figure class="shot">
+      <video class="clip" src="img/aistudio-no.mp4" poster="img/aistudio-no-poster.jpg" controls muted playsinline preload="metadata" aria-label="Google AI Studio, Gemini 3.8 Flash, with Google Search off. Asked whether Avatar: Fire and Ash has been released, it answers: No, it has not been released yet; it is scheduled for December 19, 2025." style="display:block;width:100%;height:auto;border-radius:10px;border:1px solid var(--line)"></video>
+      <figcaption>The real test, 28 October 2026. Google Search is switched off, so the model answers from its own memory.</figcaption>
+    </figure>
+    <div class="prose">
+      <p>It said no, and that the film was due on 19 December 2025. In fact, the film came out on that date, and it <a href="https://www.boxofficepro.com/avatar-fire-and-ash-crosses-the-billion-dollar-mark-at-the-global-box-office/" rel="noopener">passed $1 billion by 4 January 2026</a>. The engine simply never read about it.</p>
+      <p>So how can we help it? Think back to the exam. Most papers have a comprehension section: a short passage, then questions on it. You answer from the passage, not from memory.</p>
+    </div>
+    <div class="prints">
+      <img src="img/comprehension.svg" alt="An exam paper: read the passage, then answer the questions">
+    </div>
+    <div class="prose">
+      <p>I gave Gemini the same kind of paper: a short passage about the movie, an empty line, and then my question. Copy it and try it yourself, in any AI app.</p>
+    </div>
+    <div class="yousee"><b>Paste this into the chat</b>Avatar: Fire and Ash is the third film in James Cameron's Avatar series. It was released in cinemas on 19 December 2025. By 4 January 2026, it had earned more than $1 billion worldwide, making it the third Avatar film to cross that mark.
+
+Question: Has the movie Avatar: Fire and Ash been released?</div>
+    <figure class="shot" style="margin-top:14px">
+      <video class="clip" src="img/aistudio-yes.mp4" poster="img/aistudio-yes-poster.jpg" controls muted playsinline preload="metadata" aria-label="Google AI Studio: the passage and the question are sent. The answer: Based on the provided text, yes, the movie was released on 19 December 2025. A note below it still says that, in reality, the film has not been released yet." style="display:block;width:100%;height:auto;border-radius:10px;border:1px solid var(--line)"></video>
+      <figcaption>The same model, with the passage first. The green ring marks the answer; the orange ring marks the note from its own memory.</figcaption>
+    </figure>
+    <div class="prose">
+      <p>This time it said yes, because the passage makes the date clear. Now read the note under that answer. From its parametric memory, the model still says the film has not been released. The passage gives the right answer, while its old memory argues back.</p>
+      <p>Putting the information into the question like this is called <b>context stuffing</b>. It is exactly what these apps do with your chats, your files and the web.</p>
+    </div>
+  </section>
+
+  <section id="s10">
+    <div class="prose">
+      <h2>The takeaway</h2>
+      <ol>
+        <li>ChatGPT, Gemini and Claude are apps. The engine inside each one is an LLM.</li>
+        <li>The engine has no database. It keeps patterns as numbers, and predicts the next word.</li>
+        <li>The app keeps your chats, your Memory and your files, searches the web, and hands the right pieces to the engine.</li>
+      </ol>
+      <p>That leaves you with a question. If the engine has no database, how would you give it your own data, such as your college notes or your shop's price list?</p>
+    </div>
+  </section>
+
+  <section id="homework">
+    <div class="next">
+      <div class="lbl">Your homework</div>
+      <h3>Ask it twice</h3>
+      <ol style="font-size:var(--fs-cap);color:var(--slate)">
+        <li>Open any one of these apps: ChatGPT, Gemini or Claude.</li>
+        <li>Ask it about something that happened in the last few months.</li>
+        <li>Watch the answer. Did it search the web (you will see sources, or a "searching" note), or did it answer from memory?</li>
+        <li>Then paste a short news paragraph about the same thing, leave an empty line, and ask the same question again.</li>
+      </ol>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:10px"><i>Tell me under the video what changed. And think about it: how would you give it your own data?</i></p>
+    </div>
+  </section>
+
+  <script>
+  // each clip plays once when most of it is on screen, never when the reader asks for reduced motion (WE-141)
+  (function () {
+    if (!('IntersectionObserver' in window) || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+    document.querySelectorAll('video.clip').forEach(function (v) {
+      var o = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { o.disconnect(); v.play().catch(function () {}); } });
+      }, { threshold: 0.6 });
+      o.observe(v);
+    });
+  })();
+  </script>
+
+  <section id="related">
+    <div class="prose"><h2>Related</h2></div>
+    <div class="blog-list"><a class="blog-item" href="../why-learn-coding-when-ai-writes-code/"><span class="blog-label what">Blog · Why does it exist?</span><h3>Why learn coding when AI writes code?</h3></a><a class="blog-item" href="../get-your-gemini-api-key-and-connect-spark/"><span class="blog-label what">Blog · How do I…?</span><h3>How do I get my own Gemini API key, and connect Spark?</h3></a><a class="blog-item" href="../what-is-a-python-program/"><span class="blog-label what">Blog · What is it?</span><h3>What is a Python program?</h3></a></div>
+  </section>
+
+  <section class="lwa-refs" id="refs">
+    <div class="prose">
+      <h2>References</h2>
+      <p>Every number on this page, and where it comes from. Checked on 28 Oct 2026.</p>
+    </div>
+    <ol>
+      <li><b>OpenAI</b> — <i>How ChatGPT and our foundation models are developed (updated 30 April 2025)</i>. <span class="why">Models are large sets of numbers, &quot;weights&quot; or &quot;parameters&quot;. They &quot;do not store or retain copies of the data they are trained on&quot;; they predict the next word.</span> <a href="https://openai.com/policies/how-chatgpt-and-our-foundation-models-are-developed/" rel="noopener">link</a></li>
+      <li><b>Meta</b> — <i>Introducing Meta Llama 3 (18 April 2024)</i>. <span class="why">&quot;Llama 3 is pretrained on over 15T tokens&quot;, released with 8B and 70B parameters.</span> <a href="https://ai.meta.com/blog/meta-llama-3/" rel="noopener">link</a></li>
+      <li><b>OpenAI Help Center</b> — <i>Understanding and counting tokens</i>. <span class="why">1 token is about 4 characters. So 15 trillion tokens is roughly 60 TB of text, and an 8B model at 2 bytes a number is about 16 GB: our own arithmetic.</span> <a href="https://help.openai.com/en/articles/4936856" rel="noopener">link</a></li>
+      <li><b>Carlini et al.</b> — <i>Extracting Training Data from Large Language Models (USENIX Security 2021)</i>. <span class="why">Hundreds of exact passages could be pulled out of GPT-2: text seen often, or very unusual, can come back word for word.</span> <a href="https://arxiv.org/abs/2012.07805" rel="noopener">link</a></li>
+      <li><b>Lewis et al.</b> — <i>Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks (2020)</i>. <span class="why">Where the term comes from: &quot;parametric memory&quot; (what the model&#x27;s numbers hold) and &quot;non-parametric memory&quot; (a searchable index).</span> <a href="https://arxiv.org/abs/2005.11401" rel="noopener">link</a></li>
+      <li><b>OpenAI Help Center</b> — <i>Memory in ChatGPT; Searching the web with ChatGPT; Deleting and archiving chats (checked 26 October 2026)</i>. <span class="why">The app keeps your chats, a Memory of details you shared and your files, and can search the web.</span> <a href="https://help.openai.com/en/articles/8590148" rel="noopener">link</a></li>
+      <li><b>OpenAI</b> — <i>Why language models hallucinate (5 September 2025)</i>. <span class="why">Hallucinations are &quot;plausible but false statements&quot;; models are rewarded for guessing over saying &quot;I don&#x27;t know&quot;.</span> <a href="https://openai.com/index/why-language-models-hallucinate/" rel="noopener">link</a></li>
+      <li><b>Boxoffice Pro</b> — <i>Avatar: Fire and Ash crosses the billion-dollar mark at the global box office</i>. <span class="why">As of 4 January 2026 the film had earned $1.083 billion worldwide, the third Avatar film past $1 billion. It opened on 19 December 2025.</span> <a href="https://www.boxofficepro.com/avatar-fire-and-ash-crosses-the-billion-dollar-mark-at-the-global-box-office/" rel="noopener">link</a></li>
+      <li><b>My own runs</b> — <i>27–28 October 2026: the Gemini API and Google AI Studio (Gemini 3.8 Flash, Grounding with Google Search off)</i>. <span class="why">Asked cold, the models said the film was not out yet. With the passage first, they said yes. The two recordings on this page are real.</span></li>
+      </ol>
+  </section>
+
+  <div class="lwa-chapnav">
+    <a href="../index.html"><span class="k">← Blog</span><span class="t">All posts</span></a>
+    <a href="https://www.youtube.com/watch?v=erl1822qozQ" rel="noopener"><span class="k">Watch →</span><span class="t">The video on YouTube</span></a>
+  </div>
+
+  </main>
+</div>
+
+<footer class="foot">
+  <div class="foot-in">
+    <img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building" style="height:36px">
+    <span>Learn AI by Building — Blog · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="../index.html" style="color:var(--accent)">Blog</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
+  </div>
+</footer>
+<script src="../../assets/site-config.js"></script>
+<script src="../../assets/progress.js?v=2"></script>
+<script src="../../assets/pyrun.js?v=2"></script>
+<script src="../../assets/railspy.js?v=1"></script>
+<script src="../../assets/analytics.js?v=1" defer></script>
+</body>
+</html>
