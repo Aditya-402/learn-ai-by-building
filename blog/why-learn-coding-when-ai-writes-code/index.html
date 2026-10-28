@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Why learn coding when AI writes code? — Learn AI by Building</title>
-<meta name="description" content="An AI wrote two programs. Both ran. One of them was wrong. Can you spot which one, and what does that tell you about learning to code today?">
+<meta name="description" content="An AI wrote two programs for the same job: both ran, and one of them was wrong. By the end, you will be able to spot it, and you will know why that skill matters more now that AI writes code.">
 <link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
 <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
@@ -19,9 +19,9 @@
     <div class="title-block">
       <span class="blog-label why">Why does it exist?</span>
       <h1>Why learn coding when AI writes code?</h1>
-      <p class="standfirst">An AI wrote two programs. Both ran. One of them was wrong. Can you spot which one, and what does that tell you about learning to code today?</p>
+      <p class="standfirst">An AI wrote two programs for the same job: both ran, and one of them was wrong. By the end, you will be able to spot it, and you will know why that skill matters more now that AI writes code.</p>
       <div class="facts">
-        <div><b>Read</b>~6 min</div>
+        <div><b>Read</b>~5 min</div>
         <div><b>Watch</b>4:51 video</div>
         <div><b>Practice</b>runs right here</div>
         <div><b>Published</b>8 Oct 2026</div>
@@ -41,6 +41,7 @@
     <a href="#s5">Agentic AI: the fresher</a>
     <a href="#s6">What coding really trains</a>
     <a href="#s7">The honest cost</a>
+    <a href="#s8">The takeaway</a>
     <a href="#homework">Your homework</a>
     <a href="#related">Related</a>
   </nav>
@@ -57,73 +58,80 @@
   <section id="s1">
     <div class="prose">
       <h2>A question students keep asking me</h2>
-      <p>Of late, students keep asking me this one question. <i>"Sir, AI writes code now. Should I still learn coding?"</i></p>
-      <p>That's a very nice question. Let me answer it with one small test.</p>
-      <p>Say you and your friends go out for dinner. The rule is simple. Everyone pays an equal share. Say an AI gives you these two programs. One of them is wrong.</p>
+      <p>Of late, students keep asking me one question: <i>"Sir, AI writes code now. Should I still learn coding?"</i> That's a very nice question, and one small test answers it.</p>
+      <p>Say you and your friends go out for dinner, and the rule is simple: everyone pays an equal share. An AI gives you two programs for it, and one of them is wrong.</p>
     </div>
     <div class="prints">
       <img src="img/dinner4.svg" alt="Four friends at dinner, and the bill on the table">
     </div>
-        <div class="vs">
+    <div class="vs">
       <div><h4>Program A</h4><p class="flow">share = bill ÷ friends</p></div>
       <div><h4>Program B</h4><p class="flow">share = 500</p></div>
     </div>
-    <div class="prose">
-      <p><b>Stop here, and find the wrong one.</b> Hold on to your answer.</p>
+    <div class="p-card">
+      <div class="ph"><span class="pn">Decide first</span><span class="pt">Which program is wrong, A or B?</span></div>
+      <div class="pd">Pick one before you read on. The section "The reveal" answers it.</div>
     </div>
   </section>
 
   <section id="s2">
     <div class="prose">
       <h2>First, let's be fair to the AI</h2>
-      <p>You ask it for a program. In ten seconds, you get it. It runs. Many times, it is even correct.</p>
-      <p>But it writes both right and wrong things. And the wrong ones don't always look wrong.</p>
+      <p>You ask an AI for a program, and within 10 seconds you have it. It runs, and many times it is even correct.</p>
+      <p>But an AI writes both right and wrong code, and the wrong code doesn't always look wrong.</p>
     </div>
     <div class="prints">
       <img src="img/bill2000.svg" alt="The bill: 2,000 rupees">
-      <div class="figcap">Two thousand rupees, four friends.</div>
+      <div class="figcap">A bill of 2,000 rupees, shared by 4 friends.</div>
     </div>
-    <div class="prose">
-      <p>Here are both programs. Press <b>▶ Run</b>. The bill is two thousand rupees, and there are four friends.</p>
-      <div class="pyrun" data-id="whycode-bill">
-        <textarea spellcheck="false">bill = 2000
-friends = 4
+    <div class="worked">
+      <div class="wl">Try it: run both programs</div>
+      <p><b>The goal:</b> see what each program says for tonight's dinner.</p>
+      <p><b>The step:</b> press Run. The bill is 2,000 rupees, and there are 4 friends.</p>
+      <p><b>Guess first:</b> what will each program say?</p>
+    </div>
+    <div class="pyrun" data-id="whycode-bill">
+      <textarea spellcheck="false">bill = 2000
+friends = 4    # edit here: in the next section, change 4 to 5
 
 share_a = bill / friends   # program A
 share_b = 500              # program B
 
 print("A says:", share_a)
 print("B says:", share_b)</textarea>
-      </div>
-      <p>A says five hundred. B says five hundred. Both correct, right?</p>
+    </div>
+    <div class="prose">
+      <p><b>What you should see:</b> A says 500.0, and B says 500. Both look correct, right?</p>
     </div>
   </section>
 
   <section id="s3">
     <div class="prose">
       <h2>The reveal: it ran, and it was wrong</h2>
-      <p>Now a fifth friend joins. Same bill. Change <code>friends = 4</code> to <code>friends = 5</code>, and run it again.</p>
+      <p>Now a fifth friend joins, and the bill stays the same. In the code above, on the line marked <code># edit here</code>, change 4 to 5 and run it again.</p>
     </div>
     <div class="prints">
       <img src="img/dinner5.svg" alt="A fifth friend pulls up a chair">
       <div class="figcap">Same bill. One more friend.</div>
     </div>
+    <div class="yousee"><b>What you should see</b>A says: 400.0
+B says: 500</div>
     <div class="prose">
-      <p>A says four hundred. B still says five hundred. Did you find it? B never followed the rule. It only matched last week's answer.</p>
+      <p>A now says 400, but B still says 500. Did you find it? Program B never followed the rule; it only matched last week's answer.</p>
     </div>
     <div class="keyidea">
       <div class="lbl">No crash. No error. Still wrong.</div>
-      Nothing crashed. No error came. The program ran perfectly, and it was still wrong. Someone at that table pays from his own pocket, and nobody knows why.
+      Nothing crashed and no error came. The program ran perfectly, and it was still wrong. Someone at that table pays from his own pocket, and nobody knows why.
     </div>
     <div class="prose">
-      <p>And the only person who can catch it is someone who can read those two lines.</p>
+      <p>The only person who can catch it is someone who can read those two lines.</p>
     </div>
   </section>
 
   <section id="s4">
     <div class="prose">
       <h2>The auto ride</h2>
-      <p>Let's try to understand this in another way. Say you took an auto to go somewhere new. The driver takes a turn you have never seen. If you know the road, you ask him why. If you don't, you simply pay the meter.</p>
+      <p>Let's try to understand this another way. Say you took an auto to go somewhere new, and the driver takes a turn you have never seen. If you know the road, you ask him why. If you don't, you simply pay the meter.</p>
     </div>
     <div class="prints">
       <img src="img/auto.svg" alt="An auto-rickshaw with its meter">
@@ -131,52 +139,63 @@ print("B says:", share_b)</textarea>
       <div class="figcap">Know the road, and you ask why. Don't, and you pay the meter.</div>
     </div>
     <div class="prose">
-      <p>Code is the same. If you cannot read the road, you will not notice the wrong turn.</p>
+      <p>Code works the same way: if you cannot read the road, you will not notice the wrong turn.</p>
       <p>Reading the code an AI wrote, and judging it line by line, is what we call <b>code review</b>.</p>
-      <p>So with Generative AI, your job does not disappear. It shifts. From typing the code, to reading it and judging it.</p>
+      <p>So with Generative AI, your job does not disappear; it shifts, from typing the code to reading it and judging it.</p>
     </div>
   </section>
 
   <section id="s5">
     <div class="prose">
       <h2>Agentic AI: the fresher</h2>
-      <p>Now, Agentic AI goes one step further. An agent does not stop at writing code. It plans, picks a tool, acts, checks the result, and goes again.</p>
-      <p>So, if the AI can do all this on its own, do you need to know even less?</p>
-      <p>Say you joined a company as a fresher. You get a role, an objective, and some tools. That, effectively, is what an agent is.</p>
+      <p>Agentic AI goes one step further. An agent does not stop at writing code: it plans, picks a tool, acts, checks the result, and goes again.</p>
+      <p>So if an AI can do all of this on its own, do you need to know even less?</p>
+      <p>Say you joined a company as a fresher. You get a role, an objective and some tools. That, effectively, is what an agent is.</p>
     </div>
     <div class="prints">
       <img src="img/fresher.svg" alt="A fresher on day one: ID badge, laptop, a role, an objective, some tools">
     </div>
     <div class="prose">
-      <p>Now tell me. Would any team lead give a fresher full access on day one, without checking the work? No, right? Someone who knows the job checks the work. With agents, that someone is you.</p>
+      <p>Would any team lead give a fresher full access on day one, without checking the work? No, right? Someone who knows the job checks the work, and with agents, that someone is you.</p>
     </div>
     <div class="prints">
       <img src="img/teamlead.svg" alt="A team lead checking the fresher's work, line by line">
     </div>
     <div class="prose">
-      <p>And to check the work, you must know the job yourself. This is what we call keeping a <b>human in the loop</b>.</p>
+      <p>To check the work, you must know the job yourself. This is what we call keeping a <b>human in the loop</b>.</p>
     </div>
   </section>
 
   <section id="s6">
     <div class="prose">
       <h2>What coding really trains</h2>
-      <p>So what does knowing the job really mean? A program is a set of well defined instructions. Learning to code trains you to think in exact steps, with no ambiguity.</p>
-      <p>And that same skill makes your prompts sharp. A vague instruction gets you a vague program.</p>
-      <p>In a nutshell, the AI types faster than you. But you decide what is right.</p>
+      <p>So what does knowing the job really mean? A program is a set of well-defined instructions, and learning to code trains you to think in exact steps, with no ambiguity.</p>
+      <p>That same skill makes your prompts sharp, because a vague instruction gets you a vague program.</p>
+      <p>In a nutshell, the AI types faster than you, but you decide what is right.</p>
     </div>
     <div class="keyidea">
       <div class="lbl">True even if the AI becomes perfect</div>
-      This does not depend on the AI being weak. Even if it writes perfect code one day, someone still has to say exactly what is needed. And someone has to judge whether it was done right.
+      This does not depend on the AI being weak. Even if it writes perfect code one day, someone still has to say exactly what is needed, and someone has to judge whether it was done right.
     </div>
   </section>
 
   <section id="s7">
     <div class="prose">
       <h2>The honest cost</h2>
-      <p>Deciding what is right is a skill, and every skill has a cost. Learning to code takes time. You will fail many times. There is no shortcut around it, and I am not going to pretend there is one.</p>
-      <p>And not every problem needs code, or an agent. Start with the problem, then pick the tool. Fit for purpose thinking, not trend first thinking.</p>
-      <p>So, AI can write the code. But you still need to understand what that code is supposed to do, and whether it is correct.</p>
+      <p>Deciding what is right is a skill, and every skill has a cost. Learning to code takes time, and you will fail many times. There is no shortcut around it, and I am not going to pretend there is one.</p>
+      <p>Not every problem needs code, or an agent, either. Start with the problem, then pick the tool: fit-for-purpose thinking, not trend-first thinking.</p>
+    </div>
+  </section>
+
+  <section id="s8">
+    <div class="prose">
+      <h2>The takeaway</h2>
+      <ol>
+        <li>An AI writes code fast, and it writes both right and wrong code. The wrong code can run without a single error.</li>
+        <li>Your job shifts from typing the code to reading it and judging it, and with agents, to checking their work.</li>
+        <li>Learning to code trains you to think in exact steps, so you can say what is needed and judge what you get.</li>
+      </ol>
+      <p>So an AI can write the code. But you still need to understand what that code is supposed to do, and whether it is correct.</p>
     </div>
   </section>
 
@@ -184,12 +203,17 @@ print("B says:", share_b)</textarea>
     <div class="next">
       <div class="lbl">Your homework</div>
       <h3>Read it, change it, predict it</h3>
-      <p style="font-size:var(--fs-cap);color:var(--slate)">Take one program that an AI wrote for you. Read it, line by line. Change one number. Predict the output, then run it. No program of your own yet? Use the one below: predict first, then press <b>▶ Run</b>.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate)"><b>The goal:</b> practise reading code an AI wrote, before you trust it.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>The steps:</b> take one program that an AI wrote for you, and read it line by line. Change one number, predict the output, then run it. No program of your own yet? Ask any AI app with this:</p>
+    </div>
+    <div class="yousee"><b>Paste this into any AI app</b>Write a short Python program that splits a dinner bill equally among friends, after adding a tip.</div>
+    <div class="next">
+      <p style="font-size:var(--fs-cap);color:var(--slate)">Or use the program below. <b>Guess first:</b> with a 2,000-rupee bill, a 10% tip and 5 friends, how much does each person pay? Then press Run, and press Check to see if your guess matches.</p>
       <div class="prints"><img src="img/predict.svg" alt="A program an AI wrote, and a sticky note: my guess"></div>
-      <div class="pyrun" data-id="whycode-predict">
+      <div class="pyrun" data-id="whycode-predict" data-expect="Each pays: 440.0">
         <textarea spellcheck="false">bill = 2000
 friends = 5
-tip = 10   # percent
+tip = 10   # percent; edit here to try another tip
 
 total = bill + bill * tip / 100
 share = total / friends
@@ -221,8 +245,9 @@ print("Each pays:", share)</textarea>
   </div>
 </footer>
 <script src="../../assets/site-config.js"></script>
-<script src="../../assets/analytics.js?v=1" defer></script>
 <script src="../../assets/progress.js?v=2"></script>
-<script src="../../assets/pyrun.js?v=3"></script>
+<script src="../../assets/pyrun.js?v=2"></script>
+<script src="../../assets/railspy.js?v=1"></script>
+<script src="../../assets/analytics.js?v=1" defer></script>
 </body>
 </html>
