@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How do I install Claude Code? — Learn AI by Building</title>
+<meta name="description" content="Want to build with Claude Code, the AI that works in a folder on your own computer? By the end, you will have it installed and signed in on Windows or Mac, checked with two commands, and ready for the workshop.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=8">
+<link rel="stylesheet" href="../../assets/unit.css?v=8">
+<link rel="stylesheet" href="../../assets/blog.css?v=7">
+</head>
+<body data-lwa-course="blog" data-lwa-chapter="install-claude-code">
+<header class="top"><div class="top-in"><a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark-maroon.svg?v=1" alt="Learn AI by Building"></a><div class="lwa-brand-right"><span class="lwa-tag"><a href="../index.html">Blog</a></span><span data-lwa-auth></span></div></div></header>
+<header class="masthead">
+  <div class="masthead-in">
+    <div class="title-block">
+      <span class="blog-label how">How do I…?</span>
+      <h1>How do I install Claude Code?</h1>
+      <p class="standfirst">Want to build with Claude Code, the AI that works in a folder on your own computer? By the end, you will have it installed and signed in on Windows or Mac, checked with two commands, and ready for the workshop.</p>
+      <div class="facts">
+        <div><b>Read</b>~6 min</div>
+        <div><b>Steps</b>5, each shown on screen</div>
+        <div><b>Video</b>coming later</div>
+        <div><b>Published</b>29 Oct 2026</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="rail" aria-label="Sections">
+    <div class="rail-h">Contents</div>
+    <a class="on" href="#need">What you need first</a>
+    <a href="#windows">Install it on Windows</a>
+    <a href="#mac">Install it on a Mac</a>
+    <a href="#sign-in">Sign in and say hello</a>
+    <a href="#check">Check that everything works</a>
+    <a href="#wrong">When the install goes wrong</a>
+    <a href="#workshop">Coming to the Claude Code workshop?</a>
+    <a href="#homework">Your homework</a>
+    <a href="#related">Related</a>
+    <a href="#refs">References</a>
+  </nav>
+
+  <main>
+
+
+
+  <section id="need">
+    <div class="prose">
+      <h2>What you need first</h2>
+      <p>Claude Code is an AI that works inside a folder on your own computer. It reads your files, writes code and runs commands, asking you before it changes anything. Let's get it running.</p>
+      <p>You need three things before you start:</p>
+      <ul>
+        <li><b>A paid Claude plan.</b> Claude Code is not part of the Free plan; Pro is the smallest plan that includes it.</li>
+        <li><b>A 64-bit computer:</b> Windows 10 (version 1809 or later) or Windows 11, or macOS 13 or later.</li>
+        <li><b>About 10 minutes</b>, and an internet connection that is not blocked by an office proxy.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="windows">
+    <div class="prose">
+      <h2>Install it on Windows</h2>
+      <p>It takes two steps, both in PowerShell.</p>
+    </div>
+
+    <div class="step"><span class="n">1</span><h3>Open PowerShell</h3>
+      <p>Press the Windows key, type <i>PowerShell</i>, and open <b class="ui">Windows PowerShell</b>. Do not pick the one marked <b class="ui">(x86)</b>; that is the 32-bit version, and Claude Code needs 64-bit.</p></div>
+
+    <div class="step"><span class="n">2</span><h3>Run the installer</h3>
+      <p>Paste this line into PowerShell and press Enter:</p></div>
+    <div class="yousee"><b>Paste into PowerShell</b>irm https://claude.ai/install.ps1 | iex</div>
+    <div class="prose">
+      <p>When it finishes, <b>close PowerShell and open a new one</b>, so it can find the new command. Then check it:</p>
+    </div>
+    <div class="yousee"><b>Then type</b>claude --version</div>
+    <div class="yousee"><b>What you should see</b>2.1.312 (Claude Code)</div>
+    <div class="prose">
+      <p>Your number may be newer; that is fine. What matters is the words <i>(Claude Code)</i>. The native installer also keeps Claude Code up to date by itself.</p>
+    </div>
+  </section>
+
+  <section id="mac">
+    <div class="prose">
+      <h2>Install it on a Mac</h2>
+      <p>Open <b class="ui">Terminal</b> (press Cmd+Space, type <i>Terminal</i>), paste this line and press Enter:</p>
+    </div>
+    <div class="yousee"><b>Paste into Terminal</b>curl -fsSL https://claude.ai/install.sh | bash</div>
+    <div class="prose">
+      <p>Open a new Terminal window and type <code>claude --version</code>. You should see a version number followed by <i>(Claude Code)</i>, as on Windows. Linux works the same way, with the same line.</p>
+    </div>
+  </section>
+
+  <section id="sign-in">
+    <div class="prose">
+      <h2>Sign in and say hello</h2>
+      <p>Claude Code always works inside a folder, so make one first and start it there.</p>
+    </div>
+    <div class="yousee"><b>Windows (PowerShell)</b>mkdir C:\code\hello
+cd C:\code\hello
+claude</div>
+    <div class="yousee"><b>Mac (Terminal)</b>mkdir -p ~/code/hello
+cd ~/code/hello
+claude</div>
+    <div class="prose">
+      <p>The first time, Claude Code opens your browser to sign in. Sign in with the Claude account that has your Pro plan, then come back to the terminal.</p>
+      <p>It then asks whether you trust the files in this folder. This is your own empty folder, so choose yes.</p>
+      <p>Now type <code>/status</code> and press Enter. You should see your account, the model and the version. Type <code>/exit</code> to leave.</p>
+    </div>
+    <div class="confuse">
+      <div class="lbl">Keep your folders simple</div>
+      <p>Use a folder like <code>C:\code</code>, with no spaces and not inside OneDrive. Synced folders and spaces in paths cause odd errors later.</p>
+    </div>
+  </section>
+
+  <section id="check">
+    <div class="prose">
+      <h2>Check that everything works</h2>
+      <p>Claude Code has a built-in health check. Run it in PowerShell or Terminal, outside a Claude session:</p>
+    </div>
+    <div class="yousee"><b>Then type</b>claude doctor</div>
+    <div class="prose">
+      <p>It looks at your installation and tells you if anything needs fixing. If it reports a problem, the next section has the usual fixes.</p>
+    </div>
+  </section>
+
+  <section id="wrong">
+    <div class="prose">
+      <h2>When the install goes wrong</h2>
+      <p>Read the message first; it usually names the problem. These are the common ones.</p>
+    </div>
+    <table>
+      <tr><th>What you see</th><th>What it means, and the fix</th></tr>
+      <tr><td><i>irm is not recognized</i></td><td>You are in Command Prompt, not PowerShell. Open PowerShell and paste the line again.</td></tr>
+      <tr><td><i>claude is not recognized</i>, or <i>command not found</i></td><td>Close the terminal and open a new one first. If it still fails, the installer's folder is not on your PATH; the fix is below.</td></tr>
+      <tr><td>A 32-bit error</td><td>You opened <b class="ui">Windows PowerShell (x86)</b>. Use the one without (x86).</td></tr>
+      <tr><td>A 403 error, or a certificate error</td><td>An office network or proxy is blocking the download. Try a home network or your phone's hotspot. A 403 can also mean Claude Code is not offered in your country yet.</td></tr>
+      <tr><td>The browser sign-in says your plan does not include Claude Code</td><td>The account is on the Free plan. Upgrade to Pro, then run <code>/login</code> inside Claude Code.</td></tr>
+    </table>
+    <div class="prose">
+      <p>If <i>claude is not recognized</i> keeps coming back on Windows, add the installer's folder to your PATH with this line, then open a new PowerShell:</p>
+    </div>
+    <div class="yousee"><b>Paste into PowerShell</b>[Environment]::SetEnvironmentVariable("Path", [Environment]::GetEnvironmentVariable("Path", "User") + ";$env:USERPROFILE\.local\bin", "User")</div>
+    <div class="prose">
+      <p>Still stuck? Anthropic's <a href="https://code.claude.com/docs/en/troubleshoot-install" rel="noopener">installation troubleshooting page</a> covers the rarer cases.</p>
+    </div>
+  </section>
+
+  <section id="workshop">
+    <div class="prose">
+      <h2>Coming to the Claude Code workshop?</h2>
+      <p>In the workshop we build DevPulse, a small activity tracker for developers, from an empty folder to a live web page. For that, install four free tools too. None of them costs anything.</p>
+    </div>
+    <table>
+      <tr><th>Tool</th><th>Get it from</th><th>Check it with</th></tr>
+      <tr><td>Git</td><td><a href="https://git-scm.com/downloads" rel="noopener">git-scm.com, the Git downloads page</a></td><td><code>git --version</code></td></tr>
+      <tr><td>Python 3.12 or later</td><td><a href="https://www.python.org/downloads/" rel="noopener">python.org, the Python downloads page</a> (on Windows, tick <b class="ui">Add python.exe to PATH</b>)</td><td><code>python --version</code></td></tr>
+      <tr><td>Node.js 20 or later</td><td><a href="https://nodejs.org/" rel="noopener">nodejs.org, the LTS download</a></td><td><code>node --version</code></td></tr>
+      <tr><td>A GitHub account</td><td><a href="https://github.com/signup" rel="noopener">github.com, the sign-up page</a></td><td>You can sign in on github.com</td></tr>
+    </table>
+    <div class="prose">
+      <p>On Windows, you can install the first three in one go from PowerShell, if you prefer:</p>
+    </div>
+    <div class="yousee"><b>Paste into PowerShell (optional), one line at a time</b>winget install Git.Git
+winget install Python.Python.3.12
+winget install OpenJS.NodeJS.LTS</div>
+    <div class="prose">
+      <p>Then open a new PowerShell and run all four checks.</p>
+    </div>
+    <div class="yousee"><b>Run these, one per line</b>claude --version
+git --version
+python --version
+node --version</div>
+    <div class="prose">
+      <p><b>What you should see:</b> four version numbers and no errors. If all four print, you are ready for Saturday.</p>
+    </div>
+  </section>
+
+  <section id="homework">
+    <div class="next">
+      <div class="lbl">Your homework</div>
+      <h3>Ask it one question</h3>
+      <p style="font-size:var(--fs-cap);color:var(--slate)"><b>The goal:</b> see Claude Code work in a folder before the workshop.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>The steps:</b> go to <code>C:\code\hello</code>, run <code>claude</code>, and type: <i>Create a file called hello.txt with one line about what I want to build.</i> Answer its permission question, then open the file.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>Guess first:</b> will it create the file straight away, or ask you first?</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:10px"><i>One question for you: what do you want to build with Claude Code? Bring the answer to the workshop.</i></p>
+    </div>
+  </section>
+
+  <section id="related">
+    <div class="prose"><h2>Related</h2></div>
+    <div class="blog-list"><a class="blog-item" href="../get-your-gemini-api-key-and-connect-spark/"><span class="blog-label how">Blog · How do I…?</span><h3>How do I get my own Gemini API key, and connect Spark?</h3></a><a class="blog-item" href="../why-learn-coding-when-ai-writes-code/"><span class="blog-label how">Blog · Why does it exist?</span><h3>Why learn coding when AI writes code?</h3></a></div>
+  </section>
+
+  <section class="lwa-refs" id="refs">
+    <div class="prose">
+      <h2>References</h2>
+      <p>Where each step and requirement on this page comes from. Checked on 29 Oct 2026.</p>
+    </div>
+    <ol>
+      <li><b>Anthropic</b> — <i>Claude Code quickstart</i>. <span class="why">The native installer commands for Windows (PowerShell) and macOS/Linux, signing in on first launch, and starting in a folder.</span> <a href="https://code.claude.com/docs/en/quickstart" rel="noopener">link</a></li>
+      <li><b>Anthropic</b> — <i>Troubleshoot installation</i>. <span class="why">claude --version and claude doctor, the install folder (%USERPROFILE%\.local\bin on Windows), PATH, proxy and certificate errors.</span> <a href="https://code.claude.com/docs/en/troubleshoot-install" rel="noopener">link</a></li>
+      <li><b>Anthropic</b> — <i>Terminal guide</i>. <span class="why">Windows 10 version 1809 or later, 64-bit only (not PowerShell x86), macOS 13 or later, PowerShell versus Command Prompt.</span> <a href="https://code.claude.com/docs/en/terminal-guide" rel="noopener">link</a></li>
+      <li><b>Anthropic</b> — <i>Claude pricing</i>. <span class="why">Claude Code is not included in the Free plan; Pro is the smallest plan that includes it (checked 28 Oct 2026).</span> <a href="https://claude.com/pricing" rel="noopener">link</a></li>
+      <li><b>Anthropic</b> — <i>Supported countries</i>. <span class="why">A 403 at install or sign-in can mean the service is not offered in your country.</span> <a href="https://www.anthropic.com/supported-countries" rel="noopener">link</a></li>
+      <li><b>My own install</b> — <i>29 Oct 2026, Windows 11 Pro</i>. <span class="why">claude --version prints 2.1.312 (Claude Code); the program sits in C:\Users\&lt;you&gt;\.local\bin.</span></li>
+      </ol>
+  </section>
+
+  <div class="lwa-chapnav">
+    <a href="../index.html"><span class="k">← Blog</span><span class="t">All posts</span></a>
+    
+  </div>
+
+  </main>
+</div>
+
+<footer class="foot">
+  <div class="foot-in">
+    <img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building" style="height:36px">
+    <span>Learn AI by Building — Blog · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="../index.html" style="color:var(--accent)">Blog</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
+  </div>
+</footer>
+<script src="../../assets/site-config.js"></script>
+<script src="../../assets/progress.js?v=2"></script>
+<script src="../../assets/pyrun.js?v=2"></script>
+<script src="../../assets/railspy.js?v=1"></script>
+<script src="../../assets/analytics.js?v=1" defer></script>
+</body>
+</html>
