@@ -19,3 +19,14 @@
 .cc-wall{border-left:3px solid var(--accent);background:var(--accent-wash);padding:16px 20px;border-radius:0 10px 10px 0;max-width:100%}
 .cc-wall .lbl{font-size:var(--fs-xs);letter-spacing:.13em;text-transform:uppercase;font-weight:700;color:var(--accent);margin-bottom:6px}
 .cc-wall p{font-size:var(--fs-cap)}
+/* the prompt sheet (prompts.html, 31 Oct 2026): a dark block per prompt with a Copy button, and why it is worded that way */
+.pr{margin:12px 0 18px;max-width:100%}
+.pr-h{display:flex;justify-content:space-between;align-items:center;background:#2f323b;color:#c9bfcb;font-size:var(--fs-xs);
+  letter-spacing:.08em;text-transform:uppercase;padding:6px 10px 6px 14px;border-radius:10px 10px 0 0;margin-top:6px}
+.pr pre{margin:0;background:#23262e;color:#ece4d8;font-family:var(--mono);font-size:var(--fs-sm);padding:12px 14px;
+  border-radius:0 0 10px 10px;white-space:pre-wrap;overflow-wrap:anywhere}
+.pr-copy{background:var(--accent);color:#fff;border:0;border-radius:6px;padding:4px 12px;font-size:var(--fs-xs);cursor:pointer;
+  letter-spacing:.04em;text-transform:none}
+.pr-copy:hover{filter:brightness(1.1)}
+.pr-why{font-size:var(--fs-cap);color:var(--slate);margin-top:6px}
+.pr-link{font-size:var(--fs-cap)}
