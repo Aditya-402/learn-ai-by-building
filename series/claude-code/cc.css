@@ -1,0 +1,21 @@
+/* Learn Claude Code by Building DevPulse - what the series adds to unit.css and blog.css (29 Oct 2026).
+   Screenshots from the recorded takes: full column width, a thin frame, the caption under it. */
+.cc-shot{margin:14px 0 22px;max-width:100%}
+.cc-shot img,.cc-shot video{display:block;width:100%;height:auto;border-radius:10px;border:1px solid var(--line);box-shadow:var(--shadow)}
+.cc-shot figcaption{font-size:var(--fs-sm);color:var(--muted);margin-top:8px}
+/* the quick reference before the homework (30 Oct 2026): on a phone each row stacks into a small card */
+#quickref .cheat td:first-child code{white-space:normal}
+@media (max-width:640px){
+  #quickref .cheat tr:first-child{display:none}
+  #quickref .cheat tr,#quickref .cheat td{display:block;width:auto}
+  #quickref .cheat tr{padding:10px 0;border-top:1px solid var(--line)}
+  #quickref .cheat td{border:0;padding:2px 0}
+  #quickref .cheat td:last-child{color:var(--muted)}
+  #quickref .cheat td:last-child::before{content:"Use it when: ";font-weight:600}
+}
+/* long reference URLs break instead of widening the page on a phone (chapter 5's MDN link, 30 Oct 2026) */
+.lwa-refs a{overflow-wrap:anywhere}
+/* the "wall" at the top of every episode: the problem we hit before the tool appears */
+.cc-wall{border-left:3px solid var(--accent);background:var(--accent-wash);padding:16px 20px;border-radius:0 10px 10px 0;max-width:100%}
+.cc-wall .lbl{font-size:var(--fs-xs);letter-spacing:.13em;text-transform:uppercase;font-weight:700;color:var(--accent);margin-bottom:6px}
+.cc-wall p{font-size:var(--fs-cap)}

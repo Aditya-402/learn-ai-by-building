@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 1 · A first DevPulse page — Learn AI by Building</title>
+<meta name="description" content="Chapter 1 of the Claude Code series: start Claude Code in an empty folder, ask for a small web page, stop it with Esc, point at a file with @, and see what it decided without asking.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=8">
+<link rel="stylesheet" href="../../assets/unit.css?v=8">
+<link rel="stylesheet" href="../../assets/blog.css?v=7">
+<link rel="stylesheet" href="cc.css?v=3">
+</head>
+<body data-lwa-course="claude-code" data-lwa-chapter="chapter1" data-lwa-title="Chapter 1 · A first DevPulse page" data-lwa-taught="starting claude in a folder; the trust question; /status; asking for a build in plain words; ! to run a command; Esc to stop; @ to point at a file; /exit">
+<header class="top"><div class="top-in">
+  <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark-maroon.svg?v=1" alt="Learn AI by Building"></a>
+  <div class="lwa-brand-right"><span class="lwa-tag"><a href="index.html">Learn Claude Code by Building DevPulse</a></span><span data-lwa-auth></span></div>
+</div></header>
+<header class="masthead">
+  <div class="masthead-in">
+    <div class="title-block">
+      <div class="eyebrow">Learn Claude Code by Building DevPulse · Chapter 1</div>
+      <h1>A first DevPulse page</h1>
+      <p class="standfirst">ChatGPT writes the code, so why do you still copy, save, run and paste every error back yourself? By the end of this chapter, Claude Code will have built a working page in your own folder, and you will know the six things you use every day.</p>
+      <div class="facts"><div><b>One sitting</b>~7 min read, ~15 min to build along</div><div><b>You need</b>Claude Code installed and signed in (chapter 0)</div><div><b>You build</b>DevPulse, version one: a single web page</div><div><b>Chapter 1 of 15</b>the first wall of the series</div></div>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="rail" aria-label="Sections">
+    <a class="rnav-back" href="index.html"><span class="ico">←</span><span class="lbl">All chapters</span></a>
+    <div class="rail-h">Contents</div>
+    <a class="on" href="#wall">The wall</a>
+    <a href="#start">Start it in a folder</a>
+    <a href="#ask">Ask for the page</a>
+    <a href="#run">See it work</a>
+    <a href="#stop">Stop it with Esc</a>
+    <a href="#at">Point at a file with @</a>
+    <a href="#cost">What it never asked</a>
+    <a href="#quickref">Quick reference</a>
+    <a href="#homework">Your homework</a>
+  </nav>
+
+  <main>
+  <section id="wall" data-rail="The wall">
+    <div class="prereq">
+      <div class="pq"><b>Goes with Episode 1</b>"Why Claude Code, when we already have ChatGPT?". The video is being made. This page teaches the same steps, at your own pace.</div><div class="pq"><b>In a hurry?</b><a href="#quickref">Jump to the quick reference</a>: every command and key in this chapter, what it does, and when to use it.</div>
+      <div class="pq"><b>Build along</b>Every step has the exact line to type. Your answers from Claude will differ a little; that is normal.</div>
+    </div>
+    <div class="prose">
+      <h2>You are the one doing the work</h2>
+      <p>Say you ask ChatGPT for a small web page. It writes the code. Then what?</p>
+      <p>You copy it out. You make a file, paste it in and save it. Then you open it.</p>
+      <p>Something breaks, so you copy the error back into the chat. Then you paste the new code over the old code.</p>
+      <p>ChatGPT wrote the code, right? But you did all the work around it.</p>
+    </div>
+    <div class="cc-wall">
+      <div class="lbl">The question for this chapter</div>
+      <p>What if the AI could work inside your folder, make the files itself, and run them itself?</p>
+    </div>
+    <div class="prose">
+      <p>That is Claude Code. It is an AI that works in a folder on your computer. It reads your files, writes them and runs commands. We call a tool like that an <b>agent</b>.</p>
+    </div>
+  </section>
+
+  <section id="start" data-rail="Start it in a folder">
+    <div class="prose">
+      <h2>Start Claude Code in a folder</h2>
+      <p>Claude Code always works inside one folder. So first, make a folder for our project and go into it. I keep all my work in one folder, and I made a <code>projects</code> folder inside it. Start from wherever you keep your work.</p>
+    </div>
+    <div class="yousee"><b>Windows: type this in PowerShell, one line at a time</b>mkdir projects\devpulse
+cd projects\devpulse
+claude</div>
+    <div class="yousee"><b>Mac: type this in Terminal, one line at a time</b>mkdir -p projects/devpulse
+cd projects/devpulse
+claude</div>
+    <div class="prose">
+      <p>The first time in a new folder, Claude Code asks one question: do you trust the files in this folder?</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter1/trust.png" alt="Claude Code asks: Quick safety check. Is this a project you created or one you trust? Options: No, exit, and Yes, I trust this folder." loading="lazy">
+      <figcaption>The trust question. This is your own empty folder, so choose <b class="ui">Yes, I trust this folder</b>.</figcaption></figure>
+    <div class="prose">
+      <p>Why does it ask? Because it is about to read, edit and run what is in this folder. In a folder you downloaded from a stranger, you would read it first.</p>
+      <p>Now type <code>/status</code> and press Enter. You see the version, the folder you are in, your account and the model. Press Esc to close it.</p>
+    </div>
+    <div class="confuse">
+      <div class="lbl">Careful here</div>
+      <p>Avoid spaces in folder names, like <code>my projects</code>. Every command that uses the path then needs quotes, and that is easy to forget. Use <code>projects</code> or <code>my-projects</code> instead.</p>
+    </div>
+  </section>
+
+  <section id="ask" data-rail="Ask for the page">
+    <div class="prose">
+      <h2>Ask for the page, in plain words</h2>
+      <p>Now we ask for version one of DevPulse. DevPulse is the app we build in this whole series: a tracker for what you worked on and how long it took.</p>
+    </div>
+    <div class="yousee"><b>Type this into Claude Code, as one line</b>Make me a single web page called DevPulse where I can type what I worked on today and how many minutes it took, and see today's list. Plain HTML, CSS and JavaScript.</div>
+    <figure class="cc-shot"><img src="img/chapter1/write.png" alt="Claude Code shows Write(index.html): Wrote 191 lines to index.html, with the first ten lines of the file." loading="lazy">
+      <figcaption>Claude makes the file itself: <b class="ui">Write(index.html)</b>, 191 lines. No copying, no pasting.</figcaption></figure>
+    <div class="prose">
+      <p>In our recording it took 19 seconds. Then it told us what it built.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter1/summary.png" alt="Claude's summary: it created DevPulse as a single file, how to add entries, that each entry has a delete button, that entries are saved in the browser's localStorage, and that it has a dark mode." loading="lazy">
+      <figcaption>Its summary. Read the line about saving: we come back to it at the end. The grey text in the input box is only a suggestion.</figcaption></figure>
+    <div class="prose">
+      <p>Did you notice? It never asked "may I create this file?". That is <b>auto mode</b>, the default.</p>
+      <p>In auto mode, Claude checks each action itself. It does the safe ones and asks you only when something looks risky. The footer says so: <i>auto mode on</i>. In chapter 2 we switch modes on purpose.</p>
+    </div>
+  </section>
+
+  <section id="run" data-rail="See it work">
+    <div class="prose">
+      <h2>See it work, without leaving Claude</h2>
+      <p>To open the page, you could find the file and double-click it. Or run the command from inside Claude Code: start the line with <code>!</code>.</p>
+    </div>
+    <div class="yousee"><b>Type this into Claude Code</b>! start index.html</div>
+    <div class="prose">
+      <p><code>!</code> means "run this as a command; it is not a question for Claude". On a Mac, type <code>! open index.html</code>. The page opens in your browser. Add two tasks.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter1/page.png" alt="The DevPulse page: a field 'What did you work on?', a Minutes field and an Add button; two entries, Wrote the login page 45 min and Fixed the signup bug 30 min; total 1h 15m." loading="lazy">
+      <figcaption>Version one works: two tasks, and a total of 1h 15m.</figcaption></figure>
+  </section>
+
+  <section id="stop" data-rail="Stop it with Esc">
+    <div class="prose">
+      <h2>Stop it with Esc</h2>
+      <p>Say you ask for something and change your mind at once. You do not wait for Claude to finish. Ask for a change, and press <b>Esc</b> while it works.</p>
+    </div>
+    <div class="yousee"><b>Type this, press Enter, then press Esc after a few seconds</b>Add a weekly summary under the list</div>
+    <figure class="cc-shot"><img src="img/chapter1/esc.png" alt="After Esc, Claude has stopped, and the request 'Add a weekly summary under the list' is back in the input box." loading="lazy">
+      <figcaption>Claude stops at once, and your request comes back into the input box. Change it, or clear it.</figcaption></figure>
+  </section>
+
+  <section id="at" data-rail="Point at a file with @">
+    <div class="prose">
+      <h2>Point at a file with @</h2>
+      <p>Now clear the input. How do you ask about one particular file? Type <code>@</code> and the start of its name. A list of matching files appears; press Tab to pick it.</p>
+    </div>
+    <div class="yousee"><b>Type this into Claude Code</b>@index.html explain this file in three lines</div>
+    <figure class="cc-shot"><img src="img/chapter1/explain.png" alt="Claude reads index.html (192 lines) and explains it in three numbered lines: the CSS, the HTML form, and the JavaScript that stores entries in localStorage." loading="lazy">
+      <figcaption>It reads the file you pointed at and answers about that file only. The grey line under it, <i>add an edit button for entries</i>, is Claude suggesting a next step. We did not send it, so the page has no edit button yet. That comes in chapter 3.</figcaption></figure>
+  </section>
+
+  <section id="cost" data-rail="What it never asked">
+    <div class="prose">
+      <h2>What it never asked</h2>
+      <p>Now refresh the page in your browser: press F5. Your two tasks are still there. Good, right?</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter1/refresh.png" alt="The DevPulse page after a refresh: the same two entries, Wrote the login page 45 min and Fixed the signup bug 30 min, total 1h 15m." loading="lazy">
+      <figcaption>After F5: the same page as before, and that is the point. Both tasks survive. But who decided where they are saved?</figcaption></figure>
+    <div class="prose">
+      <p>Look back at Claude's summary. It decided to save the tasks in this one browser. It also added a delete button, a dark mode and checks on what you type. You never asked for any of it, and it never asked you.</p>
+      <p>That is the price of speed. It built something fast. But every decision was its own. Open the page in another browser, and your tasks are not there.</p>
+      <p>When you are done, type <code>/exit</code>. Claude Code prints a line that lets you come back to this conversation later.</p>
+    </div>
+  </section>
+
+  <section id="quickref" data-rail="Quick reference">
+    <div class="prose"><h2>Quick reference</h2></div>
+    <div class="cheat"><table><tr><th>Command or key</th><th>What it does</th><th>Use it when</th></tr><tr><td><code>claude</code></td><td>Starts Claude Code in the folder you are in</td><td>You begin work on a project</td></tr><tr><td><code>Yes, I trust this folder</code></td><td>Lets Claude read, edit and run files in this folder</td><td>It is your own folder, or one you trust</td></tr><tr><td><code>/status</code></td><td>Shows the version, folder, account and model</td><td>You want to check what you are running</td></tr><tr><td><code>! command</code></td><td>Runs a terminal command without leaving Claude</td><td>You need to open or run something yourself</td></tr><tr><td><code>Esc</code></td><td>Stops Claude straight away; your request comes back</td><td>You change your mind while it works</td></tr><tr><td><code>@file</code></td><td>Points Claude at one file</td><td>Your question is about a particular file</td></tr><tr><td><code>/exit</code></td><td>Ends the session</td><td>You are done for now</td></tr></table></div>
+  </section>
+
+  <section id="homework" data-rail="Your homework">
+    <div class="next">
+      <div class="lbl">Your homework</div>
+      <h3>Ask it what it decided</h3>
+      <p style="font-size:var(--fs-cap);color:var(--slate)"><b>The goal:</b> see how many choices Claude made for you in version one.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>The steps:</b> go to your <code>projects\devpulse</code> folder, run <code>claude</code>, and type: <i>List every decision you made in index.html that I did not ask for.</i></p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>Guess first:</b> how many will it find? Three? Ten?</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:10px"><i>One question for you: which of its decisions would you have made differently? Keep the answer. In chapter 2, Claude plans first and asks you.</i></p>
+    </div>
+  </section>
+
+  <section class="lwa-refs" id="refs"><div class="prose"><h2>References</h2><p>Where each command and behaviour on this page comes from. Everything was also checked in our own recording on 29 Oct 2026, Claude Code 2.1.312.</p></div><ol><li><b>Anthropic</b> · <i>Claude Code quickstart</i> <span class="why">Starting claude inside a project folder, and the first prompt.</span> <a href="https://code.claude.com/docs/en/quickstart" rel="noopener">https://code.claude.com/docs/en/quickstart</a></li><li><b>Anthropic</b> · <i>Interactive mode</i> <span class="why">Esc to stop, ! to run a shell command, @ to point at a file, /status and /exit.</span> <a href="https://code.claude.com/docs/en/interactive-mode" rel="noopener">https://code.claude.com/docs/en/interactive-mode</a></li><li><b>Anthropic</b> · <i>Permission modes</i> <span class="why">Auto mode is the default; Claude checks each action and asks only when it looks risky.</span> <a href="https://code.claude.com/docs/en/permission-modes" rel="noopener">https://code.claude.com/docs/en/permission-modes</a></li><li><b>My own recording</b> · <i>29 Oct 2026, Windows 11</i> <span class="why">Every screenshot on this page is from that take. The page was built in 19 seconds.</span></li></ol></section>
+  <div class="lwa-chapnav"><a href="chapter0.html"><span class="k">← Previous</span><span class="t">Chapter 0 · How this series works, and getting set up</span></a><button type="button" class="lwa-complete" data-lwa-complete><span class="k">Progress</span><span class="t">Mark this chapter complete</span></button><a href="chapter2.html"><span class="k">Next →</span><span class="t">Chapter 2 · Tasks saved in a file, and a Week view</span></a></div>
+  </main>
+</div>
+<footer class="foot"><div class="foot-in">
+  <img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building" style="height:36px">
+  <span><a href="../../index.html">Home</a> · <a href="../index.html">Series</a> · <a href="https://github.com/Aditya-402/devpulse" rel="noopener">DevPulse on GitHub</a></span>
+</div></footer>
+<script src="../../assets/site-config.js"></script>
+<script src="../../assets/analytics.js?v=1" defer></script>
+<script src="../../assets/progress.js?v=2"></script>
+<script src="../../assets/railspy.js?v=1"></script>
+<script>
+// each clip plays once when most of it is on screen, never when the reader asks for reduced motion (WE-141)
+(function () {
+  if (!('IntersectionObserver' in window) || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+  document.querySelectorAll('video.clip').forEach(function (v) {
+    var o = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { o.disconnect(); v.play().catch(function () {}); } });
+    }, { threshold: 0.6 });
+    o.observe(v);
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 4 · Undo, and git — Learn AI by Building</title>
+<meta name="description" content="Chapter 4 of the Claude Code series: a big change we do not like, /diff, rewinding with Esc Esc and where rewind stops, then git through Claude, the official commit-commands plugin, and a short commit.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=8">
+<link rel="stylesheet" href="../../assets/unit.css?v=8">
+<link rel="stylesheet" href="../../assets/blog.css?v=7">
+<link rel="stylesheet" href="cc.css?v=3">
+</head>
+<body data-lwa-course="claude-code" data-lwa-chapter="chapter4" data-lwa-title="Chapter 4 · Undo, and git" data-lwa-taught="a big change at once; /diff; Esc Esc rewind and its limit (shell changes are not undone); git set up by Claude; .gitignore; /plugin and the official commit-commands plugin; /commit-commands:commit; ! git log --oneline">
+<header class="top"><div class="top-in">
+  <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark-maroon.svg?v=1" alt="Learn AI by Building"></a>
+  <div class="lwa-brand-right"><span class="lwa-tag"><a href="index.html">Learn Claude Code by Building DevPulse</a></span><span data-lwa-auth></span></div>
+</div></header>
+<header class="masthead">
+  <div class="masthead-in">
+    <div class="title-block">
+      <div class="eyebrow">Learn Claude Code by Building DevPulse · Chapter 4</div>
+      <h1>Undo, and git</h1>
+      <p class="standfirst">Claude changed a lot at once and you do not like it, so how do you get your old project back? By the end of this chapter, you will have tried rewind, seen where it stops, and put DevPulse under git with two commits.</p>
+      <div class="facts"><div><b>One sitting</b>~8 min read, ~20 min to build along</div><div><b>You start from</b>chapter 3&#x27;s DevPulse, with CLAUDE.md</div><div><b>You build</b>a git history: two commits</div><div><b>Chapter 4 of 15</b>undo, and keep a history</div></div>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="rail" aria-label="Sections">
+    <a class="rnav-back" href="index.html"><span class="ico">←</span><span class="lbl">All chapters</span></a>
+    <div class="rail-h">Contents</div>
+    <a class="on" href="#wall">The wall</a>
+    <a href="#diff">See what changed</a>
+    <a href="#rewind">Rewind, and its limit</a>
+    <a href="#git">Git, through Claude</a>
+    <a href="#plugin">A ready-made plugin</a>
+    <a href="#cost">What it costs</a>
+    <a href="#quickref">Quick reference</a>
+    <a href="#homework">Your homework</a>
+  </nav>
+
+  <main>
+  <section id="wall" data-rail="The wall">
+    <div class="prereq">
+      <div class="pq"><b>Goes with Episode 4</b>"How do I undo what Claude Code just did?". The video is being made. This page teaches the same steps, at your own pace.</div><div class="pq"><b>In a hurry?</b><a href="#quickref">Jump to the quick reference</a>: every command and key in this chapter, what it does, and when to use it.</div>
+      <div class="pq"><b>Where you are</b>DevPulse with a server, two views, an edit button and a CLAUDE.md, from chapter 3.</div>
+    </div>
+    <div class="prose">
+      <h2>A big change you did not want</h2>
+      <p>So far every change was small. Now ask for a big one, in four words.</p>
+    </div>
+    <div class="yousee"><b>Type this into Claude Code</b>Give DevPulse a modern makeover.</div>
+    <figure class="cc-shot"><img src="img/chapter4/makeover.png" alt="Claude's summary of the makeover: a gradient logo tile, an indigo-to-violet accent, pill-shaped tabs, rounder cards with soft shadows, highlighted rows and animated bars. Worked for 40s." loading="lazy">
+      <figcaption>40 seconds later: a new logo, new colours, new shapes, new motion. A lot at once.</figcaption></figure>
+    <figure class="cc-shot"><img src="img/chapter4/beforeafter.png" alt="Two versions of DevPulse side by side: on the left the plain page from chapter 3, on the right the makeover with a purple logo tile, a glow and pill-shaped tabs." loading="lazy">
+      <figcaption>Left, before. Right, after. Say you do not like it. It is not ours any more.</figcaption></figure>
+    <div class="cc-wall">
+      <div class="lbl">The question for this chapter</div>
+      <p>How do you get your project back exactly as it was, and how do you never lose a version you liked?</p>
+    </div>
+  </section>
+
+  <section id="diff" data-rail="See what changed">
+    <div class="prose">
+      <h2>First, see what changed</h2>
+      <p>Before undoing, look. Claude Code has a command that shows every change.</p>
+    </div>
+    <div class="yousee"><b>Type this into Claude Code</b>/diff</div>
+    <figure class="cc-shot"><img src="img/chapter4/nodiff.png" alt="/diff: The diff panel shows git changes. The current directory isn't in a git repository." loading="lazy">
+      <figcaption>It cannot. <code>/diff</code> needs <b>git</b>, and our project has none yet. Remember this line; we fix it below.</figcaption></figure>
+  </section>
+
+  <section id="rewind" data-rail="Rewind, and its limit">
+    <div class="prose">
+      <h2>Rewind, and where it stops</h2>
+      <p>We met rewind in chapter 3. Press <b>Esc</b> twice and pick the message before the makeover.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter4/rewindlist.png" alt="Rewind: Restore the code and/or conversation to the point before… Give DevPulse a modern makeover. 2 files changed +177 -2." loading="lazy">
+      <figcaption>Rewind knows its own size: <b>2 files changed, +177 −2</b>. Even without git, it can count.</figcaption></figure>
+    <figure class="cc-shot"><img src="img/chapter4/rewindconfirm.png" alt="Confirm: The code will be restored +2 -177 in style.css and index.html. Options: Restore code and conversation, Restore conversation, Restore code, Summarize from here, Summarize up to here. Warning: Restored files go back whole, losing later changes by anyone. Bash changes to other files are not undone." loading="lazy">
+      <figcaption>Choose <b class="ui">Restore code and conversation</b>. Read the warning at the bottom first: <i>Bash changes to other files are not undone.</i></figcaption></figure>
+    <div class="prose">
+      <p>Now refresh the page.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter4/still.png" alt="DevPulse after the rewind: the logo tile is gone, but the purple glow and the pill-shaped tabs are still there." loading="lazy">
+      <figcaption>Half back. The logo tile is gone. The glow and the pill tabs stayed.</figcaption></figure>
+    <div class="prose">
+      <p>Why? Look at how Claude worked. It changed the header with its edit tool. But it put most of the new style in with a shell command.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter4/shell.png" alt="During the makeover: Running a PowerShell command that reads a scratchpad style.css and writes it into index.html." loading="lazy">
+      <figcaption>The makeover went in partly through a <b>shell command</b>. Rewind tracks Claude's edit tool, not commands.</figcaption></figure>
+    <div class="prose">
+      <p>So rewind is a good undo for Claude's own edits. It is not a safety net for the whole project. I had a copy of the old <code>index.html</code>, so I put it back by hand. Without a copy, you would ask Claude to repair it, and hope.</p>
+      <p>That copy should not depend on luck. That is what <b>git</b> is for.</p>
+    </div>
+  </section>
+
+  <section id="git" data-rail="Git, through Claude">
+    <div class="prose">
+      <h2>Keep every version with git</h2>
+      <p>Git keeps a saved copy of your project each time you say "this works". Each saved copy is called a <b>commit</b>. You do not need to know the git commands yet. Ask Claude.</p>
+    </div>
+    <div class="yousee"><b>Type this into Claude Code, as one line</b>Set up git for this project. Keep data/tasks.json and Python caches out of git, and commit what we have.</div>
+    <figure class="cc-shot"><img src="img/chapter4/gitresult.png" alt="Git is set up on branch main, and the first commit (897003a, Initial commit) has .gitignore, CLAUDE.md, index.html, server.py and test_server.py. .gitignore excludes data/tasks.json, __pycache__/ and *.pyc. I also ignored .claude/settings.local.json, which you didn't ask for." loading="lazy">
+      <figcaption>The first commit, and a <code>.gitignore</code>: the list of files git must never save. Your tasks stay private. Note the honest line: <i>which you didn't ask for</i>.</figcaption></figure>
+    <div class="confuse">
+      <div class="lbl">Careful here</div>
+      <p>Git needs your name and email for every commit. If Claude says they are not set, run these two lines once, with your own details.</p>
+    </div>
+    <div class="yousee"><b>Type this in PowerShell or Terminal, once</b>git config --global user.name "Your Name"
+git config --global user.email "you@example.com"</div>
+  </section>
+
+  <section id="plugin" data-rail="A ready-made plugin">
+    <div class="prose">
+      <h2>Commit with one command: a plugin</h2>
+      <p>Committing well means a good message every time. Anthropic publishes a free plugin for that. Plugins add ready-made commands to Claude Code.</p>
+    </div>
+    <div class="yousee"><b>Type this into Claude Code, then search for commit-commands</b>/plugin</div>
+    <figure class="cc-shot"><img src="img/chapter4/plugin.png" alt="The plugin manager, Discover tab, search box with commit-commands; result: commit-commands, Anthropic Directory, 178.5K installs, Streamline your git workflow with simple commands for committing." loading="lazy">
+      <figcaption>The <b class="ui">Discover</b> tab. Press Enter on <b>commit-commands</b> to see its details.</figcaption></figure>
+    <figure class="cc-shot"><img src="img/chapter4/install.png" alt="Plugin details: commit-commands from claude-plugins-official, by Anthropic, a warning to trust a plugin before installing, and the options Install for you (user scope), Install for all collaborators on this repository (project scope), Install for you in this repo only (local scope)." loading="lazy">
+      <figcaption>Check who made it, read the warning, then choose <b class="ui">Install for you (user scope)</b>.</figcaption></figure>
+    <div class="prose">
+      <p>Now make one small change, then commit it.</p>
+    </div>
+    <div class="yousee"><b>Type these into Claude Code, one at a time</b>Show today's total time in the browser tab title, like "DevPulse - 2 h 50 min".
+/commit-commands:commit</div>
+    <figure class="cc-shot"><img src="img/chapter4/commitmenu.png" alt="Typing /commit shows three plugin commands: commit-commands:commit (Create a git commit), commit-commands:clean_gone, commit-commands:commit-push-pr." loading="lazy">
+      <figcaption>Type <code>/commit</code> and the plugin's three commands appear. We use the first.</figcaption></figure>
+    <figure class="cc-shot"><img src="img/chapter4/gitlog.png" alt="Committed 8ea96ee: Show today's total in tab title. Then ! git log --oneline lists 8ea96ee Show today's total in tab title, and 897003a Initial commit." loading="lazy">
+      <figcaption>A short message, as chapter 3's memory asked. <code>! git log --oneline</code> shows our two commits. The grey line is only a suggestion.</figcaption></figure>
+  </section>
+
+  <section id="cost" data-rail="What it costs">
+    <div class="prose">
+      <h2>What git costs</h2>
+      <p>Git only keeps what you commit. A change you never committed is as unsafe as before. So commit each time something works, in small steps.</p>
+      <p>And a commit says the code runs. It does not say the code is right. In chapter 5 the streak looks right, passes our eyes, and is still wrong.</p>
+    </div>
+  </section>
+
+  <section id="quickref" data-rail="Quick reference">
+    <div class="prose"><h2>Quick reference</h2></div>
+    <div class="cheat"><table><tr><th>Command or key</th><th>What it does</th><th>Use it when</th></tr><tr><td><code>/diff</code></td><td>Shows what changed since the last commit</td><td>You want to see what Claude touched (needs git)</td></tr><tr><td><code>Esc Esc</code></td><td>Rewinds to an earlier message: code, conversation or both</td><td>You want to undo Claude&#x27;s last steps</td></tr><tr><td><code>Restore code and conversation</code></td><td>Puts files and the chat back as they were</td><td>Both the change and the talk about it should go</td></tr><tr><td><code>Set up git for this project …</code></td><td>Claude runs git init, writes .gitignore and makes the first commit</td><td>Your project has no history yet</td></tr><tr><td><code>/plugin</code></td><td>Opens the plugin manager: discover, install, manage</td><td>You want a ready-made set of commands</td></tr><tr><td><code>/commit-commands:commit</code></td><td>Writes a commit message and commits your changes</td><td>A change is done and works</td></tr><tr><td><code>! git log --oneline</code></td><td>Lists your commits, newest first</td><td>You want to see your history</td></tr></table></div>
+  </section>
+
+  <section id="homework" data-rail="Your homework">
+    <div class="next">
+      <div class="lbl">Your homework</div>
+      <h3>Break it, then get it back with git</h3>
+      <p style="font-size:var(--fs-cap);color:var(--slate)"><b>The goal:</b> undo a change with git, not with rewind.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>The steps:</b> ask Claude to change the Add button to bright red. Do not commit. Then type: <i>Throw away all changes since the last commit.</i></p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>Guess first:</b> will Claude ask before throwing work away?</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:10px"><i>One question for you: how often should you commit while building with Claude, and why?</i></p>
+    </div>
+  </section>
+
+  <section class="lwa-refs" id="refs"><div class="prose"><h2>References</h2><p>Where each command and behaviour on this page comes from. Every screenshot is from our own recording on 29 Oct 2026, Claude Code 2.1.312.</p></div><ol><li><b>Anthropic</b> · <i>Checkpointing</i> <span class="why">Esc Esc rewinds code and conversation; changes made by shell commands are not tracked, so they are not undone.</span> <a href="https://code.claude.com/docs/en/checkpointing" rel="noopener">https://code.claude.com/docs/en/checkpointing</a></li><li><b>Anthropic</b> · <i>Discover and install plugins</i> <span class="why">/plugin, the official marketplace claude-plugins-official, and install scopes.</span> <a href="https://code.claude.com/docs/en/discover-plugins" rel="noopener">https://code.claude.com/docs/en/discover-plugins</a></li><li><b>Git</b> · <i>git-scm.com, the Git documentation</i> <span class="why">What a commit, git log and .gitignore are.</span> <a href="https://git-scm.com/doc" rel="noopener">https://git-scm.com/doc</a></li><li><b>My own recording</b> · <i>29 Oct 2026, Windows 11</i> <span class="why">Rewind undid the edit-tool changes but not the shell command, so half the makeover stayed.</span></li></ol></section>
+  <div class="lwa-chapnav"><a href="chapter3.html"><span class="k">← Previous</span><span class="t">Chapter 3 · Project rules Claude remembers</span></a><button type="button" class="lwa-complete" data-lwa-complete><span class="k">Progress</span><span class="t">Mark this chapter complete</span></button><a href="chapter5.html"><span class="k">Next →</span><span class="t">Chapter 5 · Tests for the streak</span></a></div>
+  </main>
+</div>
+<footer class="foot"><div class="foot-in">
+  <img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building" style="height:36px">
+  <span><a href="../../index.html">Home</a> · <a href="../index.html">Series</a> · <a href="https://github.com/Aditya-402/devpulse" rel="noopener">DevPulse on GitHub</a></span>
+</div></footer>
+<script src="../../assets/site-config.js"></script>
+<script src="../../assets/analytics.js?v=1" defer></script>
+<script src="../../assets/progress.js?v=2"></script>
+<script src="../../assets/railspy.js?v=1"></script>
+<script>
+// each clip plays once when most of it is on screen, never when the reader asks for reduced motion (WE-141)
+(function () {
+  if (!('IntersectionObserver' in window) || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+  document.querySelectorAll('video.clip').forEach(function (v) {
+    var o = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { o.disconnect(); v.play().catch(function () {}); } });
+    }, { threshold: 0.6 });
+    o.observe(v);
+  });
+})();
+</script>
+</body>
+</html>

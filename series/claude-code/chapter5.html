@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 5 · Tests for the streak — Learn AI by Building</title>
+<meta name="description" content="Chapter 5 of the Claude Code series: tests for the streak with node&#x27;s built-in test runner, a bug at 00:30 India time that a test catches, the Learning output style where you write a key function yourself, and /verify.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=8">
+<link rel="stylesheet" href="../../assets/unit.css?v=8">
+<link rel="stylesheet" href="../../assets/blog.css?v=7">
+<link rel="stylesheet" href="cc.css?v=3">
+</head>
+<body data-lwa-course="claude-code" data-lwa-chapter="chapter5" data-lwa-title="Chapter 5 · Tests for the streak" data-lwa-taught="moving logic into a testable file; node --test; why a test matters (UTC versus local dates); /output-style learning and TODO(human); checking Claude&#x27;s review of your code; /verify; Claude writes, you judge">
+<header class="top"><div class="top-in">
+  <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark-maroon.svg?v=1" alt="Learn AI by Building"></a>
+  <div class="lwa-brand-right"><span class="lwa-tag"><a href="index.html">Learn Claude Code by Building DevPulse</a></span><span data-lwa-auth></span></div>
+</div></header>
+<header class="masthead">
+  <div class="masthead-in">
+    <div class="title-block">
+      <div class="eyebrow">Learn Claude Code by Building DevPulse · Chapter 5</div>
+      <h1>Tests for the streak</h1>
+      <p class="standfirst">The streak looks right on screen, so how do you know it is right for every day and every timezone? By the end of this chapter, DevPulse has 18 tests, you will have written one function yourself, and Claude will have checked the page in a real browser.</p>
+      <div class="facts"><div><b>One sitting</b>~9 min read, ~25 min to build along</div><div><b>You start from</b>chapter 4&#x27;s DevPulse, under git</div><div><b>You build</b>streak.js with 18 tests, and a best streak</div><div><b>Chapter 5 of 15</b>Claude writes, you judge</div></div>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="rail" aria-label="Sections">
+    <a class="rnav-back" href="index.html"><span class="ico">←</span><span class="lbl">All chapters</span></a>
+    <div class="rail-h">Contents</div>
+    <a class="on" href="#wall">The wall</a>
+    <a href="#tests">Write the tests</a>
+    <a href="#matters">Why the test matters</a>
+    <a href="#learning">Write it yourself</a>
+    <a href="#judge">Claude checks your code</a>
+    <a href="#cost">What it costs</a>
+    <a href="#quickref">Quick reference</a>
+    <a href="#homework">Your homework</a>
+  </nav>
+
+  <main>
+  <section id="wall" data-rail="The wall">
+    <div class="prereq">
+      <div class="pq"><b>Goes with Episode 5</b>"It runs, but is it right?". The video is being made. This page teaches the same steps, at your own pace.</div><div class="pq"><b>In a hurry?</b><a href="#quickref">Jump to the quick reference</a>: every command and key in this chapter, what it does, and when to use it.</div>
+      <div class="pq"><b>Where you are</b>DevPulse with a server, two views and a git history, from chapter 4.</div>
+    </div>
+    <div class="prose">
+      <h2>It runs. Is it right?</h2>
+      <p>The Week view shows a streak: how many days in a row you logged a task. It looks right. Nothing crashes.</p>
+      <p>But say you log a task at 00:30 at night, in India. Which day does it count for? If the code takes the date in UTC, it is still the previous day there. Your streak breaks, and nothing on screen tells you.</p>
+      <p>A program can run and still be wrong. Our eyes will not catch this one.</p>
+    </div>
+    <div class="cc-wall">
+      <div class="lbl">The question for this chapter</div>
+      <p>How do you prove the streak is right, not just that it looks right?</p>
+    </div>
+  </section>
+
+  <section id="tests" data-rail="Write the tests">
+    <div class="prose">
+      <h2>Write tests that check it for you</h2>
+      <p>A <b>test</b> is a small program that runs your code with known input and checks the answer. The streak lives inside <code>index.html</code>, where a test cannot reach it. So first it moves to its own file.</p>
+    </div>
+    <div class="yousee"><b>Type this into Claude Code, as one line</b>Move the streak calculation out of index.html into streak.js so it can be tested, and write tests for it in streak.test.js with node's built-in test runner. Include a task logged at 00:30 India time (set TZ=Asia/Kolkata in the test). Don't change how the streak works.</div>
+    <figure class="cc-shot"><img src="img/chapter5/moved.png" alt="Claude's summary: streak.js now holds the logic and index.html loads it; server.py got a /streak.js route, a small addition beyond what you asked for; streak.test.js sets TZ=Asia/Kolkata and tests a task at 00:30 IST plus no tasks, yesterday only, consecutive days, a gap, old tasks, duplicates and a month boundary." loading="lazy">
+      <figcaption>The tests it wrote, listed. It also tells you about one change you did not ask for: a route in <code>server.py</code>.</figcaption></figure>
+    <div class="prose">
+      <p>Now run them yourself. Node has a test runner built in; nothing to install.</p>
+    </div>
+    <div class="yousee"><b>Type this into Claude Code</b>! node --test</div>
+    <figure class="cc-shot"><img src="img/chapter5/pass9.png" alt="node --test: older tasks without yesterday or today give no streak, duplicate tasks on one day count once, streak spans a month boundary; tests 9, pass 9, fail 0." loading="lazy">
+      <figcaption><b>tests 9, pass 9, fail 0</b>. Each tick is one situation checked.</figcaption></figure>
+  </section>
+
+  <section id="matters" data-rail="Why the test matters">
+    <div class="prose">
+      <h2>See what the test protects</h2>
+      <p>All pass. So was the test even needed? In our recording, Claude's streak code already used the local date. Let's try to understand what the 00:30 test guards against: ask Claude to break it on purpose.</p>
+    </div>
+    <div class="yousee"><b>Type this into Claude Code, as one line</b>Show me why the 00:30 test matters: change ymd to use toISOString() for a moment, run node --test and show me what fails, then put it back.</div>
+    <figure class="cc-shot"><img src="img/chapter5/breakit.png" alt="Claude changes one line in streak.js: toLocaleDateString('en-CA') becomes toISOString().slice(0, 10) with a TEMP BREAK comment, then runs node --test." loading="lazy">
+      <figcaption>One line changes: the local date becomes the UTC date. It even marks it <i>TEMP BREAK</i>.</figcaption></figure>
+    <figure class="cc-shot"><img src="img/chapter5/why.png" alt="Claude explains: the task is dated the 29th, but the app looks for the 28th, so it doesn't find it; streaks come out one day short; the same bug would hit any user ahead of UTC, and would pass unnoticed on a UTC machine, which is why the test sets TZ=Asia/Kolkata." loading="lazy">
+      <figcaption>The tests fail, and Claude says why. On a computer set to UTC this bug would never show. That is why the test sets India's timezone.</figcaption></figure>
+    <div class="prose">
+      <p>Then it puts the line back. Run <code>! node --test</code> again: 9 pass. The test now guards that line for every future change.</p>
+    </div>
+  </section>
+
+  <section id="learning" data-rail="Write it yourself">
+    <div class="prose">
+      <h2>Write the key part yourself</h2>
+      <p>Claude writes fast. But if it writes everything, you learn nothing. Claude Code has an <b>output style</b> for learning. In it, Claude leaves the key part for you.</p>
+    </div>
+    <div class="yousee"><b>Type these into Claude Code, one at a time</b>/output-style learning
+Add a best streak, the longest run of days ever, under the streak on the Week view.</div>
+    <figure class="cc-shot"><img src="img/chapter5/styles.png" alt="/output-style lists the styles: default, Proactive, Concise, Explanatory, Learning (Claude pauses and asks you to write small pieces of code for hands-on practice)." loading="lazy">
+      <figcaption>The styles on offer. <b>Learning</b>: Claude pauses and asks you to write small pieces of code.</figcaption></figure>
+    <figure class="cc-shot"><img src="img/chapter5/todo.png" alt="Your Task: in streak.js, implement bestStreak(tasks). Look for TODO(human). Guidance: task dates are YYYY-MM-DD strings, dedupe them first, sort and walk them, step with new Date(y, m, d + 1) and compare, an empty list returns 0." loading="lazy">
+      <figcaption>Claude wires up the page and leaves one function empty, marked <code>TODO(human)</code>, with guidance on how to think about it.</figcaption></figure>
+    <div class="prose">
+      <p>Open <code>streak.js</code> in your editor, find <code>TODO(human)</code>, and write the function. Here is what I wrote.</p>
+    </div>
+    <figure class="cc-shot"><video class="clip" src="img/chapter5/human.mp4" poster="img/chapter5/human-poster.jpg" controls muted playsinline preload="metadata" aria-label="VS Code with streak.js open: the TODO(human) line is replaced by a nine-line bestStreak function that collects unique dates, sorts them, walks them counting runs of consecutive days, and returns the best run." width="1200" height="676"></video>
+      <figcaption>Writing <code>bestStreak</code> in VS Code, shown 2 times faster. Try yours before you watch mine.</figcaption></figure>
+    <div class="yousee"><b>What I wrote, if you want to compare</b>const days = [...new Set(tasks.map(t => t.date))].sort();
+let best = 0, run = 0, prev = null;
+for (const day of days) {
+  const [y, m, d] = prev ? prev.split("-").map(Number) : [];
+  run = prev && ymd(new Date(y, m - 1, d + 1)) === day ? run + 1 : 1;
+  best = Math.max(best, run);
+  prev = day;
+}
+return best;</div>
+  </section>
+
+  <section id="judge" data-rail="Claude checks your code">
+    <div class="prose">
+      <h2>Now Claude checks your code</h2>
+      <p>You wrote it. Now turn the tables.</p>
+    </div>
+    <div class="yousee"><b>Type this into Claude Code</b>I wrote bestStreak. Check it, add tests for it, and run them.</div>
+    <figure class="cc-shot"><img src="img/chapter5/limits.png" alt="The new tests cover unsorted input, duplicate days, a one-day gap, month and year boundaries, a leap day, and best streak at least the current streak. Limits of the tests: daylight saving time is not covered, since Asia/Kolkata has none; index.html not tested in a browser." loading="lazy">
+      <figcaption>New tests, and an honest <b>Limits of the tests</b>: what they still do not prove.</figcaption></figure>
+    <figure class="cc-shot"><img src="img/chapter5/pass18.png" alt="node --test: bestStreak never less than the current streak; tests 18, pass 18, fail 0. Your run matches mine: 18 of 18 pass." loading="lazy">
+      <figcaption><b>18 of 18 pass</b>, run by you, not only by Claude.</figcaption></figure>
+    <div class="prose">
+      <p>One limit is still open: nobody has looked at the page. For that there is <code>/verify</code>. It builds and runs the app, opens it in a real browser and checks the change.</p>
+    </div>
+    <div class="yousee"><b>Type this into Claude Code</b>/verify</div>
+    <figure class="cc-shot"><img src="img/chapter5/verify.png" alt="/verify's report: the best streak line renders correctly in a browser; a 404 in the console is the missing favicon; an unrelated server already held port 8765 so it used another and left that one running; and: A mistake on my side. I ran git stash and git stash apply without being asked. I confirmed the working tree was identical." loading="lazy">
+      <figcaption>It checked the page in a browser. And read its last points: it owns up to running a git command you did not ask for, and confirms nothing changed.</figcaption></figure>
+    <div class="prose">
+      <p>That is the habit of this whole series. Claude writes. You judge. It told us about its own mistake, and we checked the files ourselves.</p>
+      <p>When you are done, type <code>/output-style default</code> to go back to the normal style, and commit with <code>/commit-commands:commit</code>.</p>
+    </div>
+  </section>
+
+  <section id="cost" data-rail="What it costs">
+    <div class="prose">
+      <h2>What tests cost</h2>
+      <p>Tests are more code to keep. When the streak rule changes, the tests change too. And tests only check what you thought of: Claude itself said daylight saving time is not covered.</p>
+      <p>Look at how much this chapter cost to build: two long prompts, a review and a browser check. Do that all day, and your plan's limit arrives early. That is chapter 6.</p>
+    </div>
+  </section>
+
+  <section id="quickref" data-rail="Quick reference">
+    <div class="prose"><h2>Quick reference</h2></div>
+    <div class="cheat"><table><tr><th>Command or key</th><th>What it does</th><th>Use it when</th></tr><tr><td><code>Move … into streak.js so it can be tested</code></td><td>Puts logic in its own file, where a test can reach it</td><td>Code you want to test is buried in a page</td></tr><tr><td><code>! node --test</code></td><td>Runs every test file in the folder</td><td>You changed something and want proof it still works</td></tr><tr><td><code>Show me why this test matters …</code></td><td>Breaks the code on purpose, runs the tests, puts it back</td><td>You want to see what a test protects</td></tr><tr><td><code>/output-style learning</code></td><td>Claude explains and leaves TODO(human) for you to write</td><td>You want to learn the key part, not just get it</td></tr><tr><td><code>/output-style default</code></td><td>Back to the normal style</td><td>You are done practising</td></tr><tr><td><code>I wrote … Check it, add tests</code></td><td>Claude reviews your code and tests it</td><td>You wrote code and want a second check</td></tr><tr><td><code>/verify</code></td><td>Builds and runs the app to confirm a change really works</td><td>Tests pass but you have not seen it run</td></tr></table></div>
+  </section>
+
+  <section id="homework" data-rail="Your homework">
+    <div class="next">
+      <div class="lbl">Your homework</div>
+      <h3>Make a test fail on purpose</h3>
+      <p style="font-size:var(--fs-cap);color:var(--slate)"><b>The goal:</b> see a test catch a mistake before you do.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>The steps:</b> in your <code>bestStreak</code>, change <code>d + 1</code> to <code>d + 2</code>. Run <code>! node --test</code>. Then put it back and run it again.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>Guess first:</b> how many tests will fail? One, or several?</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:10px"><i>One question for you: which part of your own work runs fine but could still be wrong?</i></p>
+    </div>
+  </section>
+
+  <section class="lwa-refs" id="refs"><div class="prose"><h2>References</h2><p>Where each command and fact on this page comes from. Every screenshot is from our own recording on 29 Oct 2026, Claude Code 2.1.312, Node 24.</p></div><ol><li><b>Node.js</b> · <i>Test runner (node:test)</i> <span class="why">node --test finds and runs test files with no package to install.</span> <a href="https://nodejs.org/api/test.html" rel="noopener">https://nodejs.org/api/test.html</a></li><li><b>MDN</b> · <i>Date.prototype.toISOString()</i> <span class="why">toISOString always gives the date in UTC, which is why a task at 00:30 India time lands on the previous day.</span> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString" rel="noopener">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString</a></li><li><b>Anthropic</b> · <i>Output styles</i> <span class="why">The Learning style: Claude explains and leaves TODO(human) for you to write.</span> <a href="https://code.claude.com/docs/en/output-styles" rel="noopener">https://code.claude.com/docs/en/output-styles</a></li><li><b>My own recording</b> · <i>29 Oct 2026, Windows 11</i> <span class="why">Claude&#x27;s first streak code was already right; the test showed what one small change would break.</span></li></ol></section>
+  <div class="lwa-chapnav"><a href="chapter4.html"><span class="k">← Previous</span><span class="t">Chapter 4 · Undo, and git</span></a><button type="button" class="lwa-complete" data-lwa-complete><span class="k">Progress</span><span class="t">Mark this chapter complete</span></button><a href="chapter6.html"><span class="k">Next →</span><span class="t">Chapter 6 · A lighter model and a shorter context</span></a></div>
+  </main>
+</div>
+<footer class="foot"><div class="foot-in">
+  <img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building" style="height:36px">
+  <span><a href="../../index.html">Home</a> · <a href="../index.html">Series</a> · <a href="https://github.com/Aditya-402/devpulse" rel="noopener">DevPulse on GitHub</a></span>
+</div></footer>
+<script src="../../assets/site-config.js"></script>
+<script src="../../assets/analytics.js?v=1" defer></script>
+<script src="../../assets/progress.js?v=2"></script>
+<script src="../../assets/railspy.js?v=1"></script>
+<script>
+// each clip plays once when most of it is on screen, never when the reader asks for reduced motion (WE-141)
+(function () {
+  if (!('IntersectionObserver' in window) || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+  document.querySelectorAll('video.clip').forEach(function (v) {
+    var o = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { o.disconnect(); v.play().catch(function () {}); } });
+    }, { threshold: 0.6 });
+    o.observe(v);
+  });
+})();
+</script>
+</body>
+</html>

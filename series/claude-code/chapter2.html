@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 2 · Tasks saved in a file, and a Week view — Learn AI by Building</title>
+<meta name="description" content="Chapter 2 of the Claude Code series: the permission modes with Shift+Tab, plan mode, answering Claude&#x27;s questions, changing the plan before any code, the three answers to a permission prompt, and a DevPulse that saves to a file.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=8">
+<link rel="stylesheet" href="../../assets/unit.css?v=8">
+<link rel="stylesheet" href="../../assets/blog.css?v=7">
+<link rel="stylesheet" href="cc.css?v=3">
+</head>
+<body data-lwa-course="claude-code" data-lwa-chapter="chapter2" data-lwa-title="Chapter 2 · Tasks saved in a file, and a Week view" data-lwa-taught="Shift+Tab permission modes (auto, manual, accept edits, plan); plan mode; Claude&#x27;s questions; the plan dialog and &#x27;Tell Claude what to change&#x27;; permission prompts: Yes, Yes and switch to accept edits, Yes and don&#x27;t ask again; running a server in a second terminal tab">
+<header class="top"><div class="top-in">
+  <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark-maroon.svg?v=1" alt="Learn AI by Building"></a>
+  <div class="lwa-brand-right"><span class="lwa-tag"><a href="index.html">Learn Claude Code by Building DevPulse</a></span><span data-lwa-auth></span></div>
+</div></header>
+<header class="masthead">
+  <div class="masthead-in">
+    <div class="title-block">
+      <div class="eyebrow">Learn Claude Code by Building DevPulse · Chapter 2</div>
+      <h1>Tasks saved in a file, and a Week view</h1>
+      <p class="standfirst">In chapter 1, Claude decided everything itself, and the tasks lived in one browser only. By the end of this chapter, Claude will ask you first, show you its plan, and build a DevPulse that saves every task to a file.</p>
+      <div class="facts"><div><b>One sitting</b>~8 min read, ~20 min to build along</div><div><b>You start from</b>chapter 1&#x27;s index.html</div><div><b>You build</b>a small Python server and a Today and Week view</div><div><b>Chapter 2 of 15</b>plan first, then build</div></div>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="rail" aria-label="Sections">
+    <a class="rnav-back" href="index.html"><span class="ico">←</span><span class="lbl">All chapters</span></a>
+    <div class="rail-h">Contents</div>
+    <a class="on" href="#wall">The wall</a>
+    <a href="#modes">Four modes, one key</a>
+    <a href="#ask">Ask for a plan</a>
+    <a href="#plan">Change the plan</a>
+    <a href="#prompts">Three answers to a prompt</a>
+    <a href="#run">Run the server</a>
+    <a href="#cost">What it costs</a>
+    <a href="#quickref">Quick reference</a>
+    <a href="#homework">Your homework</a>
+  </nav>
+
+  <main>
+  <section id="wall" data-rail="The wall">
+    <div class="prereq">
+      <div class="pq"><b>Goes with Episode 2</b>"How do I make Claude Code think before it codes?". The video is being made. This page teaches the same steps, at your own pace.</div><div class="pq"><b>In a hurry?</b><a href="#quickref">Jump to the quick reference</a>: every command and key in this chapter, what it does, and when to use it.</div>
+      <div class="pq"><b>Where you are</b>You have chapter 1's page: one file, <code>index.html</code>, in your <code>projects\devpulse</code> folder.</div>
+    </div>
+    <div class="prose">
+      <h2>It decided everything without you</h2>
+      <p>In chapter 1, Claude built a page in 19 seconds. It chose to save the tasks in one browser. It added a delete button and a dark mode. It asked nothing.</p>
+      <p>Say a builder makes your kitchen without asking where you want the sink. It may be a fine kitchen. It is still not yours.</p>
+    </div>
+    <div class="cc-wall">
+      <div class="lbl">The question for this chapter</div>
+      <p>How do you make Claude Code ask you first, and show you the plan before it writes any code?</p>
+    </div>
+  </section>
+
+  <section id="modes" data-rail="Four modes, one key">
+    <div class="prose">
+      <h2>Four modes, one key</h2>
+      <p>Start Claude Code in your folder, as before. Now look at the line under the input box. It says <i>auto mode on</i>.</p>
+      <p>Press <b>Shift+Tab</b>. The line changes. Press it again, and again. There are four modes:</p>
+    </div>
+    <table>
+      <tr><th>Mode</th><th>What Claude does</th></tr>
+      <tr><td>auto</td><td>Decides for itself; asks only when an action looks risky. The default.</td></tr>
+      <tr><td>manual</td><td>Asks before every file change and every command.</td></tr>
+      <tr><td>accept edits</td><td>Changes files freely; still asks before commands.</td></tr>
+      <tr><td>plan</td><td>Reads and asks questions. Writes nothing until you approve a plan.</td></tr>
+    </table>
+    <div class="prose">
+      <p>Stop at <b>plan mode</b>.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter2/planmode.png" alt="Claude Code's start screen with the footer reading 'plan mode on (shift+tab to cycle)' while the planning prompt is being typed." loading="lazy">
+      <figcaption>The footer now reads <b class="ui">plan mode on</b>. The prompt is being typed above it.</figcaption></figure>
+  </section>
+
+  <section id="ask" data-rail="Ask for a plan">
+    <div class="prose">
+      <h2>Ask for a plan, not for code</h2>
+      <p>This time we describe what we want, and we invite questions.</p>
+    </div>
+    <div class="yousee"><b>Type this into Claude Code, as one line</b>Plan DevPulse properly before any code. Tasks have a title, a tag and minutes. Save them in data/tasks.json through a small Python server that uses only the standard library. Two views: Today (add, list, mark done) and Week (hours per day and a streak of days with at least one task). Ask me questions if anything is unclear.</div>
+    <div class="prose">
+      <p>Claude reads the folder first. Then it asks four questions, one at a time, each with choices. Here are the four, and what we picked:</p>
+      <ol>
+        <li>Keep chapter 1's page, or start again? <i>Evolve it.</i></li>
+        <li>What is a tag? <i>Free text, one per task.</i></li>
+        <li>Do unfinished tasks count in the Week view? <i>All tasks count.</i></li>
+        <li>Which seven days make a week? <i>The last 7 days.</i></li>
+      </ol>
+    </div>
+    <figure class="cc-shot"><video class="clip" src="img/chapter2/questions.mp4" poster="img/chapter2/questions-poster.jpg" controls muted playsinline preload="metadata" aria-label="Claude's four questions one after another, each with the chosen answer marked: Evolve it, Free text one per task, All tasks count, Rolling last 7 days; then the Review your answers screen with Submit answers." width="1200" height="576"></video>
+      <figcaption>The same four questions, as Claude asked them. The tabs on top tick off each one. Last comes the review screen with all four answers: choose <b class="ui">Submit answers</b>.</figcaption></figure>
+    <div class="prose">
+      <p>Answer with the arrow keys and Enter.</p>
+    </div>
+    <div class="confuse">
+      <div class="lbl">Careful here</div>
+      <p>Answer these questions while you are at the screen. In our recording, a question left alone for about half a minute was answered with the recommended choice. Read, then pick.</p>
+    </div>
+  </section>
+
+  <section id="plan" data-rail="Change the plan">
+    <div class="prose">
+      <h2>Change the plan before any code</h2>
+      <p>Now Claude writes a plan and asks if it may go ahead.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter2/plandialog.png" alt="Ready to code? Claude has written up a plan. Options: 1. Yes, and use auto mode, 2. Yes, manually approve edits, 3. Tell Claude what to change." loading="lazy">
+      <figcaption>Three ways forward. We want one change first, so choose <b class="ui">3. Tell Claude what to change</b>.</figcaption></figure>
+    <div class="prose">
+      <p>Choosing 3 prints the whole plan in the conversation, so you can read it. It lists the files, the data, the views and how it will be tested. Then type your change.</p>
+    </div>
+    <div class="yousee"><b>Type this into Claude Code</b>One change: show minutes as 1 h 30 min everywhere in the app.</div>
+    <div class="prose">
+      <p>Claude updates the plan and asks again. This time choose <b class="ui">2. Yes, manually approve edits</b>. Now it will ask before each file it writes.</p>
+    </div>
+  </section>
+
+  <section id="prompts" data-rail="Three answers to a prompt">
+    <div class="prose">
+      <h2>Three answers to "Do you want to…?"</h2>
+      <p>First it wants to create <code>server.py</code>. You see the code it is about to write, and a question.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter2/createserver.png" alt="The end of server.py and the question: Do you want to create server.py? 1. Yes, 2. Yes, and switch to accept edits for this session, 3. No." loading="lazy">
+      <figcaption>A permission prompt. We chose <b class="ui">1. Yes</b>: this file only.</figcaption></figure>
+    <div class="prose">
+      <p>Next it wants to change <code>index.html</code>. A change to an existing file shows in red and green: red lines go, green lines come in.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter2/diff.png" alt="A diff of index.html: lines 186 and 188 in red are removed, lines 362 to 365 in green are added; then: Do you want to overwrite index.html?" loading="lazy">
+      <figcaption>Here we chose <b class="ui">2. Yes, and switch to accept edits</b>. From now on in this session, file changes go through without asking.</figcaption></figure>
+    <div class="prose">
+      <p>Then it wants to run its tests. Commands still ask, even in accept edits.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter2/bashperm.png" alt="Bash command: python test_server.py. This command requires approval. Do you want to proceed? 1. Yes, 2. Yes, and don't ask again for: python test_server.py, 3. Yes, and switch to auto mode, 4. No." loading="lazy">
+      <figcaption>Running tests is harmless, so we chose <b class="ui">2. Yes, and don't ask again</b> for this one command.</figcaption></figure>
+    <div class="prose">
+      <p>So you have three answers: yes once, yes for the session, or no. Say yes freely to what you would do yourself. Say no to anything you do not understand.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter2/summary.png" alt="Claude's summary: durations shown as 1 h 30 min everywhere as you asked, test_server.py runs against a temporary data file, run it with python server.py, then open http://127.0.0.1:8000; Crunched for 1m 13s." loading="lazy">
+      <figcaption>Done in 1 minute 13 seconds. Note <i>"shown as 1 h 30 min everywhere, as you asked"</i>, and how to run it. The grey line in the input box is only a suggestion.</figcaption></figure>
+  </section>
+
+  <section id="run" data-rail="Run the server">
+    <div class="prose">
+      <h2>Run the server in a second tab</h2>
+      <p>DevPulse now has a small server. It must keep running while you use the page, so give it its own terminal tab. In Windows Terminal, press <b>Ctrl+Shift+T</b> for a new tab, then go to your folder.</p>
+    </div>
+    <div class="yousee"><b>Windows: type this in the new PowerShell tab</b>cd projects\devpulse
+python server.py</div>
+    <div class="yousee"><b>Mac: type this in a new Terminal tab (Cmd+T)</b>cd projects/devpulse
+python3 server.py</div>
+    <figure class="cc-shot"><img src="img/chapter2/server.png" alt="The second tab: python server.py prints DevPulse running at http://127.0.0.1:8000 (data: ...projects\devpulse\data\tasks.json)." loading="lazy">
+      <figcaption>The server is running, and it tells you where the tasks are saved: <code>data\tasks.json</code>.</figcaption></figure>
+    <div class="prose">
+      <p>Open <code>http://127.0.0.1:8000</code> in your browser. Add three tasks, each with a tag. Tick one as done. Then press F5.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter2/refreshed.png" alt="DevPulse Today view after a refresh: three tasks with tags planning, backend and review; the first is ticked and struck through; total 2 h 20 min; Wrote the tasks API shows 1 h 30 min." loading="lazy">
+      <figcaption>After F5, all three are still there, saved in a file this time. And 90 minutes shows as <b>1 h 30 min</b>, the change we asked for.</figcaption></figure>
+    <figure class="cc-shot"><img src="img/chapter2/week.png" alt="The Week view: a 1 day streak, and a bar chart of the last 7 days with one bar on Thursday, 2 h 20 min." loading="lazy">
+      <figcaption>The Week view: hours per day for the last seven days, and the streak.</figcaption></figure>
+  </section>
+
+  <section id="cost" data-rail="What it costs">
+    <div class="prose">
+      <h2>What planning costs, and what is still missing</h2>
+      <p>Planning took longer than in chapter 1. You read questions, a plan and three prompts. That is the price. In return, every decision in this version was yours.</p>
+      <p>But close Claude Code and start it again tomorrow. Will it remember that tasks live in <code>data/tasks.json</code>, or that times show as "1 h 30 min"?</p>
+      <p>It will not. A new session starts with an empty memory. That is chapter 3.</p>
+    </div>
+  </section>
+
+  <section id="quickref" data-rail="Quick reference">
+    <div class="prose"><h2>Quick reference</h2></div>
+    <div class="cheat"><table><tr><th>Command or key</th><th>What it does</th><th>Use it when</th></tr><tr><td><code>Shift+Tab</code></td><td>Cycles the modes: auto, manual, accept edits, plan</td><td>You want Claude to ask more, or less</td></tr><tr><td><code>plan mode</code></td><td>Claude reads and asks, and writes nothing until you approve</td><td>The change is big, or the decisions are yours</td></tr><tr><td><code>Tell Claude what to change</code></td><td>Shows the full plan and lets you change it</td><td>The plan is nearly right</td></tr><tr><td><code>Yes</code></td><td>Allows this one action</td><td>You want to see each step</td></tr><tr><td><code>Yes, and switch to accept edits</code></td><td>Allows all file changes for this session</td><td>You trust the plan; commands still ask</td></tr><tr><td><code>Yes, and don&#x27;t ask again</code></td><td>Always allows this one command</td><td>The command is harmless, like running tests</td></tr><tr><td><code>Ctrl+Shift+T (Mac: Cmd+T)</code></td><td>Opens a new terminal tab</td><td>Something must keep running, like a server</td></tr></table></div>
+  </section>
+
+  <section id="homework" data-rail="Your homework">
+    <div class="next">
+      <div class="lbl">Your homework</div>
+      <h3>Change one plan before it is built</h3>
+      <p style="font-size:var(--fs-cap);color:var(--slate)"><b>The goal:</b> use plan mode and change Claude's plan once, on your own.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>The steps:</b> in plan mode, type: <i>Plan a way to delete all of today's tasks at once.</i> When the plan appears, choose <b class="ui">Tell Claude what to change</b> and ask for a confirm step before anything is deleted.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>Guess first:</b> will its first plan ask you to confirm before deleting?</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:10px"><i>One question for you: which of your answers to Claude's questions surprised you, because you had not thought about it before?</i></p>
+    </div>
+  </section>
+
+  <section class="lwa-refs" id="refs"><div class="prose"><h2>References</h2><p>Where each mode and prompt on this page comes from. Every screenshot is from our own recording on 29 Oct 2026, Claude Code 2.1.312.</p></div><ol><li><b>Anthropic</b> · <i>Permission modes</i> <span class="why">Auto, manual (default), accept edits and plan mode, and switching between them with Shift+Tab.</span> <a href="https://code.claude.com/docs/en/permission-modes" rel="noopener">https://code.claude.com/docs/en/permission-modes</a></li><li><b>Anthropic</b> · <i>Common workflows: plan mode</i> <span class="why">Plan mode: Claude reads and asks, and writes no code until you approve the plan.</span> <a href="https://code.claude.com/docs/en/common-workflows" rel="noopener">https://code.claude.com/docs/en/common-workflows</a></li><li><b>Python</b> · <i>http.server</i> <span class="why">The standard-library web server our server.py is built on; nothing to install.</span> <a href="https://docs.python.org/3/library/http.server.html" rel="noopener">https://docs.python.org/3/library/http.server.html</a></li><li><b>My own recording</b> · <i>29 Oct 2026, Windows 11</i> <span class="why">From the planning prompt to a tested server and two views took 1 minute 13 seconds of building.</span></li></ol></section>
+  <div class="lwa-chapnav"><a href="chapter1.html"><span class="k">← Previous</span><span class="t">Chapter 1 · A first DevPulse page</span></a><button type="button" class="lwa-complete" data-lwa-complete><span class="k">Progress</span><span class="t">Mark this chapter complete</span></button><a href="chapter3.html"><span class="k">Next →</span><span class="t">Chapter 3 · Project rules Claude remembers</span></a></div>
+  </main>
+</div>
+<footer class="foot"><div class="foot-in">
+  <img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building" style="height:36px">
+  <span><a href="../../index.html">Home</a> · <a href="../index.html">Series</a> · <a href="https://github.com/Aditya-402/devpulse" rel="noopener">DevPulse on GitHub</a></span>
+</div></footer>
+<script src="../../assets/site-config.js"></script>
+<script src="../../assets/analytics.js?v=1" defer></script>
+<script src="../../assets/progress.js?v=2"></script>
+<script src="../../assets/railspy.js?v=1"></script>
+<script>
+// each clip plays once when most of it is on screen, never when the reader asks for reduced motion (WE-141)
+(function () {
+  if (!('IntersectionObserver' in window) || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+  document.querySelectorAll('video.clip').forEach(function (v) {
+    var o = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { o.disconnect(); v.play().catch(function () {}); } });
+    }, { threshold: 0.6 });
+    o.observe(v);
+  });
+})();
+</script>
+</body>
+</html>

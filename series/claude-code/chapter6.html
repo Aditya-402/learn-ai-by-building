@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 6 · A lighter model and a shorter context — Learn AI by Building</title>
+<meta name="description" content="Chapter 6 of the Claude Code series: reading /usage, choosing a model with /model, setting /effort, watching the conversation grow with /context, and keeping it short with /compact, /btw and /clear.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=8">
+<link rel="stylesheet" href="../../assets/unit.css?v=8">
+<link rel="stylesheet" href="../../assets/blog.css?v=7">
+<link rel="stylesheet" href="cc.css?v=3">
+</head>
+<body data-lwa-course="claude-code" data-lwa-chapter="chapter6" data-lwa-title="Chapter 6 · A lighter model and a shorter context" data-lwa-taught="/usage; /model and &#x27;s&#x27; for this session only; /effort; /context and the Messages line; /compact with what to keep; /btw for a side question; /clear for an unrelated task">
+<header class="top"><div class="top-in">
+  <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark-maroon.svg?v=1" alt="Learn AI by Building"></a>
+  <div class="lwa-brand-right"><span class="lwa-tag"><a href="index.html">Learn Claude Code by Building DevPulse</a></span><span data-lwa-auth></span></div>
+</div></header>
+<header class="masthead">
+  <div class="masthead-in">
+    <div class="title-block">
+      <div class="eyebrow">Learn Claude Code by Building DevPulse · Chapter 6</div>
+      <h1>A lighter model and a shorter context</h1>
+      <p class="standfirst">After a morning of building, the usage bar is high, so where did it all go? By the end of this chapter, you will read your usage, pick a lighter model and effort, and keep the conversation short with three commands.</p>
+      <div class="facts"><div><b>One sitting</b>~7 min read, ~15 min to try along</div><div><b>You start from</b>chapter 5&#x27;s DevPulse</div><div><b>You build</b>no code: habits that save your limit</div><div><b>Chapter 6 of 15</b>spend less, get the same</div></div>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="rail" aria-label="Sections">
+    <a class="rnav-back" href="index.html"><span class="ico">←</span><span class="lbl">All chapters</span></a>
+    <div class="rail-h">Contents</div>
+    <a class="on" href="#wall">The wall</a>
+    <a href="#usage">Read your usage</a>
+    <a href="#model">Pick a model</a>
+    <a href="#effort">Set the effort</a>
+    <a href="#context">Watch the conversation</a>
+    <a href="#short">Keep it short</a>
+    <a href="#cost">What it costs</a>
+    <a href="#quickref">Quick reference</a>
+    <a href="#homework">Your homework</a>
+  </nav>
+
+  <main>
+  <section id="wall" data-rail="The wall">
+    <div class="prereq">
+      <div class="pq"><b>Goes with Episode 6</b>"Why did I hit my limit so fast?". The video is being made. This page teaches the same steps, at your own pace.</div><div class="pq"><b>In a hurry?</b><a href="#quickref">Jump to the quick reference</a>: every command and key in this chapter, what it does, and when to use it.</div>
+      <div class="pq"><b>Where you are</b>DevPulse with tests and a best streak, from chapter 5. This chapter changes no code.</div>
+    </div>
+    <div class="prose">
+      <h2>Where did my limit go?</h2>
+      <p>Your plan gives you a limit for each few hours and for the week. A morning of chapters 1 to 5 uses a lot of it.</p>
+      <p>Say you fill a big car for a short trip to the shop. It works, but you pay for a big car every time. Claude Code has the same choices: which model, how hard it thinks, and how much it carries along.</p>
+    </div>
+    <div class="cc-wall">
+      <div class="lbl">The question for this chapter</div>
+      <p>How do you see what you used, and use less for the same work?</p>
+    </div>
+  </section>
+
+  <section id="usage" data-rail="Read your usage">
+    <div class="prose">
+      <h2>Read your usage</h2>
+      <p>Start Claude Code and look at the first lines. They show the model. On Pro and above, the default is <b>Opus</b>: the strongest model, and the one that uses your limit fastest.</p>
+    </div>
+    <div class="yousee"><b>Type this into Claude Code</b>/usage</div>
+    <figure class="cc-shot"><img src="img/chapter6/usage.png" alt="The Usage tab: Current session, a bar, 31% used, resets 12:10pm (Asia/Kolkata)." loading="lazy">
+      <figcaption>The bar for the current session: <b>31% used</b>, and when it resets. Below it are bars for the week. Your plan shows its own bars.</figcaption></figure>
+  </section>
+
+  <section id="model" data-rail="Pick a model">
+    <div class="prose">
+      <h2>Pick a lighter model</h2>
+      <p>Not every task needs the strongest model. A small change, a rename or a question about a file runs well on a lighter one.</p>
+    </div>
+    <div class="yousee"><b>Type this into Claude Code</b>/model</div>
+    <figure class="cc-shot"><img src="img/chapter6/model.png" alt="Select model: 1. Default (recommended), Opus 5.5, best for everyday, complex tasks; 2. Opus 5.5; more models below. Enter to set as default, s to use this session only." loading="lazy">
+      <figcaption>The default is Opus. Read the last line: <b>Enter</b> sets a new default, <b>s</b> uses the model for this session only.</figcaption></figure>
+    <figure class="cc-shot"><img src="img/chapter6/sonnet.png" alt="Further down the list: 3. Fable 5.1, for your toughest challenges; 4. Sonnet 5.5, most efficient for simpler tasks." loading="lazy">
+      <figcaption>Move down to <b>Sonnet</b>, "most efficient for simpler tasks", and press <b>s</b>. The models you see depend on your plan.</figcaption></figure>
+    <figure class="cc-shot"><img src="img/chapter6/setmodel.png" alt="Set model to Sonnet 5.5 for this session only. The header now reads Sonnet 5.5." loading="lazy">
+      <figcaption><i>Set model to Sonnet 5.5 for this session only.</i> Tomorrow you start on the default again.</figcaption></figure>
+  </section>
+
+  <section id="effort" data-rail="Set the effort">
+    <div class="prose">
+      <h2>Set how hard it thinks</h2>
+      <p>A model can think briefly or at length. Longer thinking helps hard problems and costs more on easy ones.</p>
+    </div>
+    <div class="yousee"><b>Type this into Claude Code</b>/effort</div>
+    <figure class="cc-shot"><img src="img/chapter6/effort.png" alt="Effort: a slider from Faster to Smarter, low, medium, high, xhigh, max; left and right to adjust, Enter to confirm, s for this session only." loading="lazy">
+      <figcaption>A slider from <b>low</b> to <b>max</b>. Medium suits most building. Press <b>s</b> to keep it for this session only.</figcaption></figure>
+  </section>
+
+  <section id="context" data-rail="Watch the conversation">
+    <div class="prose">
+      <h2>Watch the conversation grow</h2>
+      <p>Every message you send carries the whole conversation with it. So a long conversation costs more on each new question. <code>/context</code> shows the size; watch the <b>Messages</b> line.</p>
+      <p>We checked it three times: in a new session, after one big read-only question, and after <code>/clear</code>. This was the question:</p>
+    </div>
+    <div class="yousee"><b>The big question we asked</b>Read the project and list the open bugs and rough edges you can find, most serious first. Don't change anything.</div>
+    <div class="prose">
+    </div>
+    <figure class="cc-shot"><img src="img/chapter6/messages.png" alt="Messages: 300 tokens in a new session; 33.5k tokens after one big question; 130 tokens after /clear." loading="lazy">
+      <figcaption>One question took the conversation from 300 to 33,500 tokens. Every later question would carry all of it.</figcaption></figure>
+    <figure class="cc-shot"><img src="img/chapter6/bugs.png" alt="The end of Claude's list of 13 bugs and rough edges, with an Insight box, and: I'd start with 1, 2 and 3, which are small server-side fixes." loading="lazy">
+      <figcaption>That big answer: 13 issues. Useful, and heavy to carry along.</figcaption></figure>
+  </section>
+
+  <section id="short" data-rail="Keep it short">
+    <div class="prose">
+      <h2>Three ways to keep it short</h2>
+      <p>There are three commands, one for each situation.</p>
+      <p><b>Still working on the same task?</b> Shrink it, and say what must be kept.</p>
+    </div>
+    <div class="yousee"><b>Type this into Claude Code</b>/compact keep the DevPulse decisions and the open bug list</div>
+    <figure class="cc-shot"><img src="img/chapter6/compacted.png" alt="/compact keep the DevPulse decisions and the open bug list: Compacted; then it re-reads server.py, index.html, streak.js, .gitignore and test_server.py." loading="lazy">
+      <figcaption><b class="ui">Compacted</b>. It then re-reads the files it needs. In our run that brought it from 33.5k to about 28k: smaller, not tiny.</figcaption></figure>
+    <div class="prose">
+      <p><b>A quick question off the main task?</b> Ask it on the side. The answer is not added to the conversation.</p>
+    </div>
+    <div class="yousee"><b>Type this into Claude Code</b>/btw what does accept edits mode allow?</div>
+    <figure class="cc-shot"><img src="img/chapter6/btw.png" alt="A side panel answers: accept edits mode stops Claude Code from asking before it changes files; file edits, simple shell commands like mkdir and mv; other commands still ask. Keys: c to copy, f to fork, Esc to close." loading="lazy">
+      <figcaption>The answer opens in a panel. Press Esc, and the conversation is as before.</figcaption></figure>
+    <div class="prose">
+      <p><b>Starting something unrelated?</b> Start clean. <code>/clear</code> empties the conversation, in the same folder. Your files, <code>CLAUDE.md</code> and memory stay. The last line in the picture above, 130 tokens, is after <code>/clear</code>.</p>
+    </div>
+    <div class="yousee"><b>Type this into Claude Code</b>/clear</div>
+  </section>
+
+  <section id="cost" data-rail="What it costs">
+    <div class="prose">
+      <h2>What saving costs</h2>
+      <p>A lighter model can miss what Opus would catch. Low effort can rush a hard bug. And <code>/compact</code> keeps a summary, so details you did not name may be lost.</p>
+      <p>So switch down for easy work, and back up for hard work. And notice the prompts you type every day, again and again. That repetition costs time too. Chapter 7 turns one of them into a single command.</p>
+    </div>
+  </section>
+
+  <section id="quickref" data-rail="Quick reference">
+    <div class="prose"><h2>Quick reference</h2></div>
+    <div class="cheat"><table><tr><th>Command or key</th><th>What it does</th><th>Use it when</th></tr><tr><td><code>/usage</code></td><td>Shows how much of your plan&#x27;s limit is used, and when it resets</td><td>You wonder why Claude slowed down or stopped</td></tr><tr><td><code>/model</code></td><td>Picks the model; s = this session only, Enter = new default</td><td>The task is simple, or very hard</td></tr><tr><td><code>/effort</code></td><td>Sets how hard the model thinks, low to max</td><td>Quick tasks need less thinking</td></tr><tr><td><code>/context</code></td><td>Shows what fills the conversation; watch Messages</td><td>The conversation feels long</td></tr><tr><td><code>/compact keep …</code></td><td>Shrinks the conversation to a summary of what you name</td><td>A long task still has more to do</td></tr><tr><td><code>/btw question</code></td><td>Answers a side question without adding it to the conversation</td><td>A quick question off the main task</td></tr><tr><td><code>/clear</code></td><td>Starts an empty conversation in the same folder</td><td>You switch to an unrelated task</td></tr></table></div>
+  </section>
+
+  <section id="homework" data-rail="Your homework">
+    <div class="next">
+      <div class="lbl">Your homework</div>
+      <h3>Measure one question</h3>
+      <p style="font-size:var(--fs-cap);color:var(--slate)"><b>The goal:</b> see what one question costs your conversation.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>The steps:</b> start <code>claude</code>, run <code>/context</code> and note the Messages line. Ask <i>Explain streak.js in five lines.</i> Run <code>/context</code> again.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>Guess first:</b> will Messages grow by hundreds, or by thousands?</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:10px"><i>One question for you: which of your tasks today really needed the strongest model?</i></p>
+    </div>
+  </section>
+
+  <section class="lwa-refs" id="refs"><div class="prose"><h2>References</h2><p>Where each command on this page comes from. Every screenshot is from our own recording on 29 Oct 2026, Claude Code 2.1.312.</p></div><ol><li><b>Anthropic</b> · <i>Manage costs effectively</i> <span class="why">What uses your plan: model, effort, the size of the conversation; /compact and /clear.</span> <a href="https://code.claude.com/docs/en/costs" rel="noopener">https://code.claude.com/docs/en/costs</a></li><li><b>Anthropic</b> · <i>Model configuration</i> <span class="why">/model, the default model per plan, and choosing a model for one session.</span> <a href="https://code.claude.com/docs/en/model-config" rel="noopener">https://code.claude.com/docs/en/model-config</a></li><li><b>Anthropic</b> · <i>Interactive mode</i> <span class="why">/usage, /effort, /context, /compact, /btw and /clear.</span> <a href="https://code.claude.com/docs/en/interactive-mode" rel="noopener">https://code.claude.com/docs/en/interactive-mode</a></li><li><b>My own recording</b> · <i>29 Oct 2026, Windows 11</i> <span class="why">One read-only question grew the conversation from 300 to 33,500 tokens.</span></li></ol></section>
+  <div class="lwa-chapnav"><a href="chapter5.html"><span class="k">← Previous</span><span class="t">Chapter 5 · Tests for the streak</span></a><button type="button" class="lwa-complete" data-lwa-complete><span class="k">Progress</span><span class="t">Mark this chapter complete</span></button><a href="index.html"><span class="k">Next →</span><span class="t">Chapter 7 · A standup skill (coming soon)</span></a></div>
+  </main>
+</div>
+<footer class="foot"><div class="foot-in">
+  <img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building" style="height:36px">
+  <span><a href="../../index.html">Home</a> · <a href="../index.html">Series</a> · <a href="https://github.com/Aditya-402/devpulse" rel="noopener">DevPulse on GitHub</a></span>
+</div></footer>
+<script src="../../assets/site-config.js"></script>
+<script src="../../assets/analytics.js?v=1" defer></script>
+<script src="../../assets/progress.js?v=2"></script>
+<script src="../../assets/railspy.js?v=1"></script>
+<script>
+// each clip plays once when most of it is on screen, never when the reader asks for reduced motion (WE-141)
+(function () {
+  if (!('IntersectionObserver' in window) || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+  document.querySelectorAll('video.clip').forEach(function (v) {
+    var o = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { o.disconnect(); v.play().catch(function () {}); } });
+    }, { threshold: 0.6 });
+    o.observe(v);
+  });
+})();
+</script>
+</body>
+</html>

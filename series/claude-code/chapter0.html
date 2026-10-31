@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 0 · How this series works, and getting set up — Learn AI by Building</title>
+<meta name="description" content="Chapter 0 of the Claude Code series: how the series works, the app we build (DevPulse), what you need, and installing and signing in to Claude Code on a clean Windows, with the checks that prove it works.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=8">
+<link rel="stylesheet" href="../../assets/unit.css?v=8">
+<link rel="stylesheet" href="../../assets/blog.css?v=7">
+<link rel="stylesheet" href="cc.css?v=3">
+</head>
+<body data-lwa-course="claude-code" data-lwa-chapter="chapter0" data-lwa-title="Chapter 0 · How this series works, and getting set up" data-lwa-taught="how the series works; DevPulse; the free tools; installing Claude Code with the native installer; the PATH fix; claude --version; signing in; the trust question; claude doctor">
+<header class="top"><div class="top-in">
+  <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark-maroon.svg?v=1" alt="Learn AI by Building"></a>
+  <div class="lwa-brand-right"><span class="lwa-tag"><a href="index.html">Learn Claude Code by Building DevPulse</a></span><span data-lwa-auth></span></div>
+</div></header>
+<header class="masthead">
+  <div class="masthead-in">
+    <div class="title-block">
+      <div class="eyebrow">Learn Claude Code by Building DevPulse · Chapter 0</div>
+      <h1>How this series works, and getting set up</h1>
+      <p class="standfirst">How do you learn Claude Code by building, and what do you need before chapter 1? By the end of this chapter, Claude Code is installed, signed in and checked on your computer, and you know the app we build and how each chapter works.</p>
+      <div class="facts"><div><b>One sitting</b>~6 min read, ~20 min to set up</div><div><b>You need</b>a Claude Pro plan or above, and a 64-bit computer</div><div><b>You end with</b>Claude Code installed, signed in and checked</div><div><b>Chapter 0 of 15</b>the setup chapter</div></div>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="rail" aria-label="Sections">
+    <a class="rnav-back" href="index.html"><span class="ico">←</span><span class="lbl">All chapters</span></a>
+    <div class="rail-h">Contents</div>
+    <a class="on" href="#how">How this series works</a>
+    <a href="#need">What you need</a>
+    <a href="#install">Install Claude Code</a>
+    <a href="#check">Check it is found</a>
+    <a href="#signin">Sign in</a>
+    <a href="#doctor">The health check</a>
+    <a href="#cost">Before chapter 1</a>
+    <a href="#quickref">Quick reference</a>
+    <a href="#homework">Your homework</a>
+  </nav>
+
+  <main>
+  <section id="how" data-rail="How this series works">
+    <div class="prereq">
+      <div class="pq"><b>Goes with Episode 0</b>"How does this series work?". The video is being made. This page teaches the same steps, at your own pace.</div><div class="pq"><b>In a hurry?</b><a href="#quickref">Jump to the quick reference</a>: every command and key in this chapter, what it does, and when to use it.</div>
+      <div class="pq"><b>Nothing is assumed</b>Never used a terminal? This chapter shows every line to type, and what you should see.</div>
+    </div>
+    <div class="prose">
+      <h2>How this series works</h2>
+      <p>We learn Claude Code by building one app, start to finish. Each chapter starts with a problem we hit while building. Then we find the Claude Code feature that solves it, and use it at once.</p>
+      <p>The app is <b>DevPulse</b>: you type what you worked on and for how long, and it shows your day, your week and your streak. By chapter 14 it has tests, its own tools for Claude, and a public page on the internet.</p>
+      <p>Each chapter goes with one video, the episode with the same number. The video shows it; the page lets you build along at your own pace. Every chapter ends with a quick reference and homework.</p>
+    </div>
+  </section>
+
+  <section id="need" data-rail="What you need">
+    <div class="prose">
+      <h2>What you need</h2>
+      <p>Everything here is free, except one thing.</p>
+      <ul>
+        <li><b>A Claude plan with Claude Code.</b> The Free plan does not include it; Pro is the smallest plan that does. This is the only thing you pay for.</li>
+        <li><b>A 64-bit computer:</b> Windows 10 or 11, or a Mac with macOS 13 or later.</li>
+        <li><b>Free tools:</b> Git, Python 3.12 or later, Node.js 20 or later, and a free GitHub account. The <a href="../../blog/install-claude-code/">install guide on the blog</a> links each one.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="install" data-rail="Install Claude Code">
+    <div class="prose">
+      <h2>Install Claude Code</h2>
+      <p>I recorded this on a brand-new Windows, so you see exactly what a first install looks like.</p>
+      <p>Press the Windows key and type <i>powershell</i>.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter0/search.png" alt="Windows search for powershell: Best match Windows PowerShell; under Apps, Windows PowerShell ISE, Windows PowerShell ISE (x86) and Windows PowerShell (x86)." loading="lazy">
+      <figcaption>Open <b class="ui">Windows PowerShell</b>, the best match. Not the ones marked <b class="ui">(x86)</b>: those are 32-bit, and Claude Code needs 64-bit.</figcaption></figure>
+    <div class="prose">
+      <p>First, see that Claude Code is not there yet. Type <code>claude</code> and press Enter.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter0/notfound.png" alt="PowerShell: claude : The term 'claude' is not recognized as the name of a cmdlet, function, script file, or operable program." loading="lazy">
+      <figcaption>Red text: <i>the term 'claude' is not recognized</i>. Windows does not know it yet. Now install it.</figcaption></figure>
+    <div class="yousee"><b>Windows: paste this into PowerShell and press Enter</b>irm https://claude.ai/install.ps1 | iex</div>
+    <div class="yousee"><b>Mac: paste this into Terminal and press Enter</b>curl -fsSL https://claude.ai/install.sh | bash</div>
+    <div class="prose">
+      <p>It takes a minute or two. On our clean Windows it finished with a note that matters.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter0/pathfix.png" alt="Claude Code successfully installed! Version 2.1.312, Location C:\Users\...\.local\bin\claude.exe. Setup notes: Native installation exists but ...\.local\bin is not in your PATH. Then the line [Environment]::SetEnvironmentVariable(...) is typed." loading="lazy">
+      <figcaption>Installed, version 2.1.312. Read the <b>Setup notes</b>: the folder is <i>not in your PATH</i>, so Windows will not find <code>claude</code>. The line under it fixes that.</figcaption></figure>
+    <div class="prose">
+      <p>PATH is the list of folders Windows searches when you type a command. If you see that note, paste this line once.</p>
+    </div>
+    <div class="yousee"><b>Windows, only if you see the PATH note: paste this into PowerShell</b>[Environment]::SetEnvironmentVariable("Path", [Environment]::GetEnvironmentVariable("Path", "User") + ";$env:USERPROFILE\.local\bin", "User")</div>
+  </section>
+
+  <section id="check" data-rail="Check it is found">
+    <div class="prose">
+      <h2>Check it is found</h2>
+      <p>Close PowerShell and open a new one, so it reads the new PATH. Then ask for the version.</p>
+    </div>
+    <div class="yousee"><b>Type this in a new PowerShell or Terminal</b>claude --version</div>
+    <figure class="cc-shot"><img src="img/chapter0/version.png" alt="A new PowerShell: claude --version prints 2.1.312 (Claude Code)." loading="lazy">
+      <figcaption><b>2.1.312 (Claude Code)</b>. Your number may be newer; the words <i>(Claude Code)</i> are what matter.</figcaption></figure>
+  </section>
+
+  <section id="signin" data-rail="Sign in">
+    <div class="prose">
+      <h2>Sign in, the first time</h2>
+      <p>Claude Code works inside a folder. Make a small one to try it in, and start Claude Code there.</p>
+    </div>
+    <div class="yousee"><b>Windows: type this in PowerShell, one line at a time</b>mkdir C:\code\hello
+cd C:\code\hello
+claude</div>
+    <div class="yousee"><b>Mac: type this in Terminal, one line at a time</b>mkdir -p ~/code/hello
+cd ~/code/hello
+claude</div>
+    <div class="prose">
+      <p>The first start asks a few things, one screen at a time.</p>
+      <ol>
+        <li>A colour style for your terminal. <i>Dark mode</i> is fine.</li>
+        <li>How you sign in. Choose <b class="ui">Claude account with subscription</b>.</li>
+        <li>Your browser opens. Sign in with the account that has your plan.</li>
+        <li>The trust question for this folder.</li>
+      </ol>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter0/theme.png" alt="Claude Code's first start: Let's get started. Choose the text style that looks best with your terminal: Auto, Dark mode (selected), Light mode and more, with a sample diff below." loading="lazy">
+      <figcaption>1. The colour style, with a sample below so you can see it.</figcaption></figure>
+    <figure class="cc-shot"><img src="img/chapter0/login.png" alt="Select login method: 1. Claude account with subscription (Pro, Max, Team or Enterprise), 2. Anthropic Console account, 3. 3rd-party platform." loading="lazy">
+      <figcaption>2. Choose <b class="ui">1. Claude account with subscription</b>.</figcaption></figure>
+    <figure class="cc-shot"><img src="img/chapter0/great.png" alt="The browser after signing in: Build something great. You're all set up for Claude Code. You can now close this window." loading="lazy">
+      <figcaption>3. After you sign in: <i>You're all set up for Claude Code.</i> Close the browser tab and go back to the terminal.</figcaption></figure>
+    <figure class="cc-shot"><img src="img/chapter0/trust.png" alt="Accessing workspace C:\code\hello. Quick safety check: Is this a project you created or one you trust? No, exit / Yes, I trust this folder." loading="lazy">
+      <figcaption>4. This is your own empty folder, so choose <b class="ui">Yes, I trust this folder</b>.</figcaption></figure>
+    <div class="prose">
+      <p>You are in. Type <code>/status</code> to see your version, folder, account and model. Then type <code>/exit</code>.</p>
+    </div>
+  </section>
+
+  <section id="doctor" data-rail="The health check">
+    <div class="prose">
+      <h2>The health check</h2>
+      <p>One last command, outside Claude Code. It checks the whole installation.</p>
+    </div>
+    <div class="yousee"><b>Type this in PowerShell or Terminal</b>claude doctor</div>
+    <figure class="cc-shot"><img src="img/chapter0/doctor.png" alt="claude doctor: Running native (2.1.312), Platform win32-x64, Path ...\.local\bin\claude.exe, Auto-updates enabled, and: No installation issues found." loading="lazy">
+      <figcaption><b>No installation issues found.</b> It also says Claude Code keeps itself up to date.</figcaption></figure>
+    <div class="prose">
+      <p>If something did go wrong, the <a href="../../blog/install-claude-code/">install guide on the blog</a> has a table of the usual errors and their fixes.</p>
+    </div>
+  </section>
+
+  <section id="cost" data-rail="Before chapter 1">
+    <div class="prose">
+      <h2>Before chapter 1</h2>
+      <p>Claude Code is installed, found, signed in and healthy. That is all you need to start.</p>
+      <p>But a working install is not a working habit. In chapter 1 we ask it to build something, and see how much it decides on its own.</p>
+    </div>
+  </section>
+
+  <section id="quickref" data-rail="Quick reference">
+    <div class="prose"><h2>Quick reference</h2></div>
+    <div class="cheat"><table><tr><th>Command or key</th><th>What it does</th><th>Use it when</th></tr><tr><td><code>irm https://claude.ai/install.ps1 | iex</code></td><td>Installs Claude Code on Windows (in PowerShell)</td><td>Claude Code is not on your computer yet</td></tr><tr><td><code>curl -fsSL https://claude.ai/install.sh | bash</code></td><td>Installs Claude Code on a Mac or Linux (in Terminal)</td><td>The same, on a Mac</td></tr><tr><td><code>claude --version</code></td><td>Prints the version, ending in (Claude Code)</td><td>You want to know it is installed and found</td></tr><tr><td><code>claude</code></td><td>Starts Claude Code in the folder you are in; the first time, it signs you in</td><td>You begin work</td></tr><tr><td><code>Yes, I trust this folder</code></td><td>Lets Claude read, edit and run files there</td><td>It is your own folder</td></tr><tr><td><code>claude doctor</code></td><td>Checks the installation and names any problem</td><td>Something looks wrong</td></tr><tr><td><code>/exit</code></td><td>Ends the session</td><td>You are done</td></tr></table></div>
+  </section>
+
+  <section id="homework" data-rail="Your homework">
+    <div class="next">
+      <div class="lbl">Your homework</div>
+      <h3>Ask it one question</h3>
+      <p style="font-size:var(--fs-cap);color:var(--slate)"><b>The goal:</b> see Claude Code work in a folder before chapter 1.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>The steps:</b> in your <code>hello</code> folder, run <code>claude</code> and type: <i>Create a file called hello.txt with one line about what I want to build.</i> Then open the file.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>Guess first:</b> will it create the file straight away, or ask you first?</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:10px"><i>One question for you: what do you want to build with Claude Code? Keep the answer for the end of the series.</i></p>
+    </div>
+  </section>
+
+  <section class="lwa-refs" id="refs"><div class="prose"><h2>References</h2><p>Where each step on this page comes from. The screenshots are from a clean Windows 11 (Windows Sandbox) on 29 Oct 2026, Claude Code 2.1.312.</p></div><ol><li><b>Anthropic</b> · <i>Claude Code quickstart</i> <span class="why">The native installer for Windows and Mac, and signing in on first start.</span> <a href="https://code.claude.com/docs/en/quickstart" rel="noopener">https://code.claude.com/docs/en/quickstart</a></li><li><b>Anthropic</b> · <i>Troubleshoot installation</i> <span class="why">claude --version, claude doctor, and the install folder that must be on your PATH.</span> <a href="https://code.claude.com/docs/en/troubleshoot-install" rel="noopener">https://code.claude.com/docs/en/troubleshoot-install</a></li><li><b>Anthropic</b> · <i>Claude pricing</i> <span class="why">Claude Code is not in the Free plan; Pro is the smallest plan that includes it (checked 28 Oct 2026).</span> <a href="https://claude.com/pricing" rel="noopener">https://claude.com/pricing</a></li><li><b>Microsoft</b> · <i>Windows Sandbox</i> <span class="why">A clean, throwaway Windows inside Windows 11 Pro, used here to record a real first install.</span> <a href="https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/" rel="noopener">https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/</a></li></ol></section>
+  <div class="lwa-chapnav"><a href="index.html"><span class="k">← Series</span><span class="t">All chapters</span></a><button type="button" class="lwa-complete" data-lwa-complete><span class="k">Progress</span><span class="t">Mark this chapter complete</span></button><a href="chapter1.html"><span class="k">Next →</span><span class="t">Chapter 1 · A first DevPulse page</span></a></div>
+  </main>
+</div>
+<footer class="foot"><div class="foot-in">
+  <img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building" style="height:36px">
+  <span><a href="../../index.html">Home</a> · <a href="../index.html">Series</a> · <a href="https://github.com/Aditya-402/devpulse" rel="noopener">DevPulse on GitHub</a></span>
+</div></footer>
+<script src="../../assets/site-config.js"></script>
+<script src="../../assets/analytics.js?v=1" defer></script>
+<script src="../../assets/progress.js?v=2"></script>
+<script src="../../assets/railspy.js?v=1"></script>
+<script>
+// each clip plays once when most of it is on screen, never when the reader asks for reduced motion (WE-141)
+(function () {
+  if (!('IntersectionObserver' in window) || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+  document.querySelectorAll('video.clip').forEach(function (v) {
+    var o = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { o.disconnect(); v.play().catch(function () {}); } });
+    }, { threshold: 0.6 });
+    o.observe(v);
+  });
+})();
+</script>
+</body>
+</html>
