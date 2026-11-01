@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 8 · A standup that runs on its own — Learn AI by Building</title>
+<meta name="description" content="Chapter 8 of the Claude Code series: headless mode with claude -p, piping text in, allowing only the tools a job needs, and a standup.ps1 script that writes the standup in one command.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=8">
+<link rel="stylesheet" href="../../assets/unit.css?v=8">
+<link rel="stylesheet" href="../../assets/blog.css?v=7">
+<link rel="stylesheet" href="cc.css?v=4">
+</head>
+<body data-lwa-course="claude-code" data-lwa-chapter="chapter8" data-lwa-title="Chapter 8 · A standup that runs on its own" data-lwa-taught="headless mode: claude -p; piping text into claude -p; --allowedTools to allow only what a job needs; a new session cannot see your terminal history; wrapping a command in a script; Task Scheduler (mentioned)">
+<header class="top"><div class="top-in">
+  <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark-maroon.svg?v=1" alt="Learn AI by Building"></a>
+  <div class="lwa-brand-right"><span class="lwa-tag"><a href="index.html">Learn Claude Code by Building DevPulse</a></span><span data-lwa-auth></span></div>
+</div></header>
+<header class="masthead">
+  <div class="masthead-in">
+    <div class="title-block">
+      <div class="eyebrow">Learn Claude Code by Building DevPulse · Chapter 8</div>
+      <h1>A standup that runs on its own</h1>
+      <p class="standfirst">You want your standup ready before you even open Claude, so can Claude Code work without a chat? By the end of this chapter, one command, .\standup.ps1, writes the standup and DevPulse shows it.</p>
+      <div class="facts"><div><b>One sitting</b>~6 min read, ~15 min to build along</div><div><b>You start from</b>chapter 7&#x27;s DevPulse, with /standup</div><div><b>You build</b>standup.ps1: the standup in one command</div><div><b>Chapter 8 of 15</b>Claude Code without a chat</div></div>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="rail" aria-label="Sections">
+    <a class="rnav-back" href="index.html"><span class="ico">←</span><span class="lbl">All chapters</span></a>
+    <a class="rnav-back" href="prompts.html#ch8"><span class="ico">⧉</span><span class="lbl">Every prompt</span></a>
+    <div class="rail-h">Contents</div>
+    <a class="on" href="#wall">The wall</a>
+    <a href="#pipe">One request, no chat</a>
+    <a href="#tools">Only the tools it needs</a>
+    <a href="#script">Wrap it in a script</a>
+    <a href="#run">Run it</a>
+    <a href="#cost">What it costs</a>
+    <a href="#quickref">Quick reference</a>
+    <a href="#homework">Your homework</a>
+  </nav>
+
+  <main>
+  <section id="wall" data-rail="The wall">
+    <div class="prereq">
+      <div class="pq"><b>Goes with Episode 8</b>"Can Claude Code work without a chat?". The video is being made. This page teaches the same steps, at your own pace.</div><div class="pq"><b>In a hurry?</b><a href="#quickref">Jump to the quick reference</a>: every command and key in this chapter, what it does, and when to use it.</div><div class="pq"><b>Every prompt, ready to copy</b><a href="prompts.html#ch8">This chapter's prompts and commands</a>, each with a Copy button. Type them yourself first; copy if you are stuck or behind.</div>
+      <div class="pq"><b>Where you are</b>DevPulse has the /standup skill and a Standup panel, from chapter 7. Work in PowerShell in your project folder, outside Claude.</div>
+    </div>
+    <div class="prose">
+      <h2>The standup should be ready before you are</h2>
+      <p>In chapter 7, <code>/standup</code> made the standup one command. But you still open Claude, wait for it, and type the command.</p>
+      <p>Say you want the standup ready the moment you sit down. Nobody opens a chat at 8 in the morning to ask for it.</p>
+    </div>
+    <div class="cc-wall">
+      <div class="lbl">The question for this chapter</div>
+      <p>Can Claude Code do a job without a chat window at all?</p>
+    </div>
+  </section>
+
+  <section id="pipe" data-rail="One request, no chat">
+    <div class="prose">
+      <h2>One request, no chat: claude -p</h2>
+      <p>Add <code>-p</code> to <code>claude</code> and it runs one request, prints the answer, and exits. This is called <b>headless</b> mode. You can also send it text from another command with <code>|</code>, the pipe.</p>
+    </div>
+    <div class="yousee"><b>Type this in PowerShell (Mac: Terminal), in your project folder</b>git log --since=yesterday --oneline | claude -p "turn this into a three-line standup"</div>
+    <figure class="cc-shot"><img src="img/chapter8/pipe.png" alt="git log piped into claude -p: Yesterday: added a Standup panel and standup skill, best-streak tracking, today's total in the tab title. Today: (fill in; nothing in the commits says what's next). Blockers: None. The commits only cover what's done, so I left Today open instead of inventing a plan." loading="lazy">
+      <figcaption>Three lines from the commits, then the prompt comes back. Note: it left Today open rather than invent a plan.</figcaption></figure>
+  </section>
+
+  <section id="tools" data-rail="Only the tools it needs">
+    <div class="prose">
+      <h2>Let it use only the tools it needs</h2>
+      <p>A command that runs on its own should do one job, and nothing more. So you list exactly what it may use, with <code>--allowedTools</code>. Here: read files, write files, and run <code>git log</code>.</p>
+    </div>
+    <div class="yousee"><b>Type this in PowerShell (Mac: Terminal), as one line</b>claude -p "Read data/tasks.json and the git log since yesterday; write a three-line standup to data/standup.md" --allowedTools "Read,Write,Bash(git log:*)"</div>
+    <figure class="cc-shot"><img src="img/chapter8/allowed.png" alt="The headless command with --allowedTools: I wrote the standup to data/standup.md. Yesterday: Nothing logged. Today: still to do and already done. Blockers: None. Nothing is dated yesterday; I didn't modify tasks.json." loading="lazy">
+      <figcaption>It read the tasks and the log, wrote <code>data/standup.md</code>, and says it did not touch <code>tasks.json</code>.</figcaption></figure>
+    <div class="prose">
+      <p><code>Bash(git log:*)</code> means: any command that starts with <code>git log</code>. Any other command would be refused.</p>
+    </div>
+  </section>
+
+  <section id="script" data-rail="Wrap it in a script">
+    <div class="prose">
+      <h2>Wrap it in a script</h2>
+      <p>That line is long to type each morning. Ask Claude to put it in a script. Start <code>claude</code>, then:</p>
+    </div>
+    <div class="yousee"><b>Type this into Claude Code</b>Wrap that headless standup command in standup.ps1, so I can run it with .\standup.ps1 from this folder. Keep the same allowed tools.</div>
+    <figure class="cc-shot"><img src="img/chapter8/asks.png" alt="Claude: I can't find the headless standup command, so I haven't written standup.ps1. I'd rather not guess the allowed tools. Paste the command you ran, or tell me which tools it allowed." loading="lazy">
+      <figcaption>A new session cannot see what you typed in the terminal. So it asks, instead of guessing the allowed tools.</figcaption></figure>
+    <div class="yousee"><b>Give it the exact command</b>This is the command: claude -p "Read data/tasks.json and the git log since yesterday; write a three-line standup to data/standup.md" --allowedTools "Read,Write,Bash(git log:*)"</div>
+    <figure class="cc-shot"><img src="img/chapter8/script.png" alt="Write(standup.ps1): two lines, Set-Location $PSScriptRoot and the claude -p command. I created standup.ps1; it first switches to the script's own folder. If PowerShell blocks it with an execution-policy error, run powershell -ExecutionPolicy Bypass -File .\standup.ps1." loading="lazy">
+      <figcaption>Two lines: go to the script's own folder, then run the command. It also warns about Windows' script policy. The grey <i>run it and show me the output</i> is only a suggestion.</figcaption></figure>
+    <div class="prose">
+      <p>On a Mac, ask for <code>standup.sh</code> instead, and run it with <code>./standup.sh</code>.</p>
+    </div>
+  </section>
+
+  <section id="run" data-rail="Run it">
+    <div class="prose">
+      <h2>Run it, then look at the app</h2>
+      <p>Type <code>/exit</code>, then run the script from PowerShell.</p>
+    </div>
+    <div class="yousee"><b>Windows: type this in PowerShell</b>.\standup.ps1</div>
+    <div class="yousee"><b>Mac: type this in Terminal</b>./standup.sh</div>
+    <figure class="cc-shot"><img src="img/chapter8/run.png" alt=".\standup.ps1: I wrote the standup to data/standup.md, with the Yesterday, Today and Blockers lines." loading="lazy">
+      <figcaption>One command, the standup written. No chat opened.</figcaption></figure>
+    <figure class="cc-shot"><img src="img/chapter8/panel.png" alt="DevPulse's Today view: the Standup panel shows the new Yesterday, Today and Blockers lines." loading="lazy">
+      <figcaption>Refresh the app: the panel shows the new standup.</figcaption></figure>
+    <div class="prose">
+      <p>Windows Task Scheduler can run <code>standup.ps1</code> every morning by itself. We do not set that up here, but it is the next step if you want it.</p>
+    </div>
+    <div class="confuse">
+      <div class="lbl">Careful here</div>
+      <p>If PowerShell says running scripts is disabled, run <code>powershell -ExecutionPolicy Bypass -File .\standup.ps1</code>. That allows this one run, and changes nothing else.</p>
+    </div>
+  </section>
+
+  <section id="cost" data-rail="What it costs">
+    <div class="prose">
+      <h2>What headless costs</h2>
+      <p>Each run uses your plan, like any request. And nobody watches it: if the job goes wrong, you find out later. That is why the allowed tools are kept so small.</p>
+      <p>There is a bigger problem coming. The code has grown, and so far the same Claude that wrote it is the one that checks it. In chapter 9 we get a second pair of eyes.</p>
+    </div>
+  </section>
+
+  <section id="quickref" data-rail="Quick reference">
+    <div class="prose"><h2>Quick reference</h2><p>The prompts from this chapter, ready to copy: <a href="prompts.html#ch8">every prompt, chapter 8</a>.</p></div>
+    <div class="cheat"><table><tr><th>Command or key</th><th>What it does</th><th>Use it when</th></tr><tr><td><code>claude -p &quot;…&quot;</code></td><td>Runs one request, prints the answer and exits; no chat</td><td>A job you want done without opening Claude</td></tr><tr><td><code>… | claude -p &quot;…&quot;</code></td><td>Sends another command&#x27;s output in as the text to work on</td><td>The input comes from git, a file or a log</td></tr><tr><td><code>--allowedTools &quot;Read,Write,Bash(git log:*)&quot;</code></td><td>Lets the run use only these tools</td><td>A script should do one job, and nothing more</td></tr><tr><td><code>.\standup.ps1</code></td><td>Runs the script in this folder</td><td>Every morning</td></tr><tr><td><code>powershell -ExecutionPolicy Bypass -File .\standup.ps1</code></td><td>Runs it when Windows blocks scripts</td><td>You see an execution-policy error</td></tr></table></div>
+  </section>
+
+  <section id="homework" data-rail="Your homework">
+    <div class="next">
+      <div class="lbl">Your homework</div>
+      <h3>A one-line report, headless</h3>
+      <p style="font-size:var(--fs-cap);color:var(--slate)"><b>The goal:</b> use <code>claude -p</code> for a job of your own.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>The steps:</b> in your project folder, run: <code>claude -p "How many tasks are in data/tasks.json, and how many minutes in total?" --allowedTools "Read"</code></p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>Guess first:</b> what happens if you ask it to change a file, with only Read allowed?</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:10px"><i>One question for you: which job in your week could run every morning without you?</i></p>
+    </div>
+  </section>
+
+  <section class="lwa-refs" id="refs"><div class="prose"><h2>References</h2><p>Where each command and option on this page comes from. Every screenshot is from our own recording on 29 Oct 2026, Claude Code 2.1.312.</p></div><ol><li><b>Anthropic</b> · <i>Run Claude Code programmatically (headless)</i> <span class="why">claude -p: one request, an answer printed, no chat; reading from a pipe; output formats.</span> <a href="https://code.claude.com/docs/en/headless" rel="noopener">https://code.claude.com/docs/en/headless</a></li><li><b>Anthropic</b> · <i>CLI reference</i> <span class="why">--allowedTools and its patterns, such as Bash(git log:*).</span> <a href="https://code.claude.com/docs/en/cli-reference" rel="noopener">https://code.claude.com/docs/en/cli-reference</a></li><li><b>Microsoft</b> · <i>about_Execution_Policies</i> <span class="why">Why Windows may block a .ps1 script, and how to allow it.</span> <a href="https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_execution_policies" rel="noopener">https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_execution_policies</a></li><li><b>My own recording</b> · <i>29 Oct 2026, Windows 11</i> <span class="why">Both headless commands worked as written in PowerShell; no execution-policy error on this PC.</span></li></ol></section>
+  <div class="lwa-chapnav"><a href="chapter7.html"><span class="k">← Previous</span><span class="t">Chapter 7 · A standup skill</span></a><button type="button" class="lwa-complete" data-lwa-complete><span class="k">Progress</span><span class="t">Mark this chapter complete</span></button><a href="chapter9.html"><span class="k">Next →</span><span class="t">Chapter 9 · A code reviewer of our own</span></a></div>
+  </main>
+</div>
+<footer class="foot"><div class="foot-in">
+  <img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building" style="height:36px">
+  <span><a href="../../index.html">Home</a> · <a href="../index.html">Series</a> · <a href="https://github.com/Aditya-402/devpulse" rel="noopener">DevPulse on GitHub</a></span>
+</div></footer>
+<script src="../../assets/site-config.js"></script>
+<script src="../../assets/analytics.js?v=1" defer></script>
+<script src="../../assets/progress.js?v=2"></script>
+<script src="../../assets/railspy.js?v=1"></script>
+<script>
+// each clip plays once when most of it is on screen, never when the reader asks for reduced motion (WE-141)
+(function () {
+  if (!('IntersectionObserver' in window) || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+  document.querySelectorAll('video.clip').forEach(function (v) {
+    var o = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { o.disconnect(); v.play().catch(function () {}); } });
+    }, { threshold: 0.6 });
+    o.observe(v);
+  });
+})();
+</script>
+</body>
+</html>

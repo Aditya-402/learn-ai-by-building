@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 14 · DevPulse on the internet — Learn AI by Building</title>
+<meta name="description" content="Chapter 14 of the Claude Code series: publish.py builds a public page from tasks tagged public, Claude creates a GitHub repository with gh, turns on GitHub Pages, and checks that no private task went live.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=8">
+<link rel="stylesheet" href="../../assets/unit.css?v=8">
+<link rel="stylesheet" href="../../assets/blog.css?v=7">
+<link rel="stylesheet" href="cc.css?v=4">
+</head>
+<body data-lwa-course="claude-code" data-lwa-chapter="chapter14" data-lwa-title="Chapter 14 · DevPulse on the internet" data-lwa-taught="publish.py builds a static page from tasks tagged public; keeping data/ out of git with .gitignore; gh auth login; a public GitHub repository made with gh; GitHub Pages from main and /docs; checking what went public">
+<header class="top"><div class="top-in">
+  <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark-maroon.svg?v=1" alt="Learn AI by Building"></a>
+  <div class="lwa-brand-right"><span class="lwa-tag"><a href="index.html">Learn Claude Code by Building DevPulse</a></span><span data-lwa-auth></span></div>
+</div></header>
+<header class="masthead">
+  <div class="masthead-in">
+    <div class="title-block">
+      <div class="eyebrow">Learn Claude Code by Building DevPulse · Chapter 14</div>
+      <h1>DevPulse on the internet</h1>
+      <p class="standfirst">DevPulse only lives on your laptop, so how do you show a friend what you are building without showing them everything? By the end of this chapter, a public page of your chosen tasks is live on GitHub Pages, and Claude has checked that nothing private went with it.</p>
+      <div class="facts"><div><b>One sitting</b>~7 min read, ~20 min to build along</div><div><b>You start from</b>chapter 13&#x27;s DevPulse</div><div><b>You build</b>a public page, live on GitHub Pages</div><div><b>Chapter 14 of 15</b>DevPulse leaves your laptop</div></div>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="rail" aria-label="Sections">
+    <a class="rnav-back" href="index.html"><span class="ico">←</span><span class="lbl">All chapters</span></a>
+    <a class="rnav-back" href="prompts.html#ch14"><span class="ico">⧉</span><span class="lbl">Every prompt</span></a>
+    <div class="rail-h">Contents</div>
+    <a class="on" href="#wall">The wall</a>
+    <a href="#publish">A page of public tasks</a>
+    <a href="#github">Put it on GitHub</a>
+    <a href="#pages">Turn on GitHub Pages</a>
+    <a href="#check">Check what went public</a>
+    <a href="#cost">What it costs</a>
+    <a href="#quickref">Quick reference</a>
+    <a href="#homework">Your homework</a>
+  </nav>
+
+  <main>
+  <section id="wall" data-rail="The wall">
+    <div class="prereq">
+      <div class="pq"><b>Goes with Episode 14</b>"How do I put DevPulse online?". The video is being made. This page teaches the same steps, at your own pace.</div><div class="pq"><b>In a hurry?</b><a href="#quickref">Jump to the quick reference</a>: every command and key in this chapter, what it does, and when to use it.</div><div class="pq"><b>Every prompt, ready to copy</b><a href="prompts.html#ch14">This chapter's prompts and commands</a>, each with a Copy button. Type them yourself first; copy if you are stuck or behind.</div>
+      <div class="pq"><b>Where you are</b>DevPulse with tests, skills, its own tools and hooks, from chapters 1 to 13. It all runs on your laptop.</div>
+    </div>
+    <div class="prose">
+      <h2>A friend asks what you are building</h2>
+      <p>You could send a screenshot. But a link is better: they open it, and it is always up to date.</p>
+      <p>There is a catch. DevPulse holds every task you log, and some are private. You want to share a few, not all.</p>
+    </div>
+    <div class="cc-wall">
+      <div class="lbl">The question for this chapter</div>
+      <p>How do you put part of DevPulse on the internet, and be sure the rest stays on your laptop?</p>
+    </div>
+  </section>
+
+  <section id="publish" data-rail="A page of public tasks">
+    <div class="prose">
+      <h2>A page of public tasks only</h2>
+      <p>The plan: a small script reads your tasks, keeps only the ones tagged <code>public</code>, and writes one plain web page. Your data file never leaves the laptop. Only the page does.</p>
+    </div>
+    <div class="yousee"><b>Type this into Claude Code, as one line</b>Create publish.py that builds docs/index.html, a public "What I'm building" page, from tasks tagged public only. Keep data/tasks.json out of git. Then run it.</div>
+    <figure class="cc-shot"><img src="img/chapter14/publish.png" alt="Claude: I created publish.py and ran it. It wrote docs/index.html with 0 public tasks, because no task is tagged public yet. It keeps only tasks tagged exactly public, leaves out ids and timestamps, and added data/ to .gitignore; git check-ignore confirms data/tasks.json is ignored." loading="lazy">
+      <figcaption>Zero public tasks, so the page says "Nothing public yet". Note the second point: <code>data/</code> is now in <code>.gitignore</code>, so git will never commit it.</figcaption></figure>
+    <div class="prose">
+      <p>An empty page proves nothing. Give it two tasks to show. This uses your own DevPulse tools from chapter 11.</p>
+    </div>
+    <div class="yousee"><b>Then type this, as one line</b>Log two tasks tagged public: "Built a Week view with streaks" 90 minutes and "Gave Claude Code its own DevPulse tools" 60 minutes. Then run publish.py again.</div>
+    <figure class="cc-shot"><img src="img/chapter14/public.png" alt="Called devpulse 4 times, ran 1 shell command. Claude: I logged both tasks with the public tag and re-ran publish.py; docs/index.html now lists both, with a total of 2 h 30 min. Both show as open because new tasks start as not done." loading="lazy">
+      <figcaption>"Called devpulse 4 times": Claude logged the tasks through your own tools. Total: 2 h 30 min.</figcaption></figure>
+    <div class="prose">
+      <p>Open the page on your laptop first.</p>
+    </div>
+    <div class="yousee"><b>Windows: type this into Claude Code</b>! start docs/index.html</div>
+    <div class="yousee"><b>Mac: type this into Claude Code</b>! open docs/index.html</div>
+    <figure class="cc-shot"><img src="img/chapter14/page.png" alt="A plain white page titled What I'm building: 2 items, 2 h 30 min so far. Built a Week view with streaks, 2026-10-29, 1 h 30 min. Gave Claude Code its own DevPulse tools, 2026-10-29, 1 h." loading="lazy">
+      <figcaption>Two tasks, a total, and nothing else. The empty circles mean "not done yet", as Claude said.</figcaption></figure>
+    <div class="prose">
+      <p>Commit it with <code>/commit-commands:commit</code>.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter14/commit.png" alt="/commit-commands:commit. Committed e3e49da. Claude: I committed .gitignore, publish.py and docs/index.html as e3e49da, Add publish.py for public page. I left .playwright-mcp/ out of the commit." loading="lazy">
+      <figcaption>Three files in one commit. Your task file is not one of them.</figcaption></figure>
+  </section>
+
+  <section id="github" data-rail="Put it on GitHub">
+    <div class="prose">
+      <h2>Put the project on GitHub</h2>
+      <p>GitHub keeps a copy of your project online, and it can serve a folder as a website for free. Claude talks to GitHub through <code>gh</code>, GitHub's own command-line tool.</p>
+      <p>First, install <code>gh</code> and sign in to your own GitHub account. Do this yourself, in your second tab. Claude should never type your password.</p>
+    </div>
+    <div class="yousee"><b>Windows: type this in PowerShell, one line at a time</b>winget install --id GitHub.cli
+gh auth login</div>
+    <div class="yousee"><b>Mac: type this in Terminal, one line at a time</b>brew install gh
+gh auth login</div>
+    <div class="prose">
+      <p><code>gh auth login</code> asks a few questions. Pick GitHub.com, then "Login with a web browser", and follow the code it shows. Then go back to Claude Code.</p>
+    </div>
+    <div class="yousee"><b>Type this into Claude Code</b>Create a public GitHub repository called devpulse with gh, and push this project to it. Make sure data/ stays out.</div>
+    <figure class="cc-shot"><img src="img/chapter14/repo.png" alt="Claude: data/ is already ignored and nothing under it is tracked. Creating the repo now. Then: the public repo is up at https://github.com/Aditya-402/devpulse, and main is pushed to it. I checked the pushed tree and no data/ files are in it." loading="lazy">
+      <figcaption>It checked <code>data/</code> before it created anything, and checked again after the push. Yours will be under your own GitHub name.</figcaption></figure>
+    <div class="confuse">
+      <div class="lbl">Careful here</div>
+      <p>"Public" means anyone can read every file in the repository. That is why <code>data/</code> had to be in <code>.gitignore</code> first. Once a file is pushed, deleting it later does not remove it from the history.</p>
+    </div>
+  </section>
+
+  <section id="pages" data-rail="Turn on GitHub Pages">
+    <div class="prose">
+      <h2>Turn the docs folder into a website</h2>
+      <p>GitHub Pages serves one folder of your repository as a website. We put the page in <code>docs/</code> for exactly this.</p>
+    </div>
+    <div class="yousee"><b>Type this into Claude Code, as one line</b>Turn on GitHub Pages for this repository from the main branch, /docs folder, with gh, and give me the live address.</div>
+    <figure class="cc-shot"><img src="img/chapter14/pages.png" alt="Ran 1 shell command. Claude: GitHub Pages is on for main and the /docs folder. The live address is https://aditya-402.github.io/devpulse/. The first build usually takes a minute or two, so the page may return a 404 until it finishes. I didn't check that the page loads." loading="lazy">
+      <figcaption>One command, one address. Read the last line: it did not check the page. That is our next step.</figcaption></figure>
+    <div class="prose">
+      <p>Your address follows the same shape: <code>your-github-name.github.io/devpulse</code>. Wait a minute or two before you open it.</p>
+    </div>
+  </section>
+
+  <section id="check" data-rail="Check what went public">
+    <div class="prose">
+      <h2>Check what went public</h2>
+      <p>Anything on the internet can be read by anyone. So before you share the link, ask Claude to prove two things: the page is up, and nothing private is on it.</p>
+    </div>
+    <div class="yousee"><b>Type this into Claude Code</b>Check that the live page is up and shows no private tasks.</div>
+    <figure class="cc-shot"><img src="img/chapter14/live-check.png" alt="Claude: Status: the Pages build finished and the address returns HTTP 200. Content: the page lists 2 items totalling 2 h 30 min. Private tasks: data/tasks.json has 6 tasks; the 4 tagged planning, backend and review don't appear on the page. The page has no scripts and doesn't fetch any data." loading="lazy">
+      <figcaption>HTTP 200 means the page is live. Six tasks on your laptop, two on the page. The four private ones stayed home.</figcaption></figure>
+    <div class="prose">
+      <p>Now open the address in your browser.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter14/live.png" alt="The live page, What I'm building: 2 items, 2 h 30 min so far, with the same two tasks." loading="lazy">
+      <figcaption>The same page as on your laptop, now on the internet. Send the link to your friend.</figcaption></figure>
+    <div class="prose">
+      <p>To add a task later: tag it <code>public</code>, run <code>python publish.py</code> (Mac: <code>python3</code>), commit, and push. GitHub rebuilds the page.</p>
+    </div>
+  </section>
+
+  <section id="cost" data-rail="What it costs">
+    <div class="prose">
+      <h2>What it costs</h2>
+      <p>GitHub Pages is free for public repositories. The cost is care: every push to a public repository is public. Keep the check as a habit, every time.</p>
+      <p>And one more question. All 14 chapters happened in this terminal. Is the terminal the only place Claude Code works? That is chapter 15.</p>
+    </div>
+  </section>
+
+  <section id="quickref" data-rail="Quick reference">
+    <div class="prose"><h2>Quick reference</h2><p>The prompts from this chapter, ready to copy: <a href="prompts.html#ch14">every prompt, chapter 14</a>.</p></div>
+    <div class="cheat"><table><tr><th>Command or key</th><th>What it does</th><th>Use it when</th></tr><tr><td><code>Create publish.py that builds docs/index.html …</code></td><td>Writes a script that turns public tasks into one static page</td><td>You want to share some of your data, not all of it</td></tr><tr><td><code>data/ in .gitignore</code></td><td>Keeps your private task file out of every commit</td><td>Before anything goes to GitHub</td></tr><tr><td><code>gh auth login</code></td><td>Signs the GitHub CLI in to your own account</td><td>Once, before Claude creates a repository for you</td></tr><tr><td><code>Create a public GitHub repository … with gh</code></td><td>Creates the repository and pushes your project</td><td>The project is ready to leave your laptop</td></tr><tr><td><code>Turn on GitHub Pages … /docs folder</code></td><td>Serves docs/ as a website</td><td>You want a live address to share</td></tr><tr><td><code>Check that the live page is up and shows no private tasks.</code></td><td>Fetches the live page and compares it with your data</td><td>Every time something goes public</td></tr></table></div>
+  </section>
+
+  <section id="homework" data-rail="Your homework">
+    <div class="next">
+      <div class="lbl">Your homework</div>
+      <h3>Make your page show finished work</h3>
+      <p style="font-size:var(--fs-cap);color:var(--slate)"><b>The goal:</b> the live page shows both tasks as done.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>The steps:</b> ask Claude to mark both public tasks done and run <code>publish.py</code> again. Commit and push. Wait a minute, then run the check prompt again.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>Guess first:</b> will the live page change the moment you push, or later?</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:10px"><i>One question for you: which of your own tasks would you be happy for anyone to read?</i></p>
+    </div>
+  </section>
+
+  <section class="lwa-refs" id="refs"><div class="prose"><h2>References</h2><p>Where each command and setting on this page comes from. Every screenshot is from our own recording on 29 Oct 2026, Claude Code 2.1.312.</p></div><ol><li><b>GitHub</b> · <i>GitHub CLI manual</i> <span class="why">gh auth login, gh repo create, and gh api for repository settings.</span> <a href="https://cli.github.com/manual/" rel="noopener">https://cli.github.com/manual/</a></li><li><b>GitHub</b> · <i>Configuring a publishing source for your GitHub Pages site</i> <span class="why">Publishing from the main branch and the /docs folder; the first build can take a few minutes.</span> <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site" rel="noopener">https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site</a></li><li><b>Git</b> · <i>gitignore</i> <span class="why">How a .gitignore line keeps a folder out of every commit.</span> <a href="https://git-scm.com/docs/gitignore" rel="noopener">https://git-scm.com/docs/gitignore</a></li><li><b>My own recording</b> · <i>29 Oct 2026, Windows 11</i> <span class="why">The repository, Pages and the live check took under five minutes; the page showed 2 public tasks and none of the 4 private ones.</span></li></ol></section>
+  <div class="lwa-chapnav"><a href="chapter13.html"><span class="k">← Previous</span><span class="t">Chapter 13 · Hooks that watch for us</span></a><button type="button" class="lwa-complete" data-lwa-complete><span class="k">Progress</span><span class="t">Mark this chapter complete</span></button><a href="chapter15.html"><span class="k">Next →</span><span class="t">Chapter 15 · Claude Code beyond the terminal</span></a></div>
+  </main>
+</div>
+<footer class="foot"><div class="foot-in">
+  <img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building" style="height:36px">
+  <span><a href="../../index.html">Home</a> · <a href="../index.html">Series</a> · <a href="https://github.com/Aditya-402/devpulse" rel="noopener">DevPulse on GitHub</a></span>
+</div></footer>
+<script src="../../assets/site-config.js"></script>
+<script src="../../assets/analytics.js?v=1" defer></script>
+<script src="../../assets/progress.js?v=2"></script>
+<script src="../../assets/railspy.js?v=1"></script>
+<script>
+// each clip plays once when most of it is on screen, never when the reader asks for reduced motion (WE-141)
+(function () {
+  if (!('IntersectionObserver' in window) || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+  document.querySelectorAll('video.clip').forEach(function (v) {
+    var o = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { o.disconnect(); v.play().catch(function () {}); } });
+    }, { threshold: 0.6 });
+    o.observe(v);
+  });
+})();
+</script>
+</body>
+</html>

@@ -32,6 +32,7 @@
 <div class="shell">
   <nav class="rail" aria-label="Sections">
     <a class="rnav-back" href="index.html"><span class="ico">←</span><span class="lbl">All chapters</span></a>
+    <a class="rnav-back" href="prompts.html#ch0"><span class="ico">⧉</span><span class="lbl">Every prompt</span></a>
     <div class="rail-h">Contents</div>
     <a class="on" href="#how">How this series works</a>
     <a href="#need">What you need</a>
@@ -45,9 +46,15 @@
   </nav>
 
   <main>
+  <section id="video">
+    <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/ZSBzQjX9s38?rel=0" title="Episode 0 · How does this series work?"
+      allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+    <p class="video-cap">Prefer to watch? This chapter goes with Episode 0 (3:15). <a href="https://www.youtube.com/watch?v=ZSBzQjX9s38" rel="noopener">Open it on YouTube</a>, where you can also leave a comment.</p>
+  </section>
+
   <section id="how" data-rail="How this series works">
     <div class="prereq">
-      <div class="pq"><b>Goes with Episode 0</b><a href="https://www.youtube.com/watch?v=ZSBzQjX9s38" target="_blank" rel="noopener">"How does this series work?"</a>. The video shows it; this page teaches it again, at your own pace.</div><div class="pq"><b>In a hurry?</b><a href="#quickref">Jump to the quick reference</a>: every command and key in this chapter, what it does, and when to use it.</div>
+      <div class="pq"><b>Goes with Episode 0</b><a href="https://www.youtube.com/watch?v=ZSBzQjX9s38" target="_blank" rel="noopener">"How does this series work?"</a>. Watch it just above, or read this page at your own pace. It teaches the same steps.</div><div class="pq"><b>In a hurry?</b><a href="#quickref">Jump to the quick reference</a>: every command and key in this chapter, what it does, and when to use it.</div><div class="pq"><b>Every prompt, ready to copy</b><a href="prompts.html#ch0">This chapter's prompts and commands</a>, each with a Copy button. Type them yourself first; copy if you are stuck or behind.</div>
       <div class="pq"><b>Nothing is assumed</b>Never used a terminal? This chapter shows every line to type, and what you should see.</div>
     </div>
     <div class="prose">
@@ -161,7 +168,7 @@ claude</div>
   </section>
 
   <section id="quickref" data-rail="Quick reference">
-    <div class="prose"><h2>Quick reference</h2></div>
+    <div class="prose"><h2>Quick reference</h2><p>The prompts from this chapter, ready to copy: <a href="prompts.html#ch0">every prompt, chapter 0</a>.</p></div>
     <div class="cheat"><table><tr><th>Command or key</th><th>What it does</th><th>Use it when</th></tr><tr><td><code>irm https://claude.ai/install.ps1 | iex</code></td><td>Installs Claude Code on Windows (in PowerShell)</td><td>Claude Code is not on your computer yet</td></tr><tr><td><code>curl -fsSL https://claude.ai/install.sh | bash</code></td><td>Installs Claude Code on a Mac or Linux (in Terminal)</td><td>The same, on a Mac</td></tr><tr><td><code>claude --version</code></td><td>Prints the version, ending in (Claude Code)</td><td>You want to know it is installed and found</td></tr><tr><td><code>claude</code></td><td>Starts Claude Code in the folder you are in; the first time, it signs you in</td><td>You begin work</td></tr><tr><td><code>Yes, I trust this folder</code></td><td>Lets Claude read, edit and run files there</td><td>It is your own folder</td></tr><tr><td><code>claude doctor</code></td><td>Checks the installation and names any problem</td><td>Something looks wrong</td></tr><tr><td><code>/exit</code></td><td>Ends the session</td><td>You are done</td></tr></table></div>
   </section>
 

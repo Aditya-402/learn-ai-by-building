@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 10 · Claude sees the app — Learn AI by Building</title>
+<meta name="description" content="Chapter 10 of the Claude Code series: connect the Playwright MCP server so Claude opens DevPulse in a real browser at phone width, finds what looks wrong, fixes it and checks again; then a second MCP server for the Claude Code docs, and what an MCP scope is.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=8">
+<link rel="stylesheet" href="../../assets/unit.css?v=8">
+<link rel="stylesheet" href="../../assets/blog.css?v=7">
+<link rel="stylesheet" href="cc.css?v=4">
+</head>
+<body data-lwa-course="claude-code" data-lwa-chapter="chapter10" data-lwa-title="Chapter 10 · Claude sees the app" data-lwa-taught="MCP servers; claude mcp add (stdio and --transport http); claude mcp list; /mcp; the Playwright MCP server; a narrow-screen media query checked in a real browser; the Claude Code docs server; local, project and user scope">
+<header class="top"><div class="top-in">
+  <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark-maroon.svg?v=1" alt="Learn AI by Building"></a>
+  <div class="lwa-brand-right"><span class="lwa-tag"><a href="index.html">Learn Claude Code by Building DevPulse</a></span><span data-lwa-auth></span></div>
+</div></header>
+<header class="masthead">
+  <div class="masthead-in">
+    <div class="title-block">
+      <div class="eyebrow">Learn Claude Code by Building DevPulse · Chapter 10</div>
+      <h1>Claude sees the app</h1>
+      <p class="standfirst">Claude can read every line of DevPulse, but has it ever seen the page on a phone? By the end of this chapter, Claude opens the app in a real browser at 390 px, fixes what looks wrong, and answers questions from the official docs.</p>
+      <div class="facts"><div><b>One sitting</b>~7 min read, ~15 min to build along</div><div><b>You start from</b>chapter 9&#x27;s DevPulse</div><div><b>You build</b>a phone layout, checked in a real browser</div><div><b>Chapter 10 of 15</b>Claude gets eyes</div></div>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="rail" aria-label="Sections">
+    <a class="rnav-back" href="index.html"><span class="ico">←</span><span class="lbl">All chapters</span></a>
+    <a class="rnav-back" href="prompts.html#ch10"><span class="ico">⧉</span><span class="lbl">Every prompt</span></a>
+    <div class="rail-h">Contents</div>
+    <a class="on" href="#wall">The wall</a>
+    <a href="#add">Add a browser</a>
+    <a href="#look">Let Claude look</a>
+    <a href="#fix">Fix and check again</a>
+    <a href="#docs">A second server</a>
+    <a href="#cost">What it costs</a>
+    <a href="#quickref">Quick reference</a>
+    <a href="#homework">Your homework</a>
+  </nav>
+
+  <main>
+  <section id="wall" data-rail="The wall">
+    <div class="prereq">
+      <div class="pq"><b>Goes with Episode 10</b>"How does Claude Code see my app?". The video is being made. This page teaches the same steps, at your own pace.</div><div class="pq"><b>In a hurry?</b><a href="#quickref">Jump to the quick reference</a>: every command and key in this chapter, what it does, and when to use it.</div><div class="pq"><b>Every prompt, ready to copy</b><a href="prompts.html#ch10">This chapter's prompts and commands</a>, each with a Copy button. Type them yourself first; copy if you are stuck or behind.</div>
+      <div class="pq"><b>Where you are</b>DevPulse from chapters 1 to 9, with the server running in your second tab. Playwright runs through <code>npx</code>, so you need Node.js.</div>
+    </div>
+    <div class="prose">
+      <h2>Claude has never seen your page</h2>
+      <p>Most people will open a page like DevPulse on a phone. Does it look right there?</p>
+      <p>Claude wrote most of that page. But it only ever read the code. It has never opened the page, and it has never seen it 390 px wide.</p>
+    </div>
+    <div class="cc-wall">
+      <div class="lbl">The question for this chapter</div>
+      <p>How do you let Claude look at the running app, not just the code?</p>
+    </div>
+  </section>
+
+  <section id="add" data-rail="Add a browser">
+    <div class="prose">
+      <h2>Give Claude a browser</h2>
+      <p>Claude Code talks to outside tools through <b>MCP servers</b>. MCP is an open standard: one server, many tools. Playwright's server gives Claude a real Chrome to drive.</p>
+      <p>Add it from your terminal, not inside Claude.</p>
+    </div>
+    <div class="yousee"><b>Type this into the terminal, in projects\devpulse, one line at a time</b>claude mcp add playwright -- npx -y @playwright/mcp@latest
+claude mcp list</div>
+    <div class="prose">
+      <p>The same two lines work in PowerShell and in the Mac Terminal. On Windows we did not need <code>cmd /c</code> in front.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter10/add-list.png" alt="claude mcp add playwright prints: Added stdio MCP server playwright with command npx -y @playwright/mcp@latest to local config. Then claude mcp list shows playwright: Connected." loading="lazy">
+      <figcaption>Everything after <code>--</code> is the command that starts the server. <code>list</code> starts it once to check: Connected.</figcaption></figure>
+    <div class="prose">
+      <p>Now start <code>claude</code> and type <code>/mcp</code>.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter10/mcp.png" alt="The /mcp panel: Manage MCP servers. Local MCPs: playwright, 25 tools, with a tick." loading="lazy">
+      <figcaption>Playwright brings 25 tools: open a page, click, resize, take a screenshot and more. (We cropped the panel to this server.)</figcaption></figure>
+  </section>
+
+  <section id="look" data-rail="Let Claude look">
+    <div class="prose">
+      <h2>Let Claude look at the page</h2>
+    </div>
+    <div class="yousee"><b>Type this into Claude Code, as one line</b>Use the playwright tools to open http://127.0.0.1:8000, resize the window to 390 px wide, take a screenshot and tell me what looks wrong on a phone.</div>
+    <figure class="cc-shot"><img src="img/chapter10/browser.png" alt="A Chrome window opened by Playwright on 127.0.0.1:8000/#today, the page narrowed to 390 px, with a grey bar: You are using an unsupported command-line flag." loading="lazy">
+      <figcaption>A new Chrome window opens by itself, the page narrowed to phone width. The grey warning bar about a command-line flag comes from Playwright. You can close it.</figcaption></figure>
+    <figure class="cc-shot"><img src="img/chapter10/findings.png" alt="The end of Claude's list: 4, edit and delete icons under 44 px and close together; 5, the Standup panel is a dense block; 6, a 40 px gap above the Standup card. Also a favicon 404. I haven't changed any code." loading="lazy">
+      <figcaption>The end of a list of 6 problems, found in 19 seconds. The first three, above this, were about the add form and the task titles. It changed nothing yet.</figcaption></figure>
+  </section>
+
+  <section id="fix" data-rail="Fix and check again">
+    <div class="prose">
+      <h2>Fix it, then look again</h2>
+    </div>
+    <div class="yousee"><b>Type this into Claude Code, as one line</b>Fix those in index.html with a narrow-screen media query, then check again at 390 px with the playwright tools.</div>
+    <figure class="cc-shot"><img src="img/chapter10/fix.png" alt="The diff in index.html: rules inside the media query, edit and delete at min-width and min-height 44px. Below it: Calling playwright 2 times." loading="lazy">
+      <figcaption>The new CSS goes in, then Claude calls Playwright again to check its own work.</figcaption></figure>
+    <figure class="cc-shot"><img src="img/chapter10/fixed.png" alt="Claude's summary: the tag field has its own row; titles get a full-width line; edit and delete are 44 by 44 px; the gap is gone; the Standup font is smaller. It has not tested the edit row, the error message or dark mode." loading="lazy">
+      <figcaption>Done in 32 seconds. Read the last part: it says what it did <i>not</i> test.</figcaption></figure>
+    <div class="prose">
+      <p>Now see it yourself. Narrow your own browser window.</p>
+    </div>
+    <figure class="cc-shot"><video class="clip" src="img/chapter10/phone.mp4" poster="img/chapter10/phone-poster.jpg" controls muted playsinline preload="metadata" aria-label="DevPulse in a wide window, then the window is narrowed to phone width: the title, Today and Week buttons, Standup panel and the add form stack neatly in one column." width="1200" height="674"></video>
+      <figcaption>Wide, then narrow. Everything now fits one column. Commit it with <code>/commit-commands:commit</code>.</figcaption></figure>
+    <figure class="cc-shot"><img src="img/chapter10/commit.png" alt="/commit-commands:commit: Committed as 951eb4f, Add mobile layout for narrow screens. It contains only index.html." loading="lazy">
+      <figcaption>One commit, one file.</figcaption></figure>
+  </section>
+
+  <section id="docs" data-rail="A second server">
+    <div class="prose">
+      <h2>A second server: the docs</h2>
+      <p>Some servers are not programs on your computer. They live on the web. Anthropic runs one for the Claude Code docs. Exit Claude with <code>/exit</code> first.</p>
+    </div>
+    <div class="yousee"><b>Type this into the terminal</b>claude mcp add --transport http claude-code-docs https://code.claude.com/docs/mcp</div>
+    <figure class="cc-shot"><img src="img/chapter10/docsadd.png" alt="Added HTTP MCP server claude-code-docs with URL https://code.claude.com/docs/mcp to local config. File modified: .claude.json, project devpulse." loading="lazy">
+      <figcaption>An HTTP server: just a web address. Note the last words: <i>to local config</i>. (Our recording uses a separate demo profile, so the path is not the usual one.)</figcaption></figure>
+    <div class="prose">
+      <p>Start <code>claude</code> again and ask it about that.</p>
+    </div>
+    <div class="yousee"><b>Type this into Claude Code</b>Use the claude-code-docs tools: what is an MCP scope, and which scope did I just use?</div>
+    <figure class="cc-shot"><img src="img/chapter10/docs.png" alt="The end of the answer: a scope table with the User row; which scope you just used: local, private to you in this project; use --scope user for all your projects or --scope project for a shared .mcp.json; source link." loading="lazy">
+      <figcaption>The answer comes from the docs, with the link. Local: only you, only this project.</figcaption></figure>
+    <table>
+      <tr><th>Scope</th><th>Who gets the server</th><th>How to add it</th></tr>
+      <tr><td>Local</td><td>You, in this project only</td><td>The default</td></tr>
+      <tr><td>Project</td><td>Everyone who clones the repo, through <code>.mcp.json</code></td><td><code>--scope project</code></td></tr>
+      <tr><td>User</td><td>You, in all your projects</td><td><code>--scope user</code></td></tr>
+    </table>
+    <div class="confuse">
+      <div class="lbl">Careful here</div>
+      <p>An MCP server runs with your permissions. Add only servers you trust, the same way you would install a program.</p>
+    </div>
+  </section>
+
+  <section id="cost" data-rail="What it costs">
+    <div class="prose">
+      <h2>What a server costs</h2>
+      <p>Every connected server adds its tool list to Claude's context. Playwright alone has 25 tools. Keep the servers you use, and remove the rest with <code>claude mcp remove name</code>.</p>
+      <p>These servers were built by others. What if DevPulse had its own tools for Claude? That is chapter 11.</p>
+    </div>
+  </section>
+
+  <section id="quickref" data-rail="Quick reference">
+    <div class="prose"><h2>Quick reference</h2><p>The prompts from this chapter, ready to copy: <a href="prompts.html#ch10">every prompt, chapter 10</a>.</p></div>
+    <div class="cheat"><table><tr><th>Command or key</th><th>What it does</th><th>Use it when</th></tr><tr><td><code>claude mcp add name -- command</code></td><td>Adds a server that runs on your computer (stdio)</td><td>The tool is a program you can start, like Playwright</td></tr><tr><td><code>claude mcp add --transport http name url</code></td><td>Adds a server that lives on the web</td><td>The tool has a web address, like the docs server</td></tr><tr><td><code>claude mcp list</code></td><td>Lists your servers and whether they connect</td><td>You want to check a server works</td></tr><tr><td><code>/mcp</code></td><td>Shows the servers inside Claude Code, with their tools</td><td>You want to see what Claude can use right now</td></tr><tr><td><code>Use the playwright tools to …</code></td><td>Claude opens a real browser and looks</td><td>You want Claude to see the page, not just the code</td></tr><tr><td><code>--scope user / --scope project</code></td><td>Makes a server yours everywhere, or shared with the repo</td><td>Local scope is too narrow</td></tr></table></div>
+  </section>
+
+  <section id="homework" data-rail="Your homework">
+    <div class="next">
+      <div class="lbl">Your homework</div>
+      <h3>Let Claude look at a page of your own</h3>
+      <p style="font-size:var(--fs-cap);color:var(--slate)"><b>The goal:</b> Claude checks a page by seeing it, not by reading it.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>The steps:</b> add Playwright to one of your own projects. Ask Claude: <i>Use the playwright tools to open … at 390 px and tell me what looks wrong.</i> Then ask it to fix one problem and check again.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>Guess first:</b> will Claude find more problems from the screenshot, or from reading the code?</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:10px"><i>One question for you: which server would your team want in project scope?</i></p>
+    </div>
+  </section>
+
+  <section class="lwa-refs" id="refs"><div class="prose"><h2>References</h2><p>Where each command on this page comes from. Every screenshot is from our own recording on 29 Oct 2026, Claude Code 2.1.312.</p></div><ol><li><b>Anthropic</b> · <i>Connect Claude Code to tools via MCP</i> <span class="why">claude mcp add, list and get; stdio and HTTP servers; the local, project and user scopes; /mcp.</span> <a href="https://code.claude.com/docs/en/mcp" rel="noopener">https://code.claude.com/docs/en/mcp</a></li><li><b>Microsoft</b> · <i>Playwright MCP</i> <span class="why">The browser server we added: open a page, resize it, take a screenshot.</span> <a href="https://github.com/microsoft/playwright-mcp" rel="noopener">https://github.com/microsoft/playwright-mcp</a></li><li><b>Model Context Protocol</b> · <i>Introduction</i> <span class="why">What MCP is: one open way for an AI app to talk to tools and data.</span> <a href="https://modelcontextprotocol.io/introduction" rel="noopener">https://modelcontextprotocol.io/introduction</a></li><li><b>My own recording</b> · <i>29 Oct 2026, Windows 11</i> <span class="why">Claude found 6 phone problems in 19 seconds, fixed them in 32, and the docs server named the scope we used.</span></li></ol></section>
+  <div class="lwa-chapnav"><a href="chapter9.html"><span class="k">← Previous</span><span class="t">Chapter 9 · A code reviewer of our own</span></a><button type="button" class="lwa-complete" data-lwa-complete><span class="k">Progress</span><span class="t">Mark this chapter complete</span></button><a href="chapter11.html"><span class="k">Next →</span><span class="t">Chapter 11 · DevPulse tools for Claude</span></a></div>
+  </main>
+</div>
+<footer class="foot"><div class="foot-in">
+  <img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building" style="height:36px">
+  <span><a href="../../index.html">Home</a> · <a href="../index.html">Series</a> · <a href="https://github.com/Aditya-402/devpulse" rel="noopener">DevPulse on GitHub</a></span>
+</div></footer>
+<script src="../../assets/site-config.js"></script>
+<script src="../../assets/analytics.js?v=1" defer></script>
+<script src="../../assets/progress.js?v=2"></script>
+<script src="../../assets/railspy.js?v=1"></script>
+<script>
+// each clip plays once when most of it is on screen, never when the reader asks for reduced motion (WE-141)
+(function () {
+  if (!('IntersectionObserver' in window) || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+  document.querySelectorAll('video.clip').forEach(function (v) {
+    var o = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { o.disconnect(); v.play().catch(function () {}); } });
+    }, { threshold: 0.6 });
+    o.observe(v);
+  });
+})();
+</script>
+</body>
+</html>

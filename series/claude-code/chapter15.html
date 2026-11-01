@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 15 · Claude Code beyond the terminal — Learn AI by Building</title>
+<meta name="description" content="Chapter 15 of the Claude Code series: the same Claude Code in VS Code with an inline diff, in the desktop app&#x27;s Code tab, and on claude.ai/code in a cloud session on its own branch, all on DevPulse.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=8">
+<link rel="stylesheet" href="../../assets/unit.css?v=8">
+<link rel="stylesheet" href="../../assets/blog.css?v=7">
+<link rel="stylesheet" href="cc.css?v=4">
+</head>
+<body data-lwa-course="claude-code" data-lwa-chapter="chapter15" data-lwa-title="Chapter 15 · Claude Code beyond the terminal" data-lwa-taught="the Claude Code extension for VS Code; Claude Code: Open; the inline diff and Make this edit; Shift+Tab for the permission mode; the desktop app&#x27;s Code tab and Trust this workspace; claude.ai/code with a GitHub repository; a cloud session on its own claude/ branch">
+<header class="top"><div class="top-in">
+  <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark-maroon.svg?v=1" alt="Learn AI by Building"></a>
+  <div class="lwa-brand-right"><span class="lwa-tag"><a href="index.html">Learn Claude Code by Building DevPulse</a></span><span data-lwa-auth></span></div>
+</div></header>
+<header class="masthead">
+  <div class="masthead-in">
+    <div class="title-block">
+      <div class="eyebrow">Learn Claude Code by Building DevPulse · Chapter 15</div>
+      <h1>Claude Code beyond the terminal</h1>
+      <p class="standfirst">Every chapter so far happened in one terminal window, so is that the only place Claude Code works? By the end of this chapter, you have used it on DevPulse inside VS Code, in the desktop app, and in a browser, and you know which one to pick.</p>
+      <div class="facts"><div><b>One sitting</b>~6 min read, ~15 min to try along</div><div><b>You start from</b>chapter 14&#x27;s DevPulse, on GitHub</div><div><b>You try</b>VS Code, the desktop app and the web</div><div><b>Chapter 15 of 15</b>the last chapter</div></div>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="rail" aria-label="Sections">
+    <a class="rnav-back" href="index.html"><span class="ico">←</span><span class="lbl">All chapters</span></a>
+    <a class="rnav-back" href="prompts.html#ch15"><span class="ico">⧉</span><span class="lbl">Every prompt</span></a>
+    <div class="rail-h">Contents</div>
+    <a class="on" href="#wall">The wall</a>
+    <a href="#vscode">Inside VS Code</a>
+    <a href="#desktop">The desktop app</a>
+    <a href="#web">In the browser</a>
+    <a href="#choose">Which one, when</a>
+    <a href="#cost">What it costs</a>
+    <a href="#quickref">Quick reference</a>
+    <a href="#homework">Your homework</a>
+  </nav>
+
+  <main>
+  <section id="wall" data-rail="The wall">
+    <div class="prereq">
+      <div class="pq"><b>Goes with Episode 15</b>"Where else can I use Claude Code?". The video is being made. This page teaches the same steps, at your own pace.</div><div class="pq"><b>In a hurry?</b><a href="#quickref">Jump to the quick reference</a>: every command and key in this chapter, what it does, and when to use it.</div><div class="pq"><b>Every prompt, ready to copy</b><a href="prompts.html#ch15">This chapter's prompts and commands</a>, each with a Copy button. Type them yourself first; copy if you are stuck or behind.</div>
+      <div class="pq"><b>Where you are</b>DevPulse, built over 14 chapters, and now on GitHub. Every step so far happened in one terminal window.</div>
+    </div>
+    <div class="prose">
+      <h2>Do I always need this terminal?</h2>
+      <p>Some days you are already in your code editor. Some days you would rather have a window with buttons. Some days your laptop is at home.</p>
+      <p>The terminal is one way in. It is not the only one.</p>
+    </div>
+    <div class="cc-wall">
+      <div class="lbl">The question for this chapter</div>
+      <p>Where else can you use Claude Code on DevPulse, and when is each place the better choice?</p>
+    </div>
+  </section>
+
+  <section id="vscode" data-rail="Inside VS Code">
+    <div class="prose">
+      <h2>Inside VS Code</h2>
+      <p>VS Code is a free code editor. Claude Code has an extension for it. Open the Extensions view, search for <b>Claude Code</b> by Anthropic, and install it. Then open your <code>projects\devpulse</code> folder in VS Code.</p>
+      <p>Open the command list and pick <b>Claude Code: Open</b>.</p>
+    </div>
+    <div class="yousee"><b>Windows: press this in VS Code</b>Ctrl+Shift+P → Claude Code: Open</div>
+    <div class="yousee"><b>Mac: press this in VS Code</b>Cmd+Shift+P → Claude Code: Open</div>
+    <figure class="cc-shot"><img src="img/chapter15/panel.png" alt="VS Code with DevPulse open: the file list on the left, index.html in the middle, and the Claude Code panel on the right with an Ask Claude to edit box. A note says auto mode is now the default permission mode." loading="lazy">
+      <figcaption>Your files on the left, your code in the middle, Claude on the right. The same Claude Code, in a panel.</figcaption></figure>
+    <div class="prose">
+      <p>Press Shift+Tab in the panel until it asks before edits. Now every change waits for your yes.</p>
+    </div>
+    <div class="yousee"><b>Type this into the Claude Code panel</b>Change the Add button text to "Log it".</div>
+    <figure class="cc-shot"><img src="img/chapter15/diff.png" alt="index.html at line 193: the old button line in red, the new one in green, shown inside the editor. The panel asks: Make this edit to index.html? 1 Yes, 2 Yes allow all edits this session, 3 No, or tell Claude what to do instead." loading="lazy">
+      <figcaption>The change appears inside your file: red is the old line, green the new one. Nothing is saved until you pick <b>1 Yes</b>.</figcaption></figure>
+    <figure class="cc-shot"><img src="img/chapter15/done.png" alt="The panel: The Add button now reads Log it (index.html:193). I didn't run the app or the tests. index.html is marked M for modified." loading="lazy">
+      <figcaption>One line changed. Claude also says what it did not do: it did not run the app or the tests.</figcaption></figure>
+    <div class="prose">
+      <p>This is VS Code's strength: you see each change in the file itself, next to the code around it.</p>
+    </div>
+  </section>
+
+  <section id="desktop" data-rail="The desktop app">
+    <div class="prose">
+      <h2>In the desktop app</h2>
+      <p>The Claude desktop app has a <b>Code</b> tab. It runs Claude Code on a folder on your computer, in a window instead of a terminal. Open the Code tab, choose <b>Local</b>, and pick your devpulse folder.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter15/trust.png" alt="The desktop app asks: Trust this workspace? Claude Code may read, write, or execute files in this folder. The folder is projects\devpulse. Execution allowed by .claude/settings.json and .claude/settings.local.json. Buttons: Cancel, Trust workspace." loading="lazy">
+      <figcaption>The first time, it asks if you trust the folder. It names <code>.claude/settings.json</code>: that file holds your hooks from chapter 13.</figcaption></figure>
+    <div class="yousee"><b>Type this into the Code tab</b>What does this project do? Answer in three lines.</div>
+    <figure class="cc-shot"><img src="img/chapter15/desktop.png" alt="The answer in the desktop app: DevPulse is a small task and time tracker; it runs on Python's standard library, server.py serves a JSON API and tasks are saved to data/tasks.json; the front end is one plain-JavaScript index.html and test_server.py tests the API. Below: devpulse main, +1 -1, Create PR." loading="lazy">
+      <figcaption>Three lines about our own project. The bar below shows <code>+1 −1</code>: the button change from VS Code, not saved in git yet.</figcaption></figure>
+    <div class="prose">
+      <p>Same folder, same files, same settings. Only the window is different.</p>
+    </div>
+  </section>
+
+  <section id="web" data-rail="In the browser">
+    <div class="prose">
+      <h2>In the browser, on GitHub's copy</h2>
+      <p>Open <code>claude.ai/code</code>. The first time, it asks you to connect your GitHub account. Then pick your <code>devpulse</code> repository from chapter 14.</p>
+      <p>This one is different. It does not touch your laptop. It works on the copy on GitHub, on Anthropic's computers.</p>
+    </div>
+    <div class="yousee"><b>Type this into claude.ai/code</b>What does this project do? Answer in three lines. Don't change anything.</div>
+    <figure class="cc-shot"><img src="img/chapter15/web.png" alt="claude.ai/code: the same question and a three-line answer about DevPulse. On the right: Environment Default, the repository Aditya-402/devpulse, and the branch claude/confident-tesla-avkq30." loading="lazy">
+      <figcaption>A similar answer, from the GitHub copy. Look at the right side: the session has its own branch, <code>claude/confident-tesla-…</code>.</figcaption></figure>
+    <div class="confuse">
+      <div class="lbl">Careful here</div>
+      <p>A cloud session puts its changes on its own <code>claude/</code> branch, not on <code>main</code>. You read them first, then merge. And it only sees what you pushed to GitHub, not what is on your laptop.</p>
+    </div>
+  </section>
+
+  <section id="choose" data-rail="Which one, when">
+    <div class="prose">
+      <h2>Which one, when</h2>
+    </div>
+    <table>
+      <tr><th>Place</th><th>Works on</th><th>Pick it when</th></tr>
+      <tr><td>Terminal</td><td>Your folder</td><td>You want every feature from this series, and scripts like chapter 8</td></tr>
+      <tr><td>VS Code</td><td>Your folder</td><td>You want to see each change inside the file</td></tr>
+      <tr><td>Desktop app</td><td>Your folder</td><td>You prefer a window with buttons</td></tr>
+      <tr><td>claude.ai/code</td><td>Your GitHub repository</td><td>Your laptop is not with you, or the job can run while you do something else</td></tr>
+    </table>
+    <div class="prose">
+      <p>Your <code>CLAUDE.md</code>, skills and project settings live in the project folder. So they come with you to every place that opens it.</p>
+    </div>
+  </section>
+
+  <section id="cost" data-rail="What it costs">
+    <div class="prose">
+      <h2>What it costs</h2>
+      <p>All four places use your Claude plan. A cloud session runs on Anthropic's computers, but it counts like any other session.</p>
+      <p>And that is the series. You started with an empty folder. Now DevPulse has tests, skills, its own tools, hooks and a page on the internet. You built every part of it by asking.</p>
+    </div>
+  </section>
+
+  <section id="quickref" data-rail="Quick reference">
+    <div class="prose"><h2>Quick reference</h2><p>The prompts from this chapter, ready to copy: <a href="prompts.html#ch15">every prompt, chapter 15</a>.</p></div>
+    <div class="cheat"><table><tr><th>Command or key</th><th>What it does</th><th>Use it when</th></tr><tr><td><code>Ctrl+Shift+P → Claude Code: Open (Mac: Cmd+Shift+P)</code></td><td>Opens the Claude Code panel in VS Code</td><td>You want Claude next to your code</td></tr><tr><td><code>Shift+Tab</code></td><td>Changes the permission mode, for example to ask before edits</td><td>You want to see each change before it lands</td></tr><tr><td><code>Make this edit? 1 Yes</code></td><td>Accepts the change shown in the inline diff</td><td>The red and green lines look right</td></tr><tr><td><code>Desktop app → Code tab</code></td><td>Claude Code on a local folder, in a window</td><td>You prefer a window to a terminal</td></tr><tr><td><code>claude.ai/code</code></td><td>Claude Code in the cloud, on a GitHub repository</td><td>Your laptop is not with you, or the job is long</td></tr><tr><td><code>claude/… branch</code></td><td>Where a cloud session puts its changes</td><td>You review them before they reach main</td></tr></table></div>
+  </section>
+
+  <section id="homework" data-rail="Your homework">
+    <div class="next">
+      <div class="lbl">Your homework</div>
+      <h3>Build your own project</h3>
+      <p style="font-size:var(--fs-cap);color:var(--slate)"><b>The goal:</b> one small tool that you will really use, built the way we built DevPulse.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>The steps:</b> make a new folder. Start Claude Code in it and describe the tool in two sentences. Add a <code>CLAUDE.md</code>, tests, and one skill. Pick the place from the table that suits you best.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>Guess first:</b> which chapter's step will you need first, and which one will you skip?</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:10px"><i>One question for you: what do you do every week that a small tool could do for you?</i></p>
+    </div>
+  </section>
+
+  <section class="lwa-refs" id="refs"><div class="prose"><h2>References</h2><p>Where each place and setting on this page comes from. Every screenshot is from our own recording on 29 Oct 2026, Claude Code 2.1.312.</p></div><ol><li><b>Anthropic</b> · <i>Use Claude Code in VS Code</i> <span class="why">Installing the extension, opening the panel, inline diffs and accepting an edit.</span> <a href="https://code.claude.com/docs/en/vs-code" rel="noopener">https://code.claude.com/docs/en/vs-code</a></li><li><b>Anthropic</b> · <i>Claude Code on desktop</i> <span class="why">The desktop app&#x27;s Code tab, local folders and trusting a workspace.</span> <a href="https://code.claude.com/docs/en/desktop" rel="noopener">https://code.claude.com/docs/en/desktop</a></li><li><b>Anthropic</b> · <i>Claude Code on the web</i> <span class="why">claude.ai/code, connecting GitHub, cloud sessions and the claude/ branch they work on.</span> <a href="https://code.claude.com/docs/en/claude-code-on-the-web" rel="noopener">https://code.claude.com/docs/en/claude-code-on-the-web</a></li><li><b>My own recording</b> · <i>29 Oct 2026, Windows 11</i> <span class="why">The same DevPulse in all three places; the web session answered from Aditya-402/devpulse on its own branch.</span></li></ol></section>
+  <div class="lwa-chapnav"><a href="chapter14.html"><span class="k">← Previous</span><span class="t">Chapter 14 · DevPulse on the internet</span></a><button type="button" class="lwa-complete" data-lwa-complete><span class="k">Progress</span><span class="t">Mark this chapter complete</span></button><a href="index.html"><span class="k">Next →</span><span class="t">All chapters</span></a></div>
+  </main>
+</div>
+<footer class="foot"><div class="foot-in">
+  <img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building" style="height:36px">
+  <span><a href="../../index.html">Home</a> · <a href="../index.html">Series</a> · <a href="https://github.com/Aditya-402/devpulse" rel="noopener">DevPulse on GitHub</a></span>
+</div></footer>
+<script src="../../assets/site-config.js"></script>
+<script src="../../assets/analytics.js?v=1" defer></script>
+<script src="../../assets/progress.js?v=2"></script>
+<script src="../../assets/railspy.js?v=1"></script>
+<script>
+// each clip plays once when most of it is on screen, never when the reader asks for reduced motion (WE-141)
+(function () {
+  if (!('IntersectionObserver' in window) || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+  document.querySelectorAll('video.clip').forEach(function (v) {
+    var o = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { o.disconnect(); v.play().catch(function () {}); } });
+    }, { threshold: 0.6 });
+    o.observe(v);
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 12 · A bug scan in parallel — Learn AI by Building</title>
+<meta name="description" content="Chapter 12 of the Claude Code series: switch on dynamic workflows in /config, ask for a bug scan of four DevPulse files at once, watch the agents in /workflows, read the one ranked list, and save the workflow to run again.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=8">
+<link rel="stylesheet" href="../../assets/unit.css?v=8">
+<link rel="stylesheet" href="../../assets/blog.css?v=7">
+<link rel="stylesheet" href="cc.css?v=4">
+</head>
+<body data-lwa-course="claude-code" data-lwa-chapter="chapter12" data-lwa-title="Chapter 12 · A bug scan in parallel" data-lwa-taught="dynamic workflows; switching them on and choosing a size in /config; asking with &#x27;Use a workflow&#x27;; the approval prompt; /workflows to watch agents; the cost line (time, agents, tokens); saving a workflow to .claude/workflows/">
+<header class="top"><div class="top-in">
+  <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark-maroon.svg?v=1" alt="Learn AI by Building"></a>
+  <div class="lwa-brand-right"><span class="lwa-tag"><a href="index.html">Learn Claude Code by Building DevPulse</a></span><span data-lwa-auth></span></div>
+</div></header>
+<header class="masthead">
+  <div class="masthead-in">
+    <div class="title-block">
+      <div class="eyebrow">Learn Claude Code by Building DevPulse · Chapter 12</div>
+      <h1>A bug scan in parallel</h1>
+      <p class="standfirst">Checking four files for bugs one after another is slow, so how do you check them all at once? By the end of this chapter, DevPulse has a saved bug-scan workflow that sends one agent per file and returns one ranked list.</p>
+      <div class="facts"><div><b>One sitting</b>~6 min read, ~10 min to build along</div><div><b>You start from</b>chapter 11&#x27;s DevPulse</div><div><b>You build</b>a saved bug-scan workflow for DevPulse</div><div><b>Chapter 12 of 15</b>many agents, one answer</div></div>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="rail" aria-label="Sections">
+    <a class="rnav-back" href="index.html"><span class="ico">←</span><span class="lbl">All chapters</span></a>
+    <a class="rnav-back" href="prompts.html#ch12"><span class="ico">⧉</span><span class="lbl">Every prompt</span></a>
+    <div class="rail-h">Contents</div>
+    <a class="on" href="#wall">The wall</a>
+    <a href="#switch">Switch it on</a>
+    <a href="#ask">Ask for the scan</a>
+    <a href="#result">One list back</a>
+    <a href="#cost">What it costs</a>
+    <a href="#quickref">Quick reference</a>
+    <a href="#homework">Your homework</a>
+  </nav>
+
+  <main>
+  <section id="wall" data-rail="The wall">
+    <div class="prereq">
+      <div class="pq"><b>Goes with Episode 12</b>"How do I run a big job in parallel?". The video is being made. This page teaches the same steps, at your own pace.</div><div class="pq"><b>In a hurry?</b><a href="#quickref">Jump to the quick reference</a>: every command and key in this chapter, what it does, and when to use it.</div><div class="pq"><b>Every prompt, ready to copy</b><a href="prompts.html#ch12">This chapter's prompts and commands</a>, each with a Copy button. Type them yourself first; copy if you are stuck or behind.</div>
+      <div class="pq"><b>Where you are</b>DevPulse with its server, page, streak code and MCP tools, from chapters 1 to 11.</div>
+    </div>
+    <div class="prose">
+      <h2>Four files, one at a time</h2>
+      <p>Say you want a bug check on DevPulse before you share it. There are four files that matter.</p>
+      <p>You could ask about each file in turn. That works, but you wait four times. And the four checks do not need each other at all.</p>
+    </div>
+    <div class="cc-wall">
+      <div class="lbl">The question for this chapter</div>
+      <p>How do you run a big job in parallel, and still get one answer back?</p>
+    </div>
+  </section>
+
+  <section id="switch" data-rail="Switch it on">
+    <div class="prose">
+      <h2>Switch workflows on first</h2>
+      <p>A <b>workflow</b> is a small script that sends several agents off at once and gathers their answers. Check that workflows are on before you ask for one.</p>
+    </div>
+    <div class="yousee"><b>Type this into Claude Code</b>/config</div>
+    <div class="prose">
+      <p>Then type <code>workflow</code> to filter the list.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter12/config.png" alt="/config filtered by workflow: Dynamic workflows true, Ultracode keyword trigger true, Dynamic workflow size medium (default)." loading="lazy">
+      <figcaption>Three settings. <b>Dynamic workflows</b> must be true. The size says how many agents a workflow may use.</figcaption></figure>
+    <figure class="cc-shot"><img src="img/chapter12/small.png" alt="The Dynamic workflow size setting changed to small (aim for fewer than 5 agents)." loading="lazy">
+      <figcaption>We set the size to <b>small</b>: fewer than five agents. Four files need only four.</figcaption></figure>
+    <div class="confuse">
+      <div class="lbl">Careful here</div>
+      <p>On the Pro plan, workflows are not on by default. Switch them on here, and keep the size small. Every agent spends tokens from your plan.</p>
+    </div>
+  </section>
+
+  <section id="ask" data-rail="Ask for the scan">
+    <div class="prose">
+      <h2>Ask for the scan</h2>
+      <p>Start the request with <b>Use a workflow</b>. Name the parts, and say what you want back.</p>
+    </div>
+    <div class="yousee"><b>Type this into Claude Code, as one line</b>Use a workflow: check each DevPulse file (server.py, index.html, streak.js, mcp/devpulse_mcp.py) for bugs in parallel, then give me one list, most serious first. Don't change any code.</div>
+    <figure class="cc-shot"><img src="img/chapter12/ask.png" alt="Run a dynamic workflow? Dynamic workflows can use a lot of tokens. Options: 1. Yes, run it 2. View raw script 3. No." loading="lazy">
+      <figcaption>Claude writes the script, then asks first. It warns about tokens. You can read the script before you say yes.</figcaption></figure>
+    <div class="prose">
+      <p>Choose <b>Yes, run it</b>. Then open the panel that shows the agents at work.</p>
+    </div>
+    <div class="yousee"><b>Type this into Claude Code</b>/workflows</div>
+    <figure class="cc-shot"><img src="img/chapter12/running.png" alt="The /workflows panel for devpulse-bug-scan: Review, 4 agents. review:server.py 11.1k tokens, review:index.html 14.8k, review:streak.js 7.7k done, review:mcp/devpulse_mcp.py 9.2k. Keys: select, x stop, p pause, esc back, s save." loading="lazy">
+      <figcaption>One agent per file, side by side, each with its own token count. <code>x</code> stops one, <code>p</code> pauses it.</figcaption></figure>
+  </section>
+
+  <section id="result" data-rail="One list back">
+    <div class="prose">
+      <h2>One list back, and a saved workflow</h2>
+      <p>When the agents finish, the panel shows what the whole job cost.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter12/save.png" alt="Completed in 24s, 4 agents, 44.2k tokens. Save dynamic workflow: Project scope, .claude/workflows/devpulse-bug-scan.js." loading="lazy">
+      <figcaption>24 seconds, 4 agents, 44.2k tokens. Press <code>s</code> to save it in the project, in <code>.claude/workflows/</code>.</figcaption></figure>
+    <div class="prose">
+      <p>Back in the chat, Claude merges the four answers into one list, most serious first.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter12/list.png" alt="The end of the ranked list: findings 10 to 13, each with file and line. Coverage: streak.js returned no findings, treat as unconfirmed. I also saved the workflow as .claude/workflows/devpulse-bug-scan.js." loading="lazy">
+      <figcaption>Each finding names a file and a line. Note the coverage line: no bugs in <code>streak.js</code> is "unconfirmed", not "clean". The grey line, <i>fix the medium-severity bugs</i>, is only a suggestion.</figcaption></figure>
+    <div class="prose">
+      <p>We asked it not to change any code. Fixing is a separate step, and you choose which bugs.</p>
+    </div>
+  </section>
+
+  <section id="cost" data-rail="What it costs">
+    <div class="prose">
+      <h2>What a workflow costs</h2>
+      <p>Faster is not cheaper. Four agents each read their own file and think on their own, so the tokens add up.</p>
+    </div>
+    <table>
+      <tr><th>What we saw</th><th>What it means for you</th></tr>
+      <tr><td>24 seconds</td><td>The four checks ran at the same time, not one after another</td></tr>
+      <tr><td>4 agents</td><td>One per file; the small size kept it under five</td></tr>
+      <tr><td>44.2k tokens</td><td>All of it counts toward your plan's limit, for one scan</td></tr>
+    </table>
+    <div class="prose">
+      <p>So use a workflow when the parts are truly separate and the job is big. For one file, just ask.</p>
+      <p>And all this still needs you to watch. What if Claude could warn you when something goes wrong? That is chapter 13.</p>
+    </div>
+  </section>
+
+  <section id="quickref" data-rail="Quick reference">
+    <div class="prose"><h2>Quick reference</h2><p>The prompts from this chapter, ready to copy: <a href="prompts.html#ch12">every prompt, chapter 12</a>.</p></div>
+    <div class="cheat"><table><tr><th>Command or key</th><th>What it does</th><th>Use it when</th></tr><tr><td><code>/config, then type workflow</code></td><td>Shows the workflow settings: on or off, and the size</td><td>Before your first workflow, or to make them smaller</td></tr><tr><td><code>Use a workflow: …</code></td><td>Asks Claude to split the job across several agents</td><td>The job splits into parts that do not depend on each other</td></tr><tr><td><code>/workflows</code></td><td>Shows the running workflow and each agent&#x27;s tokens</td><td>You want to watch, pause or stop a workflow</td></tr><tr><td><code>x / p in /workflows</code></td><td>Stops or pauses the selected agent</td><td>An agent is stuck or costing too much</td></tr><tr><td><code>s in /workflows</code></td><td>Saves the workflow to .claude/workflows/</td><td>You will want to run the same job again</td></tr></table></div>
+  </section>
+
+  <section id="homework" data-rail="Your homework">
+    <div class="next">
+      <div class="lbl">Your homework</div>
+      <h3>Run your saved scan on your own project</h3>
+      <p style="font-size:var(--fs-cap);color:var(--slate)"><b>The goal:</b> one job split across agents, with the cost written down.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>The steps:</b> check <code>/config</code> first. Ask: <i>Use a workflow: check each of these files … for bugs in parallel, then give me one list. Don't change any code.</i> Watch it in <code>/workflows</code>, and note the time, agents and tokens.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>Guess first:</b> will two files cost about the same tokens, or very different amounts?</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:10px"><i>One question for you: which job in your week is really four small jobs that don't need each other?</i></p>
+    </div>
+  </section>
+
+  <section class="lwa-refs" id="refs"><div class="prose"><h2>References</h2><p>Where each command and file on this page comes from. Every screenshot is from our own recording on 29 Oct 2026, Claude Code 2.1.312.</p></div><ol><li><b>Anthropic</b> · <i>Claude Code settings</i> <span class="why">Where /config settings live, and project files under .claude/.</span> <a href="https://code.claude.com/docs/en/settings" rel="noopener">https://code.claude.com/docs/en/settings</a></li><li><b>Anthropic</b> · <i>Manage costs effectively</i> <span class="why">Why many agents mean many tokens, and how to keep an eye on them.</span> <a href="https://code.claude.com/docs/en/costs" rel="noopener">https://code.claude.com/docs/en/costs</a></li><li><b>My own recording</b> · <i>29 Oct 2026, Windows 11</i> <span class="why">The scan finished in 24 s with 4 agents and 44.2k tokens; streak.js came back with no findings, which Claude marked as unconfirmed.</span></li></ol></section>
+  <div class="lwa-chapnav"><a href="chapter11.html"><span class="k">← Previous</span><span class="t">Chapter 11 · DevPulse tools for Claude</span></a><button type="button" class="lwa-complete" data-lwa-complete><span class="k">Progress</span><span class="t">Mark this chapter complete</span></button><a href="chapter13.html"><span class="k">Next →</span><span class="t">Chapter 13 · Hooks that watch for us</span></a></div>
+  </main>
+</div>
+<footer class="foot"><div class="foot-in">
+  <img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building" style="height:36px">
+  <span><a href="../../index.html">Home</a> · <a href="../index.html">Series</a> · <a href="https://github.com/Aditya-402/devpulse" rel="noopener">DevPulse on GitHub</a></span>
+</div></footer>
+<script src="../../assets/site-config.js"></script>
+<script src="../../assets/analytics.js?v=1" defer></script>
+<script src="../../assets/progress.js?v=2"></script>
+<script src="../../assets/railspy.js?v=1"></script>
+<script>
+// each clip plays once when most of it is on screen, never when the reader asks for reduced motion (WE-141)
+(function () {
+  if (!('IntersectionObserver' in window) || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+  document.querySelectorAll('video.clip').forEach(function (v) {
+    var o = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { o.disconnect(); v.play().catch(function () {}); } });
+    }, { threshold: 0.6 });
+    o.observe(v);
+  });
+})();
+</script>
+</body>
+</html>

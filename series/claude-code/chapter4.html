@@ -32,6 +32,7 @@
 <div class="shell">
   <nav class="rail" aria-label="Sections">
     <a class="rnav-back" href="index.html"><span class="ico">←</span><span class="lbl">All chapters</span></a>
+    <a class="rnav-back" href="prompts.html#ch4"><span class="ico">⧉</span><span class="lbl">Every prompt</span></a>
     <div class="rail-h">Contents</div>
     <a class="on" href="#wall">The wall</a>
     <a href="#diff">See what changed</a>
@@ -46,7 +47,7 @@
   <main>
   <section id="wall" data-rail="The wall">
     <div class="prereq">
-      <div class="pq"><b>Goes with Episode 4</b>"How do I undo what Claude Code just did?". The video is being made. This page teaches the same steps, at your own pace.</div><div class="pq"><b>In a hurry?</b><a href="#quickref">Jump to the quick reference</a>: every command and key in this chapter, what it does, and when to use it.</div>
+      <div class="pq"><b>Goes with Episode 4</b>"How do I undo what Claude Code just did?". The video is being made. This page teaches the same steps, at your own pace.</div><div class="pq"><b>In a hurry?</b><a href="#quickref">Jump to the quick reference</a>: every command and key in this chapter, what it does, and when to use it.</div><div class="pq"><b>Every prompt, ready to copy</b><a href="prompts.html#ch4">This chapter's prompts and commands</a>, each with a Copy button. Type them yourself first; copy if you are stuck or behind.</div>
       <div class="pq"><b>Where you are</b>DevPulse with a server, two views, an edit button and a CLAUDE.md, from chapter 3.</div>
     </div>
     <div class="prose">
@@ -145,7 +146,7 @@ git config --global user.email "you@example.com"</div>
   </section>
 
   <section id="quickref" data-rail="Quick reference">
-    <div class="prose"><h2>Quick reference</h2></div>
+    <div class="prose"><h2>Quick reference</h2><p>The prompts from this chapter, ready to copy: <a href="prompts.html#ch4">every prompt, chapter 4</a>.</p></div>
     <div class="cheat"><table><tr><th>Command or key</th><th>What it does</th><th>Use it when</th></tr><tr><td><code>/diff</code></td><td>Shows what changed since the last commit</td><td>You want to see what Claude touched (needs git)</td></tr><tr><td><code>Esc Esc</code></td><td>Rewinds to an earlier message: code, conversation or both</td><td>You want to undo Claude&#x27;s last steps</td></tr><tr><td><code>Restore code and conversation</code></td><td>Puts files and the chat back as they were</td><td>Both the change and the talk about it should go</td></tr><tr><td><code>Set up git for this project …</code></td><td>Claude runs git init, writes .gitignore and makes the first commit</td><td>Your project has no history yet</td></tr><tr><td><code>/plugin</code></td><td>Opens the plugin manager: discover, install, manage</td><td>You want a ready-made set of commands</td></tr><tr><td><code>/commit-commands:commit</code></td><td>Writes a commit message and commits your changes</td><td>A change is done and works</td></tr><tr><td><code>! git log --oneline</code></td><td>Lists your commits, newest first</td><td>You want to see your history</td></tr></table></div>
   </section>
 

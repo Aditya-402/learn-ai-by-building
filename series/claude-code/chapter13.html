@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 13 · Hooks that watch for us — Learn AI by Building</title>
+<meta name="description" content="Chapter 13 of the Claude Code series: two hooks in .claude/settings.json, a Notification hook that beeps when Claude needs you and a PostToolUse hook that checks data/tasks.json after every edit, seen in /hooks and tested on a broken file.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=8">
+<link rel="stylesheet" href="../../assets/unit.css?v=8">
+<link rel="stylesheet" href="../../assets/blog.css?v=7">
+<link rel="stylesheet" href="cc.css?v=4">
+</head>
+<body data-lwa-course="claude-code" data-lwa-chapter="chapter13" data-lwa-title="Chapter 13 · Hooks that watch for us" data-lwa-taught="what a hook is; events (Notification, PostToolUse) and matchers (Write|Edit); hooks in .claude/settings.json; restart or /hooks to load them; /hooks is read-only; a hook that exits 2 sends its error back to Claude; testing a hook on purpose">
+<header class="top"><div class="top-in">
+  <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark-maroon.svg?v=1" alt="Learn AI by Building"></a>
+  <div class="lwa-brand-right"><span class="lwa-tag"><a href="index.html">Learn Claude Code by Building DevPulse</a></span><span data-lwa-auth></span></div>
+</div></header>
+<header class="masthead">
+  <div class="masthead-in">
+    <div class="title-block">
+      <div class="eyebrow">Learn Claude Code by Building DevPulse · Chapter 13</div>
+      <h1>Hooks that watch for us</h1>
+      <p class="standfirst">You keep glancing at the terminal in case Claude is waiting for you, so how do you stop babysitting it? By the end of this chapter, DevPulse has two hooks: one beeps when Claude needs you, and one checks the tasks file after every edit.</p>
+      <div class="facts"><div><b>One sitting</b>~7 min read, ~15 min to build along</div><div><b>You start from</b>chapter 12&#x27;s DevPulse</div><div><b>You build</b>a beep hook and a tasks.json check</div><div><b>Chapter 13 of 15</b>Claude that tells you</div></div>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="rail" aria-label="Sections">
+    <a class="rnav-back" href="index.html"><span class="ico">←</span><span class="lbl">All chapters</span></a>
+    <a class="rnav-back" href="prompts.html#ch13"><span class="ico">⧉</span><span class="lbl">Every prompt</span></a>
+    <div class="rail-h">Contents</div>
+    <a class="on" href="#wall">The wall</a>
+    <a href="#what">What a hook is</a>
+    <a href="#write">Ask for two hooks</a>
+    <a href="#load">Load and check</a>
+    <a href="#test">Break it on purpose</a>
+    <a href="#beep">Hear the beep</a>
+    <a href="#cost">What hooks cost</a>
+    <a href="#quickref">Quick reference</a>
+    <a href="#homework">Your homework</a>
+  </nav>
+
+  <main>
+  <section id="wall" data-rail="The wall">
+    <div class="prereq">
+      <div class="pq"><b>Goes with Episode 13</b>"How do I stop babysitting Claude Code?". The video is being made. This page teaches the same steps, at your own pace.</div><div class="pq"><b>In a hurry?</b><a href="#quickref">Jump to the quick reference</a>: every command and key in this chapter, what it does, and when to use it.</div><div class="pq"><b>Every prompt, ready to copy</b><a href="prompts.html#ch13">This chapter's prompts and commands</a>, each with a Copy button. Type them yourself first; copy if you are stuck or behind.</div>
+      <div class="pq"><b>Where you are</b>DevPulse from chapters 1 to 12, with its tasks in <code>data/tasks.json</code> and 18 tests.</div>
+    </div>
+    <div class="prose">
+      <h2>Watching the terminal</h2>
+      <p>Say Claude is working and you switch to your browser. A minute later you look back. It has been waiting for your yes the whole time.</p>
+      <p>Or worse: an edit broke <code>data/tasks.json</code>, and nobody noticed until the page went blank.</p>
+    </div>
+    <div class="cc-wall">
+      <div class="lbl">The question for this chapter</div>
+      <p>How do you stop babysitting Claude Code, and let it tell you when something needs you?</p>
+    </div>
+  </section>
+
+  <section id="what" data-rail="What a hook is">
+    <div class="prose">
+      <h2>What a hook is</h2>
+      <p>A <b>hook</b> is a command that Claude Code runs by itself when something happens. You don't ask each time. It just runs.</p>
+    </div>
+    <table>
+      <tr><th>Event</th><th>When it runs</th><th>Our hook</th></tr>
+      <tr><td><code>Notification</code></td><td>Claude needs you, for example to approve a command</td><td>Beep</td></tr>
+      <tr><td><code>PostToolUse</code></td><td>Right after Claude uses a tool, such as Edit</td><td>Check that <code>data/tasks.json</code> is still valid JSON</td></tr>
+    </table>
+  </section>
+
+  <section id="write" data-rail="Ask for two hooks">
+    <div class="prose">
+      <h2>Ask Claude to write both hooks</h2>
+      <p>Hooks live in a settings file. The project one is <code>.claude/settings.json</code>, so the whole team gets them.</p>
+    </div>
+    <div class="yousee"><b>Windows: type this into Claude Code, as one line</b>Add a Notification hook to .claude/settings.json that beeps on Windows when you need me, and a PostToolUse hook that runs python -m json.tool on data/tasks.json after any edit to it, so a broken file is reported at once.</div>
+    <div class="yousee"><b>Mac: the same, with two words changed</b>Add a Notification hook to .claude/settings.json that plays a sound on Mac when you need me, and a PostToolUse hook that runs python3 -m json.tool on data/tasks.json after any edit to it, so a broken file is reported at once.</div>
+    <figure class="cc-shot"><img src="img/chapter13/written.png" alt="Claude's summary: the Notification hook runs powershell.exe [console]::Beep(880,300); the PostToolUse hook on Write|Edit checks the edited path and runs python -m json.tool, exiting 2 on failure. It tested both with piped payloads. Left to do: it hasn't seen either hook fire in a real session; open /hooks once or restart." loading="lazy">
+      <figcaption>Written in 40 seconds. It tested both by hand, and is honest: it has not seen them fire in a real session yet. The grey line, <i>commit this</i>, is only a suggestion.</figcaption></figure>
+    <div class="prose">
+      <p>Look at one detail. On a broken file, the check <b>exits 2</b>. Exit code 2 tells Claude Code to send the error back to Claude, so Claude sees it at once.</p>
+    </div>
+  </section>
+
+  <section id="load" data-rail="Load and check">
+    <div class="prose">
+      <h2>Restart, then check they are on</h2>
+      <p>The settings file did not exist when this session started. So restart Claude Code: type <code>/exit</code>, then <code>claude</code>.</p>
+    </div>
+    <div class="yousee"><b>Type this into Claude Code</b>/hooks</div>
+    <figure class="cc-shot"><img src="img/chapter13/hooks.png" alt="The /hooks menu: 2 hooks on 2 events. This menu is read-only. PostToolUse, after tool execution: a Project python command for Write|Edit. Notification, when notifications are sent: a Project powershell.exe command." loading="lazy">
+      <figcaption>Two hooks on two events, both from the project. The menu only shows them. To change one, edit the file or ask Claude.</figcaption></figure>
+  </section>
+
+  <section id="test" data-rail="Break it on purpose">
+    <div class="prose">
+      <h2>Break the file on purpose</h2>
+      <p>A hook you have never seen fire is only a hope. So test it.</p>
+    </div>
+    <div class="yousee"><b>Type this into Claude Code, as one line</b>To test the hook: use the Edit tool to delete the last closing bracket of data/tasks.json. Then show me what the hook said, and fix the file.</div>
+    <figure class="cc-shot"><img src="img/chapter13/caught.png" alt="Update(data\tasks.json): removed line 38, the closing ]. PostToolUse:Edit hook returned blocking error: Expecting ',' delimiter: line 38 column 1 (char 901). Claude: the hook fired and reported invalid JSON; that is the missing closing ]. Now I'll restore it." loading="lazy">
+      <figcaption>The moment the edit lands, the hook runs and reports <b>line 38</b>. Claude reads that and knows what to fix.</figcaption></figure>
+    <figure class="cc-shot"><img src="img/chapter13/fixed.png" alt="Added 1 line: the ] back at line 38. Claude: the hook works. I removed the final ], the hook reported a blocking error, I restored it, json.tool now reports the file as valid, and the task data is unchanged." loading="lazy">
+      <figcaption>The bracket is back, and the tasks are unchanged. The grey line, <i>run the tests</i>, is only a suggestion.</figcaption></figure>
+  </section>
+
+  <section id="beep" data-rail="Hear the beep">
+    <div class="prose">
+      <h2>Make Claude need you</h2>
+      <p>Now the beep. It plays when Claude waits for you, so we need a command that asks first. Press Shift+Tab until you see <b>manual mode</b>.</p>
+    </div>
+    <div class="yousee"><b>Type this into Claude Code</b>Run node --test.</div>
+    <figure class="cc-shot"><img src="img/chapter13/prompt.png" alt="Bash command: node --test. This command requires approval. Do you want to proceed? 1. Yes 2. Yes, and don't ask again for node 3. Yes, and switch to auto mode 4. No." loading="lazy">
+      <figcaption>Claude waits for your approval. This is when the Notification hook beeps.</figcaption></figure>
+    <div class="confuse">
+      <div class="lbl">Careful here</div>
+      <p>You won't hear the beep in our video. A screen recording does not catch it. Try it yourself: switch windows before you send the line.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter13/pass.png" alt="Claude: node --test passed all 18 tests, none failing or skipped, covering current and best streak, the IST day boundary, gaps, duplicate days, month, year and leap days. Manual mode on." loading="lazy">
+      <figcaption>Choose <b>Yes</b>, and all 18 tests pass. Then Shift+Tab back to auto mode. The grey line, <i>run python test_server.py</i>, is only a suggestion.</figcaption></figure>
+    <div class="prose">
+      <p>Now you can look away. You'll hear when Claude needs you, and a broken tasks file is caught at once.</p>
+    </div>
+  </section>
+
+  <section id="cost" data-rail="What hooks cost">
+    <div class="prose">
+      <h2>What hooks cost</h2>
+      <p>A hook runs every time its event happens. Our check runs after every edit, so keep it fast. A slow hook slows down every step.</p>
+      <p>Hooks also run with your permissions. A project you clone can bring its own hooks in .claude/settings.json. Read that file before you trust the folder.</p>
+      <p>DevPulse now watches itself, but it all stays on your laptop. Next, in chapter 14, DevPulse goes on the internet.</p>
+    </div>
+  </section>
+
+  <section id="quickref" data-rail="Quick reference">
+    <div class="prose"><h2>Quick reference</h2><p>The prompts from this chapter, ready to copy: <a href="prompts.html#ch13">every prompt, chapter 13</a>.</p></div>
+    <div class="cheat"><table><tr><th>Command or key</th><th>What it does</th><th>Use it when</th></tr><tr><td><code>Add a Notification hook … that beeps when you need me</code></td><td>Plays a sound whenever Claude waits for you</td><td>You work in another window while Claude runs</td></tr><tr><td><code>Add a PostToolUse hook that runs … after any edit to …</code></td><td>Runs your check every time Claude edits that file</td><td>A file must never be left broken</td></tr><tr><td><code>/exit, then claude</code></td><td>Restarts Claude Code so new hooks load</td><td>You just added or changed a hook</td></tr><tr><td><code>/hooks</code></td><td>Lists your hooks by event (read-only)</td><td>You want to see which hooks are on</td></tr><tr><td><code>exit 2</code></td><td>In a hook command: blocks and sends the error to Claude</td><td>Claude should see the problem and fix it</td></tr></table></div>
+  </section>
+
+  <section id="homework" data-rail="Your homework">
+    <div class="next">
+      <div class="lbl">Your homework</div>
+      <h3>A hook for the file you care about most</h3>
+      <p style="font-size:var(--fs-cap);color:var(--slate)"><b>The goal:</b> a check that runs after every edit to one important file, without you asking.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>The steps:</b> pick a file in your project. Ask: <i>Add a PostToolUse hook to .claude/settings.json that checks … after any edit to it.</i> Restart, open <code>/hooks</code>, then break the file on purpose.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>Guess first:</b> if your check exits 1 instead of 2, will Claude still see the error?</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:10px"><i>One question for you: what do you check by hand after every change, that a hook could check for you?</i></p>
+    </div>
+  </section>
+
+  <section class="lwa-refs" id="refs"><div class="prose"><h2>References</h2><p>Where each command and file on this page comes from. Every screenshot is from our own recording on 29 Oct 2026, Claude Code 2.1.312.</p></div><ol><li><b>Anthropic</b> · <i>Get started with Claude Code hooks</i> <span class="why">What hooks are for, with a notification example.</span> <a href="https://code.claude.com/docs/en/hooks-guide" rel="noopener">https://code.claude.com/docs/en/hooks-guide</a></li><li><b>Anthropic</b> · <i>Hooks reference</i> <span class="why">The events (Notification, PostToolUse), matchers, the JSON a hook reads, and what exit code 2 does.</span> <a href="https://code.claude.com/docs/en/hooks" rel="noopener">https://code.claude.com/docs/en/hooks</a></li><li><b>Anthropic</b> · <i>Claude Code settings</i> <span class="why">The settings files: user, project (.claude/settings.json) and local.</span> <a href="https://code.claude.com/docs/en/settings" rel="noopener">https://code.claude.com/docs/en/settings</a></li><li><b>My own recording</b> · <i>29 Oct 2026, Windows 11</i> <span class="why">Both hooks were written in 40 s; the check caught the missing ] at line 38; the beep played but cannot be heard in a screen recording.</span></li></ol></section>
+  <div class="lwa-chapnav"><a href="chapter12.html"><span class="k">← Previous</span><span class="t">Chapter 12 · A bug scan in parallel</span></a><button type="button" class="lwa-complete" data-lwa-complete><span class="k">Progress</span><span class="t">Mark this chapter complete</span></button><a href="chapter14.html"><span class="k">Next →</span><span class="t">Chapter 14 · DevPulse on the internet</span></a></div>
+  </main>
+</div>
+<footer class="foot"><div class="foot-in">
+  <img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building" style="height:36px">
+  <span><a href="../../index.html">Home</a> · <a href="../index.html">Series</a> · <a href="https://github.com/Aditya-402/devpulse" rel="noopener">DevPulse on GitHub</a></span>
+</div></footer>
+<script src="../../assets/site-config.js"></script>
+<script src="../../assets/analytics.js?v=1" defer></script>
+<script src="../../assets/progress.js?v=2"></script>
+<script src="../../assets/railspy.js?v=1"></script>
+<script>
+// each clip plays once when most of it is on screen, never when the reader asks for reduced motion (WE-141)
+(function () {
+  if (!('IntersectionObserver' in window) || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+  document.querySelectorAll('video.clip').forEach(function (v) {
+    var o = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { o.disconnect(); v.play().catch(function () {}); } });
+    }, { threshold: 0.6 });
+    o.observe(v);
+  });
+})();
+</script>
+</body>
+</html>

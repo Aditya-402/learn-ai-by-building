@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 7 · A standup skill — Learn AI by Building</title>
+<meta name="description" content="Chapter 7 of the Claude Code series: the built-in skills behind the / menu, /simplify, then our own project skill /standup in .claude/skills, and a Standup panel in DevPulse.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=8">
+<link rel="stylesheet" href="../../assets/unit.css?v=8">
+<link rel="stylesheet" href="../../assets/blog.css?v=7">
+<link rel="stylesheet" href="cc.css?v=4">
+</head>
+<body data-lwa-course="claude-code" data-lwa-chapter="chapter7" data-lwa-title="Chapter 7 · A standup skill" data-lwa-taught="the / menu and built-in skills; /simplify; a project skill in .claude/skills/&lt;name&gt;/SKILL.md; name, description and steps; using a skill by name; disable-model-invocation; ! runs Git Bash on Windows">
+<header class="top"><div class="top-in">
+  <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark-maroon.svg?v=1" alt="Learn AI by Building"></a>
+  <div class="lwa-brand-right"><span class="lwa-tag"><a href="index.html">Learn Claude Code by Building DevPulse</a></span><span data-lwa-auth></span></div>
+</div></header>
+<header class="masthead">
+  <div class="masthead-in">
+    <div class="title-block">
+      <div class="eyebrow">Learn Claude Code by Building DevPulse · Chapter 7</div>
+      <h1>A standup skill</h1>
+      <p class="standfirst">Every morning you type the same long instruction for your standup, so how do you turn it into one command? By the end of this chapter, DevPulse has its own /standup skill and a Standup panel that shows what it wrote.</p>
+      <div class="facts"><div><b>One sitting</b>~7 min read, ~15 min to build along</div><div><b>You start from</b>chapter 6&#x27;s DevPulse</div><div><b>You build</b>the /standup skill and a Standup panel</div><div><b>Chapter 7 of 15</b>our first tool of our own</div></div>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="rail" aria-label="Sections">
+    <a class="rnav-back" href="index.html"><span class="ico">←</span><span class="lbl">All chapters</span></a>
+    <a class="rnav-back" href="prompts.html#ch7"><span class="ico">⧉</span><span class="lbl">Every prompt</span></a>
+    <div class="rail-h">Contents</div>
+    <a class="on" href="#wall">The wall</a>
+    <a href="#builtin">Skills already built in</a>
+    <a href="#create">Write your own skill</a>
+    <a href="#run">Run it, and show it</a>
+    <a href="#cost">What it costs</a>
+    <a href="#quickref">Quick reference</a>
+    <a href="#homework">Your homework</a>
+  </nav>
+
+  <main>
+  <section id="wall" data-rail="The wall">
+    <div class="prereq">
+      <div class="pq"><b>Goes with Episode 7</b>"How do I stop typing the same instructions?". The video is being made. This page teaches the same steps, at your own pace.</div><div class="pq"><b>In a hurry?</b><a href="#quickref">Jump to the quick reference</a>: every command and key in this chapter, what it does, and when to use it.</div><div class="pq"><b>Every prompt, ready to copy</b><a href="prompts.html#ch7">This chapter's prompts and commands</a>, each with a Copy button. Type them yourself first; copy if you are stuck or behind.</div>
+      <div class="pq"><b>Where you are</b>DevPulse with tests and a git history, from chapters 1 to 6. The server runs in your second tab.</div>
+    </div>
+    <div class="prose">
+      <h2>The same instruction, every morning</h2>
+      <p>Say your team has a standup every morning. Before it, you type the same thing into Claude: read today's tasks, read yesterday's commits, write three lines.</p>
+      <p>It works. But it is the same long sentence every day, and some days you forget a part of it.</p>
+    </div>
+    <div class="cc-wall">
+      <div class="lbl">The question for this chapter</div>
+      <p>How do you write an instruction down once, and run it with one short command?</p>
+    </div>
+  </section>
+
+  <section id="builtin" data-rail="Skills already built in">
+    <div class="prose">
+      <h2>Skills already built in</h2>
+      <p>Type <code>/</code> in Claude Code. A list opens. Some lines are commands you know, like <code>/init</code>. Others are <b>skills</b>: written instructions Claude follows for one kind of job.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter7/slash.png" alt="The / menu: /commit-commands:commit (from the plugin), /verify, /init, /add-dir, each with a one-line description." loading="lazy">
+      <figcaption>Type <code>/</code> and keep typing to filter. Built-in skills, plugin commands and your own skills all appear here.</figcaption></figure>
+    <div class="prose">
+      <p>Try one on a file you wrote in chapter 5.</p>
+    </div>
+    <div class="yousee"><b>Type this into Claude Code</b>/simplify streak.js</div>
+    <figure class="cc-shot"><img src="img/chapter7/simplify.png" alt="Claude: I made one simplification in streak.js, and the 18 tests still pass. Fixed: bestStreak re-parsed the previous day each time; it now keeps the next expected date. Skipped, nothing to change: reuse, efficiency, altitude." loading="lazy">
+      <figcaption>It tidied one thing in your hand-written <code>bestStreak</code>, kept all 18 tests passing, and listed what it chose not to change.</figcaption></figure>
+  </section>
+
+  <section id="create" data-rail="Write your own skill">
+    <div class="prose">
+      <h2>Write your own skill</h2>
+      <p>A skill is a folder with one file in it, <code>SKILL.md</code>. A project skill lives in your project, in <code>.claude/skills/</code>. You can ask Claude to write it.</p>
+    </div>
+    <div class="yousee"><b>Type this into Claude Code, as one line</b>Create a project skill called standup in .claude/skills/standup/SKILL.md. It reads data/tasks.json and the git log since yesterday and writes a three-line standup (Yesterday, Today, Blockers) to data/standup.md.</div>
+    <figure class="cc-shot"><img src="img/chapter7/skill.png" alt="Claude describes the skill: the output, the Yesterday, Today and Blockers lines, the time format from CLAUDE.md, no invented content; it says it based the Blockers rule on its own guess, and that .claude/skills is not ignored by git." loading="lazy">
+      <figcaption>Written in 16 seconds. It even follows our CLAUDE.md rule for times, and says which part was its own guess. The grey line is only a suggestion.</figcaption></figure>
+    <div class="prose">
+      <p>Now read what it wrote. One small surprise on Windows first.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter7/catfail.png" alt="! type .claude\skills\standup\SKILL.md fails: /usr/bin/bash: type: not found. Claude explains: the shell here is Git Bash, not cmd.exe; use forward slashes and cat." loading="lazy">
+      <figcaption><code>!</code> runs commands in Git Bash on Windows, not in PowerShell. Backslashes and <code>type</code> fail; forward slashes and <code>cat</code> work.</figcaption></figure>
+    <div class="yousee"><b>Type this into Claude Code</b>! cat .claude/skills/standup/SKILL.md</div>
+    <figure class="cc-shot"><img src="img/chapter7/skillmd.png" alt="The end of SKILL.md: step 6, show the three lines to the user; Rules: always display times as 1 h 30 min; each section a single line; only use facts from the tasks and git log; Nothing logged when empty." loading="lazy">
+      <figcaption>The end of the file: the steps, then the rules. Plain words, like a note to a new colleague.</figcaption></figure>
+    <table>
+      <tr><th>Part of SKILL.md</th><th>What it is for</th></tr>
+      <tr><td><code>name: standup</code></td><td>The command: <code>/standup</code></td></tr>
+      <tr><td><code>description:</code></td><td>When to use it. Claude reads this to decide whether the skill fits a request.</td></tr>
+      <tr><td>The steps and rules</td><td>What Claude does each time the skill runs</td></tr>
+    </table>
+    <div class="confuse">
+      <div class="lbl">Careful here</div>
+      <p>Claude may also start a skill on its own when your request matches its description. For a skill that changes things, add <code>disable-model-invocation: true</code> under the name. Then only you can start it.</p>
+    </div>
+  </section>
+
+  <section id="run" data-rail="Run it, and show it">
+    <div class="prose">
+      <h2>Run it, then show it in the app</h2>
+      <p>The skill appears in the <code>/</code> menu straight away.</p>
+    </div>
+    <div class="yousee"><b>Type this into Claude Code</b>/standup</div>
+    <figure class="cc-shot"><img src="img/chapter7/standup.png" alt="I wrote the standup to data/standup.md: Yesterday: Nothing logged. Today: already planned the DevPulse server and committed; still open: the tasks API and the Week view review. Blockers: None. Then it explains why Yesterday is empty." loading="lazy">
+      <figcaption>Three lines, from your real tasks and commits. It also says why Yesterday is empty: everything was done today.</figcaption></figure>
+    <div class="yousee"><b>Then type this</b>Add a Standup panel to the Today view that shows data/standup.md.</div>
+    <figure class="cc-shot"><img src="img/chapter7/panel.png" alt="Claude: I added a Standup panel to the Today view, above the add-task form: a GET /api/standup endpoint in server.py, the panel in index.html built with textContent, and a test in test_server.py." loading="lazy">
+      <figcaption>A small endpoint, the panel, and a test. It notes the panel shows whatever <code>/standup</code> last wrote.</figcaption></figure>
+    <div class="prose">
+      <p>Restart the server in your second tab (Ctrl+C, then <code>python server.py</code>; Mac: <code>python3</code>) and refresh the page.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter7/app.png" alt="DevPulse's Today view with a Standup panel above the form: Yesterday, Today and Blockers in bold, with the lines from data/standup.md." loading="lazy">
+      <figcaption>The standup, in the app. Commit it with <code>/commit-commands:commit</code>.</figcaption></figure>
+  </section>
+
+  <section id="cost" data-rail="What it costs">
+    <div class="prose">
+      <h2>What a skill costs</h2>
+      <p>A skill's name and description are loaded into every session, so a long list of skills costs a little each time. Keep each description short and exact.</p>
+      <p>And a skill still needs you to open Claude and type <code>/standup</code>. What if the standup were ready before you even started Claude? That is chapter 8.</p>
+    </div>
+  </section>
+
+  <section id="quickref" data-rail="Quick reference">
+    <div class="prose"><h2>Quick reference</h2><p>The prompts from this chapter, ready to copy: <a href="prompts.html#ch7">every prompt, chapter 7</a>.</p></div>
+    <div class="cheat"><table><tr><th>Command or key</th><th>What it does</th><th>Use it when</th></tr><tr><td><code>/</code></td><td>Lists every command and skill you can use here</td><td>You want to see what is built in</td></tr><tr><td><code>/simplify file</code></td><td>Tidies code without changing what it does</td><td>Code works but reads awkwardly</td></tr><tr><td><code>Create a project skill called …</code></td><td>Writes .claude/skills/&lt;name&gt;/SKILL.md for you</td><td>You type the same instruction again and again</td></tr><tr><td><code>/&lt;skill name&gt;</code></td><td>Runs your skill</td><td>You need that job done</td></tr><tr><td><code>! cat .claude/skills/&lt;name&gt;/SKILL.md</code></td><td>Shows the skill&#x27;s file</td><td>You want to read or check what Claude wrote</td></tr><tr><td><code>disable-model-invocation: true</code></td><td>A line in SKILL.md: only you can start the skill</td><td>The skill changes things, so Claude should not run it on its own</td></tr></table></div>
+  </section>
+
+  <section id="homework" data-rail="Your homework">
+    <div class="next">
+      <div class="lbl">Your homework</div>
+      <h3>Turn your own repeat into a skill</h3>
+      <p style="font-size:var(--fs-cap);color:var(--slate)"><b>The goal:</b> one instruction you type often becomes one command.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>The steps:</b> pick an instruction you typed more than twice this week. Ask Claude: <i>Create a project skill called … in .claude/skills/…/SKILL.md that …</i>. Read the file with <code>! cat</code>, then run it.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>Guess first:</b> will Claude follow your rules from CLAUDE.md inside the skill too?</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:10px"><i>One question for you: which of your daily instructions should only you be allowed to start?</i></p>
+    </div>
+  </section>
+
+  <section class="lwa-refs" id="refs"><div class="prose"><h2>References</h2><p>Where each command and file on this page comes from. Every screenshot is from our own recording on 29 Oct 2026, Claude Code 2.1.312.</p></div><ol><li><b>Anthropic</b> · <i>Agent skills in Claude Code</i> <span class="why">What a skill is, where project and personal skills live, SKILL.md&#x27;s name and description, and disable-model-invocation.</span> <a href="https://code.claude.com/docs/en/skills" rel="noopener">https://code.claude.com/docs/en/skills</a></li><li><b>Anthropic</b> · <i>Slash commands</i> <span class="why">The / menu: built-in commands, skills and plugin commands in one list.</span> <a href="https://code.claude.com/docs/en/slash-commands" rel="noopener">https://code.claude.com/docs/en/slash-commands</a></li><li><b>My own recording</b> · <i>29 Oct 2026, Windows 11</i> <span class="why">The skill was written in 16 seconds; /standup ran as a command straight away.</span></li></ol></section>
+  <div class="lwa-chapnav"><a href="chapter6.html"><span class="k">← Previous</span><span class="t">Chapter 6 · A lighter model and a shorter context</span></a><button type="button" class="lwa-complete" data-lwa-complete><span class="k">Progress</span><span class="t">Mark this chapter complete</span></button><a href="chapter8.html"><span class="k">Next →</span><span class="t">Chapter 8 · A standup that runs on its own</span></a></div>
+  </main>
+</div>
+<footer class="foot"><div class="foot-in">
+  <img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building" style="height:36px">
+  <span><a href="../../index.html">Home</a> · <a href="../index.html">Series</a> · <a href="https://github.com/Aditya-402/devpulse" rel="noopener">DevPulse on GitHub</a></span>
+</div></footer>
+<script src="../../assets/site-config.js"></script>
+<script src="../../assets/analytics.js?v=1" defer></script>
+<script src="../../assets/progress.js?v=2"></script>
+<script src="../../assets/railspy.js?v=1"></script>
+<script>
+// each clip plays once when most of it is on screen, never when the reader asks for reduced motion (WE-141)
+(function () {
+  if (!('IntersectionObserver' in window) || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+  document.querySelectorAll('video.clip').forEach(function (v) {
+    var o = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { o.disconnect(); v.play().catch(function () {}); } });
+    }, { threshold: 0.6 });
+    o.observe(v);
+  });
+})();
+</script>
+</body>
+</html>

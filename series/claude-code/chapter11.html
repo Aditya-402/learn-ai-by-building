@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 11 · DevPulse tools for Claude — Learn AI by Building</title>
+<meta name="description" content="Chapter 11 of the Claude Code series: install the mcp-server-dev plugin, let its build-mcp-server skill write a small Python MCP server for DevPulse with three tools, register it with claude mcp add, and log tasks by just asking Claude.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=8">
+<link rel="stylesheet" href="../../assets/unit.css?v=8">
+<link rel="stylesheet" href="../../assets/blog.css?v=7">
+<link rel="stylesheet" href="cc.css?v=4">
+</head>
+<body data-lwa-course="claude-code" data-lwa-chapter="chapter11" data-lwa-title="Chapter 11 · DevPulse tools for Claude" data-lwa-taught="plugins from the official marketplace; a plugin&#x27;s context cost; install scope; the build-mcp-server skill; a local stdio MCP server in Python; the MCP Python SDK in a .venv; tools that return the real error; claude mcp add and claude mcp get; stdout is for MCP messages only">
+<header class="top"><div class="top-in">
+  <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark-maroon.svg?v=1" alt="Learn AI by Building"></a>
+  <div class="lwa-brand-right"><span class="lwa-tag"><a href="index.html">Learn Claude Code by Building DevPulse</a></span><span data-lwa-auth></span></div>
+</div></header>
+<header class="masthead">
+  <div class="masthead-in">
+    <div class="title-block">
+      <div class="eyebrow">Learn Claude Code by Building DevPulse · Chapter 11</div>
+      <h1>DevPulse tools for Claude</h1>
+      <p class="standfirst">Claude can now use servers that others built, so how do you give it tools for your own app? By the end of this chapter, DevPulse has its own MCP server, and you log a task by just telling Claude about it.</p>
+      <div class="facts"><div><b>One sitting</b>~7 min read, ~15 min to build along</div><div><b>You start from</b>chapter 10&#x27;s DevPulse</div><div><b>You build</b>an MCP server with three DevPulse tools</div><div><b>Chapter 11 of 15</b>Claude uses your app directly</div></div>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="rail" aria-label="Sections">
+    <a class="rnav-back" href="index.html"><span class="ico">←</span><span class="lbl">All chapters</span></a>
+    <a class="rnav-back" href="prompts.html#ch11"><span class="ico">⧉</span><span class="lbl">Every prompt</span></a>
+    <div class="rail-h">Contents</div>
+    <a class="on" href="#wall">The wall</a>
+    <a href="#plugin">A plugin that knows MCP</a>
+    <a href="#build">Let it build the server</a>
+    <a href="#register">Register it</a>
+    <a href="#use">Just ask</a>
+    <a href="#cost">What it costs</a>
+    <a href="#quickref">Quick reference</a>
+    <a href="#homework">Your homework</a>
+  </nav>
+
+  <main>
+  <section id="wall" data-rail="The wall">
+    <div class="prereq">
+      <div class="pq"><b>Goes with Episode 11</b>"How do I give Claude Code my own tools?". The video is being made. This page teaches the same steps, at your own pace.</div><div class="pq"><b>In a hurry?</b><a href="#quickref">Jump to the quick reference</a>: every command and key in this chapter, what it does, and when to use it.</div><div class="pq"><b>Every prompt, ready to copy</b><a href="prompts.html#ch11">This chapter's prompts and commands</a>, each with a Copy button. Type them yourself first; copy if you are stuck or behind.</div>
+      <div class="pq"><b>Where you are</b>DevPulse from chapters 1 to 10, with Playwright connected. You need Python 3 for the new server.</div>
+    </div>
+    <div class="prose">
+      <h2>Claude still goes the long way round</h2>
+      <p>You fixed a bug for 45 minutes. To log it, you open the app and fill the form. Or you ask Claude, and it edits <code>data/tasks.json</code> by hand.</p>
+      <p>In chapter 10, Playwright gave Claude a browser. Someone else built that server. Nobody has built one for DevPulse.</p>
+    </div>
+    <div class="cc-wall">
+      <div class="lbl">The question for this chapter</div>
+      <p>How do you give Claude tools of your own, so it can use your app directly?</p>
+    </div>
+  </section>
+
+  <section id="plugin" data-rail="A plugin that knows MCP">
+    <div class="prose">
+      <h2>A plugin that knows how to build servers</h2>
+      <p>A <b>plugin</b> is a bundle of skills and commands. Anthropic's marketplace has one for building MCP servers.</p>
+    </div>
+    <div class="yousee"><b>Type this into Claude Code</b>/plugin install mcp-server-dev@claude-plugins-official</div>
+    <figure class="cc-shot"><img src="img/chapter11/plugin.png" alt="Plugin Details for mcp-server-dev by Anthropic: three skills, build-mcpb, build-mcp-app and build-mcp-server. Context cost: about 480 tokens every turn, about 12.4k when invoked. A trust warning, then Install for you (user scope), for all collaborators (project scope), or for you in this repo only (local scope)." loading="lazy">
+      <figcaption>Before you install, read the cost: about 480 tokens on every turn, 12.4k when you use it. We chose <i>Install for you</i>. The options sat below the screen, so we made the text smaller (Ctrl and minus).</figcaption></figure>
+  </section>
+
+  <section id="build" data-rail="Let it build the server">
+    <div class="prose">
+      <h2>Let the skill build the server</h2>
+      <p>Tell it what you want in one go: the language, the file, and the three tools.</p>
+    </div>
+    <div class="yousee"><b>Type this into Claude Code, as one line</b>/mcp-server-dev:build-mcp-server A local stdio server in Python, mcp/devpulse_mcp.py, using the open-source MCP Python SDK in a .venv. Three tools on data/tasks.json: log_task(title, tag, minutes), list_today(), week_summary(). Reuse the validation rules from server.py.</div>
+    <figure class="cc-shot"><img src="img/chapter11/brief.png" alt="Installed mcp-server-dev. Plugin is now active. Then the build-mcp-server command, and Claude: the brief already settles the deployment model, language, framework and tool pattern, so I'm skipping the discovery questions." loading="lazy">
+      <figcaption>The skill normally asks questions first. Our brief already answered them, so it went straight to work.</figcaption></figure>
+    <div class="prose">
+      <p>It made a <code>.venv</code>, installed the SDK with <code>pip install mcp</code>, wrote the file, and tested it. Then it caught a problem on its own.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter11/errors.png" alt="I've written the server and am now testing it over real stdio against a temp data file. The tools work, but validation errors come back as a generic Error executing tool, which hides the reason from the model." loading="lazy">
+      <figcaption>Bad input gave a vague error. Claude needs the real reason to fix its own call, so this mattered.</figcaption></figure>
+    <figure class="cc-shot"><img src="img/chapter11/summary.png" alt="Claude's summary: tests ran valid and bad input, and bad input now returns the real reason, for example minutes must be an integer from 1 to 1440; no automated tests; SDK 2.3.0 where FastMCP was renamed MCPServer; it imports server.py's rules; .venv is in .gitignore. Then the claude mcp add command it has not run. The grey suggestion: commit this." loading="lazy">
+      <figcaption>Done in 2 m 18 s. It says what it did not do: no automated tests, and the server is not registered yet. The grey <i>commit this</i> is only a suggestion.</figcaption></figure>
+    <div class="confuse">
+      <div class="lbl">Careful here</div>
+      <p>A stdio server talks to Claude through stdout. One stray <code>print()</code> in the server breaks the messages. Our server has none. Log to stderr instead.</p>
+    </div>
+    <div class="prose">
+      <p>Commit it with <code>/commit-commands:commit</code>.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter11/commit.png" alt="Committed d6be86b, Add stdio MCP server for tasks: mcp/devpulse_mcp.py and the .venv line in .gitignore. The grey suggestion: register it with claude mcp add." loading="lazy">
+      <figcaption>Two files. The grey line, <i>register it with claude mcp add</i>, is the next step. We do it ourselves in the terminal.</figcaption></figure>
+  </section>
+
+  <section id="register" data-rail="Register it">
+    <div class="prose">
+      <h2>Register the server</h2>
+      <p>Exit Claude with <code>/exit</code>. The command starts the server with the Python inside <code>.venv</code>, so the SDK is found.</p>
+    </div>
+    <div class="yousee"><b>Windows: type this in the terminal, one line at a time</b>claude mcp add devpulse -- .venv/Scripts/python.exe mcp/devpulse_mcp.py
+claude mcp get devpulse</div>
+    <div class="yousee"><b>Mac: type this in Terminal, one line at a time</b>claude mcp add devpulse -- .venv/bin/python mcp/devpulse_mcp.py
+claude mcp get devpulse</div>
+    <figure class="cc-shot"><img src="img/chapter11/register.png" alt="Added stdio MCP server devpulse to local config. claude mcp get devpulse: Scope Local config, Status Connected, Type stdio, Command .venv/Scripts/python.exe, Args mcp/devpulse_mcp.py." loading="lazy">
+      <figcaption>Local scope, stdio, Connected. Your own server, next to Playwright.</figcaption></figure>
+  </section>
+
+  <section id="use" data-rail="Just ask">
+    <div class="prose">
+      <h2>Now just ask</h2>
+      <p>Start <code>claude</code> again. No tool names this time. Talk like you would to a colleague.</p>
+    </div>
+    <div class="yousee"><b>Type this into Claude Code</b>log 45 minutes on fixing the streak bug, tag backend</div>
+    <figure class="cc-shot"><img src="img/chapter11/log.png" alt="Called devpulse. Logged Fix streak bug under the backend tag for 45 min on 2026-10-29." loading="lazy">
+      <figcaption><i>Called devpulse</i>: Claude picked your tool. It even made the title shorter.</figcaption></figure>
+    <div class="yousee"><b>Then type this</b>how did my week go?</div>
+    <figure class="cc-shot"><img src="img/chapter11/week.png" alt="Called devpulse. Your last 7 days, Oct 23 to 29: total 3 h 35 min across 4 tasks, 1 done; backend 2 h 45 min; planning 30 min; review 20 min. Backend took about 77% of your time. The grey suggestion: list today's tasks." loading="lazy">
+      <figcaption>The week, from <code>week_summary</code>. The grey <i>list today's tasks</i> is only a suggestion.</figcaption></figure>
+    <div class="prose">
+      <p>Did it really land in the app? Refresh DevPulse (F5) and scroll to the end.</p>
+    </div>
+    <figure class="cc-shot"><video class="clip" src="img/chapter11/app.mp4" poster="img/chapter11/app-poster.jpg" controls muted playsinline preload="metadata" aria-label="DevPulse is refreshed; the tab title changes from 2 h 50 min to 3 h 35 min; scrolling down shows the new row Fix streak bug, backend, 45 min, under 4 tasks, 1 done, total 3 h 35 min." width="1200" height="674"></video>
+      <figcaption>The new row is there: Fix streak bug, backend, 45 min. The tab title now says 3 h 35 min.</figcaption></figure>
+  </section>
+
+  <section id="cost" data-rail="What it costs">
+    <div class="prose">
+      <h2>What your own tools cost</h2>
+      <p>Each tool's name and description go into Claude's context, like any server's. Three small tools cost little. Keep them few and clearly named.</p>
+      <p>Claude now uses your app. Can it also hunt for bugs in many files at once? That is chapter 12.</p>
+    </div>
+  </section>
+
+  <section id="quickref" data-rail="Quick reference">
+    <div class="prose"><h2>Quick reference</h2><p>The prompts from this chapter, ready to copy: <a href="prompts.html#ch11">every prompt, chapter 11</a>.</p></div>
+    <div class="cheat"><table><tr><th>Command or key</th><th>What it does</th><th>Use it when</th></tr><tr><td><code>/plugin install name@claude-plugins-official</code></td><td>Installs a plugin from Anthropic&#x27;s marketplace</td><td>You want ready-made skills for a job</td></tr><tr><td><code>/mcp-server-dev:build-mcp-server …</code></td><td>Plans, writes and tests an MCP server</td><td>You want Claude to use your own app</td></tr><tr><td><code>claude mcp add name -- .venv/Scripts/python.exe file.py</code></td><td>Registers your server (Windows)</td><td>The server is written and tested</td></tr><tr><td><code>claude mcp add name -- .venv/bin/python file.py</code></td><td>Registers your server (Mac)</td><td>The same, on a Mac</td></tr><tr><td><code>claude mcp get name</code></td><td>Shows scope, status and command of one server</td><td>You want to check it connects</td></tr><tr><td><code>Just ask, in plain words</code></td><td>Claude picks the right tool and calls it</td><td>The server is connected</td></tr></table></div>
+  </section>
+
+  <section id="homework" data-rail="Your homework">
+    <div class="next">
+      <div class="lbl">Your homework</div>
+      <h3>Add a fourth tool</h3>
+      <p style="font-size:var(--fs-cap);color:var(--slate)"><b>The goal:</b> Claude can mark a task done without you opening the app.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>The steps:</b> ask Claude: <i>Add a mark_done(title) tool to mcp/devpulse_mcp.py, with the same validation, and test it.</i> Restart Claude, then say <i>mark the streak bug as done</i>. Refresh the app.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>Guess first:</b> will Claude call your new tool, or edit <code>data/tasks.json</code> by hand?</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:10px"><i>One question for you: which app of yours would you most like Claude to use directly?</i></p>
+    </div>
+  </section>
+
+  <section class="lwa-refs" id="refs"><div class="prose"><h2>References</h2><p>Where each command on this page comes from. Every screenshot is from our own recording on 29 Oct 2026, Claude Code 2.1.312.</p></div><ol><li><b>Anthropic</b> · <i>Discover and install plugins</i> <span class="why">/plugin, the official marketplace, and installing for you, a repo or this repo only.</span> <a href="https://code.claude.com/docs/en/discover-plugins" rel="noopener">https://code.claude.com/docs/en/discover-plugins</a></li><li><b>Anthropic</b> · <i>Connect Claude Code to tools via MCP</i> <span class="why">claude mcp add for a local stdio server, claude mcp get, and the scopes.</span> <a href="https://code.claude.com/docs/en/mcp" rel="noopener">https://code.claude.com/docs/en/mcp</a></li><li><b>Model Context Protocol</b> · <i>MCP Python SDK</i> <span class="why">The open-source package our server is built on (pip install mcp).</span> <a href="https://github.com/modelcontextprotocol/python-sdk" rel="noopener">https://github.com/modelcontextprotocol/python-sdk</a></li><li><b>Model Context Protocol</b> · <i>Build an MCP server</i> <span class="why">Why a stdio server must never print to stdout: that channel carries the messages.</span> <a href="https://modelcontextprotocol.io/docs/develop/build-server" rel="noopener">https://modelcontextprotocol.io/docs/develop/build-server</a></li><li><b>My own recording</b> · <i>29 Oct 2026, Windows 11</i> <span class="why">The server was written and tested in 2 m 18 s; the SDK installed was 2.3.0; Claude called devpulse for both questions.</span></li></ol></section>
+  <div class="lwa-chapnav"><a href="chapter10.html"><span class="k">← Previous</span><span class="t">Chapter 10 · Claude sees the app</span></a><button type="button" class="lwa-complete" data-lwa-complete><span class="k">Progress</span><span class="t">Mark this chapter complete</span></button><a href="chapter12.html"><span class="k">Next →</span><span class="t">Chapter 12 · A bug scan in parallel</span></a></div>
+  </main>
+</div>
+<footer class="foot"><div class="foot-in">
+  <img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building" style="height:36px">
+  <span><a href="../../index.html">Home</a> · <a href="../index.html">Series</a> · <a href="https://github.com/Aditya-402/devpulse" rel="noopener">DevPulse on GitHub</a></span>
+</div></footer>
+<script src="../../assets/site-config.js"></script>
+<script src="../../assets/analytics.js?v=1" defer></script>
+<script src="../../assets/progress.js?v=2"></script>
+<script src="../../assets/railspy.js?v=1"></script>
+<script>
+// each clip plays once when most of it is on screen, never when the reader asks for reduced motion (WE-141)
+(function () {
+  if (!('IntersectionObserver' in window) || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+  document.querySelectorAll('video.clip').forEach(function (v) {
+    var o = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { o.disconnect(); v.play().catch(function () {}); } });
+    }, { threshold: 0.6 });
+    o.observe(v);
+  });
+})();
+</script>
+</body>
+</html>

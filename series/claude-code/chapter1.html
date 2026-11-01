@@ -32,6 +32,7 @@
 <div class="shell">
   <nav class="rail" aria-label="Sections">
     <a class="rnav-back" href="index.html"><span class="ico">←</span><span class="lbl">All chapters</span></a>
+    <a class="rnav-back" href="prompts.html#ch1"><span class="ico">⧉</span><span class="lbl">Every prompt</span></a>
     <div class="rail-h">Contents</div>
     <a class="on" href="#wall">The wall</a>
     <a href="#start">Start it in a folder</a>
@@ -45,9 +46,15 @@
   </nav>
 
   <main>
+  <section id="video">
+    <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/OeSS3KgZBhE?rel=0" title="Episode 1 · Why Claude Code, when we already have ChatGPT?"
+      allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+    <p class="video-cap">Prefer to watch? This chapter goes with Episode 1 (3:53). <a href="https://www.youtube.com/watch?v=OeSS3KgZBhE" rel="noopener">Open it on YouTube</a>, where you can also leave a comment.</p>
+  </section>
+
   <section id="wall" data-rail="The wall">
     <div class="prereq">
-      <div class="pq"><b>Goes with Episode 1</b><a href="https://www.youtube.com/watch?v=OeSS3KgZBhE" target="_blank" rel="noopener">"Why Claude Code, when we already have ChatGPT?"</a>. The video shows it; this page teaches it again, at your own pace.</div><div class="pq"><b>In a hurry?</b><a href="#quickref">Jump to the quick reference</a>: every command and key in this chapter, what it does, and when to use it.</div>
+      <div class="pq"><b>Goes with Episode 1</b><a href="https://www.youtube.com/watch?v=OeSS3KgZBhE" target="_blank" rel="noopener">"Why Claude Code, when we already have ChatGPT?"</a>. Watch it just above, or read this page at your own pace. It teaches the same steps.</div><div class="pq"><b>In a hurry?</b><a href="#quickref">Jump to the quick reference</a>: every command and key in this chapter, what it does, and when to use it.</div><div class="pq"><b>Every prompt, ready to copy</b><a href="prompts.html#ch1">This chapter's prompts and commands</a>, each with a Copy button. Type them yourself first; copy if you are stuck or behind.</div>
       <div class="pq"><b>Build along</b>Every step has the exact line to type. Your answers from Claude will differ a little; that is normal.</div>
     </div>
     <div class="prose">
@@ -159,7 +166,7 @@ claude</div>
   </section>
 
   <section id="quickref" data-rail="Quick reference">
-    <div class="prose"><h2>Quick reference</h2></div>
+    <div class="prose"><h2>Quick reference</h2><p>The prompts from this chapter, ready to copy: <a href="prompts.html#ch1">every prompt, chapter 1</a>.</p></div>
     <div class="cheat"><table><tr><th>Command or key</th><th>What it does</th><th>Use it when</th></tr><tr><td><code>claude</code></td><td>Starts Claude Code in the folder you are in</td><td>You begin work on a project</td></tr><tr><td><code>Yes, I trust this folder</code></td><td>Lets Claude read, edit and run files in this folder</td><td>It is your own folder, or one you trust</td></tr><tr><td><code>/status</code></td><td>Shows the version, folder, account and model</td><td>You want to check what you are running</td></tr><tr><td><code>! command</code></td><td>Runs a terminal command without leaving Claude</td><td>You need to open or run something yourself</td></tr><tr><td><code>Esc</code></td><td>Stops Claude straight away; your request comes back</td><td>You change your mind while it works</td></tr><tr><td><code>@file</code></td><td>Points Claude at one file</td><td>Your question is about a particular file</td></tr><tr><td><code>/exit</code></td><td>Ends the session</td><td>You are done for now</td></tr></table></div>
   </section>
 
