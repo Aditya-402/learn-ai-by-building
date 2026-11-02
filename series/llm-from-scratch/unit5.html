@@ -213,17 +213,15 @@ header.top .top-in{max-width:1440px;margin:0 auto;padding:16px 28px;display:flex
 .masthead{background:var(--ground)}
 @media (max-width:640px){header.top .top-in{padding:12px 20px}}
 </style>
+<link rel="stylesheet" href="../../assets/nav.css?v=1">
 </head>
 <body data-lwa-course="llm-from-scratch" data-lwa-chapter="ch04" data-lwa-title="Unit 5 · Assembling a GPT">
-<header class="top">
-  <div class="top-in">
-      <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark-maroon.svg?v=1" alt="Learn AI by Building"></a>
-      <div class="lwa-brand-right">
-        <span class="lwa-tag"><a href="index.html">Series 01 · Build an LLM from Scratch</a></span>
-        <span data-lwa-auth></span>
-      </div>
-    </div>
-</header>
+<header class="top nav2"><div class="top-in">
+  <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark-maroon.svg?v=1" alt="Learn AI by Building — home"></a>
+  <nav class="nav2-links" aria-label="Main"><a href="../../index.html">Home</a><a href="../../series/index.html" aria-current="page">Series</a><a href="../../blog/index.html">Blog</a><a href="../../connect.html">Connect</a></nav>
+  <span class="nav2-auth" data-lwa-auth></span>
+  <details class="nav2-menu"><summary>Menu</summary><div class="m"><a href="../../index.html">Home</a><a href="../../series/index.html">Series</a><a href="../../blog/index.html">Blog</a><a href="../../connect.html">Connect</a><a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp channel</a><span class="nav2-auth-m" data-lwa-auth></span></div></details>
+</div></header>
 <header class="masthead">
   <div class="masthead-in">
     <div class="title-block">
@@ -613,6 +611,7 @@ header.top .top-in{max-width:1440px;margin:0 auto;padding:16px 28px;display:flex
     </ol>
   </section>
 
+  <section class="keep" aria-label="Follow along"><p class="follow">New chapters and episodes come out every week. Follow along on <a href="https://www.youtube.com/@learn-ai-by-building" rel="noopener">YouTube</a> or the <a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp channel</a>.</p></section>
   <div class="lwa-chapnav">
     <a href="unit4.html"><span class="k">← Previous</span><span class="t">Unit 4 · Causal Masking, Dropout &amp; Multi-Head</span></a>
     <button type="button" class="lwa-complete" data-lwa-complete><span class="k">Progress</span><span class="t">Mark this unit complete</span></button>
@@ -623,12 +622,11 @@ header.top .top-in{max-width:1440px;margin:0 auto;padding:16px 28px;display:flex
   </main>
 </div>
 
-<footer class="foot">
-  <div class="foot-in">
-    <img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building" style="height:36px">
-    <span>Learn AI by Building — Unit 5 · <a href="../../index.html" style="color:var(--accent)">Home</a> · <a href="index.html" style="color:var(--accent)">Series</a> · <a href="../../privacy.html" style="color:var(--accent)">Privacy</a></span>
-  </div>
-</footer>
+<footer class="nav2-foot"><div class="fi">
+  <a href="../../index.html"><img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building — home"></a>
+  <nav aria-label="Footer"><a href="../../index.html">Home</a><a href="../../series/index.html">Series</a><a href="../../blog/index.html">Blog</a><a href="../../connect.html">Connect</a><a href="https://www.youtube.com/@learn-ai-by-building" rel="noopener">YouTube</a><a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp</a><a href="../../privacy.html">Privacy</a></nav>
+  <span class="by">Learn AI by Building · by Adi (Aditya)</span>
+</div></footer>
 
 <script>
 "use strict";
@@ -1041,7 +1039,7 @@ addEventListener("resize",syncRail); syncRail();
 </script>
 <script src="../../assets/site-config.js"></script>
 <script src="../../assets/analytics.js?v=1" defer></script>
-<script src="../../assets/progress.js?v=2"></script>
+<script src="../../assets/progress.js?v=3"></script>
 <script src="../../assets/unitnav.js?v=1"></script>
 <script src="../../assets/stepper.js?v=3"></script>
 <script src="../../assets/spark.js?v=4" defer></script>

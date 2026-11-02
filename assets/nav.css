@@ -1,0 +1,48 @@
+/* One navigation for every page (Website book WE-154, 2 Nov 2026): the same top bar and footer everywhere, and one
+   quiet "follow along" line where a reader finishes. Written by studio/tools/site/nav.py; never a Subscribe button. */
+
+header.top.nav2{background:#3a1620;border-bottom:0}
+header.top.nav2 .top-in{max-width:1124px;margin:0 auto;padding:12px 28px;display:flex;align-items:center;gap:18px;flex-wrap:nowrap}
+header.top.nav2 .lwa-home{display:inline-flex;border:0}
+header.top.nav2 .lwa-home img{height:44px;display:block}
+.nav2-links{display:flex;gap:4px;margin-left:auto;align-items:center}
+.nav2-links a{color:#faf6ee;text-decoration:none;font:600 14px/1 var(--lwa-sans,system-ui,sans-serif);padding:9px 12px;border-radius:8px}
+.nav2-links a:hover,.nav2-links a[aria-current]{background:rgba(250,246,238,.12)}
+.nav2-auth:empty,.nav2-auth-m:empty{display:none}
+header.top.nav2 .lwa-auth{color:#faf6ee;font-size:13px}
+header.top.nav2 .lwa-auth button{background:transparent;color:#faf6ee;border:1px solid rgba(250,246,238,.35);border-radius:999px;
+  padding:8px 13px;font:600 13px var(--lwa-sans,system-ui,sans-serif);cursor:pointer;white-space:nowrap}
+header.top.nav2 .lwa-auth button:hover{border-color:#e3a63a}
+header.top.nav2 .lwa-user img{width:22px;height:22px;border-radius:50%;vertical-align:middle;margin-right:6px}
+.nav2-menu{display:none}
+.nav2-auth-m{display:none}
+@media (max-width:760px){
+  header.top.nav2 .top-in{padding:10px 16px;gap:10px;flex-wrap:wrap}
+  header.top.nav2 .lwa-home img{height:36px}
+  .nav2-links,.nav2-auth{display:none}
+  .nav2-menu{display:block;margin-left:auto}
+  .nav2-menu summary{list-style:none;cursor:pointer;color:#faf6ee;border:1px solid rgba(250,246,238,.4);border-radius:8px;
+    padding:8px 11px;font:600 13px var(--lwa-sans,system-ui,sans-serif)}
+  .nav2-menu summary::-webkit-details-marker{display:none}
+  .nav2-menu[open]{width:100%;order:9}
+  .nav2-menu[open] summary{display:inline-block;margin-bottom:6px}
+  .nav2-menu .m{display:grid;gap:2px;padding:4px 0 8px}
+  .nav2-menu .m a{color:#faf6ee;text-decoration:none;font:600 16px var(--lwa-sans,system-ui,sans-serif);padding:11px 6px;
+    border-top:1px solid rgba(250,246,238,.12)}
+  .nav2-auth-m{display:block;padding:12px 6px 4px;border-top:1px solid rgba(250,246,238,.12)}
+}
+
+/* where a reader finishes: one plain line, plain links */
+.keep{margin:30px 0 10px}
+.keep p.follow{margin:0 2px;font-size:14.5px;color:#554b58;line-height:1.55}
+.keep p.follow a{color:#5a3d5c;font-weight:600}
+.keep-wrap{max-width:820px;margin:0 auto;padding:0 20px}
+
+/* one footer everywhere */
+footer.nav2-foot{border-top:1px solid #e9dfcf;background:#fff;padding:26px 16px;margin-top:30px}
+footer.nav2-foot .fi{max-width:1124px;margin:0 auto;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  align-items:center;font-size:14px;color:#6a626e}
+footer.nav2-foot img{height:30px;display:block}
+footer.nav2-foot nav{display:flex;flex-wrap:wrap;gap:6px 14px}
+footer.nav2-foot a{color:#5a3d5c;text-decoration:none;font-weight:600}
+footer.nav2-foot .by{width:100%;font-size:13px}

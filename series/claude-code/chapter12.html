@@ -12,11 +12,14 @@
 <link rel="stylesheet" href="../../assets/unit.css?v=8">
 <link rel="stylesheet" href="../../assets/blog.css?v=7">
 <link rel="stylesheet" href="cc.css?v=4">
+<link rel="stylesheet" href="../../assets/nav.css?v=1">
 </head>
 <body data-lwa-course="claude-code" data-lwa-chapter="chapter12" data-lwa-title="Chapter 12 · A bug scan in parallel" data-lwa-taught="dynamic workflows; switching them on and choosing a size in /config; asking with &#x27;Use a workflow&#x27;; the approval prompt; /workflows to watch agents; the cost line (time, agents, tokens); saving a workflow to .claude/workflows/">
-<header class="top"><div class="top-in">
-  <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark-maroon.svg?v=1" alt="Learn AI by Building"></a>
-  <div class="lwa-brand-right"><span class="lwa-tag"><a href="index.html">Learn Claude Code by Building DevPulse</a></span><span data-lwa-auth></span></div>
+<header class="top nav2"><div class="top-in">
+  <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark-maroon.svg?v=1" alt="Learn AI by Building — home"></a>
+  <nav class="nav2-links" aria-label="Main"><a href="../../index.html">Home</a><a href="../../series/index.html" aria-current="page">Series</a><a href="../../blog/index.html">Blog</a><a href="../../connect.html">Connect</a></nav>
+  <span class="nav2-auth" data-lwa-auth></span>
+  <details class="nav2-menu"><summary>Menu</summary><div class="m"><a href="../../index.html">Home</a><a href="../../series/index.html">Series</a><a href="../../blog/index.html">Blog</a><a href="../../connect.html">Connect</a><a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp channel</a><span class="nav2-auth-m" data-lwa-auth></span></div></details>
 </div></header>
 <header class="masthead">
   <div class="masthead-in">
@@ -146,16 +149,18 @@
   </section>
 
   <section class="lwa-refs" id="refs"><div class="prose"><h2>References</h2><p>Where each command and file on this page comes from. Every screenshot is from our own recording on 29 Oct 2026, Claude Code 2.1.312.</p></div><ol><li><b>Anthropic</b> · <i>Claude Code settings</i> <span class="why">Where /config settings live, and project files under .claude/.</span> <a href="https://code.claude.com/docs/en/settings" rel="noopener">https://code.claude.com/docs/en/settings</a></li><li><b>Anthropic</b> · <i>Manage costs effectively</i> <span class="why">Why many agents mean many tokens, and how to keep an eye on them.</span> <a href="https://code.claude.com/docs/en/costs" rel="noopener">https://code.claude.com/docs/en/costs</a></li><li><b>My own recording</b> · <i>29 Oct 2026, Windows 11</i> <span class="why">The scan finished in 24 s with 4 agents and 44.2k tokens; streak.js came back with no findings, which Claude marked as unconfirmed.</span></li></ol></section>
+  <section class="keep" aria-label="Follow along"><p class="follow">New chapters and episodes come out every week. Follow along on <a href="https://www.youtube.com/@learn-ai-by-building" rel="noopener">YouTube</a> or the <a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp channel</a>.</p></section>
   <div class="lwa-chapnav"><a href="chapter11.html"><span class="k">← Previous</span><span class="t">Chapter 11 · DevPulse tools for Claude</span></a><button type="button" class="lwa-complete" data-lwa-complete><span class="k">Progress</span><span class="t">Mark this chapter complete</span></button><a href="chapter13.html"><span class="k">Next →</span><span class="t">Chapter 13 · Hooks that watch for us</span></a></div>
   </main>
 </div>
-<footer class="foot"><div class="foot-in">
-  <img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building" style="height:36px">
-  <span><a href="../../index.html">Home</a> · <a href="../index.html">Series</a> · <a href="https://github.com/Aditya-402/devpulse" rel="noopener">DevPulse on GitHub</a></span>
+<footer class="nav2-foot"><div class="fi">
+  <a href="../../index.html"><img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building — home"></a>
+  <nav aria-label="Footer"><a href="../../index.html">Home</a><a href="../../series/index.html">Series</a><a href="../../blog/index.html">Blog</a><a href="../../connect.html">Connect</a><a href="https://www.youtube.com/@learn-ai-by-building" rel="noopener">YouTube</a><a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp</a><a href="../../privacy.html">Privacy</a></nav>
+  <span class="by">Learn AI by Building · by Adi (Aditya)</span>
 </div></footer>
 <script src="../../assets/site-config.js"></script>
 <script src="../../assets/analytics.js?v=1" defer></script>
-<script src="../../assets/progress.js?v=2"></script>
+<script src="../../assets/progress.js?v=3"></script>
 <script src="../../assets/railspy.js?v=1"></script>
 <script>
 // each clip plays once when most of it is on screen, never when the reader asks for reduced motion (WE-141)

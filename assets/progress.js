@@ -135,15 +135,21 @@
     });
   }
 
+  // the page's own word (Website book WE-148): series chapters are chapters, blog posts are posts, study units are units
+  function word(course) {
+    return /^(claude-code|python-by-building)/.test(course || "") ? "chapter" : course === "blog" ? "post" : "unit";
+  }
+
   function render() {
     // mark-complete buttons
     document.querySelectorAll("[data-lwa-complete]").forEach(btn => {
       if (!COURSE || !CHAPTER) return;
       const done = !!rec(COURSE, CHAPTER).c;
+      const w = word(COURSE);
       btn.classList.toggle("is-done", done);
       btn.innerHTML = done
-        ? "<span class='k'>Progress</span><span class='t'>✓ Unit complete — well done</span>"
-        : "<span class='k'>Progress</span><span class='t'>Mark this unit complete</span>";
+        ? "<span class='k'>Progress</span><span class='t'>✓ " + w.charAt(0).toUpperCase() + w.slice(1) + " complete — well done</span>"
+        : "<span class='k'>Progress</span><span class='t'>Mark this " + w + " complete</span>";
     });
     // course progress bars / counts
     document.querySelectorAll("[data-lwa-progress]").forEach(el => {
@@ -153,7 +159,7 @@
       const bar = el.querySelector(".pbar i");
       if (bar && total) bar.style.width = Math.round(100 * doneN / total) + "%";
       const cnt = el.querySelector("[data-lwa-count]");
-      if (cnt) cnt.textContent = doneN + " of " + total + " units complete";
+      if (cnt) cnt.textContent = doneN + " of " + total + " " + word(course) + "s complete";
     });
     // chapter row statuses on hub pages
     document.querySelectorAll("[data-lwa-chapstat]").forEach(el => {
