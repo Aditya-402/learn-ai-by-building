@@ -50,9 +50,15 @@
   </nav>
 
   <main>
+  <section id="video">
+    <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/zmiptR61f1w?rel=0" title="Episode 3 · Does Claude Code remember decisions from a previous session?"
+      allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+    <p class="video-cap">Prefer to watch? This chapter goes with Episode 3 (5:08). <a href="https://www.youtube.com/watch?v=zmiptR61f1w" rel="noopener">Open it on YouTube</a>.</p>
+  </section>
+
   <section id="wall" data-rail="The wall">
     <div class="prereq">
-      <div class="pq"><b>Goes with Episode 3</b>"Why does Claude Code forget my decisions?". The video is being made. This page teaches the same steps, at your own pace.</div><div class="pq"><b>In a hurry?</b><a href="#quickref">Jump to the quick reference</a>: every command and key in this chapter, what it does, and when to use it.</div><div class="pq"><b>Every prompt, ready to copy</b><a href="prompts.html#ch3">This chapter's prompts and commands</a>, each with a Copy button. Type them yourself first; copy if you are stuck or behind.</div>
+      <div class="pq"><b>Goes with Episode 3</b><a href="https://www.youtube.com/watch?v=zmiptR61f1w" target="_blank" rel="noopener">"Does Claude Code remember decisions from a previous session?"</a>. Watch it just above, or read this page at your own pace. It teaches the same steps.</div><div class="pq"><b>In a hurry?</b><a href="#quickref">Jump to the quick reference</a>: every command and key in this chapter, what it does, and when to use it.</div><div class="pq"><b>Every prompt, ready to copy</b><a href="prompts.html#ch3">This chapter's prompts and commands</a>, each with a Copy button. Type them yourself first; copy if you are stuck or behind.</div>
       <div class="pq"><b>Where you are</b>DevPulse has a small server, a tasks file and two views, from chapter 2. The server runs in your second terminal tab.</div>
     </div>
     <div class="prose">
@@ -66,7 +72,7 @@ Add an edit button to each task, to change its title, tag and minutes.</div>
     <figure class="cc-shot"><img src="img/chapter3/rediscover.png" alt="A new session: Add an edit button to each task. Searched for 2 patterns, read 2 files. I'll refactor validation into reusable field helpers and let PATCH accept any of done/title/tag/minutes." loading="lazy">
       <figcaption>It searches and reads the files again, from the start. Everything we agreed in chapter 2 is gone.</figcaption></figure>
     <div class="prose">
-      <p>Say a new colleague joins every morning, a different one each day. Each one is clever. None of them was there yesterday.</p>
+      <p>Say a different caretaker looks after your house each day. Each one can see the house, but not your rules. So you leave a note on the door: water the flowers on Monday, keep the back door locked. Each new Claude session is like a new caretaker.</p>
     </div>
     <div class="cc-wall">
       <div class="lbl">The question for this chapter</div>
@@ -90,7 +96,7 @@ Add an edit button to each task, to change its title, tag and minutes.</div>
   <section id="init" data-rail="Write CLAUDE.md">
     <div class="prose">
       <h2>Write the project down with /init</h2>
-      <p>Claude Code reads one file at the start of every session: <code>CLAUDE.md</code>, in your project folder. Think of it as the note you leave for tomorrow's colleague. To write the first version, type one command.</p>
+      <p>Claude Code reads one file at the start of every session: <code>CLAUDE.md</code>, in your project folder. Think of it as the note on the door, for each new caretaker. To write the first version, type one command.</p>
     </div>
     <div class="yousee"><b>Type this into Claude Code</b>/init</div>
     <figure class="cc-shot"><img src="img/chapter3/init.png" alt="I created CLAUDE.md in the project root. It covers: Commands, how to run the server and the tests; Architecture; Testing. I only read the first 80 lines of index.html, so the frontend description is thin." loading="lazy">
@@ -188,12 +194,12 @@ Add an edit button to each task, to change its title, tag and minutes.</div>
       <p style="font-size:var(--fs-cap);color:var(--slate)"><b>The goal:</b> see one rule of yours change what Claude does.</p>
       <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>The steps:</b> ask Claude to add a rule to <code>CLAUDE.md</code>: <i>every button has a tooltip that says what it does.</i> Then <code>/exit</code>, start <code>claude</code> again, and ask for a "clear all done tasks" button.</p>
       <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>Guess first:</b> will the new button have a tooltip without you asking?</p>
-      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:10px"><i>One question for you: which of your own habits would you put in auto memory, and which in CLAUDE.md?</i></p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:10px"><i>One question for you, the same as in the video: what is the one rule you would put in your CLAUDE.md? And which of your own habits would go in auto memory instead?</i></p>
     </div>
   </section>
 
   <section class="lwa-refs" id="refs"><div class="prose"><h2>References</h2><p>Where each command and file on this page comes from. Every screenshot is from our own recording on 29 Oct 2026, Claude Code 2.1.312.</p></div><ol><li><b>Anthropic</b> · <i>Manage Claude&#x27;s memory</i> <span class="why">CLAUDE.md files, /init, auto memory, /memory, and how memory is loaded at the start of every session.</span> <a href="https://code.claude.com/docs/en/memory" rel="noopener">https://code.claude.com/docs/en/memory</a></li><li><b>Anthropic</b> · <i>Checkpointing</i> <span class="why">Esc Esc rewinds the code and the conversation to an earlier message.</span> <a href="https://code.claude.com/docs/en/checkpointing" rel="noopener">https://code.claude.com/docs/en/checkpointing</a></li><li><b>Anthropic</b> · <i>Interactive mode</i> <span class="why">/context shows what fills the conversation, memory files included.</span> <a href="https://code.claude.com/docs/en/interactive-mode" rel="noopener">https://code.claude.com/docs/en/interactive-mode</a></li><li><b>My own recording</b> · <i>29 Oct 2026, Windows 11</i> <span class="why">The same request, before and after CLAUDE.md; the second time it ran our test command and finished in 50 seconds.</span></li></ol></section>
-  <section class="keep" aria-label="Follow along"><p class="follow">New chapters and episodes come out every week. Follow along on <a href="https://www.youtube.com/@learn-ai-by-building" rel="noopener">YouTube</a> or the <a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp channel</a>.</p></section>
+  <section class="keep" aria-label="Follow along"><p class="follow">New chapters and episodes come out every week. Follow along on <a href="https://www.youtube.com/@learn-ai-by-building" rel="noopener">YouTube</a> or the <a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp channel</a>. Questions? Ask under the video on YouTube; I read every comment.</p></section>
   <div class="lwa-chapnav"><a href="chapter2.html"><span class="k">← Previous</span><span class="t">Chapter 2 · Tasks saved in a file, and a Week view</span></a><button type="button" class="lwa-complete" data-lwa-complete><span class="k">Progress</span><span class="t">Mark this chapter complete</span></button><a href="chapter4.html"><span class="k">Next →</span><span class="t">Chapter 4 · Undo, and git</span></a></div>
   </main>
 </div>
