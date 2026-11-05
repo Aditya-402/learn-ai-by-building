@@ -48,15 +48,22 @@
   </nav>
 
   <main>
+  <section id="video">
+    <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/I0TPBor-Ii8?rel=0" title="Episode 5 · It runs, but is it right?"
+      allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+    <p class="video-cap">Prefer to watch? This chapter goes with Episode 5 (5:42). <a href="https://www.youtube.com/watch?v=I0TPBor-Ii8" rel="noopener">Open it on YouTube</a>.</p>
+  </section>
+
   <section id="wall" data-rail="The wall">
     <div class="prereq">
-      <div class="pq"><b>Goes with Episode 5</b>"It runs, but is it right?". The video is being made. This page teaches the same steps, at your own pace.</div><div class="pq"><b>In a hurry?</b><a href="#quickref">Jump to the quick reference</a>: every command and key in this chapter, what it does, and when to use it.</div><div class="pq"><b>Every prompt, ready to copy</b><a href="prompts.html#ch5">This chapter's prompts and commands</a>, each with a Copy button. Type them yourself first; copy if you are stuck or behind.</div>
+      <div class="pq"><b>Goes with Episode 5</b><a href="https://www.youtube.com/watch?v=I0TPBor-Ii8" target="_blank" rel="noopener">"It runs, but is it right?"</a>. Watch it just above, or read this page at your own pace. It teaches the same steps.</div><div class="pq"><b>In a hurry?</b><a href="#quickref">Jump to the quick reference</a>: every command and key in this chapter, what it does, and when to use it.</div><div class="pq"><b>Every prompt, ready to copy</b><a href="prompts.html#ch5">This chapter's prompts and commands</a>, each with a Copy button. Type them yourself first; copy if you are stuck or behind.</div>
       <div class="pq"><b>Where you are</b>DevPulse with a server, two views and a git history, from chapter 4.</div>
+      <div class="pq"><b>Before you start</b>Node.js must be installed on your computer: the tests run with it. To check, run <code>node --version</code> in PowerShell or Terminal. If it is missing, <a href="https://nodejs.org/en/download" rel="noopener">download Node.js from its official site</a>.</div>
     </div>
     <div class="prose">
       <h2>It runs. Is it right?</h2>
       <p>The Week view shows a streak: how many days in a row you logged a task. It looks right. Nothing crashes.</p>
-      <p>But say you log a task at 00:30 at night, in India. Which day does it count for? If the code takes the date in UTC, it is still the previous day there. Your streak breaks, and nothing on screen tells you.</p>
+      <p>But say you log a task at 00:30 at night, in India. Which day does it count for? If the code takes the date in UTC, the world's reference time (5½ hours behind India), it is still the previous day there. Your streak breaks, and nothing on screen tells you.</p>
       <p>A program can run and still be wrong. Our eyes will not catch this one.</p>
     </div>
     <div class="cc-wall">
@@ -68,7 +75,8 @@
   <section id="tests" data-rail="Write the tests">
     <div class="prose">
       <h2>Write tests that check it for you</h2>
-      <p>A <b>test</b> is a small program that runs your code with known input and checks the answer. The streak lives inside <code>index.html</code>, where a test cannot reach it. So first it moves to its own file.</p>
+      <p>Say you bake a cake for a friend. It looks perfect, but you still taste a small piece before you serve it. Looking is not checking.</p>
+      <p>A <b>test</b> is that small taste, for code: a small program that runs your code with known input and checks the answer. The streak lives inside <code>index.html</code>, where a test cannot reach it. So first it moves to its own file.</p>
     </div>
     <div class="yousee"><b>Type this into Claude Code, as one line</b>Move the streak calculation out of index.html into streak.js so it can be tested, and write tests for it in streak.test.js with node's built-in test runner. Include a task logged at 00:30 India time (set TZ=Asia/Kolkata in the test). Don't change how the streak works.</div>
     <figure class="cc-shot"><img src="img/chapter5/moved.png" alt="Claude's summary: streak.js now holds the logic and index.html loads it; server.py got a /streak.js route, a small addition beyond what you asked for; streak.test.js sets TZ=Asia/Kolkata and tests a task at 00:30 IST plus no tasks, yesterday only, consecutive days, a gap, old tasks, duplicates and a month boundary." loading="lazy">
@@ -148,7 +156,7 @@ return best;</div>
   <section id="cost" data-rail="What it costs">
     <div class="prose">
       <h2>What tests cost</h2>
-      <p>Tests are more code to keep. When the streak rule changes, the tests change too. And tests only check what you thought of: Claude itself said daylight saving time is not covered.</p>
+      <p>Tests are more code to keep. When the streak rule changes, the tests change too. In return, a change that breaks something shows at once, as the 00:30 test did. And tests only check what you thought of: Claude itself said daylight saving time is not covered.</p>
       <p>Look at how much this chapter cost to build: two long prompts, a review and a browser check. Do that all day, and your plan's limit arrives early. That is chapter 6.</p>
     </div>
   </section>
@@ -161,16 +169,16 @@ return best;</div>
   <section id="homework" data-rail="Your homework">
     <div class="next">
       <div class="lbl">Your homework</div>
-      <h3>Make a test fail on purpose</h3>
+      <h3>Break it on purpose, and see if a test catches it</h3>
       <p style="font-size:var(--fs-cap);color:var(--slate)"><b>The goal:</b> see a test catch a mistake before you do.</p>
-      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>The steps:</b> in your <code>bestStreak</code>, change <code>d + 1</code> to <code>d + 2</code>. Run <code>! node --test</code>. Then put it back and run it again.</p>
-      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>Guess first:</b> how many tests will fail? One, or several?</p>
-      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:10px"><i>One question for you: which part of your own work runs fine but could still be wrong?</i></p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>The steps:</b> in your own project, ask Claude to write tests for one function. Then ask it to break that function on purpose, and run the tests. Want a warm-up first? In your <code>bestStreak</code>, change <code>d + 1</code> to <code>d + 2</code>, run <code>! node --test</code>, then put it back.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>Guess first:</b> will your tests notice? If none fail, your tests miss that case: ask Claude for one that would.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:10px"><i>One question for you, the same as in the video: which part of your own work runs fine, but could still be wrong?</i></p>
     </div>
   </section>
 
   <section class="lwa-refs" id="refs"><div class="prose"><h2>References</h2><p>Where each command and fact on this page comes from. Every screenshot is from our own recording on 29 Oct 2026, Claude Code 2.1.312, Node 24.</p></div><ol><li><b>Node.js</b> · <i>Test runner (node:test)</i> <span class="why">node --test finds and runs test files with no package to install.</span> <a href="https://nodejs.org/api/test.html" rel="noopener">https://nodejs.org/api/test.html</a></li><li><b>MDN</b> · <i>Date.prototype.toISOString()</i> <span class="why">toISOString always gives the date in UTC, which is why a task at 00:30 India time lands on the previous day.</span> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString" rel="noopener">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString</a></li><li><b>Anthropic</b> · <i>Output styles</i> <span class="why">The Learning style: Claude explains and leaves TODO(human) for you to write.</span> <a href="https://code.claude.com/docs/en/output-styles" rel="noopener">https://code.claude.com/docs/en/output-styles</a></li><li><b>My own recording</b> · <i>29 Oct 2026, Windows 11</i> <span class="why">Claude&#x27;s first streak code was already right; the test showed what one small change would break.</span></li></ol></section>
-  <section class="keep" aria-label="Follow along"><p class="follow">New chapters and episodes come out every week. Follow along on <a href="https://www.youtube.com/@learn-ai-by-building" rel="noopener">YouTube</a> or the <a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp channel</a>.</p></section>
+  <section class="keep" aria-label="Follow along"><p class="follow">New chapters and episodes come out every week. Follow along on <a href="https://www.youtube.com/@learn-ai-by-building" rel="noopener">YouTube</a> or the <a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp channel</a>. Questions? Ask under the video on YouTube; I read every comment.</p></section>
   <div class="lwa-chapnav"><a href="chapter4.html"><span class="k">← Previous</span><span class="t">Chapter 4 · Undo, and git</span></a><button type="button" class="lwa-complete" data-lwa-complete><span class="k">Progress</span><span class="t">Mark this chapter complete</span></button><a href="chapter6.html"><span class="k">Next →</span><span class="t">Chapter 6 · A lighter model and a shorter context</span></a></div>
   </main>
 </div>
