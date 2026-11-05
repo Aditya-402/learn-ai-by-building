@@ -48,20 +48,28 @@
   </nav>
 
   <main>
+  <section id="video">
+    <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/tJmvewv6WhQ?rel=0" title="Episode 4 · Why doesn&#x27;t rewind undo everything in Claude Code?"
+      allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+    <p class="video-cap">Prefer to watch? This chapter goes with Episode 4 (5:09). <a href="https://www.youtube.com/watch?v=tJmvewv6WhQ" rel="noopener">Open it on YouTube</a>.</p>
+  </section>
+
   <section id="wall" data-rail="The wall">
     <div class="prereq">
-      <div class="pq"><b>Goes with Episode 4</b>"How do I undo what Claude Code just did?". The video is being made. This page teaches the same steps, at your own pace.</div><div class="pq"><b>In a hurry?</b><a href="#quickref">Jump to the quick reference</a>: every command and key in this chapter, what it does, and when to use it.</div><div class="pq"><b>Every prompt, ready to copy</b><a href="prompts.html#ch4">This chapter's prompts and commands</a>, each with a Copy button. Type them yourself first; copy if you are stuck or behind.</div>
+      <div class="pq"><b>Goes with Episode 4</b><a href="https://www.youtube.com/watch?v=tJmvewv6WhQ" target="_blank" rel="noopener">"Why doesn&#x27;t rewind undo everything in Claude Code?"</a>. Watch it just above, or read this page at your own pace. It teaches the same steps.</div><div class="pq"><b>In a hurry?</b><a href="#quickref">Jump to the quick reference</a>: every command and key in this chapter, what it does, and when to use it.</div><div class="pq"><b>Every prompt, ready to copy</b><a href="prompts.html#ch4">This chapter's prompts and commands</a>, each with a Copy button. Type them yourself first; copy if you are stuck or behind.</div>
       <div class="pq"><b>Where you are</b>DevPulse with a server, two views, an edit button and a CLAUDE.md, from chapter 3.</div>
+      <div class="pq"><b>Before you start</b>Git must be installed on your computer. To check, run <code>git --version</code> in PowerShell or Terminal. If it is missing, <a href="https://git-scm.com/downloads" rel="noopener">download Git from its official site</a>. (Git is not GitHub: this chapter needs no GitHub account.)</div>
     </div>
     <div class="prose">
       <h2>A big change you did not want</h2>
+      <p>Before a big rewrite of your resume, you save a copy called <i>resume-old</i>. If the new one reads worse, you open the copy, and you are back. Today we look for that copy in Claude Code.</p>
       <p>So far every change was small. Now ask for a big one, in four words.</p>
     </div>
     <div class="yousee"><b>Type this into Claude Code</b>Give DevPulse a modern makeover.</div>
     <figure class="cc-shot"><img src="img/chapter4/makeover.png" alt="Claude's summary of the makeover: a gradient logo tile, an indigo-to-violet accent, pill-shaped tabs, rounder cards with soft shadows, highlighted rows and animated bars. Worked for 40s." loading="lazy">
       <figcaption>40 seconds later: a new logo, new colours, new shapes, new motion. A lot at once.</figcaption></figure>
     <figure class="cc-shot"><img src="img/chapter4/beforeafter.png" alt="Two versions of DevPulse side by side: on the left the plain page from chapter 3, on the right the makeover with a purple logo tile, a glow and pill-shaped tabs." loading="lazy">
-      <figcaption>Left, before. Right, after. Say you do not like it. It is not ours any more.</figcaption></figure>
+      <figcaption>Left, before. Right, after. The edit and delete buttons are gone too: hidden until you hover. We never asked for that.</figcaption></figure>
     <div class="cc-wall">
       <div class="lbl">The question for this chapter</div>
       <p>How do you get your project back exactly as it was, and how do you never lose a version you liked?</p>
@@ -75,7 +83,7 @@
     </div>
     <div class="yousee"><b>Type this into Claude Code</b>/diff</div>
     <figure class="cc-shot"><img src="img/chapter4/nodiff.png" alt="/diff: The diff panel shows git changes. The current directory isn't in a git repository." loading="lazy">
-      <figcaption>It cannot. <code>/diff</code> needs <b>git</b>, and our project has none yet. Remember this line; we fix it below.</figcaption></figure>
+      <figcaption>It cannot. <code>/diff</code> needs <b>git</b>, and our project has none yet. Remember this line; we set up git below.</figcaption></figure>
   </section>
 
   <section id="rewind" data-rail="Rewind, and its limit">
@@ -94,6 +102,7 @@
       <figcaption>Half back. The logo tile is gone. The glow and the pill tabs stayed.</figcaption></figure>
     <div class="prose">
       <p>Why? Look at how Claude worked. It changed the header with its edit tool. But it put most of the new style in with a shell command.</p>
+      <p>Claude changes files in two ways. With its own edit tool, rewind can undo it: the logo went back. With a shell command, rewind cannot: the colours stayed.</p>
     </div>
     <figure class="cc-shot"><img src="img/chapter4/shell.png" alt="During the makeover: Running a PowerShell command that reads a scratchpad style.css and writes it into index.html." loading="lazy">
       <figcaption>The makeover went in partly through a <b>shell command</b>. Rewind tracks Claude's edit tool, not commands.</figcaption></figure>
@@ -122,7 +131,7 @@ git config --global user.email "you@example.com"</div>
   <section id="plugin" data-rail="A ready-made plugin">
     <div class="prose">
       <h2>Commit with one command: a plugin</h2>
-      <p>Committing well means a good message every time. Anthropic publishes a free plugin for that. Plugins add ready-made commands to Claude Code.</p>
+      <p>Committing well means a good message every time. Anthropic publishes a free plugin for that. Plugins add ready-made commands to Claude Code, like installing an app on your phone.</p>
     </div>
     <div class="yousee"><b>Type this into Claude Code, then search for commit-commands</b>/plugin</div>
     <figure class="cc-shot"><img src="img/chapter4/plugin.png" alt="The plugin manager, Discover tab, search box with commit-commands; result: commit-commands, Anthropic Directory, 178.5K installs, Streamline your git workflow with simple commands for committing." loading="lazy">
@@ -144,6 +153,7 @@ git config --global user.email "you@example.com"</div>
     <div class="prose">
       <h2>What git costs</h2>
       <p>Git only keeps what you commit. A change you never committed is as unsafe as before. So commit each time something works, in small steps.</p>
+      <p>Two habits: commit before a big change, and write a short message each time. In return, every change has a way back.</p>
       <p>And a commit says the code runs. It does not say the code is right. In chapter 5 the streak looks right, passes our eyes, and is still wrong.</p>
     </div>
   </section>
@@ -156,16 +166,16 @@ git config --global user.email "you@example.com"</div>
   <section id="homework" data-rail="Your homework">
     <div class="next">
       <div class="lbl">Your homework</div>
-      <h3>Break it, then get it back with git</h3>
-      <p style="font-size:var(--fs-cap);color:var(--slate)"><b>The goal:</b> undo a change with git, not with rewind.</p>
-      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>The steps:</b> ask Claude to change the Add button to bright red. Do not commit. Then type: <i>Throw away all changes since the last commit.</i></p>
-      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>Guess first:</b> will Claude ask before throwing work away?</p>
-      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:10px"><i>One question for you: how often should you commit while building with Claude, and why?</i></p>
+      <h3>Your project, a big change, and a way back</h3>
+      <p style="font-size:var(--fs-cap);color:var(--slate)"><b>The goal:</b> undo a big change in your own project.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>The steps:</b> in your own project, ask Claude to set up git and make a first commit. Then ask for a big change you may not like, and undo it. (For an extra: ask Claude to change the Add button to bright red, do not commit, then type <i>Throw away all changes since the last commit.</i>)</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>Guess first:</b> will rewind be enough, or will you need git?</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:10px"><i>One question for you, the same as in the video: what was the last change you wished you could undo? And how often would you commit while building with Claude?</i></p>
     </div>
   </section>
 
   <section class="lwa-refs" id="refs"><div class="prose"><h2>References</h2><p>Where each command and behaviour on this page comes from. Every screenshot is from our own recording on 29 Oct 2026, Claude Code 2.1.312.</p></div><ol><li><b>Anthropic</b> · <i>Checkpointing</i> <span class="why">Esc Esc rewinds code and conversation; changes made by shell commands are not tracked, so they are not undone.</span> <a href="https://code.claude.com/docs/en/checkpointing" rel="noopener">https://code.claude.com/docs/en/checkpointing</a></li><li><b>Anthropic</b> · <i>Discover and install plugins</i> <span class="why">/plugin, the official marketplace claude-plugins-official, and install scopes.</span> <a href="https://code.claude.com/docs/en/discover-plugins" rel="noopener">https://code.claude.com/docs/en/discover-plugins</a></li><li><b>Git</b> · <i>git-scm.com, the Git documentation</i> <span class="why">What a commit, git log and .gitignore are.</span> <a href="https://git-scm.com/doc" rel="noopener">https://git-scm.com/doc</a></li><li><b>My own recording</b> · <i>29 Oct 2026, Windows 11</i> <span class="why">Rewind undid the edit-tool changes but not the shell command, so half the makeover stayed.</span></li></ol></section>
-  <section class="keep" aria-label="Follow along"><p class="follow">New chapters and episodes come out every week. Follow along on <a href="https://www.youtube.com/@learn-ai-by-building" rel="noopener">YouTube</a> or the <a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp channel</a>.</p></section>
+  <section class="keep" aria-label="Follow along"><p class="follow">New chapters and episodes come out every week. Follow along on <a href="https://www.youtube.com/@learn-ai-by-building" rel="noopener">YouTube</a> or the <a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp channel</a>. Questions? Ask under the video on YouTube; I read every comment.</p></section>
   <div class="lwa-chapnav"><a href="chapter3.html"><span class="k">← Previous</span><span class="t">Chapter 3 · Project rules Claude remembers</span></a><button type="button" class="lwa-complete" data-lwa-complete><span class="k">Progress</span><span class="t">Mark this chapter complete</span></button><a href="chapter5.html"><span class="k">Next →</span><span class="t">Chapter 5 · Tests for the streak</span></a></div>
   </main>
 </div>
