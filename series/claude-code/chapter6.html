@@ -26,7 +26,7 @@
     <div class="title-block">
       <div class="eyebrow">Learn Claude Code by Building DevPulse · Chapter 6</div>
       <h1>A lighter model and a shorter context</h1>
-      <p class="standfirst">After a morning of building, the usage bar is high, so where did it all go? By the end of this chapter, you will read your usage, pick a lighter model and effort, and keep the conversation short with three commands.</p>
+      <p class="standfirst">After a morning of building, the usage bar is high, so what is using it up? By the end of this chapter, you will read your usage, pick a lighter model and effort, and keep the conversation short with three commands.</p>
       <div class="facts"><div><b>One sitting</b>~7 min read, ~15 min to try along</div><div><b>You start from</b>chapter 5&#x27;s DevPulse</div><div><b>You build</b>no code: habits that save your limit</div><div><b>Chapter 6 of 15</b>spend less, get the same</div></div>
     </div>
   </div>
@@ -49,30 +49,41 @@
   </nav>
 
   <main>
+  <section id="video">
+    <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/QkSpY3GCNWk?rel=0" title="Episode 6 · What is using up my limit?"
+      allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+    <p class="video-cap">Prefer to watch? This chapter goes with Episode 6 (5:36). <a href="https://www.youtube.com/watch?v=QkSpY3GCNWk" rel="noopener">Open it on YouTube</a>.</p>
+  </section>
+
   <section id="wall" data-rail="The wall">
     <div class="prereq">
-      <div class="pq"><b>Goes with Episode 6</b>"Why did I hit my limit so fast?". The video is being made. This page teaches the same steps, at your own pace.</div><div class="pq"><b>In a hurry?</b><a href="#quickref">Jump to the quick reference</a>: every command and key in this chapter, what it does, and when to use it.</div><div class="pq"><b>Every prompt, ready to copy</b><a href="prompts.html#ch6">This chapter's prompts and commands</a>, each with a Copy button. Type them yourself first; copy if you are stuck or behind.</div>
+      <div class="pq"><b>Goes with Episode 6</b><a href="https://www.youtube.com/watch?v=QkSpY3GCNWk" target="_blank" rel="noopener">"What is using up my limit?"</a>. Watch it just above, or read this page at your own pace. It teaches the same steps.</div><div class="pq"><b>In a hurry?</b><a href="#quickref">Jump to the quick reference</a>: every command and key in this chapter, what it does, and when to use it.</div><div class="pq"><b>Every prompt, ready to copy</b><a href="prompts.html#ch6">This chapter's prompts and commands</a>, each with a Copy button. Type them yourself first; copy if you are stuck or behind.</div>
       <div class="pq"><b>Where you are</b>DevPulse with tests and a best streak, from chapter 5. This chapter changes no code.</div>
     </div>
     <div class="prose">
-      <h2>Where did my limit go?</h2>
-      <p>Your plan gives you a limit for each few hours and for the week. A morning of chapters 1 to 5 uses a lot of it.</p>
-      <p>Say you fill a big car for a short trip to the shop. It works, but you pay for a big car every time. Claude Code has the same choices: which model, how hard it thinks, and how much it carries along.</p>
+      <h2>What is using up my limit?</h2>
+      <p>Your plan gives you a limit for each few hours and for the week. A morning of chapters 1 to 5 uses a lot of it. In our run, a new session already showed 31% used before the first question.</p>
     </div>
     <div class="cc-wall">
       <div class="lbl">The question for this chapter</div>
-      <p>How do you see what you used, and use less for the same work?</p>
+      <p>What is using up your limit, and how can you do the same work with less of it?</p>
     </div>
   </section>
 
   <section id="usage" data-rail="Read your usage">
     <div class="prose">
       <h2>Read your usage</h2>
-      <p>Start Claude Code and look at the first lines. They show the model. On Pro and above, the default is <b>Opus</b>: the strongest model, and the one that uses your limit fastest.</p>
+      <p>Start Claude Code and look at the first lines. They show the model. In our run the default is <b>Opus</b>, "best for everyday, complex tasks". Your plan may show other models.</p>
     </div>
     <div class="yousee"><b>Type this into Claude Code</b>/usage</div>
     <figure class="cc-shot"><img src="img/chapter6/usage.png" alt="The Usage tab: Current session, a bar, 31% used, resets 12:10pm (Asia/Kolkata)." loading="lazy">
       <figcaption>The bar for the current session: <b>31% used</b>, and when it resets. Below it are bars for the week. Your plan shows its own bars.</figcaption></figure>
+    <div class="prose">
+      <p>This "current session" is your plan's window of a few hours. It counts all your recent work, not only the conversation you just opened.</p>
+      <p>Say you take a big car for a short trip to the shop. It gets you there, but you pay for a big car on every trip. Claude Code gives you the same kind of choices: which model does the work, how hard it thinks, and how much it carries along.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter6/bigcar.svg" alt="A big car on a short trip to a small shop." loading="lazy">
+      <figcaption>A big car for a short trip: it works, but you pay for the big car every time.</figcaption></figure>
   </section>
 
   <section id="model" data-rail="Pick a model">
@@ -96,18 +107,16 @@
     </div>
     <div class="yousee"><b>Type this into Claude Code</b>/effort</div>
     <figure class="cc-shot"><img src="img/chapter6/effort.png" alt="Effort: a slider from Faster to Smarter, low, medium, high, xhigh, max; left and right to adjust, Enter to confirm, s for this session only." loading="lazy">
-      <figcaption>A slider from <b>low</b> to <b>max</b>. Medium suits most building. Press <b>s</b> to keep it for this session only.</figcaption></figure>
+      <figcaption>A slider from <b>low</b> to <b>max</b>. Below the slider, a line shows the cost as you move: high costs about twice as much as medium, max about 10 times. Medium suits most building. Press <b>s</b> to keep it for this session only.</figcaption></figure>
   </section>
 
   <section id="context" data-rail="Watch the conversation">
     <div class="prose">
       <h2>Watch the conversation grow</h2>
-      <p>Every message you send carries the whole conversation with it. So a long conversation costs more on each new question. <code>/context</code> shows the size; watch the <b>Messages</b> line.</p>
+      <p>Every message you send carries the whole conversation with it. Claude counts it in tokens: small pieces of text, a few letters each. So a long conversation costs more on each new question. <code>/context</code> shows the size; watch the <b>Messages</b> line.</p>
       <p>We checked it three times: in a new session, after one big read-only question, and after <code>/clear</code>. This was the question:</p>
     </div>
     <div class="yousee"><b>The big question we asked</b>Read the project and list the open bugs and rough edges you can find, most serious first. Don't change anything.</div>
-    <div class="prose">
-    </div>
     <figure class="cc-shot"><img src="img/chapter6/messages.png" alt="Messages: 300 tokens in a new session; 33.5k tokens after one big question; 130 tokens after /clear." loading="lazy">
       <figcaption>One question took the conversation from 300 to 33,500 tokens. Every later question would carry all of it.</figcaption></figure>
     <figure class="cc-shot"><img src="img/chapter6/bugs.png" alt="The end of Claude's list of 13 bugs and rough edges, with an Insight box, and: I'd start with 1, 2 and 3, which are small server-side fixes." loading="lazy">
@@ -124,13 +133,13 @@
     <figure class="cc-shot"><img src="img/chapter6/compacted.png" alt="/compact keep the DevPulse decisions and the open bug list: Compacted; then it re-reads server.py, index.html, streak.js, .gitignore and test_server.py." loading="lazy">
       <figcaption><b class="ui">Compacted</b>. It then re-reads the files it needs. In our run that brought it from 33.5k to about 28k: smaller, not tiny.</figcaption></figure>
     <div class="prose">
-      <p><b>A quick question off the main task?</b> Ask it on the side. The answer is not added to the conversation.</p>
+      <p><b>A quick question off the main task?</b> Ask it on the side, without interrupting the main conversation.</p>
     </div>
     <div class="yousee"><b>Type this into Claude Code</b>/btw what does accept edits mode allow?</div>
     <figure class="cc-shot"><img src="img/chapter6/btw.png" alt="A side panel answers: accept edits mode stops Claude Code from asking before it changes files; file edits, simple shell commands like mkdir and mv; other commands still ask. Keys: c to copy, f to fork, Esc to close." loading="lazy">
       <figcaption>The answer opens in a panel. Press Esc, and the conversation is as before.</figcaption></figure>
     <div class="prose">
-      <p><b>Starting something unrelated?</b> Start clean. <code>/clear</code> empties the conversation, in the same folder. Your files, <code>CLAUDE.md</code> and memory stay. The last line in the picture above, 130 tokens, is after <code>/clear</code>.</p>
+      <p><b>Starting something unrelated?</b> Start clean. <code>/clear</code> empties the conversation, in the same folder. Your files, <code>CLAUDE.md</code> and memory stay, and the old session is not lost: it stays on disk, and <code>/resume</code> opens it again. The last reading in the Messages picture under <i>Watch the conversation grow</i>, 130 tokens, is after <code>/clear</code>.</p>
     </div>
     <div class="yousee"><b>Type this into Claude Code</b>/clear</div>
   </section>
@@ -155,12 +164,12 @@
       <p style="font-size:var(--fs-cap);color:var(--slate)"><b>The goal:</b> see what one question costs your conversation.</p>
       <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>The steps:</b> start <code>claude</code>, run <code>/context</code> and note the Messages line. Ask <i>Explain streak.js in five lines.</i> Run <code>/context</code> again.</p>
       <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>Guess first:</b> will Messages grow by hundreds, or by thousands?</p>
-      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:10px"><i>One question for you: which of your tasks today really needed the strongest model?</i></p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:10px"><i>One question for you, the same as in the video: which of your tasks today really needed the strongest model?</i></p>
     </div>
   </section>
 
   <section class="lwa-refs" id="refs"><div class="prose"><h2>References</h2><p>Where each command on this page comes from. Every screenshot is from our own recording on 29 Oct 2026, Claude Code 2.1.312.</p></div><ol><li><b>Anthropic</b> · <i>Manage costs effectively</i> <span class="why">What uses your plan: model, effort, the size of the conversation; /compact and /clear.</span> <a href="https://code.claude.com/docs/en/costs" rel="noopener">https://code.claude.com/docs/en/costs</a></li><li><b>Anthropic</b> · <i>Model configuration</i> <span class="why">/model, the default model per plan, and choosing a model for one session.</span> <a href="https://code.claude.com/docs/en/model-config" rel="noopener">https://code.claude.com/docs/en/model-config</a></li><li><b>Anthropic</b> · <i>Interactive mode</i> <span class="why">/usage, /effort, /context, /compact, /btw and /clear.</span> <a href="https://code.claude.com/docs/en/interactive-mode" rel="noopener">https://code.claude.com/docs/en/interactive-mode</a></li><li><b>My own recording</b> · <i>29 Oct 2026, Windows 11</i> <span class="why">One read-only question grew the conversation from 300 to 33,500 tokens.</span></li></ol></section>
-  <section class="keep" aria-label="Follow along"><p class="follow">New chapters and episodes come out every week. Follow along on <a href="https://www.youtube.com/@learn-ai-by-building" rel="noopener">YouTube</a> or the <a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp channel</a>.</p></section>
+  <section class="keep" aria-label="Follow along"><p class="follow">New chapters and episodes come out every week. Follow along on <a href="https://www.youtube.com/@learn-ai-by-building" rel="noopener">YouTube</a> or the <a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp channel</a>. Questions? Ask under the video on YouTube; I read every comment.</p></section>
   <div class="lwa-chapnav"><a href="chapter5.html"><span class="k">← Previous</span><span class="t">Chapter 5 · Tests for the streak</span></a><button type="button" class="lwa-complete" data-lwa-complete><span class="k">Progress</span><span class="t">Mark this chapter complete</span></button><a href="chapter7.html"><span class="k">Next →</span><span class="t">Chapter 7 · A standup skill</span></a></div>
   </main>
 </div>
