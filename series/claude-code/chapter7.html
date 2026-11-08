@@ -47,16 +47,25 @@
   </nav>
 
   <main>
+  <section id="video">
+    <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/fHA0DCZoSgI?rel=0" title="Episode 7 · How do I stop typing the same instructions?"
+      allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+    <p class="video-cap">Prefer to watch? This chapter goes with Episode 7 (4:40). <a href="https://www.youtube.com/watch?v=fHA0DCZoSgI" rel="noopener">Open it on YouTube</a>.</p>
+  </section>
+
   <section id="wall" data-rail="The wall">
     <div class="prereq">
-      <div class="pq"><b>Goes with Episode 7</b>"How do I stop typing the same instructions?". The video is being made. This page teaches the same steps, at your own pace.</div><div class="pq"><b>In a hurry?</b><a href="#quickref">Jump to the quick reference</a>: every command and key in this chapter, what it does, and when to use it.</div><div class="pq"><b>Every prompt, ready to copy</b><a href="prompts.html#ch7">This chapter's prompts and commands</a>, each with a Copy button. Type them yourself first; copy if you are stuck or behind.</div>
+      <div class="pq"><b>Goes with Episode 7</b><a href="https://www.youtube.com/watch?v=fHA0DCZoSgI" target="_blank" rel="noopener">"How do I stop typing the same instructions?"</a>. Watch it just above, or read this page at your own pace. It teaches the same steps.</div><div class="pq"><b>In a hurry?</b><a href="#quickref">Jump to the quick reference</a>: every command and key in this chapter, what it does, and when to use it.</div><div class="pq"><b>Every prompt, ready to copy</b><a href="prompts.html#ch7">This chapter's prompts and commands</a>, each with a Copy button. Type them yourself first; copy if you are stuck or behind.</div>
       <div class="pq"><b>Where you are</b>DevPulse with tests and a git history, from chapters 1 to 6. The server runs in your second tab.</div>
     </div>
     <div class="prose">
       <h2>The same instruction, every morning</h2>
+      <p>In chapter 6 we found one more cost: the same instructions, typed again and again.</p>
       <p>Say your team has a standup every morning. Before it, you type the same thing into Claude: read today's tasks, read yesterday's commits, write three lines.</p>
       <p>It works. But it is the same long sentence every day, and some days you forget a part of it.</p>
     </div>
+    <figure class="cc-shot"><img src="img/chapter7/everyday.svg" alt="Three calendar days, Mon, Tue and Wed, each with the same sticky note: tasks + commits, 3 lines." loading="lazy">
+      <figcaption>Monday, Tuesday, Wednesday: the same note every day.</figcaption></figure>
     <div class="cc-wall">
       <div class="lbl">The question for this chapter</div>
       <p>How do you write an instruction down once, and run it with one short command?</p>
@@ -67,7 +76,10 @@
     <div class="prose">
       <h2>Skills already built in</h2>
       <p>Type <code>/</code> in Claude Code. A list opens. Some lines are commands you know, like <code>/init</code>. Others are <b>skills</b>: written instructions Claude follows for one kind of job.</p>
+      <p>Say you keep a recipe card in your kitchen. You write it once, and whoever cooks follows the same steps every time. A skill is that card, for Claude.</p>
     </div>
+    <figure class="cc-shot"><img src="img/chapter7/recipe.svg" alt="A handwritten chai recipe card with four numbered steps, pinned by a magnet, and a cup of tea beside it." loading="lazy">
+      <figcaption>Written once, followed the same way every time.</figcaption></figure>
     <figure class="cc-shot"><img src="img/chapter7/slash.png" alt="The / menu: /commit-commands:commit (from the plugin), /verify, /init, /add-dir, each with a one-line description." loading="lazy">
       <figcaption>Type <code>/</code> and keep typing to filter. Built-in skills, plugin commands and your own skills all appear here.</figcaption></figure>
     <div class="prose">
@@ -128,7 +140,7 @@
     <div class="prose">
       <h2>What a skill costs</h2>
       <p>A skill's name and description are loaded into every session, so a long list of skills costs a little each time. Keep each description short and exact.</p>
-      <p>And a skill still needs you to open Claude and type <code>/standup</code>. What if the standup were ready before you even started Claude? That is chapter 8.</p>
+      <p>And a skill still needs you to open Claude. What if the standup were ready before you even started Claude? That is chapter 8.</p>
     </div>
   </section>
 
@@ -143,13 +155,13 @@
       <h3>Turn your own repeat into a skill</h3>
       <p style="font-size:var(--fs-cap);color:var(--slate)"><b>The goal:</b> one instruction you type often becomes one command.</p>
       <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>The steps:</b> pick an instruction you typed more than twice this week. Ask Claude: <i>Create a project skill called … in .claude/skills/…/SKILL.md that …</i>. Read the file with <code>! cat</code>, then run it.</p>
-      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>Guess first:</b> will Claude follow your rules from CLAUDE.md inside the skill too?</p>
-      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:10px"><i>One question for you: which of your daily instructions should only you be allowed to start?</i></p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>Guess first:</b> will Claude use your skill on its own, without you typing it? Then try it: ask for a standup in plain words, without <code>/standup</code>.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:10px"><i>One question for you, the same as in the video: which instruction do you type most often, that should be a skill?</i></p>
     </div>
   </section>
 
   <section class="lwa-refs" id="refs"><div class="prose"><h2>References</h2><p>Where each command and file on this page comes from. Every screenshot is from our own recording on 29 Oct 2026, Claude Code 2.1.312.</p></div><ol><li><b>Anthropic</b> · <i>Agent skills in Claude Code</i> <span class="why">What a skill is, where project and personal skills live, SKILL.md&#x27;s name and description, and disable-model-invocation.</span> <a href="https://code.claude.com/docs/en/skills" rel="noopener">https://code.claude.com/docs/en/skills</a></li><li><b>Anthropic</b> · <i>Slash commands</i> <span class="why">The / menu: built-in commands, skills and plugin commands in one list.</span> <a href="https://code.claude.com/docs/en/slash-commands" rel="noopener">https://code.claude.com/docs/en/slash-commands</a></li><li><b>My own recording</b> · <i>29 Oct 2026, Windows 11</i> <span class="why">The skill was written in 16 seconds; /standup ran as a command straight away.</span></li></ol></section>
-  <section class="keep" aria-label="Follow along"><p class="follow">New chapters and episodes come out every week. Follow along on <a href="https://www.youtube.com/@learn-ai-by-building" rel="noopener">YouTube</a> or the <a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp channel</a>.</p></section>
+  <section class="keep" aria-label="Follow along"><p class="follow">New chapters and episodes come out every week. Follow along on <a href="https://www.youtube.com/@learn-ai-by-building" rel="noopener">YouTube</a> or the <a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp channel</a>. Questions? Ask under the video on YouTube; I read every comment.</p></section>
   <div class="lwa-chapnav"><a href="chapter6.html"><span class="k">← Previous</span><span class="t">Chapter 6 · A lighter model and a shorter context</span></a><button type="button" class="lwa-complete" data-lwa-complete><span class="k">Progress</span><span class="t">Mark this chapter complete</span></button><a href="chapter8.html"><span class="k">Next →</span><span class="t">Chapter 8 · A standup that runs on its own</span></a></div>
   </main>
 </div>
