@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="cc.css?v=4">
 <link rel="stylesheet" href="../../assets/nav.css?v=1">
 </head>
-<body data-lwa-course="claude-code" data-lwa-chapter="chapter8" data-lwa-title="Chapter 8 · A standup that runs on its own" data-lwa-taught="headless mode: claude -p; piping text into claude -p; --allowedTools to allow only what a job needs; a new session cannot see your terminal history; wrapping a command in a script; Task Scheduler (mentioned)">
+<body data-lwa-course="claude-code" data-lwa-chapter="chapter8" data-lwa-title="Chapter 8 · A standup that runs on its own" data-lwa-taught="headless mode: claude -p; piping text into claude -p; --allowedTools to allow only what a job needs; a new session cannot see your terminal history; wrapping a command in a script; scheduling it: schtasks on Windows, cron on a Mac">
 <header class="top nav2"><div class="top-in">
   <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark-maroon.svg?v=1" alt="Learn AI by Building — home"></a>
   <nav class="nav2-links" aria-label="Main"><a href="../../index.html">Home</a><a href="../../series/index.html" aria-current="page">Series</a><a href="../../blog/index.html">Blog</a><a href="../../connect.html">Connect</a></nav>
@@ -48,16 +48,24 @@
   </nav>
 
   <main>
+  <section id="video">
+    <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/Xeo2ei779sM?rel=0" title="Episode 8 · Can Claude Code work without a chat?"
+      allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+    <p class="video-cap">Prefer to watch? This chapter goes with Episode 8 (4:05). <a href="https://www.youtube.com/watch?v=Xeo2ei779sM" rel="noopener">Open it on YouTube</a>.</p>
+  </section>
+
   <section id="wall" data-rail="The wall">
     <div class="prereq">
-      <div class="pq"><b>Goes with Episode 8</b>"Can Claude Code work without a chat?". The video is being made. This page teaches the same steps, at your own pace.</div><div class="pq"><b>In a hurry?</b><a href="#quickref">Jump to the quick reference</a>: every command and key in this chapter, what it does, and when to use it.</div><div class="pq"><b>Every prompt, ready to copy</b><a href="prompts.html#ch8">This chapter's prompts and commands</a>, each with a Copy button. Type them yourself first; copy if you are stuck or behind.</div>
+      <div class="pq"><b>Goes with Episode 8</b><a href="https://www.youtube.com/watch?v=Xeo2ei779sM" target="_blank" rel="noopener">"Can Claude Code work without a chat?"</a>. Watch it just above, or read this page at your own pace. It teaches the same steps.</div><div class="pq"><b>In a hurry?</b><a href="#quickref">Jump to the quick reference</a>: every command and key in this chapter, what it does, and when to use it.</div><div class="pq"><b>Every prompt, ready to copy</b><a href="prompts.html#ch8">This chapter's prompts and commands</a>, each with a Copy button. Type them yourself first; copy if you are stuck or behind.</div>
       <div class="pq"><b>Where you are</b>DevPulse has the /standup skill and a Standup panel, from chapter 7. Work in PowerShell in your project folder, outside Claude.</div>
     </div>
     <div class="prose">
       <h2>The standup should be ready before you are</h2>
       <p>In chapter 7, <code>/standup</code> made the standup one command. But you still open Claude, wait for it, and type the command.</p>
-      <p>Say you want the standup ready the moment you sit down. Nobody opens a chat at 8 in the morning to ask for it.</p>
+      <p>Say your milk packet is at the door every morning, before you wake up. You never call anyone for it; it just arrives. That is the standup you want: ready before you sit down, without asking each time.</p>
     </div>
+    <figure class="cc-shot"><img src="img/chapter8/milk.svg" alt="A hand-drawn front door at 6 am, with a cloth bag on the handle holding a milk packet, and a rising sun." loading="lazy">
+      <figcaption>The milk is at the door before you wake up. Nobody asked for it that morning.</figcaption></figure>
     <div class="cc-wall">
       <div class="lbl">The question for this chapter</div>
       <p>Can Claude Code do a job without a chat window at all?</p>
@@ -115,7 +123,25 @@
     <figure class="cc-shot"><img src="img/chapter8/panel.png" alt="DevPulse's Today view: the Standup panel shows the new Yesterday, Today and Blockers lines." loading="lazy">
       <figcaption>Refresh the app: the panel shows the new standup.</figcaption></figure>
     <div class="prose">
-      <p>Windows Task Scheduler can run <code>standup.ps1</code> every morning by itself. We do not set that up here, but it is the next step if you want it.</p>
+      <h2>Every morning, by itself</h2>
+      <p>Now the morning part. One line asks Windows Task Scheduler to run the script every day at nine. <code>$PWD</code> is the folder you are in, so run it from <code>projects\devpulse</code>.</p>
+    </div>
+    <div class="yousee"><b>Windows: type this in PowerShell</b>schtasks /create /tn "DevPulse standup" /tr "powershell -File $PWD\standup.ps1" /sc daily /st 09:00</div>
+    <div class="yousee"><b>Check it, then run it once now</b>schtasks /query /tn "DevPulse standup"
+schtasks /run /tn "DevPulse standup"</div>
+    <div class="prose">
+      <p>Windows shows the next run: <code>9:00:00 AM</code>, <code>Ready</code>. When the task runs, a window opens by itself. That is the script running Claude: it writes the standup, and closes.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter8/schedule.png" alt="schtasks /create: SUCCESS. schtasks /query: DevPulse standup, Next Run Time 9:00:00 AM, Ready. schtasks /run: SUCCESS, attempted to run." loading="lazy">
+      <figcaption>The task is made, the next run is 9:00 AM, and we run it once now.</figcaption></figure>
+    <figure class="cc-shot"><img src="img/chapter8/scheduled-run.png" alt="A window titled claude opens over PowerShell by itself and prints: I wrote the standup to data/standup.md, with the Yesterday, Today and Blockers lines." loading="lazy">
+      <figcaption>The window that opens by itself: the script runs Claude, and Claude writes the standup. Then it closes.</figcaption></figure>
+    <figure class="cc-shot"><img src="img/chapter8/panel-scheduled.png" alt="DevPulse's Today view after a refresh: the Standup panel shows the standup the scheduled run wrote." loading="lazy">
+      <figcaption>When we refresh the app, a new standup is waiting, and we typed nothing in Claude. We recorded this on 8 Nov, so the open tasks from 29 Oct show as blockers.</figcaption></figure>
+    <div class="yousee"><b>Mac: type this in Terminal</b>(crontab -l 2>/dev/null; echo "0 9 * * * cd $PWD &amp;&amp; PATH=$HOME/.local/bin:\$PATH ./standup.sh") | crontab -</div>
+    <div class="prose">
+      <p>On a Mac, cron does the same job: every day at nine, go to this folder and run <code>standup.sh</code>. The <code>PATH</code> part is there because cron does not know where <code>claude</code> is installed.</p>
+      <p>Either way, the computer has to be on at nine. On Windows, you also have to be signed in; a locked screen is fine. If not, that morning's run is skipped. To stop it later: <code>schtasks /delete /tn "DevPulse standup"</code> on Windows, <code>crontab -e</code> and delete the line on a Mac.</p>
     </div>
     <div class="confuse">
       <div class="lbl">Careful here</div>
@@ -127,7 +153,7 @@
     <div class="prose">
       <h2>What headless costs</h2>
       <p>Each run uses your plan, like any request. And nobody watches it: if the job goes wrong, you find out later. That is why the allowed tools are kept so small.</p>
-      <p>There is a bigger problem coming. The code has grown, and so far the same Claude that wrote it is the one that checks it. In chapter 9 we get a second pair of eyes.</p>
+      <p>There is a bigger problem coming. The code has grown, and so far the same Claude that wrote it is the one that checks it. In chapter 9 we get a second pair of eyes. Claude Code calls it a subagent.</p>
     </div>
   </section>
 
@@ -147,8 +173,8 @@
     </div>
   </section>
 
-  <section class="lwa-refs" id="refs"><div class="prose"><h2>References</h2><p>Where each command and option on this page comes from. Every screenshot is from our own recording on 29 Oct 2026, Claude Code 2.1.312.</p></div><ol><li><b>Anthropic</b> · <i>Run Claude Code programmatically (headless)</i> <span class="why">claude -p: one request, an answer printed, no chat; reading from a pipe; output formats.</span> <a href="https://code.claude.com/docs/en/headless" rel="noopener">https://code.claude.com/docs/en/headless</a></li><li><b>Anthropic</b> · <i>CLI reference</i> <span class="why">--allowedTools and its patterns, such as Bash(git log:*).</span> <a href="https://code.claude.com/docs/en/cli-reference" rel="noopener">https://code.claude.com/docs/en/cli-reference</a></li><li><b>Microsoft</b> · <i>about_Execution_Policies</i> <span class="why">Why Windows may block a .ps1 script, and how to allow it.</span> <a href="https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_execution_policies" rel="noopener">https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_execution_policies</a></li><li><b>My own recording</b> · <i>29 Oct 2026, Windows 11</i> <span class="why">Both headless commands worked as written in PowerShell; no execution-policy error on this PC.</span></li></ol></section>
-  <section class="keep" aria-label="Follow along"><p class="follow">New chapters and episodes come out every week. Follow along on <a href="https://www.youtube.com/@learn-ai-by-building" rel="noopener">YouTube</a> or the <a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp channel</a>.</p></section>
+  <section class="lwa-refs" id="refs"><div class="prose"><h2>References</h2><p>Where each command and option on this page comes from. Every screenshot is from our own recording on 29 Oct 2026, Claude Code 2.1.312, except the three schedule pictures, recorded on 8 Nov 2026.</p></div><ol><li><b>Anthropic</b> · <i>Run Claude Code programmatically (headless)</i> <span class="why">claude -p: one request, an answer printed, no chat; reading from a pipe; output formats.</span> <a href="https://code.claude.com/docs/en/headless" rel="noopener">https://code.claude.com/docs/en/headless</a></li><li><b>Anthropic</b> · <i>CLI reference</i> <span class="why">--allowedTools and its patterns, such as Bash(git log:*).</span> <a href="https://code.claude.com/docs/en/cli-reference" rel="noopener">https://code.claude.com/docs/en/cli-reference</a></li><li><b>Microsoft</b> · <i>about_Execution_Policies</i> <span class="why">Why Windows may block a .ps1 script, and how to allow it.</span> <a href="https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_execution_policies" rel="noopener">https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_execution_policies</a></li><li><b>My own recording</b> · <i>29 Oct 2026, Windows 11</i> <span class="why">Both headless commands worked as written in PowerShell; no execution-policy error on this PC.</span></li></ol></section>
+  <section class="keep" aria-label="Follow along"><p class="follow">New chapters and episodes come out every week. Follow along on <a href="https://www.youtube.com/@learn-ai-by-building" rel="noopener">YouTube</a> or the <a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp channel</a>. Questions? Ask under the video on YouTube; I read every comment.</p></section>
   <div class="lwa-chapnav"><a href="chapter7.html"><span class="k">← Previous</span><span class="t">Chapter 7 · A standup skill</span></a><button type="button" class="lwa-complete" data-lwa-complete><span class="k">Progress</span><span class="t">Mark this chapter complete</span></button><a href="chapter9.html"><span class="k">Next →</span><span class="t">Chapter 9 · A code reviewer of our own</span></a></div>
   </main>
 </div>
