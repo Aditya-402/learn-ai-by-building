@@ -48,30 +48,39 @@
   </nav>
 
   <main>
+  <section id="video">
+    <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/2tsK3JxVsaM?rel=0" title="Episode 9 · How do I get a second pair of eyes in Claude Code?"
+      allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+    <p class="video-cap">Prefer to watch? This chapter goes with Episode 9 (5:08). <a href="https://www.youtube.com/watch?v=2tsK3JxVsaM" rel="noopener">Open it on YouTube</a>.</p>
+  </section>
+
   <section id="wall" data-rail="The wall">
     <div class="prereq">
-      <div class="pq"><b>Goes with Episode 9</b>"How do I get a second pair of eyes?". The video is being made. This page teaches the same steps, at your own pace.</div><div class="pq"><b>In a hurry?</b><a href="#quickref">Jump to the quick reference</a>: every command and key in this chapter, what it does, and when to use it.</div><div class="pq"><b>Every prompt, ready to copy</b><a href="prompts.html#ch9">This chapter's prompts and commands</a>, each with a Copy button. Type them yourself first; copy if you are stuck or behind.</div>
+      <div class="pq"><b>Goes with Episode 9</b><a href="https://www.youtube.com/watch?v=2tsK3JxVsaM" target="_blank" rel="noopener">"How do I get a second pair of eyes in Claude Code?"</a>. Watch it just above, or read this page at your own pace. It teaches the same steps.</div><div class="pq"><b>In a hurry?</b><a href="#quickref">Jump to the quick reference</a>: every command and key in this chapter, what it does, and when to use it.</div><div class="pq"><b>Every prompt, ready to copy</b><a href="prompts.html#ch9">This chapter's prompts and commands</a>, each with a Copy button. Type them yourself first; copy if you are stuck or behind.</div>
       <div class="pq"><b>Where you are</b>DevPulse with tests, a standup skill and standup.ps1, from chapters 1 to 8. Start <code>claude</code> in your project folder.</div>
     </div>
     <div class="prose">
       <h2>Who checks the code?</h2>
       <p>DevPulse has a server, a page, a streak and a standup now. Claude wrote most of it, and when we asked for checks, the same Claude did those too.</p>
-      <p>At work, nobody reviews their own pull request. Someone else reads it, with fresh eyes.</p>
+      <p>Say you wrote your resume and read it three times before sending it. Then a friend reads it once, and circles a spelling mistake in the very first line. You kept reading what you meant to write; your friend reads only what is on the page. And your friend does not rewrite it: they mark the mistake, and you fix it.</p>
     </div>
+    <figure class="cc-shot"><img src="img/chapter9/resume.svg" alt="A hand-drawn resume page with the heading Sofware Developer. A friend with a pen has circled Sofware in mustard and written sp? under it." loading="lazy">
+      <figcaption>Fresh eyes read what is on the page. The friend marks the mistake; you fix it.</figcaption></figure>
     <div class="cc-wall">
       <div class="lbl">The question for this chapter</div>
-      <p>Can Claude Code give you a second pair of eyes?</p>
+      <p>How do you get a second pair of eyes on your code, from someone who did not write it?</p>
     </div>
   </section>
 
   <section id="explore" data-rail="A helper: Explore">
     <div class="prose">
       <h2>A helper with its own context</h2>
-      <p>A <b>subagent</b> is a helper Claude starts for one job. It works in its own context and sends back only the answer, so your session stays short. One is built in: <b>Explore</b>, which only reads.</p>
+      <p>Claude Code can give you a friend like that. Claude can start a helper for one job, and that helper works in its own context. It starts fresh, without your long conversation, and sends back only its answer, so your own session stays short.</p>
+      <p>That helper is what Claude Code calls a <b>subagent</b>. One is built in: <b>Explore</b>, which only reads.</p>
     </div>
     <div class="yousee"><b>Type this into Claude Code</b>Use the Explore subagent to find where the streak is calculated and what calls it.</div>
     <figure class="cc-shot"><img src="img/chapter9/explore.png" alt="The Explore result: index.html loads /streak.js and calls computeStreak and bestStreak in renderWeek; server.py only serves the file; streak.test.js covers both functions. Agent Find streak calculation and callers finished in 19s." loading="lazy">
-      <figcaption>19 seconds: the file, the lines, and every caller. It also says what it did not search. The grey <i>Run the streak tests</i> is only a suggestion.</figcaption></figure>
+      <figcaption>19 seconds: everything that uses the streak code, with line numbers, and what it did not search. The grey <i>Run the streak tests</i> is only a suggestion.</figcaption></figure>
   </section>
 
   <section id="create" data-rail="Make your own reviewer">
@@ -96,8 +105,8 @@
       <p>Call the reviewer by its name, and give it one file.</p>
     </div>
     <div class="yousee"><b>Type this into Claude Code</b>Use the code-reviewer subagent to review server.py.</div>
-    <figure class="cc-shot"><img src="img/chapter9/review.png" alt="code-reviewer(Review server.py): Backgrounded agent. The code-reviewer subagent is now reviewing server.py in the background. Waiting for 1 background agent to finish." loading="lazy">
-      <figcaption>It runs in the background, so you can keep typing while it reads.</figcaption></figure>
+    <figure class="cc-shot"><img src="img/chapter9/review.png" alt="code-reviewer(Review server.py): Backgrounded agent. The code-reviewer subagent is now reviewing server.py in the background. Waiting for 1 background agent to finish. At the bottom: main, and code-reviewer Review server.py, 24s, 12.4k tokens." loading="lazy">
+      <figcaption>It runs in the background: the bottom line shows your main session, and the subagent beside it, with its own token count. The grey <i>fix the issues it finds</i> is only a suggestion.</figcaption></figure>
     <figure class="cc-shot"><img src="img/chapter9/findings.png" alt="The end of the review: finding 6, file reads not fully guarded; 7, readability; 8, a failed send on a broken pipe. No problems found with path traversal, the atomic write, locking or ID matching. It did not review the front end. Findings 1-4 matter most." loading="lazy">
       <figcaption>The end of 8 findings, in 27 seconds. Note what it checked and found fine, and what it did not check: the front end. The grey <i>fix findings 1-4</i> is only a suggestion.</figcaption></figure>
     <div class="prose">
@@ -108,20 +117,21 @@
   <section id="fix" data-rail="Fix the first one">
     <div class="prose">
       <h2>Fix the first one, with a test</h2>
+      <p>Our server has had its own tests since chapter 2, in <code>test_server.py</code>. Ask Claude to fix finding 1, add one more test, and run them all.</p>
     </div>
     <div class="yousee"><b>Type this into Claude Code</b>Fix finding 1 and add a test for it, then run the tests.</div>
     <figure class="cc-shot"><img src="img/chapter9/fixed.png" alt="Finding 1 is fixed, and all 9 tests pass, including the new one. Fix: _read_json now returns 400 Bad Content-Length when the length is negative. Test: test_negative_content_length. I didn't run it against the unfixed code, so I haven't seen it fail without the fix." loading="lazy">
-      <figcaption>A negative length used to slip past the size check. Now it gets a 400, and all 9 tests pass. The grey <i>commit this</i> is only a suggestion.</figcaption></figure>
+      <figcaption>The new test sends a length of -1 and expects the server to refuse it. Before, a negative length got past the size cap; now it gets a 400, and all 9 server tests pass, the new one included. The grey <i>commit this</i> is only a suggestion.</figcaption></figure>
     <div class="prose">
-      <p>Read the honest line: it never saw the new test fail. A test you never saw fail may not test anything. We committed the fix with <code>/commit-commands:commit</code>.</p>
+      <p>Read the honest line: it never saw the new test fail. A test you never saw fail may not test anything. We committed the fix with <code>/commit-commands:commit</code>. The commit left our new <code>.claude/agents/code-reviewer.md</code> out; we committed it ourselves, so anyone who clones the project gets the reviewer too.</p>
     </div>
   </section>
 
   <section id="cost" data-rail="What it costs">
     <div class="prose">
       <h2>What a subagent costs</h2>
-      <p>A subagent has its own context, so it uses its own tokens. A review of one file is cheap, but a review of the whole project is not.</p>
-      <p>And our reviewer only reads code. It cannot see the app running in the browser. In chapter 10, Claude sees the app.</p>
+      <p>A subagent has its own context, so it uses its own tokens. In our run, Explore used 26.0k tokens for one search, and the reviewer 12.6k for one file: the counts on the bottom line while each one works. A review of one file is cheap, but a review of the whole project is not.</p>
+      <p>Our reviewer reads every line of DevPulse, but it has never seen DevPulse on a screen. In the next chapter, Claude opens it in a real browser, at the size of a phone. Claude Code does that through what it calls an MCP server.</p>
     </div>
   </section>
 
@@ -135,14 +145,15 @@
       <div class="lbl">Your homework</div>
       <h3>Fix finding 2, and see the test fail first</h3>
       <p style="font-size:var(--fs-cap);color:var(--slate)"><b>The goal:</b> act on the next finding, and trust its test.</p>
-      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>The steps:</b> ask Claude: <i>Write a test for finding 2 and run it before you fix anything. Then fix it and run the tests again.</i></p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>First:</b> in your own project, make a read-only reviewer and run it on one file.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>Then:</b> for its second finding, ask Claude: <i>Write a test for finding 2 and run it before you fix anything. Then fix it and run the tests again.</i></p>
       <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>Guess first:</b> will the new test fail before the fix?</p>
       <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:10px"><i>One question for you: what other helper would you give its own subagent?</i></p>
     </div>
   </section>
 
-  <section class="lwa-refs" id="refs"><div class="prose"><h2>References</h2><p>Where each command and file on this page comes from. Every screenshot is from our own recording on 29 Oct 2026, Claude Code 2.1.312.</p></div><ol><li><b>Anthropic</b> · <i>Subagents in Claude Code</i> <span class="why">What a subagent is, the built-in Explore agent, project subagents in .claude/agents, and their tools and model.</span> <a href="https://code.claude.com/docs/en/sub-agents" rel="noopener">https://code.claude.com/docs/en/sub-agents</a></li><li><b>My own recording</b> · <i>29 Oct 2026, Windows 11</i> <span class="why">Explore answered in 19 seconds; the review took 27 seconds and found 8 issues; the fix passed all 9 tests.</span></li></ol></section>
-  <section class="keep" aria-label="Follow along"><p class="follow">New chapters and episodes come out every week. Follow along on <a href="https://www.youtube.com/@learn-ai-by-building" rel="noopener">YouTube</a> or the <a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp channel</a>.</p></section>
+  <section class="lwa-refs" id="refs"><div class="prose"><h2>References</h2><p>Where each command and file on this page comes from. Every screenshot is from our own recording on 29 Oct 2026, Claude Code 2.1.312.</p></div><ol><li><b>Anthropic</b> · <i>Subagents in Claude Code</i> <span class="why">What a subagent is, the built-in Explore agent, project subagents in .claude/agents, and their tools and model.</span> <a href="https://code.claude.com/docs/en/sub-agents" rel="noopener">https://code.claude.com/docs/en/sub-agents</a></li><li><b>My own recording</b> · <i>29 Oct 2026, Windows 11</i> <span class="why">Explore answered in 19 seconds; the review took 27 seconds and found 8 issues; the fix passed all 9 server tests, the new one included.</span></li></ol></section>
+  <section class="keep" aria-label="Follow along"><p class="follow">New chapters and episodes come out every week. Follow along on <a href="https://www.youtube.com/@learn-ai-by-building" rel="noopener">YouTube</a> or the <a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp channel</a>. Questions? Ask under the video on YouTube; I read every comment.</p></section>
   <div class="lwa-chapnav"><a href="chapter8.html"><span class="k">← Previous</span><span class="t">Chapter 8 · A standup that runs on its own</span></a><button type="button" class="lwa-complete" data-lwa-complete><span class="k">Progress</span><span class="t">Mark this chapter complete</span></button><a href="chapter10.html"><span class="k">Next →</span><span class="t">Chapter 10 · Claude sees the app</span></a></div>
   </main>
 </div>
