@@ -48,16 +48,25 @@
   </nav>
 
   <main>
+  <section id="video">
+    <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/ZfpIrBns-to?rel=0" title="Episode 11 · How do I give Claude Code my own tools?"
+      allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+    <p class="video-cap">Prefer to watch? This chapter goes with Episode 11 (6:06). <a href="https://www.youtube.com/watch?v=ZfpIrBns-to" rel="noopener">Open it on YouTube</a>.</p>
+  </section>
+
   <section id="wall" data-rail="The wall">
     <div class="prereq">
-      <div class="pq"><b>Goes with Episode 11</b>"How do I give Claude Code my own tools?". The video is being made. This page teaches the same steps, at your own pace.</div><div class="pq"><b>In a hurry?</b><a href="#quickref">Jump to the quick reference</a>: every command and key in this chapter, what it does, and when to use it.</div><div class="pq"><b>Every prompt, ready to copy</b><a href="prompts.html#ch11">This chapter's prompts and commands</a>, each with a Copy button. Type them yourself first; copy if you are stuck or behind.</div>
+      <div class="pq"><b>Goes with Episode 11</b><a href="https://www.youtube.com/watch?v=ZfpIrBns-to" target="_blank" rel="noopener">"How do I give Claude Code my own tools?"</a>. Watch it just above, or read this page at your own pace. It teaches the same steps.</div><div class="pq"><b>In a hurry?</b><a href="#quickref">Jump to the quick reference</a>: every command and key in this chapter, what it does, and when to use it.</div><div class="pq"><b>Every prompt, ready to copy</b><a href="prompts.html#ch11">This chapter's prompts and commands</a>, each with a Copy button. Type them yourself first; copy if you are stuck or behind.</div>
       <div class="pq"><b>Where you are</b>DevPulse from chapters 1 to 10, with Playwright connected. You need Python 3 for the new server.</div>
     </div>
     <div class="prose">
       <h2>Claude still goes the long way round</h2>
       <p>You fixed a bug for 45 minutes. To log it, you open the app and fill the form. Or you ask Claude, and it edits <code>data/tasks.json</code> by hand.</p>
-      <p>In chapter 10, Playwright gave Claude a browser. Someone else built that server. Nobody has built one for DevPulse.</p>
+      <p>In chapter 10, Playwright gave Claude a browser. Someone else built that server. Nobody has built one for DevPulse, so when Claude edits the data file by hand, nothing checks what it writes.</p>
+      <p>Think of your bank. You never walk into the vault and write in the ledger yourself. You use the ATM: a few clear buttons, and it checks every request before it touches your money. DevPulse's own server will be that ATM for Claude: three tools, and each one checks what it is given.</p>
     </div>
+    <figure class="cc-shot"><img src="img/chapter11/atm.svg" alt="A hand-drawn ATM with a screen, three buttons and a card going in, in front of a closed round vault door. A note reads: 3 buttons, each one checked." loading="lazy">
+      <figcaption>A few clear buttons, each request checked. Nobody walks into the vault.</figcaption></figure>
     <div class="cc-wall">
       <div class="lbl">The question for this chapter</div>
       <p>How do you give Claude tools of your own, so it can use your app directly?</p>
@@ -83,15 +92,15 @@
     <figure class="cc-shot"><img src="img/chapter11/brief.png" alt="Installed mcp-server-dev. Plugin is now active. Then the build-mcp-server command, and Claude: the brief already settles the deployment model, language, framework and tool pattern, so I'm skipping the discovery questions." loading="lazy">
       <figcaption>The skill normally asks questions first. Our brief already answered them, so it went straight to work.</figcaption></figure>
     <div class="prose">
-      <p>It made a <code>.venv</code>, installed the SDK with <code>pip install mcp</code>, wrote the file, and tested it. Then it caught a problem on its own.</p>
+      <p>It made a <code>.venv</code>, a separate Python environment for this project, installed the MCP library (the SDK) into it with <code>pip install mcp</code>, wrote the file, and tested it against a temporary copy of the data. Then it caught a problem on its own.</p>
     </div>
     <figure class="cc-shot"><img src="img/chapter11/errors.png" alt="I've written the server and am now testing it over real stdio against a temp data file. The tools work, but validation errors come back as a generic Error executing tool, which hides the reason from the model." loading="lazy">
       <figcaption>Bad input gave a vague error. Claude needs the real reason to fix its own call, so this mattered.</figcaption></figure>
     <figure class="cc-shot"><img src="img/chapter11/summary.png" alt="Claude's summary: tests ran valid and bad input, and bad input now returns the real reason, for example minutes must be an integer from 1 to 1440; no automated tests; SDK 2.3.0 where FastMCP was renamed MCPServer; it imports server.py's rules; .venv is in .gitignore. Then the claude mcp add command it has not run. The grey suggestion: commit this." loading="lazy">
-      <figcaption>Done in 2 m 18 s. It says what it did not do: no automated tests, and the server is not registered yet. The grey <i>commit this</i> is only a suggestion.</figcaption></figure>
+      <figcaption>Done in 2 m 18 s. It says what it did not do: no automated tests, and the server is not registered yet. It also warns that SDK 2.3.0 renamed FastMCP to MCPServer, so an older guide may not match. The grey <i>commit this</i> is only a suggestion.</figcaption></figure>
     <div class="confuse">
       <div class="lbl">Careful here</div>
-      <p>A stdio server talks to Claude through stdout. One stray <code>print()</code> in the server breaks the messages. Our server has none. Log to stderr instead.</p>
+      <p>A program normally prints its text to <b>stdout</b>, standard output. A stdio server uses that same channel to send its messages to Claude, in a strict format. So a stray <code>print()</code>, even a quick debug line, lands in the middle of those messages, and Claude can no longer read them. The server Claude wrote prints nothing. If your server needs to write notes while it runs, send them to <b>stderr</b>, standard error, a second channel kept apart from the messages.</p>
     </div>
     <div class="prose">
       <p>Commit it with <code>/commit-commands:commit</code>.</p>
@@ -111,6 +120,9 @@ claude mcp get devpulse</div>
 claude mcp get devpulse</div>
     <figure class="cc-shot"><img src="img/chapter11/register.png" alt="Added stdio MCP server devpulse to local config. claude mcp get devpulse: Scope Local config, Status Connected, Type stdio, Command .venv/Scripts/python.exe, Args mcp/devpulse_mcp.py." loading="lazy">
       <figcaption>Local scope, stdio, Connected. Your own server, next to Playwright.</figcaption></figure>
+    <div class="prose">
+      <p>Notice the two scopes. The plugin went in at user scope, so it is yours in every project. This server is local: it lives in this project only.</p>
+    </div>
   </section>
 
   <section id="use" data-rail="Just ask">
@@ -135,7 +147,7 @@ claude mcp get devpulse</div>
     <div class="prose">
       <h2>What your own tools cost</h2>
       <p>Each tool's name and description go into Claude's context, like any server's. Three small tools cost little. Keep them few and clearly named.</p>
-      <p>Claude now uses your app. Can it also hunt for bugs in many files at once? That is chapter 12.</p>
+      <p>So far, Claude has done one job at a time. In chapter 12, we hand it a bigger job, a bug check of four files at once, and let it split the work. Claude Code calls this a workflow.</p>
     </div>
   </section>
 
@@ -156,7 +168,7 @@ claude mcp get devpulse</div>
   </section>
 
   <section class="lwa-refs" id="refs"><div class="prose"><h2>References</h2><p>Where each command on this page comes from. Every screenshot is from our own recording on 29 Oct 2026, Claude Code 2.1.312.</p></div><ol><li><b>Anthropic</b> · <i>Discover and install plugins</i> <span class="why">/plugin, the official marketplace, and installing for you, a repo or this repo only.</span> <a href="https://code.claude.com/docs/en/discover-plugins" rel="noopener">https://code.claude.com/docs/en/discover-plugins</a></li><li><b>Anthropic</b> · <i>Connect Claude Code to tools via MCP</i> <span class="why">claude mcp add for a local stdio server, claude mcp get, and the scopes.</span> <a href="https://code.claude.com/docs/en/mcp" rel="noopener">https://code.claude.com/docs/en/mcp</a></li><li><b>Model Context Protocol</b> · <i>MCP Python SDK</i> <span class="why">The open-source package our server is built on (pip install mcp).</span> <a href="https://github.com/modelcontextprotocol/python-sdk" rel="noopener">https://github.com/modelcontextprotocol/python-sdk</a></li><li><b>Model Context Protocol</b> · <i>Build an MCP server</i> <span class="why">Why a stdio server must never print to stdout: that channel carries the messages.</span> <a href="https://modelcontextprotocol.io/docs/develop/build-server" rel="noopener">https://modelcontextprotocol.io/docs/develop/build-server</a></li><li><b>My own recording</b> · <i>29 Oct 2026, Windows 11</i> <span class="why">The server was written and tested in 2 m 18 s; the SDK installed was 2.3.0; Claude called devpulse for both questions.</span></li></ol></section>
-  <section class="keep" aria-label="Follow along"><p class="follow">New chapters and episodes come out every week. Follow along on <a href="https://www.youtube.com/@learn-ai-by-building" rel="noopener">YouTube</a> or the <a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp channel</a>.</p></section>
+  <section class="keep" aria-label="Follow along"><p class="follow">New chapters and episodes come out every week. Follow along on <a href="https://www.youtube.com/@learn-ai-by-building" rel="noopener">YouTube</a> or the <a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp channel</a>. Questions? Ask under the video on YouTube; I read every comment.</p></section>
   <div class="lwa-chapnav"><a href="chapter10.html"><span class="k">← Previous</span><span class="t">Chapter 10 · Claude sees the app</span></a><button type="button" class="lwa-complete" data-lwa-complete><span class="k">Progress</span><span class="t">Mark this chapter complete</span></button><a href="chapter12.html"><span class="k">Next →</span><span class="t">Chapter 12 · A bug scan in parallel</span></a></div>
   </main>
 </div>
