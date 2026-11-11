@@ -47,16 +47,26 @@
   </nav>
 
   <main>
+  <section id="video">
+    <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/PGCzYYnpJuk?rel=0" title="Episode 12 · How do I run a big job in parallel with Claude Code?"
+      allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+    <p class="video-cap">Prefer to watch? This chapter goes with Episode 12 (6:10). <a href="https://www.youtube.com/watch?v=PGCzYYnpJuk" rel="noopener">Open it on YouTube</a>.</p>
+  </section>
+
   <section id="wall" data-rail="The wall">
     <div class="prereq">
-      <div class="pq"><b>Goes with Episode 12</b>"How do I run a big job in parallel?". The video is being made. This page teaches the same steps, at your own pace.</div><div class="pq"><b>In a hurry?</b><a href="#quickref">Jump to the quick reference</a>: every command and key in this chapter, what it does, and when to use it.</div><div class="pq"><b>Every prompt, ready to copy</b><a href="prompts.html#ch12">This chapter's prompts and commands</a>, each with a Copy button. Type them yourself first; copy if you are stuck or behind.</div>
+      <div class="pq"><b>Goes with Episode 12</b><a href="https://www.youtube.com/watch?v=PGCzYYnpJuk" target="_blank" rel="noopener">"How do I run a big job in parallel with Claude Code?"</a>. Watch it just above, or read this page at your own pace. It teaches the same steps.</div><div class="pq"><b>In a hurry?</b><a href="#quickref">Jump to the quick reference</a>: every command and key in this chapter, what it does, and when to use it.</div><div class="pq"><b>Every prompt, ready to copy</b><a href="prompts.html#ch12">This chapter's prompts and commands</a>, each with a Copy button. Type them yourself first; copy if you are stuck or behind.</div>
       <div class="pq"><b>Where you are</b>DevPulse with its server, page, streak code and MCP tools, from chapters 1 to 11.</div>
     </div>
     <div class="prose">
       <h2>Four files, one at a time</h2>
-      <p>Say you want a bug check on DevPulse before you share it. There are four files that matter.</p>
+      <p>Eleven chapters in, DevPulse has grown. Before you add anything new, you want a bug check. There are four files that matter.</p>
       <p>You could ask about each file in turn. That works, but you wait four times. And the four checks do not need each other at all.</p>
+      <p>Think of a kitchen before a big family dinner. One cook could make the dal, then the rice, then the sabzi, then the raita.</p>
+      <p>Instead, the head cook gives each dish to its own cook, and they all cook at once. At the end, she puts every dish on one plate. Claude will be our head cook.</p>
     </div>
+    <figure class="cc-shot"><img src="img/chapter12/kitchen.svg" alt="A hand-drawn kitchen: four cooks stand side by side at four pots of dal, rice, sabzi and raita. In front, the head cook holds one thali with four bowls. A note reads: one plate." loading="lazy">
+      <figcaption>Each dish to its own cook, all at once. Then one plate.</figcaption></figure>
     <div class="cc-wall">
       <div class="lbl">The question for this chapter</div>
       <p>How do you run a big job in parallel, and still get one answer back?</p>
@@ -66,19 +76,19 @@
   <section id="switch" data-rail="Switch it on">
     <div class="prose">
       <h2>Switch workflows on first</h2>
-      <p>A <b>workflow</b> is a small script that sends several agents off at once and gathers their answers. Check that workflows are on before you ask for one.</p>
+      <p>A <b>workflow</b> is a small script that Claude writes, which sends several agents off at once and gathers their answers. Each agent is a separate Claude with one task. Check that workflows are on before you ask for one.</p>
     </div>
     <div class="yousee"><b>Type this into Claude Code</b>/config</div>
     <div class="prose">
       <p>Then type <code>workflow</code> to filter the list.</p>
     </div>
     <figure class="cc-shot"><img src="img/chapter12/config.png" alt="/config filtered by workflow: Dynamic workflows true, Ultracode keyword trigger true, Dynamic workflow size medium (default)." loading="lazy">
-      <figcaption>Three settings. <b>Dynamic workflows</b> must be true. The size says how many agents a workflow may use.</figcaption></figure>
+      <figcaption>Three settings. <b>Dynamic workflows</b> must be true; if yours says false, switch it on here. The size says how many agents a workflow should aim for.</figcaption></figure>
     <figure class="cc-shot"><img src="img/chapter12/small.png" alt="The Dynamic workflow size setting changed to small (aim for fewer than 5 agents)." loading="lazy">
-      <figcaption>We set the size to <b>small</b>: fewer than five agents. Four files need only four.</figcaption></figure>
+      <figcaption>We cycle through the sizes until it says <b>small</b>: fewer than five agents. Four files need only four.</figcaption></figure>
     <div class="confuse">
       <div class="lbl">Careful here</div>
-      <p>On the Pro plan, workflows are not on by default. Switch them on here, and keep the size small. Every agent spends tokens from your plan.</p>
+      <p>On a Pro plan, your limit is smaller, so keep the size small. Every agent spends tokens from your plan's limit.</p>
     </div>
   </section>
 
@@ -89,28 +99,31 @@
     </div>
     <div class="yousee"><b>Type this into Claude Code, as one line</b>Use a workflow: check each DevPulse file (server.py, index.html, streak.js, mcp/devpulse_mcp.py) for bugs in parallel, then give me one list, most serious first. Don't change any code.</div>
     <figure class="cc-shot"><img src="img/chapter12/ask.png" alt="Run a dynamic workflow? Dynamic workflows can use a lot of tokens. Options: 1. Yes, run it 2. View raw script 3. No." loading="lazy">
-      <figcaption>Claude writes the script, then asks first. It warns about tokens. You can read the script before you say yes.</figcaption></figure>
+      <figcaption>Claude loads its guide for writing workflows, writes the script, then asks first. Read the warning: many agents at once can use a lot of tokens quickly, and that counts against your plan's limit. You can read the script before you say yes.</figcaption></figure>
     <div class="prose">
-      <p>Choose <b>Yes, run it</b>. Then open the panel that shows the agents at work.</p>
+      <p>Choose <b>Yes, run it</b>. The workflow runs in the background. Claude says it has four read-only reviewers, one for each file. It will merge their findings when they finish.</p>
+      <p>Claude's own line points to <code>/workflows</code>. Type it to open the panel that shows the agents at work.</p>
     </div>
     <div class="yousee"><b>Type this into Claude Code</b>/workflows</div>
     <figure class="cc-shot"><img src="img/chapter12/running.png" alt="The /workflows panel for devpulse-bug-scan: Review, 4 agents. review:server.py 11.1k tokens, review:index.html 14.8k, review:streak.js 7.7k done, review:mcp/devpulse_mcp.py 9.2k. Keys: select, x stop, p pause, esc back, s save." loading="lazy">
-      <figcaption>One agent per file, side by side, each with its own token count. <code>x</code> stops one, <code>p</code> pauses it.</figcaption></figure>
+      <figcaption>One agent per file, side by side, each with its own token count. The reviewer of <code>streak.js</code> finished first, after 8 seconds; the whole job was done in 24. <code>x</code> stops one, <code>p</code> pauses it.</figcaption></figure>
   </section>
 
   <section id="result" data-rail="One list back">
     <div class="prose">
       <h2>One list back, and a saved workflow</h2>
-      <p>When the agents finish, the panel shows what the whole job cost.</p>
+      <p>When the agents finish, press <code>s</code> in the panel to save the workflow. The panel closes, and the chat shows what the whole job cost. Below it, Claude asks where to save it and under what name: keep <b>Project scope</b> and the name <code>devpulse-bug-scan</code>, and press Enter.</p>
     </div>
     <figure class="cc-shot"><img src="img/chapter12/save.png" alt="Completed in 24s, 4 agents, 44.2k tokens. Save dynamic workflow: Project scope, .claude/workflows/devpulse-bug-scan.js." loading="lazy">
-      <figcaption>24 seconds, 4 agents, 44.2k tokens. Press <code>s</code> to save it in the project, in <code>.claude/workflows/</code>.</figcaption></figure>
+      <figcaption>24 seconds, 4 agents, 44.2k tokens. Press <code>s</code> to save it in the project, in <code>.claude/workflows/</code>. Any later session can run the same scan by its name, <code>/devpulse-bug-scan</code>.</figcaption></figure>
     <div class="prose">
       <p>Back in the chat, Claude merges the four answers into one list, most serious first.</p>
     </div>
     <figure class="cc-shot"><img src="img/chapter12/list.png" alt="The end of the ranked list: findings 10 to 13, each with file and line. Coverage: streak.js returned no findings, treat as unconfirmed. I also saved the workflow as .claude/workflows/devpulse-bug-scan.js." loading="lazy">
-      <figcaption>Each finding names a file and a line. Note the coverage line: no bugs in <code>streak.js</code> is "unconfirmed", not "clean". The grey line, <i>fix the medium-severity bugs</i>, is only a suggestion.</figcaption></figure>
+      <figcaption>The list lands scrolled to its end, so you see the last 4 of 13 findings. Finding 12: a tab left open past midnight still shows yesterday's date. Each finding names a file and a line. The grey line, <i>fix the medium-severity bugs</i>, is only a suggestion.</figcaption></figure>
     <div class="prose">
+      <p>Now read the coverage line. The reviewer of <code>streak.js</code> found nothing, but Claude does not call the file clean. That could mean no bugs, or a reviewer that came back empty. So it marks the file as unconfirmed.</p>
+      <p>That is a habit worth copying: an empty answer from an agent is a reason to look again.</p>
       <p>We asked it not to change any code. Fixing is a separate step, and you choose which bugs.</p>
     </div>
   </section>
@@ -118,7 +131,7 @@
   <section id="cost" data-rail="What it costs">
     <div class="prose">
       <h2>What a workflow costs</h2>
-      <p>Faster is not cheaper. Four agents each read their own file and think on their own, so the tokens add up.</p>
+      <p>Faster is not cheaper. Four agents each read their own file and think on their own, so the tokens add up. On a Pro plan, that limit is smaller, so keep the size small.</p>
     </div>
     <table>
       <tr><th>What we saw</th><th>What it means for you</th></tr>
@@ -127,8 +140,10 @@
       <tr><td>44.2k tokens</td><td>All of it counts toward your plan's limit, for one scan</td></tr>
     </table>
     <div class="prose">
-      <p>So use a workflow when the parts are truly separate and the job is big. For one file, just ask.</p>
-      <p>And all this still needs you to watch. What if Claude could warn you when something goes wrong? That is chapter 13.</p>
+      <h2>When is a workflow worth it?</h2>
+      <p>When a big job splits into parts that don't depend on each other: no part waits for another part's answer. Our four files are like that: each check reads one file and needs nothing from the others.</p>
+      <p>If the parts do depend on each other (step two needs step one's result), or it is only one file, just ask.</p>
+      <p>One thing hasn't changed: you still sit and watch the screen, in case Claude needs you. In the next chapter, Claude gets your attention instead, with a beep whenever it needs an answer. Claude Code calls this a hook.</p>
     </div>
   </section>
 
@@ -140,16 +155,16 @@
   <section id="homework" data-rail="Your homework">
     <div class="next">
       <div class="lbl">Your homework</div>
-      <h3>Run your saved scan on your own project</h3>
+      <h3>Run a scan of your own</h3>
       <p style="font-size:var(--fs-cap);color:var(--slate)"><b>The goal:</b> one job split across agents, with the cost written down.</p>
-      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>The steps:</b> check <code>/config</code> first. Ask: <i>Use a workflow: check each of these files … for bugs in parallel, then give me one list. Don't change any code.</i> Watch it in <code>/workflows</code>, and note the time, agents and tokens.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>The steps:</b> pick 3 or 4 of your own files, and check the workflow settings in <code>/config</code> first. Ask: <i>Use a workflow: check each of these files … for bugs in parallel, then give me one list. Don't change any code.</i> Watch it in <code>/workflows</code>, and note the time, agents and tokens.</p>
       <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>Guess first:</b> will two files cost about the same tokens, or very different amounts?</p>
-      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:10px"><i>One question for you: which job in your week is really four small jobs that don't need each other?</i></p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:10px"><i>One question for you: which job in your week could be split into small jobs that don't need each other?</i></p>
     </div>
   </section>
 
   <section class="lwa-refs" id="refs"><div class="prose"><h2>References</h2><p>Where each command and file on this page comes from. Every screenshot is from our own recording on 29 Oct 2026, Claude Code 2.1.312.</p></div><ol><li><b>Anthropic</b> · <i>Claude Code settings</i> <span class="why">Where /config settings live, and project files under .claude/.</span> <a href="https://code.claude.com/docs/en/settings" rel="noopener">https://code.claude.com/docs/en/settings</a></li><li><b>Anthropic</b> · <i>Manage costs effectively</i> <span class="why">Why many agents mean many tokens, and how to keep an eye on them.</span> <a href="https://code.claude.com/docs/en/costs" rel="noopener">https://code.claude.com/docs/en/costs</a></li><li><b>My own recording</b> · <i>29 Oct 2026, Windows 11</i> <span class="why">The scan finished in 24 s with 4 agents and 44.2k tokens; streak.js came back with no findings, which Claude marked as unconfirmed.</span></li></ol></section>
-  <section class="keep" aria-label="Follow along"><p class="follow">New chapters and episodes come out every week. Follow along on <a href="https://www.youtube.com/@learn-ai-by-building" rel="noopener">YouTube</a> or the <a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp channel</a>.</p></section>
+  <section class="keep" aria-label="Follow along"><p class="follow">New chapters and episodes come out every week. Follow along on <a href="https://www.youtube.com/@learn-ai-by-building" rel="noopener">YouTube</a> or the <a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp channel</a>. Questions? Ask under the video on YouTube; I read every comment.</p></section>
   <div class="lwa-chapnav"><a href="chapter11.html"><span class="k">← Previous</span><span class="t">Chapter 11 · DevPulse tools for Claude</span></a><button type="button" class="lwa-complete" data-lwa-complete><span class="k">Progress</span><span class="t">Mark this chapter complete</span></button><a href="chapter13.html"><span class="k">Next →</span><span class="t">Chapter 13 · Hooks that watch for us</span></a></div>
   </main>
 </div>
