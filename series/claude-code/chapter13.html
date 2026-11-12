@@ -26,7 +26,7 @@
     <div class="title-block">
       <div class="eyebrow">Learn Claude Code by Building DevPulse · Chapter 13</div>
       <h1>Hooks that watch for us</h1>
-      <p class="standfirst">You keep glancing at the terminal in case Claude is waiting for you, so how do you stop babysitting it? By the end of this chapter, DevPulse has two hooks: one beeps when Claude needs you, and one checks the tasks file after every edit.</p>
+      <p class="standfirst">How do you make Claude Code beep when it needs you, so you stop glancing at the terminal in case it is waiting? By the end of this chapter, DevPulse has two hooks: one beeps when Claude needs you, and one checks the tasks file after every edit.</p>
       <div class="facts"><div><b>One sitting</b>~7 min read, ~15 min to build along</div><div><b>You start from</b>chapter 12&#x27;s DevPulse</div><div><b>You build</b>a beep hook and a tasks.json check</div><div><b>Chapter 13 of 15</b>Claude that tells you</div></div>
     </div>
   </div>
@@ -49,26 +49,35 @@
   </nav>
 
   <main>
+  <section id="video">
+    <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/S77YqtE_RT0?rel=0" title="Episode 13 · How do I make Claude Code beep when it needs me?"
+      allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+    <p class="video-cap">Prefer to watch? This chapter goes with Episode 13 (5:18). <a href="https://www.youtube.com/watch?v=S77YqtE_RT0" rel="noopener">Open it on YouTube</a>.</p>
+  </section>
+
   <section id="wall" data-rail="The wall">
     <div class="prereq">
-      <div class="pq"><b>Goes with Episode 13</b>"How do I stop babysitting Claude Code?". The video is being made. This page teaches the same steps, at your own pace.</div><div class="pq"><b>In a hurry?</b><a href="#quickref">Jump to the quick reference</a>: every command and key in this chapter, what it does, and when to use it.</div><div class="pq"><b>Every prompt, ready to copy</b><a href="prompts.html#ch13">This chapter's prompts and commands</a>, each with a Copy button. Type them yourself first; copy if you are stuck or behind.</div>
+      <div class="pq"><b>Goes with Episode 13</b><a href="https://www.youtube.com/watch?v=S77YqtE_RT0" target="_blank" rel="noopener">"How do I make Claude Code beep when it needs me?"</a>. Watch it just above, or read this page at your own pace. It teaches the same steps.</div><div class="pq"><b>In a hurry?</b><a href="#quickref">Jump to the quick reference</a>: every command and key in this chapter, what it does, and when to use it.</div><div class="pq"><b>Every prompt, ready to copy</b><a href="prompts.html#ch13">This chapter's prompts and commands</a>, each with a Copy button. Type them yourself first; copy if you are stuck or behind.</div>
       <div class="pq"><b>Where you are</b>DevPulse from chapters 1 to 12, with its tasks in <code>data/tasks.json</code> and 18 tests.</div>
     </div>
     <div class="prose">
       <h2>Watching the terminal</h2>
       <p>Say Claude is working and you switch to your browser. A minute later you look back. It has been waiting for your yes the whole time.</p>
-      <p>Or worse: an edit broke <code>data/tasks.json</code>, and nobody noticed until the page went blank.</p>
+      <p>There is a second job too. When Claude edits <code>data/tasks.json</code>, nobody checks that it is still valid. One missing bracket breaks it.</p>
+      <p>Think of a pressure cooker on the stove. Nobody stands next to it, counting the minutes. When the pressure is up, the cooker whistles by itself, and only then do you walk back. That whistle is what we want from Claude.</p>
     </div>
+    <figure class="cc-shot"><img src="img/chapter13/cooker.svg" alt="A hand-drawn kitchen: a pressure cooker on a gas stove lets off a puff of steam from its whistle. Behind a wall, in the next room, a man reading a book hears it." loading="lazy">
+      <figcaption>Nobody watches the cooker. It whistles by itself, and you come back only then.</figcaption></figure>
     <div class="cc-wall">
       <div class="lbl">The question for this chapter</div>
-      <p>How do you stop babysitting Claude Code, and let it tell you when something needs you?</p>
+      <p>How do you make Claude Code beep when it needs you, so you can stop watching the terminal?</p>
     </div>
   </section>
 
   <section id="what" data-rail="What a hook is">
     <div class="prose">
       <h2>What a hook is</h2>
-      <p>A <b>hook</b> is a command that Claude Code runs by itself when something happens. You don't ask each time. It just runs.</p>
+      <p>Claude Code calls this a <b>hook</b>: a command that Claude Code runs by itself when something happens. You don't ask each time. That something is called an <b>event</b>.</p>
     </div>
     <table>
       <tr><th>Event</th><th>When it runs</th><th>Our hook</th></tr>
@@ -88,13 +97,14 @@
       <figcaption>Written in 40 seconds. It tested both by hand, and is honest: it has not seen them fire in a real session yet. The grey line, <i>commit this</i>, is only a suggestion.</figcaption></figure>
     <div class="prose">
       <p>Look at one detail. On a broken file, the check <b>exits 2</b>. Exit code 2 tells Claude Code to send the error back to Claude, so Claude sees it at once.</p>
+      <p>Its own test even broke our real tasks file for a moment (<i>temporarily set to {oops</i>), then put it back. Our tasks were fine afterwards.</p>
     </div>
   </section>
 
   <section id="load" data-rail="Load and check">
     <div class="prose">
       <h2>Restart, then check they are on</h2>
-      <p>The settings file did not exist when this session started. So restart Claude Code: type <code>/exit</code>, then <code>claude</code>.</p>
+      <p>The settings file did not exist when this session started, so Claude suggests a restart. Type <code>/exit</code>, then <code>claude</code>.</p>
     </div>
     <div class="yousee"><b>Type this into Claude Code</b>/hooks</div>
     <figure class="cc-shot"><img src="img/chapter13/hooks.png" alt="The /hooks menu: 2 hooks on 2 events. This menu is read-only. PostToolUse, after tool execution: a Project python command for Write|Edit. Notification, when notifications are sent: a Project powershell.exe command." loading="lazy">
@@ -120,10 +130,10 @@
     </div>
     <div class="yousee"><b>Type this into Claude Code</b>Run node --test.</div>
     <figure class="cc-shot"><img src="img/chapter13/prompt.png" alt="Bash command: node --test. This command requires approval. Do you want to proceed? 1. Yes 2. Yes, and don't ask again for node 3. Yes, and switch to auto mode 4. No." loading="lazy">
-      <figcaption>Claude waits for your approval. This is when the Notification hook beeps.</figcaption></figure>
+      <figcaption>Claude waits for your approval. That is the moment the Notification hook beeps: one short tone, the <code>[console]::Beep(880,300)</code> in the hook.</figcaption></figure>
     <div class="confuse">
-      <div class="lbl">Careful here</div>
-      <p>You won't hear the beep in our video. A screen recording does not catch it. Try it yourself: switch windows before you send the line.</p>
+      <div class="lbl">Try it yourself</div>
+      <p>Switch to another window before you send the line. When Claude asks, you hear the beep and come back.</p>
     </div>
     <figure class="cc-shot"><img src="img/chapter13/pass.png" alt="Claude: node --test passed all 18 tests, none failing or skipped, covering current and best streak, the IST day boundary, gaps, duplicate days, month, year and leap days. Manual mode on." loading="lazy">
       <figcaption>Choose <b>Yes</b>, and all 18 tests pass. Then Shift+Tab back to auto mode. The grey line, <i>run python test_server.py</i>, is only a suggestion.</figcaption></figure>
@@ -137,7 +147,7 @@
       <h2>What hooks cost</h2>
       <p>A hook runs every time its event happens. Our check runs after every edit, so keep it fast. A slow hook slows down every step.</p>
       <p>Hooks also run with your permissions. A project you clone can bring its own hooks in .claude/settings.json. Read that file before you trust the folder.</p>
-      <p>DevPulse now watches itself, but it all stays on your laptop. Next, in chapter 14, DevPulse goes on the internet.</p>
+      <p>DevPulse now watches itself, but it all stays on your laptop. In the next chapter, a page of DevPulse goes on the internet, showing only the tasks you choose to share, on GitHub Pages.</p>
     </div>
   </section>
 
@@ -157,8 +167,8 @@
     </div>
   </section>
 
-  <section class="lwa-refs" id="refs"><div class="prose"><h2>References</h2><p>Where each command and file on this page comes from. Every screenshot is from our own recording on 29 Oct 2026, Claude Code 2.1.312.</p></div><ol><li><b>Anthropic</b> · <i>Get started with Claude Code hooks</i> <span class="why">What hooks are for, with a notification example.</span> <a href="https://code.claude.com/docs/en/hooks-guide" rel="noopener">https://code.claude.com/docs/en/hooks-guide</a></li><li><b>Anthropic</b> · <i>Hooks reference</i> <span class="why">The events (Notification, PostToolUse), matchers, the JSON a hook reads, and what exit code 2 does.</span> <a href="https://code.claude.com/docs/en/hooks" rel="noopener">https://code.claude.com/docs/en/hooks</a></li><li><b>Anthropic</b> · <i>Claude Code settings</i> <span class="why">The settings files: user, project (.claude/settings.json) and local.</span> <a href="https://code.claude.com/docs/en/settings" rel="noopener">https://code.claude.com/docs/en/settings</a></li><li><b>My own recording</b> · <i>29 Oct 2026, Windows 11</i> <span class="why">Both hooks were written in 40 s; the check caught the missing ] at line 38; the beep played but cannot be heard in a screen recording.</span></li></ol></section>
-  <section class="keep" aria-label="Follow along"><p class="follow">New chapters and episodes come out every week. Follow along on <a href="https://www.youtube.com/@learn-ai-by-building" rel="noopener">YouTube</a> or the <a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp channel</a>.</p></section>
+  <section class="lwa-refs" id="refs"><div class="prose"><h2>References</h2><p>Where each command and file on this page comes from. Every screenshot is from our own recording on 29 Oct 2026, Claude Code 2.1.312.</p></div><ol><li><b>Anthropic</b> · <i>Get started with Claude Code hooks</i> <span class="why">What hooks are for, with a notification example.</span> <a href="https://code.claude.com/docs/en/hooks-guide" rel="noopener">https://code.claude.com/docs/en/hooks-guide</a></li><li><b>Anthropic</b> · <i>Hooks reference</i> <span class="why">The events (Notification, PostToolUse), matchers, the JSON a hook reads, and what exit code 2 does.</span> <a href="https://code.claude.com/docs/en/hooks" rel="noopener">https://code.claude.com/docs/en/hooks</a></li><li><b>Anthropic</b> · <i>Claude Code settings</i> <span class="why">The settings files: user, project (.claude/settings.json) and local.</span> <a href="https://code.claude.com/docs/en/settings" rel="noopener">https://code.claude.com/docs/en/settings</a></li><li><b>My own recording</b> · <i>29 Oct 2026, Windows 11</i> <span class="why">Both hooks were written in 40 s; the check caught the missing ] at line 38; the beep played; a screen recording does not catch sound, so the video adds the same tone (880 Hz, 0.3 s).</span></li></ol></section>
+  <section class="keep" aria-label="Follow along"><p class="follow">New chapters and episodes come out every week. Follow along on <a href="https://www.youtube.com/@learn-ai-by-building" rel="noopener">YouTube</a> or the <a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp channel</a>. Questions? Ask under the video on YouTube; I read every comment.</p></section>
   <div class="lwa-chapnav"><a href="chapter12.html"><span class="k">← Previous</span><span class="t">Chapter 12 · A bug scan in parallel</span></a><button type="button" class="lwa-complete" data-lwa-complete><span class="k">Progress</span><span class="t">Mark this chapter complete</span></button><a href="chapter14.html"><span class="k">Next →</span><span class="t">Chapter 14 · DevPulse on the internet</span></a></div>
   </main>
 </div>
