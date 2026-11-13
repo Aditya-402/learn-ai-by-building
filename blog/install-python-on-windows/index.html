@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How do I install Python on Windows? — Learn AI by Building</title>
+<meta name="description" content="How do you install Python on Windows, and know that it really works? By the end, Python and pip will answer in PowerShell, your first program will run, and you will know the fix for &#x27;python is not recognized&#x27;.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=8">
+<link rel="stylesheet" href="../../assets/unit.css?v=8">
+<link rel="stylesheet" href="../../assets/blog.css?v=7">
+<link rel="stylesheet" href="../../assets/nav.css?v=1">
+</head>
+<body data-lwa-course="blog" data-lwa-chapter="install-python-on-windows">
+<header class="top nav2"><div class="top-in">
+  <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark-maroon.svg?v=1" alt="Learn AI by Building — home"></a>
+  <nav class="nav2-links" aria-label="Main"><a href="../../index.html">Home</a><a href="../../series/index.html">Series</a><a href="../../blog/index.html" aria-current="page">Blog</a><a href="../../connect.html">Connect</a></nav>
+  <span class="nav2-auth" data-lwa-auth></span>
+  <details class="nav2-menu"><summary>Menu</summary><div class="m"><a href="../../index.html">Home</a><a href="../../series/index.html">Series</a><a href="../../blog/index.html">Blog</a><a href="../../connect.html">Connect</a><a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp channel</a><span class="nav2-auth-m" data-lwa-auth></span></div></details>
+</div></header>
+<header class="masthead">
+  <div class="masthead-in">
+    <div class="title-block">
+      <span class="blog-label how">How do I…?</span>
+      <h1>How do I install Python on Windows?</h1>
+      <p class="standfirst">How do you install Python on Windows, and know that it really works? By the end, Python and pip will answer in PowerShell, your first program will run, and you will know the fix for &#x27;python is not recognized&#x27;.</p>
+      <div class="facts">
+        <div><b>Read</b>~5 min</div>
+        <div><b>Steps</b>4, and a fix, each shown on screen</div>
+        <!-- TODO(video-id): <div><b>Watch</b>m:ss video</div> -->
+        <div><b>Published</b>14 Nov 2026</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="rail" aria-label="Sections">
+    <div class="rail-h">Contents</div>
+    <!-- TODO(video-id): <a href="#video">Watch the video</a> -->
+    <a class="on" href="#need">What you need</a>
+    <a href="#download">Step 1: Download the installer</a>
+    <a href="#install">Step 2: Install, with the PATH tick</a>
+    <a href="#check">Step 3: Check Python and pip</a>
+    <a href="#first-program">Step 4: Run your first program</a>
+    <a href="#fix">Forgot the tick? Fix "python is not recognized"</a>
+    <a href="#next">What's next</a>
+    <a href="#takeaway">The takeaway</a>
+    <a href="#related">Related</a>
+    <a href="#refs">References</a>
+  </nav>
+
+  <main>
+
+  <!-- TODO(video-id): the video goes public with this page (ME-217); then put its id and length here and uncomment.
+  <section id="video">
+    <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/VIDEO_ID?rel=0" title="How do I install Python on Windows?"
+      allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+    <p class="video-cap">Prefer to watch? This post goes with the video (m:ss). <a href="https://www.youtube.com/watch?v=VIDEO_ID" rel="noopener">Open it on YouTube</a>.</p>
+  </section>
+  -->
+
+  <section id="need">
+    <div class="prose">
+      <h2>What you need</h2>
+      <p>Most beginners meet the same first error: <i>'python' is not recognized</i>, and it comes from one missed tick in the installer. So we install Python on Windows with that tick, and then we prove that it really works.</p>
+      <p>Before you start, you need three things:</p>
+      <ul>
+        <li>a Windows PC,</li>
+        <li>an internet connection,</li>
+        <li>about 10 minutes.</li>
+      </ul>
+      <p>Python is free, and you do not need an account anywhere to get it.</p>
+    </div>
+  </section>
+
+  <section id="download">
+    <div class="prose">
+      <h2>Step 1: Download the installer</h2>
+      <p>Go to <a href="https://www.python.org/downloads/windows/" rel="noopener">python.org's downloads page for Windows</a>. On the home page, pointing at <b class="ui">Downloads</b> opens the same choice in a small panel.</p>
+      <p>You will see two kinds of download. The big button is the new <b>Python install manager</b>, a tool that installs and updates Python versions for you.</p>
+      <p>We take the classic installer instead: the latest Python 3, for 64-bit Windows. When we recorded, that was <i>python-3.15.2-amd64.exe</i>, and it downloaded in a few seconds.</p>
+    </div>
+  </section>
+
+  <section id="install">
+    <div class="prose">
+      <h2>Step 2: Install, with the PATH tick</h2>
+      <p>Open the file you downloaded. The first screen carries a note: this installer is being retired after Python 3.15, so in later versions you may see only the install manager.</p>
+      <p>Now the step that matters most. At the bottom, tick <b class="ui">Add python.exe to PATH</b>.</p>
+    </div>
+    <figure class="shot" style="margin-top:14px"><img src="img/1-tick-add-python-to-path.jpg" alt="The Python 3.15.2 (64-bit) Setup window. Under Install Now it shows the install folder, ending AppData\Local\Programs\Python\Python315. At the bottom, the box Add python.exe to PATH is ticked and ringed." width="1100" height="680" loading="lazy"><figcaption>The tick at the bottom. The folder under Install Now is where Python goes; note it, in case you ever need the fix below.</figcaption></figure>
+    <div class="prose">
+      <p>Why does this one tick matter? <b>PATH</b> is the list of folders Windows searches when you type a command. With the tick, Python's folder joins that list, and then any terminal can find Python from any folder.</p>
+      <p>Click <b class="ui">Install Now</b>. It takes about a minute on a normal PC. One of the steps you see go by is <i>Add to Path</i>: your tick made that happen.</p>
+      <p>When it says <b class="ui">Setup was successful</b>, click <b class="ui">Disable path length limit</b>. Windows otherwise stops at folder paths longer than 260 characters, and some programs need more. Then click <b class="ui">Close</b>.</p>
+    </div>
+  </section>
+
+  <section id="check">
+    <div class="prose">
+      <h2>Step 3: Check Python and pip</h2>
+      <p>Open a <b>new</b> PowerShell window. A window that was already open still holds the old PATH; only a new one reads the new list. Then type these two lines, one at a time:</p>
+    </div>
+    <div class="yousee"><b>Type in a new PowerShell</b>python --version
+pip --version</div>
+    <div class="yousee"><b>What you should see</b>Python 3.15.2
+pip 26.2.2 from …\Python315\Lib\site-packages\pip (python 3.15)</div>
+    <figure class="shot" style="margin-top:14px"><img src="img/2-python-and-pip-answer.jpg" alt="A PowerShell window: python --version prints Python 3.15.2, and pip --version prints pip 26.2.2 from the Python315 folder, ringed." width="1200" height="362" loading="lazy"></figure>
+    <div class="prose">
+      <p>Your numbers may be newer, and that is fine, because what matters is that both answer. The second one, <b>pip</b>, is Python's tool for installing libraries, and you will use it often.</p>
+    </div>
+  </section>
+
+  <section id="first-program">
+    <div class="prose">
+      <h2>Step 4: Run your first program</h2>
+      <p>A version number proves Python is there. A program you wrote proves it runs. Make a folder called <i>hello</i>, and open IDLE, Python's own editor, on a new file in it:</p>
+    </div>
+    <div class="yousee"><b>Type in PowerShell, one line at a time</b>mkdir C:\hello
+cd C:\hello
+python -m idlelib hello.py</div>
+    <div class="prose">
+      <p>IDLE opens an empty file called <i>hello.py</i>. Type this one line, then save with Ctrl+S:</p>
+    </div>
+    <div class="yousee"><b>Type in IDLE</b>print("Hello, World!")</div>
+    <div class="prose">
+      <p>Close IDLE, and run the file from PowerShell:</p>
+    </div>
+    <div class="yousee"><b>Type in PowerShell</b>python hello.py</div>
+    <figure class="shot" style="margin-top:14px"><img src="img/3-hello-world.jpg" alt="PowerShell in C:\hello: python -m idlelib hello.py, then python hello.py, which prints Hello, World!, ringed." width="1200" height="172" loading="lazy"></figure>
+    <div class="prose">
+      <p>There it is: <i>Hello, World!</i> Python works.</p>
+    </div>
+  </section>
+
+  <section id="fix">
+    <div class="prose">
+      <h2>Forgot the tick? Fix "python is not recognized"</h2>
+      <p>Say you clicked Install Now without the tick. Python is installed, but nothing told Windows where it is. So PowerShell answers <code>python --version</code> with an error:</p>
+    </div>
+    <figure class="shot" style="margin-top:14px"><img src="img/4-python-not-recognized.jpg" alt="A PowerShell window: python --version answers in red: The term 'python' is not recognized as the name of a cmdlet, function, script file, or operable program." width="1200" height="350" loading="lazy"><figcaption>The full message starts: <i>The term 'python' is not recognized as the name of a cmdlet, function, script file, or operable program.</i></figcaption></figure>
+    <div class="prose">
+      <p>You do not need to reinstall. We add Python's folder to PATH ourselves, in five steps.</p>
+    </div>
+
+    <div class="step"><span class="n">1</span><h3>Open the environment variables</h3>
+      <p>Press the Windows key and type <i>environment</i>. Open <b class="ui">Edit the system environment variables</b>, then click <b class="ui">Environment Variables</b>.</p></div>
+
+    <div class="step"><span class="n">2</span><h3>Edit your own Path</h3>
+      <p>In the top list, the variables for your user, select <b class="ui">Path</b> and click <b class="ui">Edit</b>.</p></div>
+
+    <div class="step"><span class="n">3</span><h3>Add Python's folder</h3>
+      <p>Click <b class="ui">New</b> and type the folder the installer showed under Install Now. It sits inside your user folder: <i>AppData\<wbr>Local\<wbr>Programs\<wbr>Python\<wbr>Python315</i>. The last part follows your version: Python315 for 3.15.</p></div>
+
+    <div class="step"><span class="n">4</span><h3>Add its Scripts folder</h3>
+      <p>Now a second row: click <b class="ui">New</b> again and type the same folder with <i>\Scripts</i> at the end. That is the folder where pip lives.</p></div>
+
+    <figure class="shot" style="margin-top:14px"><img src="img/5-two-path-rows.jpg" alt="The Edit environment variable window. Two new rows are ringed: one ending AppData\Local\Programs\Python\Python315, and one ending Python315\Scripts. The user name in each row is blurred." width="1124" height="250" loading="lazy"><figcaption>The two new rows, after widening the window so both read in full.</figcaption></figure>
+
+    <div class="step"><span class="n">5</span><h3>Save, and open a new PowerShell</h3>
+      <p>Click <b class="ui">OK</b> three times, once for each window. Close the old PowerShell, because it still holds the old PATH. In a new PowerShell window, run <code>python --version</code> and <code>pip --version</code> again. Both answer now, so the fix worked.</p></div>
+
+    <div class="prose" style="margin-top:22px">
+      <p>To keep for later: three messages you may meet after an install, and what each one means.</p>
+    </div>
+    <table>
+      <tr><th>What you see</th><th>What it means, and the fix</th></tr>
+      <tr><td><i>'python' is not recognized</i></td><td>Python's folder is not on PATH. Open a new PowerShell first; if it still fails, add both folders as above.</td></tr>
+      <tr><td><i>'pip' is not recognized</i>, but Python answers</td><td>Only the Scripts folder is missing. Add the row ending in <i>\Scripts</i>.</td></tr>
+      <tr><td>It works in a new window, but not in an old one</td><td>The old window still holds the old PATH. Close it and use the new one.</td></tr>
+    </table>
+  </section>
+
+  <section id="next">
+    <div class="prose">
+      <h2>What's next</h2>
+      <p>That is Python, installed and checked on your own PC. Now it needs something to build.</p>
+      <ul>
+        <li>To learn Python by building things, start with <a href="https://learnaibybuilding.in/series/python-by-building/">our Python series, Python by Building</a>. It starts from a Python installed just like this one.</li>
+        <li>To build chatbots, <a href="https://learnaibybuilding.in/series/chatbots/">our chatbot series</a> uses this same Python.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="takeaway">
+    <div class="prose">
+      <h2>The takeaway</h2>
+      <ol>
+        <li>Tick <b class="ui">Add python.exe to PATH</b> before you click Install Now. It saves you the fix.</li>
+        <li>Check in a new PowerShell: <code>python --version</code> and <code>pip --version</code> must both answer.</li>
+        <li>Missed the tick? Add the Python folder and its Scripts folder to your user Path, then open a new PowerShell.</li>
+      </ol>
+      <p><i>One question for you: which step took you the longest? Tell me under the video on YouTube.</i></p>
+    </div>
+  </section>
+
+  <section id="related">
+    <div class="prose"><h2>Related</h2></div>
+    <div class="blog-list"><a class="blog-item" href="../install-claude-code/"><span class="blog-label how">Blog · How do I…?</span><h3>How do I install Claude Code?</h3></a><a class="blog-item" href="../what-is-a-python-program/"><span class="blog-label how">Blog · What is it?</span><h3>What is a Python program?</h3></a></div>
+  </section>
+
+  <section class="lwa-refs" id="refs">
+    <div class="prose">
+      <h2>References</h2>
+      <p>Where each step on this page comes from. Checked on 13 Nov 2026.</p>
+    </div>
+    <ol>
+      <li><b>Python Software Foundation</b> — <i>Python Releases for Windows</i>. <span class="why">The classic installer for the latest Python 3, and the Python install manager.</span> <a href="https://www.python.org/downloads/windows/" rel="noopener">link</a></li>
+      <li><b>Python documentation</b> — <i>Using Python on Windows</i>. <span class="why">The installer&#x27;s options: Add python.exe to PATH, Disable path length limit, and the install manager that replaces the installer.</span> <a href="https://docs.python.org/3/using/windows.html" rel="noopener">link</a></li>
+      <li><b>Microsoft</b> — <i>Maximum path length limitation</i>. <span class="why">Windows paths stop at 260 characters unless long paths are enabled.</span> <a href="https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation" rel="noopener">link</a></li>
+      <li><b>My own install</b> — <i>recorded for the video, November 2026, a fresh Windows 11 setup</i>. <span class="why">Python 3.15.2 (64-bit); python --version prints Python 3.15.2 and pip --version prints pip 26.2.2; the install folder is AppData\Local\Programs\Python\Python315 inside the user folder.</span></li>
+      </ol>
+  </section>
+
+  <section class="keep" aria-label="Follow along"><p class="follow">New chapters and episodes come out every week. Follow along on <a href="https://www.youtube.com/@learn-ai-by-building" rel="noopener">YouTube</a> or the <a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp channel</a>. Questions? Ask under the video on YouTube; I read every comment.</p></section>
+  <div class="lwa-chapnav">
+    <a href="../index.html"><span class="k">← Blog</span><span class="t">All posts</span></a>
+    <!-- TODO(video-id): <a href="https://www.youtube.com/watch?v=VIDEO_ID" rel="noopener"><span class="k">Watch →</span><span class="t">The video on YouTube</span></a> -->
+  </div>
+
+  </main>
+</div>
+
+<footer class="nav2-foot"><div class="fi">
+  <a href="../../index.html"><img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building — home"></a>
+  <nav aria-label="Footer"><a href="../../index.html">Home</a><a href="../../series/index.html">Series</a><a href="../../blog/index.html">Blog</a><a href="../../connect.html">Connect</a><a href="https://www.youtube.com/@learn-ai-by-building" rel="noopener">YouTube</a><a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp</a><a href="../../privacy.html">Privacy</a></nav>
+  <span class="by">Learn AI by Building · by Adi (Aditya)</span>
+</div></footer>
+<script src="../../assets/site-config.js"></script>
+<script src="../../assets/progress.js?v=3"></script>
+<script src="../../assets/pyrun.js?v=2"></script>
+<script src="../../assets/railspy.js?v=1"></script>
+<script src="../../assets/analytics.js?v=1" defer></script>
+</body>
+</html>

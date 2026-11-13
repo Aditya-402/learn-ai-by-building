@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How do I install Node.js on Windows? — Learn AI by Building</title>
+<meta name="description" content="Many AI tools and MCP servers start with npx, and on a fresh Windows PC that command does not exist yet. By the end, you will have Node.js installed, node, npm and npx answering in PowerShell, and the red npm error fixed with one command.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=8">
+<link rel="stylesheet" href="../../assets/unit.css?v=8">
+<link rel="stylesheet" href="../../assets/blog.css?v=7">
+<link rel="stylesheet" href="../../assets/nav.css?v=1">
+<style>
+  .shot img{width:100%;border-radius:10px;border:1px solid var(--line)}
+  .shot.dialog img{max-width:520px;margin:0 auto}
+</style>
+</head>
+<body data-lwa-course="blog" data-lwa-chapter="install-nodejs-on-windows">
+<header class="top nav2"><div class="top-in">
+  <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark-maroon.svg?v=1" alt="Learn AI by Building — home"></a>
+  <nav class="nav2-links" aria-label="Main"><a href="../../index.html">Home</a><a href="../../series/index.html">Series</a><a href="../../blog/index.html" aria-current="page">Blog</a><a href="../../connect.html">Connect</a></nav>
+  <span class="nav2-auth" data-lwa-auth></span>
+  <details class="nav2-menu"><summary>Menu</summary><div class="m"><a href="../../index.html">Home</a><a href="../../series/index.html">Series</a><a href="../../blog/index.html">Blog</a><a href="../../connect.html">Connect</a><a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp channel</a><span class="nav2-auth-m" data-lwa-auth></span></div></details>
+</div></header>
+<header class="masthead">
+  <div class="masthead-in">
+    <div class="title-block">
+      <span class="blog-label how">How do I…?</span>
+      <h1>How do I install Node.js on Windows?</h1>
+      <p class="standfirst">Many AI tools and MCP servers start with npx, and on a fresh Windows PC that command does not exist yet. By the end, you will have Node.js installed, node, npm and npx answering in PowerShell, and the red npm error fixed with one command.</p>
+      <div class="facts">
+        <div><b>Read</b>~5 min</div>
+        <div><b>Steps</b>9, each shown on screen</div>
+        <div><b>Video</b>coming soon</div>
+        <div><b>Published</b>14 Nov 2026</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="rail" aria-label="Sections">
+    <div class="rail-h">Contents</div>
+    <!-- TODO(video-id): when the video is out, add <a href="#video">Watch the video</a> here as the first link -->
+    <a class="on" href="#why">Why you need Node.js</a>
+    <a href="#download">Download the LTS installer</a>
+    <a href="#install">Click through the setup wizard</a>
+    <a href="#check">Check it in PowerShell</a>
+    <a href="#red-error">When npm says scripts are disabled</a>
+    <a href="#summary">The three checks at a glance</a>
+    <a href="#takeaway">The takeaway</a>
+    <a href="#related">Related</a>
+    <a href="#refs">References</a>
+  </nav>
+
+  <main>
+
+  <!-- TODO(video-id): when the video is out, uncomment this block, put the video id in both places and the length (m:ss),
+       change the masthead fact "Video coming soon" to "Watch m:ss video", and add the Watch link in .lwa-chapnav below.
+  <section id="video">
+    <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/VIDEO_ID?rel=0" title="How do I install Node.js on Windows?"
+      allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+    <p class="video-cap">Prefer to watch? This post goes with the video (m:ss). <a href="https://www.youtube.com/watch?v=VIDEO_ID" rel="noopener">Open it on YouTube</a>.</p>
+  </section>
+  -->
+
+  <section id="why">
+    <div class="prose">
+      <h2>Why you need Node.js</h2>
+      <p>Say you want to try an AI tool, or connect an MCP server to your assistant. The setup page gives you one line to run, and it starts with <code>npx</code>. You paste it into PowerShell, and Windows says it has never heard of npx.</p>
+      <p>That is because npx is not a Windows command. It comes with <b>Node.js</b>, a free, open-source runtime that lets JavaScript programs run on your own computer. Install Node.js, and you also get npm, its package manager, and npx with it.</p>
+      <p>You need only two things: a Windows PC and an internet connection. It takes about ten minutes, most of it waiting for the installer.</p>
+    </div>
+  </section>
+
+  <section id="download">
+    <div class="prose">
+      <h2>Download the LTS installer</h2>
+    </div>
+
+    <div class="step"><span class="n">1</span><h3>Open the download page</h3>
+      <p>Go to <a href="https://nodejs.org/en/download" rel="noopener">the Node.js download page on nodejs.org</a>. From the home page, <b class="ui">Get Node.js</b> brings you to the same place.</p></div>
+
+    <figure class="shot">
+      <img src="img/lts-download.jpg" alt="The Node.js download page: Get Node.js v26.13.0 LTS for Windows, with a box of fnm commands below it" width="1280" height="650" loading="lazy">
+      <figcaption>The download page offers the LTS version. The box of commands is for fnm, a version manager; we skip it.</figcaption>
+    </figure>
+
+    <div class="prose">
+      <p>The page offers the <b>LTS</b> version first. LTS means long-term support: it gets fixes for a long time, so it is the safe pick. Your version number may be newer than the one in the picture, and that is fine.</p>
+      <p>The box of commands below it uses fnm, a tool for keeping several Node.js versions. You do not need it for a first install.</p>
+    </div>
+
+    <div class="step"><span class="n">2</span><h3>Download the Windows Installer</h3>
+      <p>Scroll down and click <b class="ui">Windows Installer (.msi)</b>. When the download finishes, click <b class="ui">Open file</b>. Windows takes a minute or two to prepare the installer, so wait for it.</p></div>
+  </section>
+
+  <section id="install">
+    <div class="prose">
+      <h2>Click through the setup wizard</h2>
+      <p>The wizard asks five questions. You keep every default except one box, and that box is step 6.</p>
+    </div>
+
+    <div class="step"><span class="n">3</span><h3>Welcome and licence</h3>
+      <p>Click <b class="ui">Next</b>. On the licence page, <b class="ui">Next</b> stays grey until you tick <i>I accept the terms in the License Agreement</i>. Tick it, then click <b class="ui">Next</b>.</p></div>
+
+    <div class="step"><span class="n">4</span><h3>Keep the suggested folder</h3>
+      <p>The wizard asks where to install. Keep the folder it suggests, and click <b class="ui">Next</b>.</p></div>
+
+    <div class="step"><span class="n">5</span><h3>Keep all four parts in Custom Setup</h3>
+      <p>Custom Setup lists what goes onto your PC. Leave all four as they are, and click <b class="ui">Next</b>.</p></div>
+
+    <figure class="shot dialog">
+      <img src="img/custom-setup.jpg" alt="The Custom Setup page of the Node.js installer: Node.js runtime, npm package manager, Online documentation shortcuts and Add to PATH" width="640" height="490" loading="lazy">
+      <figcaption>Custom Setup: four parts, all kept.</figcaption>
+    </figure>
+
+    <table>
+      <tr><th>Part</th><th>What it gives you</th></tr>
+      <tr><td>Node.js runtime</td><td>The <code>node</code> program itself, which runs JavaScript.</td></tr>
+      <tr><td>npm package manager</td><td><code>npm</code> to install packages, and <code>npx</code> to run them.</td></tr>
+      <tr><td>Online documentation shortcuts</td><td>Start-menu links to the Node.js documentation.</td></tr>
+      <tr><td>Add to PATH</td><td>Lets any terminal find <code>node</code> and <code>npm</code> by name. This one matters most.</td></tr>
+    </table>
+
+    <div class="step"><span class="n">6</span><h3>Leave the Tools for Native Modules box unticked</h3>
+      <p>Some npm packages are written in C or C++. They must be compiled on your PC, and that needs extra build tools. This box would install those tools, and Chocolatey, a package manager for Windows, along with them. You do not need them to start, so leave the box empty and click <b class="ui">Next</b>.</p></div>
+
+    <figure class="shot dialog">
+      <img src="img/native-tools.jpg" alt="The Tools for Native Modules page of the Node.js installer, with the box to install the necessary tools and Chocolatey left unticked" width="640" height="490" loading="lazy">
+      <figcaption>The one box to leave alone: it is unticked, and stays that way.</figcaption>
+    </figure>
+
+    <div class="step"><span class="n">7</span><h3>Click Install</h3>
+      <p>The wizard says it is ready. Click <b class="ui">Install</b>. If Windows asks to allow changes, click <b class="ui">Yes</b>.</p></div>
+
+    <div class="step"><span class="n">8</span><h3>Wait, then Finish</h3>
+      <p>The progress bar may sit empty for a few minutes before it moves, so let it run. When you see <i>Node.js has been successfully installed</i>, click <b class="ui">Finish</b>.</p></div>
+  </section>
+
+  <section id="check">
+    <div class="prose">
+      <h2>Check it in PowerShell</h2>
+    </div>
+
+    <div class="step"><span class="n">9</span><h3>Ask node for its version</h3>
+      <p>Open the Start menu, type <i>PowerShell</i>, and open <b class="ui">Windows PowerShell</b>. If one was already open, close it and open a new one, so it sees the new PATH. Then type:</p></div>
+    <div class="yousee"><b>Type into PowerShell</b>node --version</div>
+    <div class="yousee"><b>What you should see</b>v26.13.0</div>
+    <div class="prose">
+      <p>Any version number means Node.js is installed. Now ask npm the same question with <code>npm --version</code>.</p>
+      <p>On many Windows PCs, this is where the red text appears.</p>
+    </div>
+  </section>
+
+  <section id="red-error">
+    <div class="prose">
+      <h2>When npm says scripts are disabled</h2>
+      <p>node answered, but npm stops with a red error. The key words are in the first line: <i>running scripts is disabled on this system</i>.</p>
+    </div>
+
+    <figure class="shot">
+      <img src="img/npm-error.jpg" alt="PowerShell: node --version prints v26.13.0, then npm --version fails in red: File C:\Program Files\nodejs\npm.ps1 cannot be loaded because running scripts is disabled on this system" width="1280" height="260" loading="lazy">
+      <figcaption>node works. npm does not, because it starts through a script.</figcaption>
+    </figure>
+
+    <div class="prose">
+      <p>So why does one work and not the other? Look at the file the error names: <code>npm.ps1</code>. On Windows, npm starts through a small PowerShell script.</p>
+      <p>PowerShell may be set to block every script, and on a fresh PC it often is. The node command is a plain program, so it was never blocked.</p>
+      <p>Nothing is broken, and you do not need to reinstall. One command fixes it. Copy it exactly, and run it in the same PowerShell window:</p>
+    </div>
+    <div class="yousee"><b>Paste into PowerShell</b>Set-ExecutionPolicy -Scope CurrentUser RemoteSigned</div>
+    <div class="prose">
+      <p>PowerShell explains the change and asks you to confirm. Type <code>Y</code> and press Enter.</p>
+      <p>What did that change? <b>RemoteSigned</b> lets scripts on your own PC run, such as npm's. A script downloaded from the internet still needs a signature from its publisher. <b>CurrentUser</b> means the change is only for your Windows account, so it needs no administrator rights.</p>
+      <p>Now ask npm again, then npx:</p>
+    </div>
+    <div class="yousee"><b>Run these, one per line</b>npm --version
+npx --version</div>
+
+    <figure class="shot">
+      <img src="img/npm-npx-answer.jpg" alt="PowerShell after Set-ExecutionPolicy -Scope CurrentUser RemoteSigned and the answer Y: npm --version prints 11.20.0, and npx --version prints 11.20.0" width="1280" height="512" loading="lazy">
+      <figcaption>After the fix, npm answers with no error, and so does npx.</figcaption>
+    </figure>
+
+    <div class="prose">
+      <p>Both print a version number. npm and npx share one version, so the two numbers match. Node.js is ready.</p>
+    </div>
+  </section>
+
+  <section id="summary">
+    <div class="prose">
+      <h2>The three checks at a glance</h2>
+      <p>Run these any time you want to know whether Node.js is set up on a PC.</p>
+    </div>
+    <table>
+      <tr><th>Type this</th><th>A working PC shows</th><th>If you see red</th></tr>
+      <tr><td><code>node --version</code></td><td>A version, such as v26.13.0</td><td><i>not recognized</i>: open a new PowerShell. Still there? Install again, with Add to PATH kept.</td></tr>
+      <tr><td><code>npm --version</code></td><td>A version, such as 11.20.0</td><td><i>running scripts is disabled</i>: run the Set-ExecutionPolicy line above.</td></tr>
+      <tr><td><code>npx --version</code></td><td>The same version as npm</td><td>The same fix as npm.</td></tr>
+    </table>
+  </section>
+
+  <section id="takeaway">
+    <div class="prose">
+      <h2>The takeaway</h2>
+      <ol>
+        <li>Download the LTS installer from nodejs.org, and keep the defaults, with Add to PATH.</li>
+        <li>Leave the Tools for Native Modules box unticked, unless a package asks for build tools.</li>
+        <li>If npm says scripts are disabled, run <code>Set-ExecutionPolicy -Scope CurrentUser RemoteSigned</code> once, and answer Y.</li>
+      </ol>
+      <p>Which AI tool are you installing Node.js for? Tell me under the video on YouTube.</p>
+    </div>
+  </section>
+
+  <section id="related">
+    <div class="prose"><h2>Related</h2></div>
+    <div class="blog-list"><a class="blog-item" href="../install-claude-code/"><span class="blog-label how">Blog · How do I…?</span><h3>How do I install Claude Code?</h3></a><a class="blog-item" href="../get-your-gemini-api-key-and-connect-spark/"><span class="blog-label how">Blog · How do I…?</span><h3>How do I get my own Gemini API key, and connect Spark?</h3></a></div>
+  </section>
+
+  <section class="lwa-refs" id="refs">
+    <div class="prose">
+      <h2>References</h2>
+      <p>Where each step and claim on this page comes from. Checked on 13 Nov 2026.</p>
+    </div>
+    <ol>
+      <li><b>OpenJS Foundation</b> — <i>Download Node.js</i>. <span class="why">The LTS version, the Windows Installer (.msi), and the fnm commands we skip.</span> <a href="https://nodejs.org/en/download" rel="noopener">link</a></li>
+      <li><b>Microsoft</b> — <i>about_Execution_Policies</i>. <span class="why">Why PowerShell blocks scripts on Windows, and what RemoteSigned and the CurrentUser scope mean.</span> <a href="https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_execution_policies" rel="noopener">link</a></li>
+      <li><b>Microsoft</b> — <i>Set-ExecutionPolicy</i>. <span class="why">The command that fixes the npm error, and the confirm question it asks.</span> <a href="https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-executionpolicy" rel="noopener">link</a></li>
+      <li><b>npm</b> — <i>npx</i>. <span class="why">npx comes with npm and runs a package's command.</span> <a href="https://docs.npmjs.com/cli/commands/npx" rel="noopener">link</a></li>
+      <li><b>My own install</b> — <i>the recording for the video, Windows 11</i>. <span class="why">Node.js v26.13.0 LTS; npm and npx both print 11.20.0; the red error before the fix, and none after it.</span></li>
+    </ol>
+  </section>
+
+  <section class="keep" aria-label="Follow along"><p class="follow">New chapters and episodes come out every week. Follow along on <a href="https://www.youtube.com/@learn-ai-by-building" rel="noopener">YouTube</a> or the <a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp channel</a>. Questions? Ask under the video on YouTube; I read every comment.</p></section>
+  <div class="lwa-chapnav">
+    <a href="../index.html"><span class="k">← Blog</span><span class="t">All posts</span></a>
+    <!-- TODO(video-id): <a href="https://www.youtube.com/watch?v=VIDEO_ID" rel="noopener"><span class="k">Watch →</span><span class="t">The video on YouTube</span></a> -->
+  </div>
+
+  </main>
+</div>
+
+<footer class="nav2-foot"><div class="fi">
+  <a href="../../index.html"><img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building — home"></a>
+  <nav aria-label="Footer"><a href="../../index.html">Home</a><a href="../../series/index.html">Series</a><a href="../../blog/index.html">Blog</a><a href="../../connect.html">Connect</a><a href="https://www.youtube.com/@learn-ai-by-building" rel="noopener">YouTube</a><a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp</a><a href="../../privacy.html">Privacy</a></nav>
+  <span class="by">Learn AI by Building · by Adi (Aditya)</span>
+</div></footer>
+<script src="../../assets/site-config.js"></script>
+<script src="../../assets/progress.js?v=3"></script>
+<script src="../../assets/railspy.js?v=1"></script>
+<script src="../../assets/analytics.js?v=1" defer></script>
+</body>
+</html>

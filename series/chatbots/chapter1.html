@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 1 · bot.py, the first reply — Learn AI by Building</title>
+<meta name="description" content="Chapter 1 of Building Chatbots: pick a Gemini model in Google AI Studio, see what a question costs, run its Python code in Antigravity, fix a real error with one narrow prompt, and move your API key out of the code into a .env file.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=8">
+<link rel="stylesheet" href="../../assets/unit.css?v=8">
+<link rel="stylesheet" href="../../assets/blog.css?v=7">
+<!-- the series-chapter parts (.cc-shot, .cc-wall, .pr copy blocks, the quick reference on a phone) are shared with the Claude Code chapters -->
+<link rel="stylesheet" href="../claude-code/cc.css?v=4">
+<link rel="stylesheet" href="../../assets/nav.css?v=1">
+</head>
+<body data-lwa-course="chatbots" data-lwa-chapter="chapter1" data-lwa-title="Chapter 1 · bot.py, the first reply" data-lwa-taught="Google AI Studio model picker and token cost; Get code; Antigravity folder and bot.py; virtual environment and the PowerShell execution policy; a Gemini API key; reading an error and a narrow fix prompt; a prompt file that moves the key into .env">
+<header class="top nav2"><div class="top-in">
+  <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark-maroon.svg?v=1" alt="Learn AI by Building — home"></a>
+  <nav class="nav2-links" aria-label="Main"><a href="../../index.html">Home</a><a href="../../series/index.html" aria-current="page">Series</a><a href="../../blog/index.html">Blog</a><a href="../../connect.html">Connect</a></nav>
+  <span class="nav2-auth" data-lwa-auth></span>
+  <details class="nav2-menu"><summary>Menu</summary><div class="m"><a href="../../index.html">Home</a><a href="../../series/index.html">Series</a><a href="../../blog/index.html">Blog</a><a href="../../connect.html">Connect</a><a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp channel</a><span class="nav2-auth-m" data-lwa-auth></span></div></details>
+</div></header>
+<header class="masthead">
+  <div class="masthead-in">
+    <div class="title-block">
+      <div class="eyebrow">Building Chatbots · Chapter 1</div>
+      <h1>bot.py, the first reply</h1>
+      <p class="standfirst">You have chatted with Gemini in the browser. By the end of this chapter, a Python file on your own PC sends Gemini a question and prints the answer, and your key is kept out of the code.</p>
+      <div class="facts"><div><b>One sitting</b>~12 min read, ~30 min to build along</div><div><b>You need</b>Python 3.11 or later, Antigravity, a Google account</div><div><b>You build</b>bot.py, which asks Gemini one question</div><div><b>Chapter 1</b>where the series starts</div></div>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="rail" aria-label="Sections">
+    <a class="rnav-back" href="index.html"><span class="ico">←</span><span class="lbl">All chapters</span></a>
+    <div class="rail-h">Contents</div>
+    <a class="on" href="#wall">The wall</a>
+    <a href="#studio">Pick a model</a>
+    <a href="#cost">What a question costs</a>
+    <a href="#code">Take the code</a>
+    <a href="#venv">A place for the libraries</a>
+    <a href="#key">A key of your own</a>
+    <a href="#fail">It fails first</a>
+    <a href="#more">More questions, two problems</a>
+    <a href="#env">Move the key out</a>
+    <a href="#where">What it still cannot do</a>
+    <a href="#quickref">Quick reference</a>
+    <a href="#takeaway">The takeaway</a>
+    <a href="#homework">Your homework</a>
+  </nav>
+
+  <main>
+  <!-- TODO(video-id): when Episode 1 is on YouTube, put the player here as on ../claude-code/chapter1.html
+       (section id="video": the youtube-nocookie embed of VIDEO_ID, title "Episode 1 · How do I talk to Gemini from my own
+       Python code?", and the video-cap line with the length, m:ss floored). Then turn the "Goes with Episode 1" card below
+       into the watch link, and re-run studio/tools/site/nav.py on this page so the comment line appears once (ME-248 G3).
+       If the episode is scheduled, use the scheduled form from build_cc_chapters.py (WE-159). -->
+
+  <section id="wall" data-rail="The wall">
+    <div class="prereq">
+      <div class="pq"><b>Goes with Episode 1</b>"How do I talk to Gemini from my own Python code?". The video is coming soon. This page teaches the same steps now, at your own pace.</div>
+      <div class="pq"><b>Before you start</b>Python 3.11 or later: check with <code>python --version</code> in PowerShell. How To: <a href="../../blog/install-python-on-windows/">install Python on Windows</a>. Antigravity, installed and signed in: <a href="../../blog/install-antigravity-on-windows/">install Antigravity on Windows</a>. And a Google account, which is free.</div>
+      <div class="pq"><b>Build along</b>Every command and prompt has a Copy button. Gemini will word its answers a little differently for you; that is normal.</div>
+    </div>
+    <div class="prose">
+      <h2>From the chat page to your own program</h2>
+      <p>Say you ask Gemini a question in the browser. You type, it answers, and the answer stays on that page.</p>
+      <p>Now you want that answer inside a program of your own. You want to save it, or build a shop assistant around it. The chat page cannot give you that.</p>
+    </div>
+    <div class="cc-wall">
+      <div class="lbl">The question for this chapter</div>
+      <p>How do I talk to Gemini from my own Python code?</p>
+    </div>
+    <div class="prose">
+      <p>Let's try to understand what we are building. It is a chatbot, and its engine is Gemini. The chatbot is one Python file on your computer, <code>bot.py</code>. Only the question travels over the internet to Gemini, and only the answer comes back.</p>
+      <p>Your program asks through an <b>API</b>, a door Google opens for programs. A key, the <b>API key</b>, tells Google who is asking.</p>
+      <p>We get there in three steps:</p>
+      <ol>
+        <li>Take the code from Google AI Studio.</li>
+        <li>Run it in Antigravity, Google's editor for AI-assisted coding.</li>
+        <li>Let it in with a key of your own.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="studio" data-rail="Pick a model">
+    <div class="prose">
+      <h2>Pick a model in Google AI Studio</h2>
+      <p>Open <a href="https://aistudio.google.com" rel="noopener">Google AI Studio at aistudio.google.com</a> and click <b class="ui">Get started</b>. Sign in with your Google account. You land on the Playground.</p>
+      <p>Your default model may differ from ours. Ours opened on Gemini 4 Hydrogen, with Google Search on. Click the model name at the top right, and search for <code>flash-lite</code>.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter1/models.png" alt="AI Studio's Model selection panel, searched for flash-lite. Gemini 3.5 Flash Lite: Input $0.30 / Output $2.50. Gemini 3.1 Flash Lite: text, image and video Input $0.25 / Output $1.50." loading="lazy">
+      <figcaption>The two Flash Lite models, as listed when we recorded in November 2026. The list can change. 3.1 is cheaper for input and for output, so we pick <b class="ui">Gemini 3.1 Flash Lite</b>.</figcaption></figure>
+    <div class="prose">
+      <p>Now switch off <b class="ui">Grounding with Google Search</b>, so the model answers on its own. Then ask something you can check yourself.</p>
+    </div>
+    <div class="pr"><div class="pr-h"><span>Type this in AI Studio</span><button type="button" class="pr-copy" data-for="p1">Copy</button></div><pre id="p1">What is the capital of France?</pre>
+      <p class="pr-why">The answer: "The capital of France is Paris." Correct, right?</p></div>
+  </section>
+
+  <section id="cost" data-rail="What a question costs">
+    <div class="prose">
+      <h2>What one question costs</h2>
+      <p>The prices on those cards are for every 1 million tokens. A <b>token</b> is a small piece of text the model reads or writes. AI Studio counts them next to the chat's title. Hover over the count, and it splits them into input and output, with a cost.</p>
+      <p>We asked the France question on both models. Then we asked 3.1 for a longer answer: "Explain in about 150 words how a large language model answers a question, for someone who has just learned Python."</p>
+    </div>
+    <div class="cheat"><table>
+      <tr><th>Question, model</th><th>Tokens in + out</th><th>Cost, input + output</th></tr>
+      <tr><td>France, 3.5 Flash Lite</td><td>8 + 7</td><td>$0.000002 + $0.000018 = $0.000020</td></tr>
+      <tr><td>France, 3.1 Flash Lite</td><td>8 + 7</td><td>$0.000002 + $0.000011 = $0.000013</td></tr>
+      <tr><td>150 words, 3.1 Flash Lite</td><td>26 + 195</td><td>$0.000007 + $0.000293 = $0.000299</td></tr>
+    </table></div>
+    <div class="prose">
+      <p>Check the last row yourself. 195 output tokens at $1.50 per million is $0.000293. The question was short; the answer was long.</p>
+      <p>So the answer drives the cost. On 3.1, an output token costs 6 times an input token: $1.50 against $0.25. That is why the long answer cost more than 20 times our France question.</p>
+      <p>One more line in the small print: here in AI Studio, with no API key selected, usage is free.</p>
+    </div>
+  </section>
+
+  <section id="code" data-rail="Take the code">
+    <div class="prose">
+      <h2>Take the code AI Studio wrote</h2>
+      <p>Go back to the France chat; <b class="ui">History</b> on the left keeps it. Click <b class="ui">Get code</b> at the top. With <b class="ui">Python</b> chosen, AI Studio shows your call as a Python program. Click <b class="ui">Copy</b> at the bottom right.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter1/getcode.png" alt="AI Studio's Get code dialog, Python: pip install google-genai, imports, def generate, client = genai.Client(api_key=os.environ.get(&quot;GEMINI_API_KEY&quot;)), model = &quot;gemini-3.1-flash-lite&quot;, and the Copy button." loading="lazy">
+      <figcaption>Our chat as a Python program. Look at <code>api_key=os.environ.get("GEMINI_API_KEY")</code>: we come back to it.</figcaption></figure>
+    <div class="prose">
+      <p>In Antigravity, choose <b class="ui">Open Folder</b>. Make a folder anywhere you like; ours is <code>C:\code\chatbot-series</code>. Antigravity asks whether you trust the authors of the files. Say yes: it is your own folder.</p>
+      <p>Click the <b class="ui">New File</b> icon next to the folder name, and name the file <code>bot.py</code>. Paste the code and save it with Ctrl+S.</p>
+      <p>The question is not in the copied code yet. On its line you find a placeholder, <code>INSERT_INPUT_HERE</code>. We fill it in soon.</p>
+    </div>
+  </section>
+
+  <section id="venv" data-rail="A place for the libraries">
+    <div class="prose">
+      <h2>A place for this project's libraries</h2>
+      <p>Open a terminal from the menu bar: <b class="ui">Terminal</b>, then <b class="ui">New Terminal</b>. It opens in your project folder. First, check your Python. Google's library for Gemini needs Python 3.11 or later.</p>
+    </div>
+    <div class="pr"><div class="pr-h"><span>Type in the terminal (PowerShell)</span><button type="button" class="pr-copy" data-for="p2">Copy</button></div><pre id="p2">python --version</pre>
+      <p class="pr-why">Ours said Python 3.15.2.</p></div>
+    <div class="prose">
+      <p>Next, make a <b>virtual environment</b>: a dedicated place for this project's libraries, so they do not mix with other projects. Make it once, then switch it on.</p>
+    </div>
+    <div class="pr"><div class="pr-h"><span>Type in the terminal, one line at a time</span><button type="button" class="pr-copy" data-for="p3">Copy</button></div><pre id="p3">python -m venv .venv
+.venv\Scripts\activate</pre></div>
+    <div class="prose">
+      <p>On Windows, PowerShell may stop you here with a red error.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter1/venv-error.png" alt="PowerShell in red: Activate.ps1 cannot be loaded because running scripts is disabled on this system. Below it, Set-ExecutionPolicy -Scope CurrentUser RemoteSigned, the activate command again, and the prompt now starting with (.venv)." loading="lazy">
+      <figcaption>"Running scripts is disabled on this system." Under the error: the one-line fix, the activate command again, and the prompt now starts with <b class="ui">(.venv)</b>. Part of the folder path is blurred.</figcaption></figure>
+    <div class="prose">
+      <p>One command lets your own scripts run, for your user only. Then switch the environment on again.</p>
+    </div>
+    <div class="pr"><div class="pr-h"><span>Only if you see that error</span><button type="button" class="pr-copy" data-for="p4">Copy</button></div><pre id="p4">Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+.venv\Scripts\activate</pre></div>
+    <div class="prose">
+      <p>Every command from here runs inside the environment. Now install Google's library for Gemini, <code>google-genai</code>.</p>
+    </div>
+    <div class="pr"><div class="pr-h"><span>Type in the terminal</span><button type="button" class="pr-copy" data-for="p5">Copy</button></div><pre id="p5">pip install google-genai</pre></div>
+    <div class="confuse">
+      <div class="lbl">Careful here</div>
+      <p>A new terminal starts outside the environment. If the prompt does not start with <code>(.venv)</code>, run <code>.venv\Scripts\activate</code> first. Otherwise Python may not find the libraries you installed.</p>
+    </div>
+  </section>
+
+  <section id="key" data-rail="A key of your own">
+    <div class="prose">
+      <h2>A key of your own</h2>
+      <p>Look at line 12 of <code>bot.py</code>: <code>api_key=os.environ.get("GEMINI_API_KEY")</code>. The code expects your key in a setting on your computer, called <code>GEMINI_API_KEY</code>. You have no key yet, so let's make one.</p>
+      <ol>
+        <li>In AI Studio, click the key icon at the bottom left. <b class="ui">API Keys</b> opens. The first time, it is empty.</li>
+        <li>Click <b class="ui">Create API key</b>, at the top right.</li>
+        <li>Name it after the project, <code>chatbot-series</code>, and create it.</li>
+        <li>AI Studio shows the key. Click <b class="ui">Copy key</b>.</li>
+      </ol>
+      <p>This is the quick way. Our <a href="../../blog/get-your-gemini-api-key-and-connect-spark/">full how-to on getting a Gemini API key</a> goes step by step. AI Studio gives a limited number of free requests, and the limits change from time to time. Check the <a href="https://ai.google.dev/gemini-api/docs/rate-limits" rel="noopener">current Gemini API rate limits</a>.</p>
+    </div>
+    <div class="confuse">
+      <div class="lbl">Careful here</div>
+      <p>Your key is like a password. Anyone who has it can use Gemini on your account. In the video you see my key for a moment: it was a throwaway key, deleted after the recording. Keep your own key to yourself, and never put it in code you share.</p>
+    </div>
+    <div class="prose">
+      <p>For a first test, we put the key straight into <code>bot.py</code>. On line 12, select <code>os.environ.get("GEMINI_API_KEY")</code> and delete it. Type a quote, and paste your key. Line 12 now looks like this, with your key in place of <i>your-key-here</i>:</p>
+    </div>
+    <div class="yousee"><b>Line 12, for this test only</b>api_key="your-key-here",</div>
+    <div class="prose">
+      <p>Then go to line 20. Replace <code>INSERT_INPUT_HERE</code> with your question, and save.</p>
+    </div>
+    <div class="yousee"><b>Line 20</b>types.Part.from_text(text="""What is the capital of France?"""),</div>
+    <div class="prose">
+      <p>The key stays in the file only until the end of this chapter. Then a prompt moves it out.</p>
+    </div>
+  </section>
+
+  <section id="fail" data-rail="It fails first">
+    <div class="prose">
+      <h2>It fails first</h2>
+      <p>Now run it.</p>
+    </div>
+    <div class="pr"><div class="pr-h"><span>Type in the terminal</span><button type="button" class="pr-copy" data-for="p6">Copy</button></div><pre id="p6">python bot.py</pre></div>
+    <div class="prose">
+      <p>We did not expect this: it fails, with a screen of red and purple lines. When a program fails, read the last lines first.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter1/error.png" alt="The last lines of the traceback: google.genai.errors.ClientError: 400 INVALID_ARGUMENT. Invalid JSON payload received. Unknown name audioTranscriptionConfig at generation_config: Cannot find field." loading="lazy">
+      <figcaption><b class="ui">400 INVALID_ARGUMENT</b>, and the server does not know a field called <code>audioTranscriptionConfig</code>.</figcaption></figure>
+    <div class="prose">
+      <p>In plain words: the copied code sends a setting that the server rejects. So what do we do? We don't guess. We write a narrow prompt in a small file.</p>
+      <p>Make a folder called <code>prompts</code>, and in it a file <code>01-fix-error.txt</code>. It has the task, the error, and one rule: fix only this error.</p>
+    </div>
+    <div class="pr"><div class="pr-h"><span>prompts/01-fix-error.txt</span><button type="button" class="pr-copy" data-for="p7">Copy</button></div><pre id="p7">Task : Fix the error when running bot.py
+
+Context :
+- Running python bot.py gives this error:
+  400 INVALID_ARGUMENT. Unknown name "audioTranscriptionConfig" at generation_config.
+- Fix only this error. Don't change anything else in bot.py.
+
+Folder arch :
+- bot.py</pre>
+      <p class="pr-why">"Fix only this error" keeps the agent from tidying up things you did not ask about.</p></div>
+    <div class="prose">
+      <p>Select all, copy, and paste it into the agent panel on the right. Send it. The agent explains the cause, and shows its change.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter1/fix.png" alt="Antigravity: prompts/01-fix-error.txt open on the left; on the right the agent says audio_transcription_config was removed from generate_content_config, shows the code left behind, and 1 file changed +0 -2." loading="lazy">
+      <figcaption>The prompt on the left. On the right, the fix: <code>audio_transcription_config</code> removed, <b class="ui">1 file changed +0 -2</b>. Two lines out, nothing else.</figcaption></figure>
+    <div class="prose">
+      <p>Click <b class="ui">Accept all</b>, and run <code>python bot.py</code> again.</p>
+    </div>
+    <div class="yousee"><b>What you should see</b>The capital of France is Paris.</div>
+    <div class="keyidea">
+      <div class="lbl">Key idea</div>
+      <p>Copied code will not always work. Read the last line of the error, give the agent one narrow prompt, and check what it changed.</p>
+    </div>
+  </section>
+
+  <section id="more" data-rail="More questions, two problems">
+    <div class="prose">
+      <h2>More questions, and two problems</h2>
+      <p>Your own code just got its first reply from Gemini. Change the question on line 20, save, and run again. We asked four more:</p>
+    </div>
+    <div class="cheat"><table>
+      <tr><th>Question on line 20</th><th>What our bot answered</th></tr>
+      <tr><td>Who is the President of India?</td><td>The current President of India is Droupadi Murmu. She assumed office on July 25, 2022.</td></tr>
+      <tr><td>How many days are there in a leap year?</td><td>There are 366 days in a leap year.</td></tr>
+      <tr><td>Translate "thank you" into Hindi.</td><td>Dhanyavaad, with how to say it, and 2 other ways: Shukriya, and Bahut-bahut dhanyavaad.</td></tr>
+      <tr><td>Write a one-line poem about the rain.</td><td>The clouds dissolve into a thousand silver threads that stitch the sky to the earth.</td></tr>
+    </table></div>
+    <div class="prose">
+      <p>Search is off, so a fact like the President can go out of date. Your answers will be worded differently.</p>
+      <p>Five questions, five answers. Now look at <code>bot.py</code> again.</p>
+      <ol>
+        <li>Every new question means editing the code.</li>
+        <li>Your key sits right in the file. Anyone who sees the file can use it.</li>
+      </ol>
+      <p>The first problem waits for Chapter 2. The second one, we fix now.</p>
+    </div>
+  </section>
+
+  <section id="env" data-rail="Move the key out">
+    <div class="prose">
+      <h2>Move the key out with a prompt file</h2>
+      <p>We fix it the way we build this whole series: with a prompt saved in a file. In the <code>prompts</code> folder, make <code>01-api-key.txt</code>. Every prompt has 3 parts:</p>
+    </div>
+    <div class="cheat"><table>
+      <tr><th>Part</th><th>What it says in this prompt</th></tr>
+      <tr><td>Task</td><td>Move the key out of the code, into a <code>.env</code> file.</td></tr>
+      <tr><td>Context</td><td>How: load it with <code>python-dotenv</code>, add <code>.env</code> to <code>.gitignore</code>, keep the model and the question, add nothing new.</td></tr>
+      <tr><td>Folder arch</td><td>The files the project should end up with, one line each.</td></tr>
+    </table></div>
+    <div class="pr"><div class="pr-h"><span>prompts/01-api-key.txt</span><button type="button" class="pr-copy" data-for="p8">Copy</button></div><pre id="p8">Task : Move my Gemini API key out of the code, into a .env file
+
+Context :
+- bot.py is the code copied from Google AI Studio. The API key is written directly in bot.py.
+- Move the key into a .env file as GEMINI_API_KEY and remove it from bot.py.
+- Use load_dotenv from python-dotenv to load it.
+- Add .env to .gitignore, so the key never goes to Git.
+- Keep the model and the question exactly as they are.
+- Don't add memory, tools, a UI or new features.
+
+Folder arch :
+- bot.py : the chatbot
+- .env : GEMINI_API_KEY
+- .gitignore : contains .env and .venv
+- requirements.txt : the libraries used
+- README.md : how to set up the virtual environment and run</pre>
+      <p class="pr-why">The <code>.env</code> file is the environment file. It stays on your computer, and <code>.gitignore</code> tells Git never to store it.</p></div>
+    <div class="prose">
+      <p>Then hand the file to the agent.</p>
+    </div>
+    <div class="pr"><div class="pr-h"><span>Type into the agent panel</span><button type="button" class="pr-copy" data-for="p9">Copy</button></div><pre id="p9">Review and implement prompts/01-api-key.txt</pre>
+      <p class="pr-why">It stops before it installs python-dotenv, and again before it writes .env. Choose <b class="ui">Yes, allow this time</b> both times, so the choice stays with you.</p></div>
+    <div class="prose">
+      <h3>Read the summary as a checklist</h3>
+      <p>Ours worked for 5 minutes, then wrote a summary. Read it against your prompt:</p>
+    </div>
+    <div class="cheat"><table>
+      <tr><th>File</th><th>What the agent did</th><th>In Git?</th></tr>
+      <tr><td><code>.env</code></td><td>Holds <code>GEMINI_API_KEY</code>, your key</td><td>No</td></tr>
+      <tr><td><code>bot.py</code></td><td>Calls <code>load_dotenv()</code>; no key in the client</td><td>Yes</td></tr>
+      <tr><td><code>.gitignore</code></td><td>Lists <code>.env</code> and <code>.venv/</code></td><td>Yes</td></tr>
+      <tr><td><code>requirements.txt</code></td><td><code>google-genai</code> and <code>python-dotenv</code></td><td>Yes</td></tr>
+      <tr><td><code>README.md</code></td><td>How to set up the environment and run</td><td>Yes</td></tr>
+    </table></div>
+    <div class="prose">
+      <p>It also ran the bot to test it. Click <b class="ui">Accept all</b>, then open the files and read them yourself. A summary is only the agent's word.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter1/lastrun.png" alt="Antigravity: bot.py with load_dotenv() on line 9 and client = genai.Client() with no key on line 13; the Explorer lists .env, .gitignore, bot.py, README.md and requirements.txt; the terminal shows python bot.py and The capital of France is Paris." loading="lazy">
+      <figcaption>After the prompt: <code>load_dotenv()</code> on line 9, <code>genai.Client()</code> with no key on line 13. One more run gives the same answer, Paris. Nothing changed for the bot, but the key is out of the code.</figcaption></figure>
+    <div class="confuse">
+      <div class="lbl">Careful here</div>
+      <p>Keep your own key in <code>.env</code>, never in code you share. If a key ever ends up somewhere public, delete it in AI Studio's API Keys page and make a new one.</p>
+    </div>
+  </section>
+
+  <section id="where" data-rail="What it still cannot do">
+    <div class="prose">
+      <h2>What bot.py still cannot do</h2>
+      <p>Right now, <code>bot.py</code> is a one-question bot. It asks, prints the answer, and exits. To ask anything else, you open the code. And each run spends one call to Gemini on your key.</p>
+      <p>Chapter 2 takes the question out of the code. You type into a window, and the bot replies. Programmers call that window the <b>frontend</b>, and <code>bot.py</code> behind it the <b>backend</b>. Over this series, the pair grows into an assistant for an electronics shop.</p>
+    </div>
+  </section>
+
+  <section id="quickref" data-rail="Quick reference">
+    <div class="prose"><h2>Quick reference</h2><p>Every command from this chapter. The two prompt files are above, in <a href="#fail">It fails first</a> and <a href="#env">Move the key out</a>.</p></div>
+    <div class="cheat"><table><tr><th>Command</th><th>What it does</th><th>Use it when</th></tr><tr><td><code>python --version</code></td><td>Shows your Python version</td><td>Before you start: you need 3.11 or later</td></tr><tr><td><code>python -m venv .venv</code></td><td>Makes the virtual environment</td><td>Once per project</td></tr><tr><td><code>.venv\Scripts\activate</code></td><td>Switches it on; the prompt starts with (.venv)</td><td>In every new terminal</td></tr><tr><td><code>Set-ExecutionPolicy -Scope CurrentUser RemoteSigned</code></td><td>Lets your own scripts run, for your user only</td><td>PowerShell says running scripts is disabled</td></tr><tr><td><code>pip install google-genai</code></td><td>Installs Google's library for Gemini</td><td>Once, inside the environment</td></tr><tr><td><code>python bot.py</code></td><td>Runs the bot</td><td>After every change</td></tr><tr><td><code>Review and implement prompts/01-api-key.txt</code></td><td>Hands a prompt file to the agent</td><td>A prompt file is ready</td></tr></table></div>
+  </section>
+
+  <section id="takeaway" data-rail="The takeaway">
+    <div class="prose">
+      <h2>The takeaway</h2>
+      <ol>
+        <li>Your program talks to Gemini through the API, and your key tells Google who is asking. Only the question and the answer travel.</li>
+        <li>When copied code fails, read the last line of the error. Give the agent one narrow prompt, then check what it changed.</li>
+        <li>A key lives in <code>.env</code>, listed in <code>.gitignore</code>. Never in code you share.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="homework" data-rail="Your homework">
+    <div class="next">
+      <div class="lbl">Your homework</div>
+      <h3>Run the first prompt file on your own machine</h3>
+      <p style="font-size:var(--fs-cap);color:var(--slate)"><b>The goal:</b> your own bot.py, with your own key safely in .env.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>The steps:</b> build <code>bot.py</code> as we did. Give <code>prompts/01-api-key.txt</code> to the agent on your machine. Then put a question of your own on line 20, and run it 3 times.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>Guess first:</b> will the 3 answers be the same?</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:10px"><i>One question for you: what is the first question you would ask a bot of your own?</i></p>
+    </div>
+  </section>
+
+  <section class="lwa-refs" id="refs"><div class="prose"><h2>References</h2><p>Where each step and number on this page comes from. Everything was also checked in our own recording on 12 and 13 Nov 2026.</p></div><ol>
+    <li><b>Google</b> · <i>Google AI Studio</i> <span class="why">The model list and its prices, the token count and cost on hover, Get code, and API Keys.</span> <a href="https://aistudio.google.com" rel="noopener">https://aistudio.google.com</a></li>
+    <li><b>Google</b> · <i>Gemini API rate limits</i> <span class="why">The free tier and its current limits.</span> <a href="https://ai.google.dev/gemini-api/docs/rate-limits" rel="noopener">https://ai.google.dev/gemini-api/docs/rate-limits</a></li>
+    <li><b>Python</b> · <i>venv: creation of virtual environments</i> <span class="why">python -m venv and activating it on Windows.</span> <a href="https://docs.python.org/3/library/venv.html" rel="noopener">https://docs.python.org/3/library/venv.html</a></li>
+    <li><b>Microsoft</b> · <i>about_Execution_Policies</i> <span class="why">Why PowerShell says running scripts is disabled, and the CurrentUser RemoteSigned setting.</span> <a href="https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_execution_policies" rel="noopener">https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_execution_policies</a></li>
+    <li><b>python-dotenv</b> · <i>the package page</i> <span class="why">load_dotenv reads the .env file into the environment.</span> <a href="https://pypi.org/project/python-dotenv/" rel="noopener">https://pypi.org/project/python-dotenv/</a></li>
+    <li><b>My own recording</b> · <i>12 and 13 Nov 2026, Windows 11</i> <span class="why">Every picture and answer on this page is from those takes: Python 3.15.2, google-genai 3.2.0, Gemini 3.1 Flash Lite.</span></li>
+  </ol></section>
+  <section class="keep" aria-label="Follow along"><p class="follow">New chapters and episodes come out every week. Follow along on <a href="https://www.youtube.com/@learn-ai-by-building" rel="noopener">YouTube</a> or the <a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp channel</a>.</p></section>
+  <div class="lwa-chapnav"><a href="index.html"><span class="k">← Series</span><span class="t">All chapters</span></a><button type="button" class="lwa-complete" data-lwa-complete><span class="k">Progress</span><span class="t">Mark this chapter complete</span></button><a href="index.html"><span class="k">Series</span><span class="t">All chapters</span></a></div>
+  </main>
+</div>
+<footer class="nav2-foot"><div class="fi">
+  <a href="../../index.html"><img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building — home"></a>
+  <nav aria-label="Footer"><a href="../../index.html">Home</a><a href="../../series/index.html">Series</a><a href="../../blog/index.html">Blog</a><a href="../../connect.html">Connect</a><a href="https://www.youtube.com/@learn-ai-by-building" rel="noopener">YouTube</a><a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp</a><a href="../../privacy.html">Privacy</a></nav>
+  <span class="by">Learn AI by Building · by Adi (Aditya)</span>
+</div></footer>
+<script>
+// a Copy button for every command and prompt (as on the Claude Code prompt sheet)
+document.querySelectorAll('.pr-copy').forEach(function (b) {
+  b.addEventListener('click', function () {
+    var t = document.getElementById(b.dataset.for).textContent;
+    (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () {
+      b.textContent = 'Copied'; setTimeout(function () { b.textContent = 'Copy'; }, 1500);
+    }, function () { b.textContent = 'Select and copy'; });
+  });
+});
+</script>
+<script src="../../assets/site-config.js"></script>
+<script src="../../assets/analytics.js?v=1" defer></script>
+<script src="../../assets/progress.js?v=3"></script>
+<script src="../../assets/railspy.js?v=1"></script>
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How do I install Git on Windows? — Learn AI by Building</title>
+<meta name="description" content="How do you install Git on a Windows PC, and make sure it works? By the end, you will have Git installed with the two settings worth changing, checked in Git Bash, and carrying your own name and email.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=8">
+<link rel="stylesheet" href="../../assets/unit.css?v=8">
+<link rel="stylesheet" href="../../assets/blog.css?v=7">
+<link rel="stylesheet" href="../../assets/nav.css?v=1">
+</head>
+<body data-lwa-course="blog" data-lwa-chapter="install-git-on-windows">
+<header class="top nav2"><div class="top-in">
+  <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark-maroon.svg?v=1" alt="Learn AI by Building — home"></a>
+  <nav class="nav2-links" aria-label="Main"><a href="../../index.html">Home</a><a href="../../series/index.html">Series</a><a href="../../blog/index.html" aria-current="page">Blog</a><a href="../../connect.html">Connect</a></nav>
+  <span class="nav2-auth" data-lwa-auth></span>
+  <details class="nav2-menu"><summary>Menu</summary><div class="m"><a href="../../index.html">Home</a><a href="../../series/index.html">Series</a><a href="../../blog/index.html">Blog</a><a href="../../connect.html">Connect</a><a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp channel</a><span class="nav2-auth-m" data-lwa-auth></span></div></details>
+</div></header>
+<header class="masthead">
+  <div class="masthead-in">
+    <div class="title-block">
+      <span class="blog-label how">How do I…?</span>
+      <h1>How do I install Git on Windows?</h1>
+      <p class="standfirst">How do you install Git on a Windows PC, and make sure it works? By the end, you will have Git installed with the two settings worth changing, checked in Git Bash, and carrying your own name and email.</p>
+      <div class="facts">
+        <div><b>Read</b>~4 min</div>
+        <!-- TODO(video-id): add <div><b>Watch</b>M:SS video</div> here once the video is public (ME-217) -->
+        <div><b>Steps</b>9, each shown on screen</div>
+        <div><b>Published</b>14 Nov 2026</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="rail" aria-label="Sections">
+    <div class="rail-h">Contents</div>
+    <!-- TODO(video-id): <a class="on" href="#video">Watch the video</a> (then drop class="on" from the next link) -->
+    <a class="on" href="#why">Why install Git at all?</a>
+    <a href="#need">What you need first</a>
+    <a href="#download">Download the installer</a>
+    <a href="#install">Install it: keep the defaults, change two</a>
+    <a href="#check">Check it, then tell Git your name</a>
+    <a href="#where">Where we are</a>
+    <a href="#related">Related</a>
+    <a href="#refs">References</a>
+  </nav>
+
+  <main>
+
+  <!-- TODO(video-id): the video goes here, as in the other How do I posts:
+  <section id="video">
+    <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/VIDEO_ID?rel=0" title="How do I install Git on Windows?"
+      allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+    <p class="video-cap">Prefer to watch? This post goes with the video (M:SS). <a href="https://www.youtube.com/watch?v=VIDEO_ID" rel="noopener">Open it on YouTube</a>.</p>
+  </section>
+  -->
+
+  <section id="why">
+    <div class="prose">
+      <h2>Why install Git at all?</h2>
+      <p>Say you keep saving copies of your work: <i>final</i>, <i>final 2</i>, <i>final really</i>. After a week, you no longer know which one is which.</p>
+      <p>Git does that saving for you. It keeps every saved version of your project, so you can always go back to an earlier one.</p>
+      <p>Many tools also expect Git to be there. Coding agents save their work with it, and GitHub needs it. So it is worth installing once, properly.</p>
+    </div>
+  </section>
+
+  <section id="need">
+    <div class="prose">
+      <h2>What you need first</h2>
+      <ul>
+        <li>A Windows PC where you are allowed to install programs.</li>
+        <li>A browser.</li>
+      </ul>
+      <p>Git is free. The official download page is <a href="https://git-scm.com/install/windows" rel="noopener">Git for Windows on git-scm.com</a>.</p>
+    </div>
+  </section>
+
+  <section id="download">
+    <div class="prose">
+      <h2>Download the installer</h2>
+    </div>
+
+    <div class="step"><span class="n">1</span><h3>Get the installer from git-scm.com</h3>
+      <p>Type <i>git-scm.com</i> in your browser. On the home page, click <b class="ui">Install for Windows</b>. Then pick <b class="ui">Git for Windows/x64 Setup</b>, or the <b class="ui">ARM64</b> one if your PC has an ARM chip.</p></div>
+    <figure class="shot"><img src="img/1-download-page.jpg" width="1280" height="720" loading="lazy" alt="The Install page on git-scm.com, Windows tab: under Standalone Installer, the link Git for Windows/x64 Setup is marked."><figcaption>Most Windows PCs want the x64 Setup.</figcaption></figure>
+  </section>
+
+  <section id="install">
+    <div class="prose">
+      <h2>Install it: keep the defaults, change two</h2>
+      <p>The installer asks 12 questions. We keep the default on all but 2, and each change has a reason.</p>
+    </div>
+
+    <div class="step"><span class="n">2</span><h3>Start the installer</h3>
+      <p>When the download finishes, click <b class="ui">Open file</b>. Windows may ask if this app can make changes to your device: click <b class="ui">Yes</b>. The first page is the licence, the GNU General Public License, so click <b class="ui">Next</b>.</p></div>
+
+    <div class="step"><span class="n">3</span><h3>Keep the folder, the components and the Start menu</h3>
+      <p>These three pages stay as they are, so click <b class="ui">Next</b> on each.</p></div>
+
+    <div class="step"><span class="n">4</span><h3>Change 1: make Notepad Git's editor</h3>
+      <p>This is the editor Git opens when it wants a message from you. The default is Vim, and the installer itself says Vim <i>can be hard to use</i>. So open the list and choose <b class="ui">Use Notepad as Git's default editor</b>, which already comes with Windows. Click <b class="ui">Next</b>.</p></div>
+    <figure class="shot"><img src="img/2-editor-vim-warning.jpg" width="1280" height="720" loading="lazy" alt="The installer page Choosing the default editor used by Git, with Vim selected; the installer's note that Vim can be hard to use is marked."><figcaption>The installer's own warning about Vim, before we switch to Notepad.</figcaption></figure>
+
+    <div class="step"><span class="n">5</span><h3>Change 2: call the first branch main</h3>
+      <p>This page names the first branch of every new project. <b class="ui">Let Git decide</b> would call it <i>master</i>. GitHub and many teams use <i>main</i>, so choose <b class="ui">Override the default branch name for new repositories</b>. Keep <i>main</i> in the box, and click <b class="ui">Next</b>.</p></div>
+    <figure class="shot"><img src="img/3-branch-main.jpg" width="1280" height="720" loading="lazy" alt="The installer page Adjusting the name of the initial branch in new repositories: Override the default branch name is chosen, with main in the box."><figcaption>Override chosen, and main in the box.</figcaption></figure>
+
+    <div class="step"><span class="n">6</span><h3>Keep the next 7 defaults, then install</h3>
+      <p>The next 7 pages keep their defaults, starting with the one marked <i>Recommended</i>. Click <b class="ui">Next</b> on each, then <b class="ui">Install</b>, and setup copies the files.</p></div>
+
+    <div class="step"><span class="n">7</span><h3>Finish, and open Git Bash</h3>
+      <p>On the last page, tick <b class="ui">Launch Git Bash</b>, untick <b class="ui">View Release Notes</b>, and click <b class="ui">Finish</b>.</p></div>
+  </section>
+
+  <section id="check">
+    <div class="prose">
+      <h2>Check it, then tell Git your name</h2>
+      <p>Git Bash is a terminal that comes with Git. It opens by itself after Finish.</p>
+    </div>
+
+    <div class="step"><span class="n">8</span><h3>Ask Git for its version</h3>
+      <p>Type this and press Enter:</p></div>
+    <div class="yousee"><b>Type in Git Bash</b>git --version</div>
+    <div class="prose">
+      <p>Git answers with a line that starts <i>git version</i>. Your number may be newer than ours, and that is fine. If it answers, Git is installed.</p>
+    </div>
+
+    <div class="step"><span class="n">9</span><h3>Tell Git who you are</h3>
+      <p>Every version you save carries a name and an email, so set yours once, now. Type your own name, and the email you use on GitHub, in place of the examples:</p></div>
+    <div class="yousee"><b>Type in Git Bash, one line at a time</b>git config --global user.name "Your Name"
+git config --global user.email "you@example.com"</div>
+    <div class="prose">
+      <p>Then list the settings, to see that both are there:</p>
+    </div>
+    <div class="yousee"><b>Then type</b>git config --global --list</div>
+    <div class="yousee"><b>What you should see</b>user.name=Your Name
+user.email=you@example.com</div>
+    <figure class="shot"><img src="img/4-git-bash-settings.jpg" width="1060" height="640" loading="lazy" alt="Git Bash: git --version answers git version 2.56.0.windows.4; then the two git config lines, and the list showing user.name and user.email."><figcaption>The whole check in one window. On your screen, it shows your own name and email.</figcaption></figure>
+  </section>
+
+  <section id="where">
+    <div class="prose">
+      <h2>Where we are</h2>
+      <p>Git is ready now, for your first project. In a nutshell:</p>
+      <ol>
+        <li>Git came from git-scm.com, the official page, and it is free.</li>
+        <li>We kept every default but two: Notepad as the editor, and <i>main</i> as the first branch.</li>
+        <li>Git Bash answered <code>git --version</code>, and Git now knows your name and email.</li>
+      </ol>
+      <p><i>One question for you: which editor did you choose for Git, and why? Leave me a line below the video.</i></p>
+    </div>
+  </section>
+
+  <section id="related">
+    <div class="prose"><h2>Related</h2></div>
+    <div class="blog-list"><a class="blog-item" href="../install-claude-code/"><span class="blog-label how">Blog · How do I…?</span><h3>How do I install Claude Code?</h3></a></div>
+  </section>
+
+  <section class="lwa-refs" id="refs">
+    <div class="prose">
+      <h2>References</h2>
+      <p>Where each step and setting on this page comes from. Checked on 13 Nov 2026.</p>
+    </div>
+    <ol>
+      <li><b>Git for Windows</b> — <i>Install Git on Windows, git-scm.com</i>. <span class="why">The official download page: the x64 and ARM64 Setup installers.</span> <a href="https://git-scm.com/install/windows" rel="noopener">link</a></li>
+      <li><b>Git for Windows</b> — <i>The installer's own pages (recorded 10 Nov 2026)</i>. <span class="why">Vim "can be hard to use", and it is "highly recommended to switch to a modern GUI editor"; Let Git decide uses "master"; "many teams already renamed their default branches; common choices are main…".</span></li>
+      <li><b>GitHub Docs</b> — <i>Changing the default branch</i>. <span class="why">GitHub names the first branch of a new repository main.</span> <a href="https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-branches-in-your-repository/changing-the-default-branch" rel="noopener">link</a></li>
+      <li><b>Git</b> — <i>Pro Git, First-Time Git Setup</i>. <span class="why">Setting user.name and user.email with git config --global, and listing them with git config --list.</span> <a href="https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup" rel="noopener">link</a></li>
+      </ol>
+  </section>
+
+  <section class="keep" aria-label="Follow along"><p class="follow">New chapters and episodes come out every week. Follow along on <a href="https://www.youtube.com/@learn-ai-by-building" rel="noopener">YouTube</a> or the <a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp channel</a>. Questions? Ask under the video on YouTube; I read every comment.</p></section>
+  <div class="lwa-chapnav">
+    <a href="../index.html"><span class="k">← Blog</span><span class="t">All posts</span></a>
+    <!-- TODO(video-id): <a href="https://www.youtube.com/watch?v=VIDEO_ID" rel="noopener"><span class="k">Watch →</span><span class="t">The video on YouTube</span></a> -->
+  </div>
+
+  </main>
+</div>
+
+<footer class="nav2-foot"><div class="fi">
+  <a href="../../index.html"><img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building — home"></a>
+  <nav aria-label="Footer"><a href="../../index.html">Home</a><a href="../../series/index.html">Series</a><a href="../../blog/index.html">Blog</a><a href="../../connect.html">Connect</a><a href="https://www.youtube.com/@learn-ai-by-building" rel="noopener">YouTube</a><a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp</a><a href="../../privacy.html">Privacy</a></nav>
+  <span class="by">Learn AI by Building · by Adi (Aditya)</span>
+</div></footer>
+<script src="../../assets/site-config.js"></script>
+<script src="../../assets/progress.js?v=3"></script>
+<script src="../../assets/pyrun.js?v=2"></script>
+<script src="../../assets/railspy.js?v=1"></script>
+<script src="../../assets/analytics.js?v=1" defer></script>
+</body>
+</html>
