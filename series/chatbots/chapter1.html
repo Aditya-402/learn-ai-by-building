@@ -37,7 +37,7 @@
   <nav class="rail" aria-label="Sections">
     <a class="rnav-back" href="index.html"><span class="ico">←</span><span class="lbl">All chapters</span></a>
     <div class="rail-h">Contents</div>
-    <a class="on" href="#wall">The wall</a>
+    <a class="on" href="#wall">From the chat page to your own program</a>
     <a href="#studio">Pick a model</a>
     <a href="#cost">What a question costs</a>
     <a href="#code">Take the code</a>
@@ -75,7 +75,8 @@
       <p>How do I talk to Gemini from my own Python code?</p>
     </div>
     <div class="prose">
-      <p>Let's try to understand what we are building. It is a chatbot, and its engine is Gemini. The chatbot is one Python file on your computer, <code>bot.py</code>. Only the question travels over the internet to Gemini, and only the answer comes back.</p>
+      <p>Here is what we build. <code>bot.py</code> is a chatbot on your own computer, with Gemini as its engine. Your question goes over the internet to Gemini; the answer comes back to <code>bot.py</code>, and nothing else leaves.</p>
+    <figure class="cc-shot"><img src="img/chapter1/our-computer-gemini.svg" alt="bot.py on our computer sends a question to Gemini in the cloud, and the answer comes back to bot.py." loading="lazy"><figcaption>bot.py runs on your computer; only the question goes to Gemini, and only the answer comes back.</figcaption></figure>
       <p>Your program asks through an <b>API</b>, a door Google opens for programs. A key, the <b>API key</b>, tells Google who is asking.</p>
       <p>We get there in three steps:</p>
       <ol>
@@ -180,7 +181,7 @@
     </div>
     <div class="confuse">
       <div class="lbl">Careful here</div>
-      <p>Your key is like a password. Anyone who has it can use Gemini on your account. In the video you see my key for a moment: it was a throwaway key, deleted after the recording. Keep your own key to yourself, and never put it in code you share.</p>
+      <p>Your key is like a password. Anyone who has it can use Gemini on your account. In the video you see my key for a moment: it is a throwaway key, and I delete it before the video goes out. Keep your own key to yourself, and never put it in code you share.</p>
     </div>
     <div class="prose">
       <p>For a first test, we put the key straight into <code>bot.py</code>. On line 12, select <code>os.environ.get("GEMINI_API_KEY")</code> and delete it. Type a quote, and paste your key. Line 12 now looks like this, with your key in place of <i>your-key-here</i>:</p>
@@ -202,7 +203,7 @@
     </div>
     <div class="pr"><div class="pr-h"><span>Type in the terminal</span><button type="button" class="pr-copy" data-for="p6">Copy</button></div><pre id="p6">python bot.py</pre></div>
     <div class="prose">
-      <p>We did not expect this: it fails, with a screen of red and purple lines. When a program fails, read the last lines first.</p>
+      <p>We did not expect this: it fails, with a screen of red and purple lines. When a program fails, read the last line first.</p>
     </div>
     <figure class="cc-shot"><img src="img/chapter1/error.png" alt="The last lines of the traceback: google.genai.errors.ClientError: 400 INVALID_ARGUMENT. Invalid JSON payload received. Unknown name audioTranscriptionConfig at generation_config: Cannot find field." loading="lazy">
       <figcaption><b class="ui">400 INVALID_ARGUMENT</b>, and the server does not know a field called <code>audioTranscriptionConfig</code>.</figcaption></figure>
@@ -318,7 +319,7 @@ Folder arch :
     <div class="prose">
       <h2>What bot.py still cannot do</h2>
       <p>Right now, <code>bot.py</code> is a one-question bot. It asks, prints the answer, and exits. To ask anything else, you open the code. And each run spends one call to Gemini on your key.</p>
-      <p>Chapter 2 takes the question out of the code. You type into a window, and the bot replies. Programmers call that window the <b>frontend</b>, and <code>bot.py</code> behind it the <b>backend</b>. Over this series, the pair grows into an assistant for an electronics shop.</p>
+      <p>Chapter 2 takes the question out of the code. You type into a window, and the bot replies. Programmers call that window the <b>frontend</b>, and <code>bot.py</code> behind it the <b>backend</b>. Later chapters grow the pair into an assistant for an electronics shop.</p>
     </div>
   </section>
 
