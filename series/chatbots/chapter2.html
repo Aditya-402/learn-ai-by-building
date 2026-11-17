@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 2 · ui.py, a window that talks to bot.py — Learn AI by Building</title>
+<meta name="description" content="Chapter 2 of Chatbot from Scratch: turn bot.py into a terminal chat, draw the window you want in Paint, hand the sketch to the agent, and get a Tkinter window (frontend) that talks to bot.py (backend), with token counts and plain error messages.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=8">
+<link rel="stylesheet" href="../../assets/unit.css?v=8">
+<link rel="stylesheet" href="../../assets/blog.css?v=7">
+<!-- the series-chapter parts (.cc-shot, .cc-wall, .pr copy blocks, the quick reference on a phone) are shared with the Claude Code chapters -->
+<link rel="stylesheet" href="../claude-code/cc.css?v=4">
+<link rel="stylesheet" href="../../assets/nav.css?v=1">
+</head>
+<body data-lwa-course="chatbots" data-lwa-chapter="chapter2" data-lwa-title="Chapter 2 · ui.py, a window that talks to bot.py" data-lwa-taught="a terminal chat loop with ask() and usage(); a prompt that names the virtual environment; describing a window in words against a sketch; a Tkinter window from a Paint sketch; token counts and cost; plain error messages for no internet, 429 and 503; the free tier's rate limits; frontend and backend">
+<header class="top nav2"><div class="top-in">
+  <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark-maroon.svg?v=1" alt="Learn AI by Building — home"></a>
+  <nav class="nav2-links" aria-label="Main"><a href="../../index.html">Home</a><a href="../../series/index.html" aria-current="page">Series</a><a href="../../blog/index.html">Blog</a><a href="../../connect.html">Connect</a></nav>
+  <span class="nav2-auth" data-lwa-auth></span>
+  <details class="nav2-menu"><summary>Menu</summary><div class="m"><a href="../../index.html">Home</a><a href="../../series/index.html">Series</a><a href="../../blog/index.html">Blog</a><a href="../../connect.html">Connect</a><a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp channel</a><span class="nav2-auth-m" data-lwa-auth></span></div></details>
+</div></header>
+<header class="masthead">
+  <div class="masthead-in">
+    <div class="title-block">
+      <div class="eyebrow">Chatbot from Scratch · Chapter 2</div>
+      <h1>ui.py, a window that talks to bot.py</h1>
+      <p class="standfirst">Your bot answers one question written inside its code. By the end of this chapter, you type as many questions as you like into a window of your own, and the window shows each reply with its tokens.</p>
+      <div class="facts"><div><b>One sitting</b>~10 min read, ~45 min to build along (the agent works for about half an hour)</div><div><b>You need</b>the project from Chapter 1, Antigravity, your own key in .env</div><div><b>You build</b>a terminal chat, then ui.py: a window from your own sketch</div><div><b>Chapter 2</b>after <a href="chapter1.html">Chapter 1 · bot.py, the first reply</a></div></div>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="rail" aria-label="Sections">
+    <a class="rnav-back" href="index.html"><span class="ico">←</span><span class="lbl">All chapters</span></a>
+    <div class="rail-h">Contents</div>
+    <a class="on" href="#wall">One question, then it stops</a>
+    <a href="#terminal">A chat in the terminal</a>
+    <a href="#youbot">You and Bot</a>
+    <a href="#why">Why a window</a>
+    <a href="#sketch">A sketch, not words</a>
+    <a href="#prompt">The window prompt</a>
+    <a href="#window">Our window</a>
+    <a href="#wrong">When something goes wrong</a>
+    <a href="#split">Frontend and backend</a>
+    <a href="#quickref">Quick reference</a>
+    <a href="#takeaway">The takeaway</a>
+    <a href="#homework">Your homework</a>
+  </nav>
+
+  <main>
+  <section id="video">
+    <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/TWU_CT7Jlcs?rel=0" title="Episode 2 · How do I give my chatbot its own window?"
+      allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+    <p class="video-cap">Prefer to watch? This chapter goes with Episode 2 (9:16). <a href="https://www.youtube.com/watch?v=TWU_CT7Jlcs" rel="noopener">Open it on YouTube</a>.</p>
+  </section>
+
+  <section id="wall" data-rail="One question, then it stops">
+    <div class="prereq">
+      <div class="pq"><b>Goes with Episode 2</b><a href="https://www.youtube.com/watch?v=TWU_CT7Jlcs" target="_blank" rel="noopener">"How do I give my chatbot its own window?"</a>. Watch it just above, or build along here at your own pace.</div>
+      <div class="pq"><b>Before you start</b>The project from <a href="chapter1.html">Chapter 1</a>, with its <code>.venv</code>. Antigravity, signed in: <a href="../../blog/install-antigravity-on-windows/">install Antigravity on Windows</a>. And your own Gemini key in <code>.env</code>.</div>
+      <div class="pq"><b>The code, ready to run</b><a href="https://github.com/Aditya-402/chatbot-from-scratch/releases/download/episode-02/chatbot-from-scratch-episode-02.zip" rel="noopener">Download this chapter's code (zip)</a>. Every chapter's code is on <a href="https://github.com/Aditya-402/chatbot-from-scratch" rel="noopener">GitHub</a>. Add your own <code>.env</code> with <code>GEMINI_API_KEY</code>; the README shows the setup.</div>
+    </div>
+    <div class="prose">
+      <h2>One question, then it stops</h2>
+      <p>At the end of Chapter 1, <code>bot.py</code> asked Gemini one question, with your key safely in <code>.env</code>.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter2/arch-ep01.svg" alt="Our project after Chapter 1: bot.py on our PC reads the API key from .env and sends the question to Gemini 3.1 Flash Lite in Google's cloud; the answer comes back." loading="lazy"><figcaption>Where Chapter 1 left us: one file on our PC, Gemini in Google's cloud.</figcaption></figure>
+    <div class="prose">
+      <p>But the question is written into the code itself. Ours asked for a one-line poem about the rain. To ask anything else, you open the code, change the line, save, and run again. Nobody chats like that.</p>
+    </div>
+    <div class="cc-wall">
+      <div class="lbl">The question for this chapter</div>
+      <p>How do I give my chatbot its own window?</p>
+    </div>
+    <div class="prose">
+      <p>We get there in two steps:</p>
+      <ol>
+        <li>A chat in the terminal: type a question, read the answer, type the next one.</li>
+        <li>A window around it, built from a sketch you draw yourself.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="terminal" data-rail="A chat in the terminal">
+    <div class="prose">
+      <h2>Step 1: a chat in the terminal</h2>
+      <p>Make a new file in your <code>prompts</code> folder: <code>02-terminal-chat.txt</code>. It has the same three parts as in Chapter 1: the task, the context, and the folder layout.</p>
+    </div>
+    <div class="pr"><div class="pr-h"><span>prompts/02-terminal-chat.txt</span><button type="button" class="pr-copy" data-for="p1">Copy</button></div><pre id="p1">Task : Let me chat with the bot in the terminal, as many questions as I like
+
+Context :
+- Use the virtual environment .venv in this folder. Don't create a new one.
+- Today the question is written inside bot.py. I want to type my question in the terminal while it runs.
+- After each answer, ask me for the next question.
+- When I type exit or bye, the chat ends.
+- Show my question as "You: ..." and the answer as "Bot: ...", so the chat reads like a conversation.
+- Put the call to Gemini in one function, ask(question), that returns the reply text and the token usage (tokens in, tokens out), so a window can use it later.
+- Add a function usage() that returns the totals so far in this run: tokens in, tokens out, and the cost in dollars (Gemini 3.1 Flash Lite: $0.25 per 1 million input tokens, $1.50 per 1 million output tokens).
+- Keep the model, the thinking setting and load_dotenv exactly as they are.
+- Each question is on its own: no chat history yet.
+
+Folder arch :
+- bot.py : the chatbot (backend)
+- .env : GEMINI_API_KEY
+- requirements.txt : the libraries used</pre>
+      <p class="pr-why">This is the file as it ends the chapter. The "You:" and "Bot:" line came one run later; see <a href="#youbot">You and Bot</a>.</p></div>
+    <div class="cheat"><table>
+      <tr><th>Line in the prompt</th><th>Why it is there</th></tr>
+      <tr><td>Use .venv in this folder</td><td>Without it, agents often make a second environment, and your libraries end up in two places.</td></tr>
+      <tr><td>exit or bye ends the chat</td><td>A loop needs a way out that you choose.</td></tr>
+      <tr><td><code>ask(question)</code></td><td>One door to Gemini. The window in Step 2 calls the same function.</td></tr>
+      <tr><td><code>usage()</code>, with the prices</td><td>The running total of tokens and cost, for the window's counter.</td></tr>
+      <tr><td>Keep the model and load_dotenv</td><td>The agent changes only what you asked for.</td></tr>
+    </table></div>
+    <div class="prose">
+      <p>Hand the file to the agent.</p>
+    </div>
+    <div class="pr"><div class="pr-h"><span>Type into the agent panel</span><button type="button" class="pr-copy" data-for="p2">Copy</button></div><pre id="p2">Review and implement prompts/02-terminal-chat.txt</pre>
+      <p class="pr-why">It asks before it reads your <code>.env</code> file: we chose <b class="ui">Yes, and always allow in this conversation</b>. It also asks before each test run: choose <b class="ui">Yes, allow this time</b>.</p></div>
+    <div class="prose">
+      <p>When it is done, its summary says: <code>bot.py</code> changed, and the README too.</p>
+      <p>Click <b class="ui">Accept all</b>, and read <code>bot.py</code> yourself. At the top, the model and the thinking setting are as they were. Further down are the two new functions, <code>ask</code> and <code>usage</code>. At the bottom, a loop keeps asking.</p>
+      <p>Now run it, and ask three questions:</p>
+    </div>
+    <div class="pr"><div class="pr-h"><span>Type in the terminal</span><button type="button" class="pr-copy" data-for="p3">Copy</button></div><pre id="p3">python bot.py</pre>
+      <p class="pr-why">The prompt should start with <code>(.venv)</code>. If not, run <code>.venv\Scripts\activate</code> first.</p></div>
+    <div class="prose">
+      <p>We asked: what is the capital of France? Paris. What does a laptop's RAM do, in two sentences? And a one-line poem about the rain.</p>
+      <p>Then <code>bye</code>, and the chat ended. Three questions, and not one edit to the code.</p>
+    </div>
+  </section>
+
+  <section id="youbot" data-rail="You and Bot">
+    <div class="prose">
+      <h2>You and Bot</h2>
+      <p>Our first run printed "Ask a question:" before each question, and the bare answer under it. It read like a form, not a chat.</p>
+      <p>So we added one line to the prompt, the fifth one above: show my question as "You:" and the answer as "Bot:". Then we sent a short message to the agent.</p>
+    </div>
+    <div class="pr"><div class="pr-h"><span>Type into the agent panel</span><button type="button" class="pr-copy" data-for="p4">Copy</button></div><pre id="p4">Review the new line in prompts/02-terminal-chat.txt and implement it</pre>
+      <p class="pr-why">A prompt file can grow. Add the line, and point the agent at it.</p></div>
+    <figure class="cc-shot"><img src="img/chapter2/terminal-chat.png" alt="The terminal: (.venv) python bot.py. You: What is the capital of France? Bot: The capital of France is Paris. You: Explain what a laptop's RAM does, in two sentences. Bot: RAM acts as your laptop's short-term memory... You: Write a one-line poem about the rain. Bot: The clouds dissolve in silver threads to touch the thirsty earth." loading="lazy">
+      <figcaption>The agent changed two lines in <code>bot.py</code>. Now it reads like a conversation.</figcaption></figure>
+  </section>
+
+  <section id="why" data-rail="Why a window">
+    <div class="prose">
+      <h2>Step 2: why a window, if the terminal works?</h2>
+      <p>A terminal is for programmers. Everyone else expects a window: a place to type, a <b class="ui">Send</b> button, and the chat above it.</p>
+      <p>So start a second prompt, <code>prompts/02-window.txt</code>, and try to describe that window in words. We tried:</p>
+    </div>
+    <div class="yousee"><b>Our first try, in words</b>A big area at the top where the chat shows up, my question on the left and the answer on the right, a bit lower, and under it a box to type in, not too tall, maybe one or two lines, and a button on the right of the box, and somewhere in a corner the number of tokens</div>
+    <div class="prose">
+      <p>It gets long, and it is still vague. How tall is "not too tall"? Which corner? The agent would have to guess.</p>
+    </div>
+  </section>
+
+  <section id="sketch" data-rail="A sketch, not words">
+    <div class="prose">
+      <h2>A sketch, not words</h2>
+      <p>A picture says it faster. Open Paint and draw the window you want. Ours, in the order we drew it:</p>
+      <ol>
+        <li>A frame for the window.</li>
+        <li>At the bottom, a typing box and a <b class="ui">Send</b> button.</li>
+        <li>Above them, a big chat area.</li>
+        <li>Inside it, your question in a bubble on the left, and the reply in a bubble on the right.</li>
+        <li>Labels in the bubbles: User and Bot.</li>
+      </ol>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter2/ui-sketch.png" alt="A sketch drawn in Paint: a window frame; a large rounded chat area with a bubble on the left labelled User : &lt;Query&gt; and a bubble on the right labelled Bot : &lt;response&gt;; at the bottom a long typing box and a small Send button." loading="lazy">
+      <figcaption>Our sketch. Rough is fine: it only has to show the layout.</figcaption></figure>
+    <div class="prose">
+      <p>Save it as <code>ui-sketch.png</code> in your <code>prompts</code> folder, next to the prompt files, and open it in Antigravity. Now the agent can see it too.</p>
+    </div>
+  </section>
+
+  <section id="prompt" data-rail="The window prompt">
+    <div class="prose">
+      <h2>The window prompt</h2>
+      <p>Replace the words in <code>02-window.txt</code> with a prompt that points at the picture. The picture carries the layout; the prompt carries what a picture cannot show.</p>
+    </div>
+    <div class="pr"><div class="pr-h"><span>prompts/02-window.txt</span><button type="button" class="pr-copy" data-for="p5">Copy</button></div><pre id="p5">Task : Create a desktop window for the chatbot, from my sketch prompts/ui-sketch.png
+
+Context :
+- Open the picture prompts/ui-sketch.png first and build the window to look like it: a large chat area, my question and the bot's reply in bubbles, a typing box at the bottom and a Send button.
+- Use the virtual environment .venv in this folder. Don't create a new one.
+- Use tkinter. Create ui.py; it calls ask() from bot.py.
+- The chat area is only for reading: I can read and copy from it, but not type into it.
+- In the typing box, pressing Enter sends my question, just like clicking Send.
+- Under each reply, one small grey line: tokens in and tokens out.
+- In the top right corner, a token counter like Google AI Studio's: it shows the total tokens so far; when I hover over it, it shows tokens in, tokens out and the cost so far. It gets these numbers from usage() in bot.py.
+- While the bot is thinking, show "Thinking..." and keep the window responsive.
+- If anything goes wrong, show a short plain message in the chat, in the error colour below, and keep the window open. For example:
+-- 429 RESOURCE_EXHAUSTED: "Too many requests for the free tier. Wait a minute and try again."
+-- 503 UNAVAILABLE: "Gemini is busy right now. Try again in a moment."
+-- no internet: "No internet connection."
+- The window opens at half the size of the screen.
+- The typing box at the bottom is 10% of the window's height; the chat area above it takes the rest.
+- Use the Learn AI by Building colours: window background cream #faf6ee; chat area white #ffffff; my questions in plum #5a3d5c; the bot's replies in ink #2b2730; the token line in grey #6a626e; error messages in clay #a8441f.
+- No menus, no system prompt and no chat history yet.
+
+Folder arch :
+- ui.py : the window (frontend)
+- bot.py : the chatbot (backend)
+- prompts/ : our prompts and ui-sketch.png</pre>
+      <p class="pr-why">Sizes and colours are written out in numbers. "Not too tall" became "10% of the window's height".</p></div>
+    <div class="pr"><div class="pr-h"><span>Type into the agent panel</span><button type="button" class="pr-copy" data-for="p6">Copy</button></div><pre id="p6">Review and implement prompts/02-window.txt</pre>
+      <p class="pr-why">It reads the sketch first. It asks before a live test of the window; allow it once.</p></div>
+    <div class="prose">
+      <p>Ours took about 12 minutes. Its summary lists what it built. Speech bubbles with tails, matching the sketch. A read-only chat, a token line under each reply, and the counter. <code>ui.py</code> is new; <code>bot.py</code> did not change. Click <b class="ui">Accept all</b>.</p>
+    </div>
+  </section>
+
+  <section id="window" data-rail="Our window">
+    <div class="prose">
+      <h2>Our window</h2>
+    </div>
+    <div class="pr"><div class="pr-h"><span>Type in the terminal</span><button type="button" class="pr-copy" data-for="p7">Copy</button></div><pre id="p7">python ui.py</pre></div>
+    <div class="prose">
+      <p>The window opens, laid out like the sketch. We asked the same three questions.</p>
+      <p>France went with the Enter key: "Thinking..." showed, then Paris, with "8 in, 7 out" under it. The RAM question went with the <b class="ui">Send</b> button. Then the poem.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter2/hover.png" alt="The Chatbot window: a cream background, a white chat area with speech bubbles. User : Write a one-line poem about the rain. Bot : The sky descends in silver threads to stitch the earth to clouds. 11 in, 13 out. The counter at the top right says 106 tokens, and its hover box says Tokens in: 33, Tokens out: 73, Cost so far: $0.000118. A typing box and a plum Send button at the bottom." loading="lazy">
+      <figcaption>Hover over the counter: 33 tokens in, 73 out, $0.000118 so far.</figcaption></figure>
+    <div class="prose">
+      <p>Check the cost yourself: 33 input tokens at $0.25 per million, plus 73 output tokens at $1.50 per million, is $0.000118. One more test: try to type into the chat area. The text goes to the typing box, as the prompt asked.</p>
+    </div>
+    <div class="cheat"><table>
+      <tr><th>The prompt asked for</th><th>Check it in your window</th></tr>
+      <tr><td>A layout like the sketch</td><td>Chat area, bubbles left and right, typing box, Send</td></tr>
+      <tr><td>Enter sends, like the button</td><td>Ask one question each way</td></tr>
+      <tr><td>A grey token line under each reply</td><td>"8 in, 7 out" under Paris</td></tr>
+      <tr><td>A counter with a hover box</td><td>Tokens in, tokens out, cost so far</td></tr>
+      <tr><td>A read-only chat area</td><td>Typing there lands in the typing box</td></tr>
+      <tr><td>"Thinking..." while it waits</td><td>Shows, and Send is greyed out until the reply</td></tr>
+      <tr><td>Half the screen, typing box 10%</td><td>Ours opened 960 pixels wide on a 1920 screen</td></tr>
+    </table></div>
+  </section>
+
+  <section id="wrong" data-rail="When something goes wrong">
+    <div class="prose">
+      <h2>When something goes wrong</h2>
+      <p>What happens when Gemini cannot be reached? We switched off the internet on our test machine and asked for the capital of Japan.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter2/no-internet.png" alt="The Chatbot window: User : What is the capital of Japan? and under it, in clay, No internet connection. The window is still open." loading="lazy">
+      <figcaption>"No internet connection." in clay, and the window stays open. With the internet back on, the same question got Tokyo.</figcaption></figure>
+    <div class="prose">
+      <p>The free tier has limits too. Google AI Studio shows yours on its <a href="https://aistudio.google.com/rate-limit" rel="noopener">Rate Limit page</a>. On the day we recorded, 3.1 Flash Lite allowed 15 requests a minute, and our peak was 16, mostly from the agent's own tests.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter2/rate-limit.png" alt="Google AI Studio's Rate Limit table: Gemini 3.1 Flash Lite, Text-out models, RPM 16 / 15 with a red bar, TPM 36.2K / 250K, RPD 78 / 500." loading="lazy">
+      <figcaption>RPM is requests per minute, TPM tokens per minute, RPD requests per day. The limits change; check your own page.</figcaption></figure>
+    <div class="prose">
+      <p>Here are the two errors you are most likely to meet on the free tier. Our window has a plain message for each:</p>
+    </div>
+    <div class="cheat"><table>
+      <tr><th>Error</th><th>What it means</th><th>What our window says</th></tr>
+      <tr><td><code>429 RESOURCE_EXHAUSTED</code></td><td>Too many requests for your limit</td><td>Too many requests for the free tier. Wait a minute and try again.</td></tr>
+      <tr><td><code>503 UNAVAILABLE</code></td><td>Gemini's servers are busy</td><td>Gemini is busy right now. Try again in a moment.</td></tr>
+      <tr><td>No connection</td><td>Your PC cannot reach Gemini</td><td>No internet connection.</td></tr>
+    </table></div>
+    <div class="confuse">
+      <div class="lbl">Careful here</div>
+      <p>The free tier does not always stop you at the exact number on the page. We sent 120 quick requests on the same day and got no 429. Treat the page as a guide, and let your code handle the error when it does come.</p>
+    </div>
+  </section>
+
+  <section id="split" data-rail="Frontend and backend">
+    <div class="prose">
+      <h2>Frontend and backend</h2>
+      <p>How do the two files talk? Line 4 of <code>ui.py</code>:</p>
+    </div>
+    <div class="yousee"><b>ui.py, line 4</b>from bot import ask, usage</div>
+    <div class="prose">
+      <p>In <code>bot.py</code>, <code>ask</code> talks to Gemini, and <code>usage</code> adds up the tokens and the cost. The window never talks to Gemini itself.</p>
+      <p>That split has a name. <code>ui.py</code> is the <b>frontend</b>: the part you see and click. <code>bot.py</code> is the <b>backend</b>: the part that talks to Gemini. You can change one without touching the other.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter2/arch-ep02.svg" alt="Our project after Chapter 2: You type and read in ui.py, the window (frontend), on our PC. ui.py calls ask() and usage() in bot.py (backend), which reads the API key from .env and sends the question over the internet to Gemini 3.1 Flash Lite in Google's cloud. You and ui.py are new, in orange." loading="lazy">
+      <figcaption>Our project so far. The new parts are in orange: you, and the window.</figcaption></figure>
+  </section>
+
+  <section id="quickref" data-rail="Quick reference">
+    <div class="prose"><h2>Quick reference</h2><p>Every command from this chapter. The two prompt files are above, in <a href="#terminal">A chat in the terminal</a> and <a href="#prompt">The window prompt</a>.</p></div>
+    <div class="cheat"><table><tr><th>Command</th><th>What it does</th><th>Use it when</th></tr><tr><td><code>.venv\Scripts\activate</code></td><td>Switches the environment on</td><td>In every new terminal</td></tr><tr><td><code>Review and implement prompts/02-terminal-chat.txt</code></td><td>Builds the terminal chat</td><td>Step 1</td></tr><tr><td><code>python bot.py</code></td><td>Runs the terminal chat; type bye to end</td><td>After Step 1</td></tr><tr><td><code>Review and implement prompts/02-window.txt</code></td><td>Builds the window from your sketch</td><td>Step 2</td></tr><tr><td><code>python ui.py</code></td><td>Opens the window</td><td>After Step 2</td></tr></table></div>
+  </section>
+
+  <section id="takeaway" data-rail="The takeaway">
+    <div class="prose">
+      <h2>The takeaway</h2>
+      <ol>
+        <li>For a layout, a rough sketch beats a paragraph. Hand the agent the picture, and put sizes and colours in numbers.</li>
+        <li>Name your virtual environment in every prompt, so the agent does not make a new one.</li>
+        <li>The window is the frontend, <code>bot.py</code> the backend. One function, <code>ask</code>, joins them.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="homework" data-rail="Your homework">
+    <div class="next">
+      <div class="lbl">Your homework</div>
+      <h3>Your own window, from your own sketch</h3>
+      <p style="font-size:var(--fs-cap);color:var(--slate)"><b>The goal:</b> a window you designed, talking to your bot.py.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>The steps:</b> draw the window you want in Paint and save it over <code>prompts/ui-sketch.png</code>. Send the agent &ldquo;Review and implement prompts/02-window.txt&rdquo;, then run <code>python ui.py</code>. Ask your window 3 different questions and keep an eye on the token counter.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>Before you look:</b> which of your 3 questions will cost the most? Then hover over the counter and check.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:10px"><i>One question for you: what would you add to your window first?</i></p>
+    </div>
+  </section>
+
+  <section class="lwa-refs" id="refs"><div class="prose"><h2>References</h2><p>Where each step and number on this page comes from. Everything was also checked in our own recording on 17 Nov 2026.</p></div><ol>
+    <li><b>Google</b> · <i>Google AI Studio, Rate Limit</i> <span class="why">The free tier's limits per model: requests a minute, tokens a minute, requests a day.</span> <a href="https://aistudio.google.com/rate-limit" rel="noopener">https://aistudio.google.com/rate-limit</a></li>
+    <li><b>Google</b> · <i>Gemini API rate limits</i> <span class="why">The free tier and its current limits.</span> <a href="https://ai.google.dev/gemini-api/docs/rate-limits" rel="noopener">https://ai.google.dev/gemini-api/docs/rate-limits</a></li>
+    <li><b>Python</b> · <i>tkinter: Python interface to Tcl/Tk</i> <span class="why">The window library ui.py is built on, part of Python itself.</span> <a href="https://docs.python.org/3/library/tkinter.html" rel="noopener">https://docs.python.org/3/library/tkinter.html</a></li>
+    <li><b>Learn AI by Building</b> · <i>chatbot-from-scratch on GitHub</i> <span class="why">This chapter's finished code, prompts and sketch.</span> <a href="https://github.com/Aditya-402/chatbot-from-scratch" rel="noopener">https://github.com/Aditya-402/chatbot-from-scratch</a></li>
+    <li><b>My own recording</b> · <i>17 Nov 2026, Windows 11</i> <span class="why">Every picture and answer on this page is from those takes: Gemini 3.1 Flash Lite, Antigravity's agent on Gemini 3.8 Flash.</span></li>
+  </ol></section>
+  <section class="keep" aria-label="Follow along"><p class="follow">New chapters and episodes come out every week. Follow along on <a href="https://www.youtube.com/@learn-ai-by-building" rel="noopener">YouTube</a> or the <a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp channel</a>. Questions? Ask under the video on YouTube; I read every comment.</p></section>
+  <div class="lwa-chapnav"><a href="chapter1.html"><span class="k">← Chapter 1</span><span class="t">bot.py, the first reply</span></a><button type="button" class="lwa-complete" data-lwa-complete><span class="k">Progress</span><span class="t">Mark this chapter complete</span></button><a href="index.html"><span class="k">Series</span><span class="t">All chapters</span></a></div>
+  </main>
+</div>
+<footer class="nav2-foot"><div class="fi">
+  <a href="../../index.html"><img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building — home"></a>
+  <nav aria-label="Footer"><a href="../../index.html">Home</a><a href="../../series/index.html">Series</a><a href="../../blog/index.html">Blog</a><a href="../../connect.html">Connect</a><a href="https://www.youtube.com/@learn-ai-by-building" rel="noopener">YouTube</a><a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp</a><a href="../../privacy.html">Privacy</a></nav>
+  <span class="by">Learn AI by Building · by Adi (Aditya)</span>
+</div></footer>
+<script>
+// a Copy button for every command and prompt (as on the Claude Code prompt sheet)
+document.querySelectorAll('.pr-copy').forEach(function (b) {
+  b.addEventListener('click', function () {
+    var t = document.getElementById(b.dataset.for).textContent;
+    (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () {
+      b.textContent = 'Copied'; setTimeout(function () { b.textContent = 'Copy'; }, 1500);
+    }, function () { b.textContent = 'Select and copy'; });
+  });
+});
+</script>
+<script src="../../assets/site-config.js"></script>
+<script src="../../assets/analytics.js?v=1" defer></script>
+<script src="../../assets/progress.js?v=3"></script>
+<script src="../../assets/railspy.js?v=1"></script>
+</body>
+</html>

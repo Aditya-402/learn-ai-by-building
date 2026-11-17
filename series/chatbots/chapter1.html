@@ -100,6 +100,8 @@
     </div>
     <div class="pr"><div class="pr-h"><span>Type this in AI Studio</span><button type="button" class="pr-copy" data-for="p1">Copy</button></div><pre id="p1">What is the capital of France?</pre>
       <p class="pr-why">The answer: "The capital of France is Paris." Correct, right?</p></div>
+    <figure class="cc-shot"><video class="clip" src="img/chapter1/studio.mp4" poster="img/chapter1/studio-poster.jpg" controls muted playsinline preload="none" aria-label="Google AI Studio: the model list searched for Flash Lite, Gemini 3.1 Flash Lite picked, Grounding with Google Search switched off, and the question What is the capital of France? The reply: The capital of France is Paris." width="1200" height="576"></video>
+      <figcaption>Pick <b class="ui">Gemini 3.1 Flash Lite</b>, ask, and read the answer, sped up. <a href="https://www.youtube.com/watch?v=7eg1brjY2Cg&amp;t=98s" rel="noopener">Watch this step in the video</a>.</figcaption></figure>
   </section>
 
   <section id="cost" data-rail="What a question costs">
@@ -128,6 +130,8 @@
     </div>
     <figure class="cc-shot"><img src="img/chapter1/getcode.png" alt="AI Studio's Get code dialog, Python: pip install google-genai, imports, def generate, client = genai.Client(api_key=os.environ.get(&quot;GEMINI_API_KEY&quot;)), model = &quot;gemini-3.1-flash-lite&quot;, and the Copy button." loading="lazy">
       <figcaption>Our chat as a Python program. Look at <code>api_key=os.environ.get("GEMINI_API_KEY")</code>: we come back to it.</figcaption></figure>
+    <figure class="cc-shot"><video class="clip" src="img/chapter1/getcode.mp4" poster="img/chapter1/getcode-poster.jpg" controls muted playsinline preload="none" aria-label="Google AI Studio: Get code opens the Python version of the France chat; the Copy button at the bottom right is clicked." width="1200" height="576"></video>
+      <figcaption><b class="ui">Get code</b>, then <b class="ui">Copy</b>, sped up. <a href="https://www.youtube.com/watch?v=7eg1brjY2Cg&amp;t=226s" rel="noopener">Watch this step in the video</a>.</figcaption></figure>
     <div class="prose">
       <p>In Antigravity, choose <b class="ui">Open Folder</b>. Make a folder anywhere you like; ours is <code>C:\code\chatbot-series</code>. Antigravity asks whether you trust the authors of the files. Say yes: it is your own folder.</p>
       <p>Click the <b class="ui">New File</b> icon next to the folder name, and name the file <code>bot.py</code>. Paste the code and save it with Ctrl+S.</p>
@@ -205,6 +209,8 @@
     <div class="prose">
       <p>We did not expect this: it fails, with a screen of red and purple lines. When a program fails, read the last line first.</p>
     </div>
+    <figure class="cc-shot"><video class="clip" src="img/chapter1/error.mp4" poster="img/chapter1/error-poster.jpg" controls muted playsinline preload="none" aria-label="python bot.py runs and fails: google.genai.errors.ClientError: 400 INVALID_ARGUMENT, Unknown name audioTranscriptionConfig." width="1200" height="576"></video>
+      <figcaption>The run, and the red error. <a href="https://www.youtube.com/watch?v=7eg1brjY2Cg&amp;t=399s" rel="noopener">Watch this step in the video</a>.</figcaption></figure>
     <figure class="cc-shot"><img src="img/chapter1/error.png" alt="The last lines of the traceback: google.genai.errors.ClientError: 400 INVALID_ARGUMENT. Invalid JSON payload received. Unknown name audioTranscriptionConfig at generation_config: Cannot find field." loading="lazy">
       <figcaption><b class="ui">400 INVALID_ARGUMENT</b>, and the server does not know a field called <code>audioTranscriptionConfig</code>.</figcaption></figure>
     <div class="prose">
@@ -224,12 +230,16 @@ Folder arch :
     <div class="prose">
       <p>Select all, copy, and paste it into the agent panel on the right. Send it. The agent explains the cause, and shows its change.</p>
     </div>
+    <figure class="cc-shot"><video class="clip" src="img/chapter1/agentfix.mp4" poster="img/chapter1/agentfix-poster.jpg" controls muted playsinline preload="none" aria-label="The narrow prompt is sent; the agent removes audio_transcription_config and shows 1 file changed +0 -2, then Accept all." width="1200" height="576"></video>
+      <figcaption>The agent removes just 2 lines. <a href="https://www.youtube.com/watch?v=7eg1brjY2Cg&amp;t=422s" rel="noopener">Watch this step in the video</a>.</figcaption></figure>
     <figure class="cc-shot"><img src="img/chapter1/fix.png" alt="Antigravity: prompts/01-fix-error.txt open on the left; on the right the agent says audio_transcription_config was removed from generate_content_config, shows the code left behind, and 1 file changed +0 -2." loading="lazy">
       <figcaption>The prompt on the left. On the right, the fix: <code>audio_transcription_config</code> removed, <b class="ui">1 file changed +0 -2</b>. Two lines out, nothing else.</figcaption></figure>
     <div class="prose">
       <p>Click <b class="ui">Accept all</b>, and run <code>python bot.py</code> again.</p>
     </div>
     <div class="yousee"><b>What you should see</b>The capital of France is Paris.</div>
+    <figure class="cc-shot"><video class="clip" src="img/chapter1/paris.mp4" poster="img/chapter1/paris-poster.jpg" controls muted playsinline preload="none" aria-label="python bot.py runs again and prints: The capital of France is Paris." width="1200" height="576"></video>
+      <figcaption>The second run: Paris. <a href="https://www.youtube.com/watch?v=7eg1brjY2Cg&amp;t=450s" rel="noopener">Watch this step in the video</a>.</figcaption></figure>
     <div class="keyidea">
       <div class="lbl">Key idea</div>
       <p>Copied code will not always work. Read the last line of the error, give the agent one narrow prompt, and check what it changed.</p>
@@ -377,6 +387,18 @@ document.querySelectorAll('.pr-copy').forEach(function (b) {
     }, function () { b.textContent = 'Select and copy'; });
   });
 });
+</script>
+<script>
+// each clip plays once when most of it is on screen, never when the reader asks for reduced motion (WE-141)
+(function () {
+  if (!('IntersectionObserver' in window) || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+  document.querySelectorAll('video.clip').forEach(function (v) {
+    var o = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { o.disconnect(); v.play().catch(function () {}); } });
+    }, { threshold: 0.6 });
+    o.observe(v);
+  });
+})();
 </script>
 <script src="../../assets/site-config.js"></script>
 <script src="../../assets/analytics.js?v=1" defer></script>
