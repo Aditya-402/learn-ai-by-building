@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 3 · the model's settings — Learn AI by Building</title>
+<meta name="description" content="Chapter 3 of Chatbot from Scratch: why the same question gives different answers. How a model picks its next word, temperature, top-P, top-K and max tokens, tried in Google AI Studio and then added to our own chatbot window as a Settings menu.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=8">
+<link rel="stylesheet" href="../../assets/unit.css?v=8">
+<link rel="stylesheet" href="../../assets/blog.css?v=7">
+<!-- the series-chapter parts (.cc-shot, .cc-wall, .pr copy blocks, the quick reference on a phone) are shared with the Claude Code chapters -->
+<link rel="stylesheet" href="../claude-code/cc.css?v=4">
+<link rel="stylesheet" href="../../assets/nav.css?v=1">
+</head>
+<body data-lwa-course="chatbots" data-lwa-chapter="chapter3" data-lwa-title="Chapter 3 · the model's settings" data-lwa-taught="how a model picks its next word; temperature; top-P and top-K and how they differ; max tokens and the MAX_TOKENS finish reason; the run settings in Google AI Studio; a Settings menu in our own window by prompting; why AI Studio and our window differ (chat history)">
+<header class="top nav2"><div class="top-in">
+  <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark-maroon.svg?v=1" alt="Learn AI by Building — home"></a>
+  <nav class="nav2-links" aria-label="Main"><a href="../../index.html">Home</a><a href="../../series/index.html" aria-current="page">Series</a><a href="../../blog/index.html">Blog</a><a href="../../connect.html">Connect</a></nav>
+  <span class="nav2-auth" data-lwa-auth></span>
+  <details class="nav2-menu"><summary>Menu</summary><div class="m"><a href="../../index.html">Home</a><a href="../../series/index.html">Series</a><a href="../../blog/index.html">Blog</a><a href="../../connect.html">Connect</a><a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp channel</a><span class="nav2-auth-m" data-lwa-auth></span></div></details>
+</div></header>
+<header class="masthead">
+  <div class="masthead-in">
+    <div class="title-block">
+      <div class="eyebrow">Chatbot from Scratch · Chapter 3</div>
+      <h1>The model's settings</h1>
+      <p class="standfirst">Ask your bot the same thing three times and you can get three answers. This chapter shows where that comes from, and gives your window a Settings menu to control it.</p>
+      <div class="facts"><div><b>One sitting</b>~10 min read, ~40 min to build along (the agent works for about twenty of them)</div><div><b>You need</b>the project from Chapter 2, Antigravity, your own key in .env</div><div><b>You build</b>a Settings menu: temperature, top-P, max tokens, reset</div><div><b>Chapter 3</b>after <a href="chapter2.html">Chapter 2 · ui.py, a window that talks to bot.py</a></div></div>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="rail" aria-label="Sections">
+    <a class="rnav-back" href="index.html"><span class="ico">←</span><span class="lbl">All chapters</span></a>
+    <div class="rail-h">Contents</div>
+    <a class="on" href="#wall">Three answers</a>
+    <a href="#pick">How the next word is picked</a>
+    <a href="#knobs">Four settings</a>
+    <a href="#studio">Try it in AI Studio</a>
+    <a href="#history">AI Studio vs our window</a>
+    <a href="#prompt">The settings prompt</a>
+    <a href="#turn">Turn the knobs</a>
+    <a href="#when">Which setting when</a>
+    <a href="#quickref">Quick reference</a>
+    <a href="#takeaway">The takeaway</a>
+    <a href="#homework">Your homework</a>
+  </nav>
+
+  <main>
+  <section id="video">
+    <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/JjqCbaXx1y4?rel=0" title="Episode 3 · Why does the same question give different answers?"
+      allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+    <p class="video-cap">Prefer to watch? This chapter goes with Episode 3 (7:22). <a href="https://www.youtube.com/watch?v=JjqCbaXx1y4" rel="noopener">Open it on YouTube</a>.</p>
+  </section>
+
+  <section id="wall" data-rail="Three answers">
+    <div class="prereq">
+      <div class="pq"><b>Goes with Episode 3</b><a href="https://www.youtube.com/watch?v=JjqCbaXx1y4" target="_blank" rel="noopener">"Why does the same question give different answers?"</a>. Watch it just above, or build along here at your own pace.</div>
+      <div class="pq"><b>Before you start</b>The project from <a href="chapter2.html">Chapter 2</a>, with its window <code>ui.py</code> and its <code>.venv</code>. Antigravity, signed in: <a href="../../blog/install-antigravity-on-windows/">install Antigravity on Windows</a>. And your own Gemini key in <code>.env</code>.</div>
+      <div class="pq"><b>The code, ready to run</b><a href="https://github.com/Aditya-402/chatbot-from-scratch/releases/download/episode-03/chatbot-from-scratch-episode-03.zip" rel="noopener">Download this chapter's code (zip)</a>. Every chapter's code is on <a href="https://github.com/Aditya-402/chatbot-from-scratch" rel="noopener">GitHub</a>. Add your own <code>.env</code> with <code>GEMINI_API_KEY</code>; the README shows the setup.</div>
+    </div>
+    <div class="prose">
+      <h2>Three answers to one question</h2>
+      <p>Chapter 2 ended with a window, <code>ui.py</code>, that sends your question to Gemini through <code>bot.py</code>.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter3/arch-ep02.svg" alt="Our project after Chapter 2: you type in ui.py, the window (frontend); it calls ask() and usage() in bot.py (backend), which reads the API key from .env and asks Gemini 3.1 Flash Lite in Google's cloud." loading="lazy"><figcaption>Where Chapter 2 left us.</figcaption></figure>
+    <div class="prose">
+      <p>Type this into the window three times, word for word: <i>Write a one-line slogan for my new electronics shop. Reply with the slogan only.</i> Ours answered:</p>
+    </div>
+    <div class="yousee"><b>Same question, three runs</b>Innovating your everyday.<br>Powering your future, today.<br>Your world, powered by innovation.</div>
+    <div class="cc-wall">
+      <div class="lbl">The question for this chapter</div>
+      <p>Why does the same question give different answers?</p>
+    </div>
+  </section>
+
+  <section id="pick" data-rail="How the next word is picked">
+    <div class="prose">
+      <h2>How the next word is picked</h2>
+      <p>A model writes its answer one word at a time. For each next word, it has a list of candidates, each with a probability. Then it picks one, a little like rolling a weighted die. A few settings decide how much that roll counts.</p>
+      <p>The probabilities in the top-K and top-P picture below are an example. Our model does not show its real ones. We asked, and the API said: "not enabled for this model".</p>
+    </div>
+  </section>
+
+  <section id="knobs" data-rail="Four settings">
+    <div class="prose">
+      <h2>Four settings</h2>
+    </div>
+    <div class="cheat"><table>
+      <tr><th>Setting</th><th>What it changes</th><th>Low</th><th>High</th></tr>
+      <tr><td><b>Temperature</b></td><td>How creative the pick is</td><td>Nearly always the likeliest word</td><td>Less likely words get more room</td></tr>
+      <tr><td><b>Top-K</b></td><td>How many words stay in the list</td><td>Only the few likeliest</td><td>Many words</td></tr>
+      <tr><td><b>Top-P</b></td><td>How much probability stays in the list</td><td>Only the top words, until a small share</td><td>Almost every word</td></tr>
+      <tr><td><b>Max tokens</b></td><td>How long the answer may be</td><td>Cut short</td><td>Room for a full answer</td></tr>
+    </table></div>
+    <div class="prose">
+      <p>Top-K and top-P sound alike, and both cut the list before the pick. The difference is what they count.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter3/topk-topp.svg" alt="Two bar charts of the same example words: Powering 40%, Innovating 25%, Your 15%, Smart 10%, Bright 6%, Future 4%. Left, top-K = 3 keeps the first three words, always. Right, top-P = 0.5 keeps Powering and Innovating, because 40% + 25% already reaches 50%." loading="lazy">
+      <figcaption>Top-K counts words; top-P adds up probabilities. Example numbers.</figcaption></figure>
+    <div class="confuse">
+      <div class="lbl">Careful here</div>
+      <p>On Gemini 3.1 Flash Lite, Google fixes top-K at 64. In our test, asking for top-K 1 still gave different slogans, so the setting is ignored. Top-P is the one you can turn.</p>
+    </div>
+  </section>
+
+  <section id="studio" data-rail="Try it in AI Studio">
+    <div class="prose">
+      <h2>Try it in Google AI Studio first</h2>
+      <p>Open <a href="https://aistudio.google.com" rel="noopener">Google AI Studio</a> and look at the run settings on the right.</p>
+      <ul>
+        <li><b>Gemini 3.1 Flash Lite</b> shows no temperature and no top-P, only <b class="ui">Output length</b>. For this model, those two are set from our code. Set Output length to 20 and ask what a laptop's RAM does: the answer stops at "holding the data and".</li>
+        <li><b>Gemma 4</b>, Google's open model, does show the temperature slider. At 2, the slogan question gave three different slogans in one chat. At 0, two new chats both gave "Connecting you to the future."</li>
+      </ul>
+      <p>Google advises keeping temperature at 1.0 on the Gemini 3 models; for 3.1 Flash Lite, AI Studio does not show it at all.</p>
+    </div>
+  </section>
+
+  <section id="history" data-rail="AI Studio vs our window">
+    <div class="prose">
+      <h2>AI Studio vs our window</h2>
+      <p>Why a new chat for each test at temperature 0? Because the two behave differently, and the test depends on it.</p>
+    </div>
+    <div class="cheat"><table>
+      <tr><th></th><th>Google AI Studio</th><th>Our window</th></tr>
+      <tr><td>What it is</td><td>A full chat app</td><td>Our own small frontend</td></tr>
+      <tr><td>Sends with each question</td><td>The whole conversation so far</td><td>Only your latest question</td></tr>
+      <tr><td>Asking again in the same chat</td><td>Not the same input any more</td><td>The same input</td></tr>
+      <tr><td>A fair repeat test</td><td>Open a new chat</td><td>Just ask again</td></tr>
+    </table></div>
+    <div class="prose">
+      <p>Our window keeps no history at all. Remember that: it is why the bot forgets your name at the end of this chapter.</p>
+    </div>
+  </section>
+
+  <section id="prompt" data-rail="The settings prompt">
+    <div class="prose">
+      <h2>The settings prompt</h2>
+      <p>Now bring the same settings into our own window. Make a new file, <code>prompts/03-settings.txt</code>. This time there is no sketch: a menu is easy to describe in words.</p>
+    </div>
+    <div class="pr"><div class="pr-h"><span>prompts/03-settings.txt</span><button type="button" class="pr-copy" data-for="p1">Copy</button></div><pre id="p1">Task : Add a menu bar to the window with a Settings menu, with the same settings as Google AI Studio, so I can change how the bot picks its words
+
+Context :
+- Use the virtual environment .venv in this folder. Don't create a new one.
+- In bot.py, let ask() also take the settings: temperature, top_p and max_output_tokens. Keep the model and the thinking setting as they are.
+- Add a menu bar at the top of the window with one menu, Settings.
+- Settings > Temperature... opens a small dialog with a slider from 0 to 2, in steps of 0.1, starting at 1.0.
+- Settings > Top-P... opens a small dialog with a slider from 0 to 1, in steps of 0.05, starting at 0.95.
+- Settings > Max tokens... opens a small dialog with a slider from 10 to 2000, in steps of 10, starting at 2000.
+- Each dialog shows the slider's current value, an OK button and a Cancel button.
+- Settings > Top-K: 64 (fixed for this model) is shown greyed out, and top_k is left out of the call.
+- Settings > Reset to defaults puts every setting back where it started.
+- Under the menu bar, one small grey line always shows the current settings, for example: Temperature 1.0 · Top-P 0.95 · Max tokens 2000.
+- The grey line under each reply also shows the settings used, and "stopped: max tokens" when the answer was cut short.
+- Keep everything else in the window as it is: the chat, the token counter, the error messages and the colours.
+- The terminal chat in bot.py keeps working with the starting settings.
+
+Folder arch :
+- ui.py : the window (frontend)
+- bot.py : the chatbot (backend)
+- prompts/ : our prompts</pre>
+      <p class="pr-why">The starting values match AI Studio's defaults, so Reset puts you back where Google recommends.</p></div>
+    <div class="pr"><div class="pr-h"><span>Type into the agent panel</span><button type="button" class="pr-copy" data-for="p2">Copy</button></div><pre id="p2">Review and implement prompts/03-settings.txt</pre>
+      <p class="pr-why">It works for a while. Its summary lists the Settings menu, the status line and the grey line under each reply: 3 files changed. Click <b class="ui">Accept all</b>.</p></div>
+  </section>
+
+  <section id="turn" data-rail="Turn the knobs">
+    <div class="prose">
+      <h2>Turn the knobs</h2>
+    </div>
+    <div class="pr"><div class="pr-h"><span>Type in the terminal</span><button type="button" class="pr-copy" data-for="p3">Copy</button></div><pre id="p3">python ui.py</pre></div>
+    <div class="prose">
+      <p>The window now has a <b class="ui">Settings</b> menu, with Top-K greyed out at 64. Ask the slogan question after each change.</p>
+      <h3>Temperature 0</h3>
+      <p><b class="ui">Settings › Temperature…</b>, drag the slider to 0, OK. Three asks, one answer: "Powering your future, today."</p>
+    </div>
+    <figure class="cc-shot"><video class="clip" src="img/chapter3/temp0.mp4" poster="img/chapter3/temp0-poster.jpg" controls muted playsinline preload="none" aria-label="Temperature set to 0; the slogan question asked three times; each reply is Powering your future, today." width="1200" height="576"></video>
+      <figcaption>Temperature 0, sped up. <a href="https://www.youtube.com/watch?v=JjqCbaXx1y4&amp;t=283s" rel="noopener">Watch this step in the video</a>.</figcaption></figure>
+    <div class="prose">
+      <h3>Temperature 2</h3>
+      <p>Drag it to the top. "Elevating your everyday through innovative technology." "Empowering your world, one gadget at a time." "Upgrade Your World." Different every time.</p>
+    </div>
+    <figure class="cc-shot"><video class="clip" src="img/chapter3/temp2.mp4" poster="img/chapter3/temp2-poster.jpg" controls muted playsinline preload="none" aria-label="Temperature set to 2; the slogan question asked again; the replies differ: Empowering your world, one gadget at a time, then Upgrade Your World." width="1200" height="576"></video>
+      <figcaption>Temperature 2, sped up. <a href="https://www.youtube.com/watch?v=JjqCbaXx1y4&amp;t=306s" rel="noopener">Watch this step in the video</a>.</figcaption></figure>
+    <div class="prose">
+      <h3>Top-P 0.1, still at temperature 2</h3>
+      <p>Keep temperature at 2 and set <b class="ui">Top-P…</b> to 0.1. Only the top candidates are allowed, and the answer stays put: "Powering your future, today.", twice.</p>
+    </div>
+    <figure class="cc-shot"><video class="clip" src="img/chapter3/topp.mp4" poster="img/chapter3/topp-poster.jpg" controls muted playsinline preload="none" aria-label="Top-P set to 0.1 at temperature 2; the slogan question asked twice; both replies are Powering your future, today." width="1200" height="576"></video>
+      <figcaption>Top-P 0.1 at temperature 2, sped up. <a href="https://www.youtube.com/watch?v=JjqCbaXx1y4&amp;t=320s" rel="noopener">Watch this step in the video</a>.</figcaption></figure>
+    <div class="prose">
+      <h3>Max tokens 30</h3>
+      <p>Set <b class="ui">Max tokens…</b> to 30 and ask what a laptop's RAM does, in two sentences. The answer stops mid-sentence, and the grey line says why: <code>stopped: max tokens</code>. Then <b class="ui">Settings › Reset to defaults</b> puts everything back: 1.0, 0.95, 2000.</p>
+    </div>
+    <figure class="cc-shot"><video class="clip" src="img/chapter3/maxtok.mp4" poster="img/chapter3/maxtok-poster.jpg" controls muted playsinline preload="none" aria-label="Max tokens set to 30; the RAM question; the reply stops at the data and applications you are currently, and the grey line ends with stopped: max tokens." width="1200" height="576"></video>
+      <figcaption>Max tokens 30, sped up. <a href="https://www.youtube.com/watch?v=JjqCbaXx1y4&amp;t=335s" rel="noopener">Watch this step in the video</a>.</figcaption></figure>
+  </section>
+
+  <section id="when" data-rail="Which setting when">
+    <div class="prose">
+      <h2>Which setting when</h2>
+    </div>
+    <div class="cheat"><table>
+      <tr><th>You want</th><th>Turn</th><th>On Gemini 3.1 Flash Lite</th></tr>
+      <tr><td>A good default</td><td>Nothing: Reset to defaults</td><td>Temperature 1.0, top-P 0.95 (Google's advice for Gemini 3)</td></tr>
+      <tr><td>The same answer every time</td><td>Lower top-P (or temperature)</td><td>Top-P 0.1 held even at temperature 2</td></tr>
+      <tr><td>More varied ideas</td><td>Higher temperature</td><td>Temperature 2 changed the slogan on every ask</td></tr>
+      <tr><td>Short answers, lower cost</td><td>Max tokens</td><td>30 cut the answer: <code>stopped: max tokens</code></td></tr>
+      <tr><td>Fewer word choices by count</td><td>Top-K</td><td>Fixed at 64; not available</td></tr>
+    </table></div>
+    <figure class="cc-shot"><img src="img/chapter3/arch-ep03.svg" alt="Our project after Chapter 3: you, ui.py the window with a new Settings menu (temperature, top-P, max tokens, in orange), bot.py with ask() and usage(), the key in .env, and Gemini 3.1 Flash Lite in Google's cloud." loading="lazy">
+      <figcaption>Our project so far. The new part is in orange: the Settings menu.</figcaption></figure>
+  </section>
+
+  <section id="quickref" data-rail="Quick reference">
+    <div class="prose"><h2>Quick reference</h2><p>Every command from this chapter. The prompt is above, in <a href="#prompt">The settings prompt</a>.</p></div>
+    <div class="cheat"><table><tr><th>Command</th><th>What it does</th><th>Use it when</th></tr><tr><td><code>.venv\Scripts\activate</code></td><td>Switches the environment on</td><td>In every new terminal</td></tr><tr><td><code>Review and implement prompts/03-settings.txt</code></td><td>Adds the Settings menu</td><td>After writing the prompt</td></tr><tr><td><code>python ui.py</code></td><td>Opens the window</td><td>To try each setting</td></tr></table></div>
+  </section>
+
+  <section id="takeaway" data-rail="The takeaway">
+    <div class="prose">
+      <h2>The takeaway</h2>
+      <ol>
+        <li>A model picks each next word by chance, weighted by probability. That is why one question can get several answers.</li>
+        <li>Temperature sets how creative the pick is; top-K and top-P trim the list first, by count or by probability; max tokens caps the length.</li>
+        <li>On Gemini 3, keep the defaults unless you have a reason. Use max tokens to keep answers short and cheap.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="homework" data-rail="Your homework">
+    <div class="next">
+      <div class="lbl">Your homework</div>
+      <h3>Find your own three answers</h3>
+      <p style="font-size:var(--fs-cap);color:var(--slate)"><b>The goal:</b> see each setting change the answers in your own window.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>The steps:</b> send the agent &ldquo;Review and implement prompts/03-settings.txt&rdquo; and run <code>python ui.py</code>. Pick a question with many good answers, like a name for a pet. Ask it twice at temperature 0, twice at temperature 2, then twice at temperature 2 with top-P 0.1.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>Before you look:</b> which of the three gives the most different answers?</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:10px"><i>One question for you: which setting will you change first in your own bot?</i></p>
+    </div>
+  </section>
+
+  <section id="next" data-rail="Next">
+    <div class="prose">
+      <h2>Next: it forgets your name</h2>
+      <p>Tell the window "My name is Adi." It answers "Hi Adi! It's nice to meet you." Then ask "What is my name?" It does not know. Chapter 4 finds out why.</p>
+    </div>
+    <figure class="cc-shot"><video class="clip" src="img/chapter3/forgets.mp4" poster="img/chapter3/forgets-poster.jpg" controls muted playsinline preload="none" aria-label="My name is Adi. The bot: Hi Adi! It's nice to meet you. Then What is my name? The bot: I don't know your name." width="1200" height="576"></video>
+      <figcaption>Our window forgets, sped up. <a href="https://www.youtube.com/watch?v=JjqCbaXx1y4&amp;t=417s" rel="noopener">Watch this step in the video</a>.</figcaption></figure>
+  </section>
+
+  <section class="lwa-refs" id="refs"><div class="prose"><h2>References</h2><p>Where each setting and number on this page comes from. Everything was also checked in our own recording and test run on 18 Nov 2026.</p></div><ol>
+    <li><b>Google</b> · <i>Gemini 3 developer guide</i> <span class="why">Google's advice to keep temperature at 1.0 on the Gemini 3 models.</span> <a href="https://ai.google.dev/gemini-api/docs/gemini-3" rel="noopener">https://ai.google.dev/gemini-api/docs/gemini-3</a></li>
+    <li><b>Google</b> · <i>Prompt design strategies</i> <span class="why">Temperature, top-K, top-P and max output tokens explained.</span> <a href="https://ai.google.dev/gemini-api/docs/prompting-strategies" rel="noopener">https://ai.google.dev/gemini-api/docs/prompting-strategies</a></li>
+    <li><b>Google</b> · <i>Google AI Studio</i> <span class="why">The run settings for each model.</span> <a href="https://aistudio.google.com" rel="noopener">https://aistudio.google.com</a></li>
+    <li><b>Learn AI by Building</b> · <i>chatbot-from-scratch on GitHub</i> <span class="why">This chapter's finished code and prompts.</span> <a href="https://github.com/Aditya-402/chatbot-from-scratch" rel="noopener">https://github.com/Aditya-402/chatbot-from-scratch</a></li>
+    <li><b>My own recording</b> · <i>18 Nov 2026, Windows 11</i> <span class="why">Every answer on this page is from those takes and a test run: Gemini 3.1 Flash Lite (top-K ignored, word probabilities not enabled, MAX_TOKENS at 20 and 5).</span></li>
+  </ol></section>
+  <section class="keep" aria-label="Follow along"><p class="follow">New chapters and episodes come out every week. Follow along on <a href="https://www.youtube.com/@learn-ai-by-building" rel="noopener">YouTube</a> or the <a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp channel</a>. Questions? Ask under the video on YouTube; I read every comment.</p></section>
+  <div class="lwa-chapnav"><a href="chapter2.html"><span class="k">← Chapter 2</span><span class="t">ui.py, a window that talks to bot.py</span></a><button type="button" class="lwa-complete" data-lwa-complete><span class="k">Progress</span><span class="t">Mark this chapter complete</span></button><a href="index.html"><span class="k">Series</span><span class="t">All chapters</span></a></div>
+  </main>
+</div>
+<footer class="nav2-foot"><div class="fi">
+  <a href="../../index.html"><img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building — home"></a>
+  <nav aria-label="Footer"><a href="../../index.html">Home</a><a href="../../series/index.html">Series</a><a href="../../blog/index.html">Blog</a><a href="../../connect.html">Connect</a><a href="https://www.youtube.com/@learn-ai-by-building" rel="noopener">YouTube</a><a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp</a><a href="../../privacy.html">Privacy</a></nav>
+  <span class="by">Learn AI by Building · by Adi (Aditya)</span>
+</div></footer>
+<script>
+// a Copy button for every command and prompt (as on the Claude Code prompt sheet)
+document.querySelectorAll('.pr-copy').forEach(function (b) {
+  b.addEventListener('click', function () {
+    var t = document.getElementById(b.dataset.for).textContent;
+    (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () {
+      b.textContent = 'Copied'; setTimeout(function () { b.textContent = 'Copy'; }, 1500);
+    }, function () { b.textContent = 'Select and copy'; });
+  });
+});
+</script>
+<script>
+// each clip plays once when most of it is on screen, never when the reader asks for reduced motion (WE-141)
+(function () {
+  if (!('IntersectionObserver' in window) || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+  document.querySelectorAll('video.clip').forEach(function (v) {
+    var o = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { o.disconnect(); v.play().catch(function () {}); } });
+    }, { threshold: 0.6 });
+    o.observe(v);
+  });
+})();
+</script>
+<script src="../../assets/site-config.js"></script>
+<script src="../../assets/analytics.js?v=1" defer></script>
+<script src="../../assets/progress.js?v=3"></script>
+<script src="../../assets/railspy.js?v=1"></script>
+</body>
+</html>
