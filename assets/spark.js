@@ -347,7 +347,7 @@ ${relevantContext(question, highlight)}`;
   const GUIDE = (() => {
     const s = document.currentScript || [...document.scripts].find(x => /assets\/spark\.js/.test(x.src));
     try { return new URL("../blog/get-your-gemini-api-key-and-connect-spark/", s.src).href; }
-    catch { return "https://learnaibybuilding.in/blog/get-your-gemini-api-key-and-connect-spark/"; }
+    catch { return "/blog/get-your-gemini-api-key-and-connect-spark/"; }   // origin-relative: same on both addresses
   })();
   const AISTUDIO = "https://aistudio.google.com/api-keys";
 
