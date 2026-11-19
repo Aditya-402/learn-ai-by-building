@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="canonical" href="https://learnwithadi.com/series/chatbots/chapter4.html">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 4 · memory — Learn AI by Building</title>
+<meta name="description" content="Chapter 4 of Chatbot from Scratch: why a chatbot forgets what you just told it. A model has no memory between calls, so we give ours a short-term memory (the last few exchanges) and a long-term memory (one running summary), both switchable in the window.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=8">
+<link rel="stylesheet" href="../../assets/unit.css?v=8">
+<link rel="stylesheet" href="../../assets/blog.css?v=8">
+<!-- the series-chapter parts (.cc-shot, .cc-wall, .pr copy blocks, the quick reference on a phone) are shared with the Claude Code chapters -->
+<link rel="stylesheet" href="../claude-code/cc.css?v=4">
+<link rel="stylesheet" href="../../assets/nav.css?v=1">
+</head>
+<body data-lwa-course="chatbots" data-lwa-chapter="chapter4" data-lwa-title="Chapter 4 · memory" data-lwa-taught="a model has no memory between calls; chat apps send the history again; short-term memory as the last N exchanges in our own list; the memory window and its token cost; long-term memory as one running summary; New chat; both memories switchable in Settings">
+<header class="top nav2"><div class="top-in">
+  <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark-maroon.svg?v=1" alt="Learn AI by Building — home"></a>
+  <nav class="nav2-links" aria-label="Main"><a href="../../index.html">Home</a><a href="../../series/index.html" aria-current="page">Series</a><a href="../../blog/index.html">Blog</a><a href="../../connect.html">Connect</a></nav>
+  <span class="nav2-auth" data-lwa-auth></span>
+  <details class="nav2-menu"><summary>Menu</summary><div class="m"><a href="../../index.html">Home</a><a href="../../series/index.html">Series</a><a href="../../blog/index.html">Blog</a><a href="../../connect.html">Connect</a><a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp channel</a><span class="nav2-auth-m" data-lwa-auth></span></div></details>
+</div></header>
+<header class="masthead">
+  <div class="masthead-in">
+    <div class="title-block">
+      <div class="eyebrow">Chatbot from Scratch · Chapter 4</div>
+      <h1>Memory</h1>
+      <p class="standfirst">Tell your bot your name, ask it a moment later, and it has forgotten. This chapter shows why, and gives it two memories: the last few messages, word for word, and a short summary of everything older.</p>
+      <div class="facts"><div><b>One sitting</b>~10 min read, ~40 min to build along (the agent works for about twenty of them)</div><div><b>You need</b>the project from Chapter 3, Antigravity, your own key in .env</div><div><b>You build</b>a short-term and a long-term memory, a memory window, New chat</div><div><b>Chapter 4</b>after <a href="chapter3.html">Chapter 3 · the model's settings</a></div></div>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="rail" aria-label="Sections">
+    <a class="rnav-back" href="index.html"><span class="ico">←</span><span class="lbl">All chapters</span></a>
+    <div class="rail-h">Contents</div>
+    <a class="on" href="#wall">It forgets your name</a>
+    <a href="#studio">AI Studio remembers</a>
+    <a href="#nomemory">A model has no memory</a>
+    <a href="#prompt1">The short-term prompt</a>
+    <a href="#short">Short-term memory, live</a>
+    <a href="#window">Why a window</a>
+    <a href="#prompt2">The long-term prompt</a>
+    <a href="#long">Long-term memory, live</a>
+    <a href="#newchat">New chat</a>
+    <a href="#quickref">Quick reference</a>
+    <a href="#takeaway">The takeaway</a>
+    <a href="#homework">Your homework</a>
+  </nav>
+
+  <main>
+  <section id="video">
+    <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/yQXDOwvUp98?rel=0" title="Episode 4 · Why does my chatbot forget what I just told it?"
+      allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+    <p class="video-cap">Prefer to watch? This chapter goes with Episode 4 (6:23). <a href="https://www.youtube.com/watch?v=yQXDOwvUp98" rel="noopener">Open it on YouTube</a>.</p>
+    <p class="yt-sub"><a href="https://www.youtube.com/@learn-ai-by-building?sub_confirmation=1" rel="noopener">Subscribe on YouTube</a></p>
+  </section>
+
+  <section id="wall" data-rail="It forgets your name">
+    <div class="prereq">
+      <div class="pq"><b>Goes with Episode 4</b><a href="https://www.youtube.com/watch?v=yQXDOwvUp98" target="_blank" rel="noopener">"Why does my chatbot forget what I just told it?"</a>. Watch it just above, or build along here at your own pace.</div>
+      <div class="pq"><b>Before you start</b>The project from <a href="chapter3.html">Chapter 3</a>, with its Settings menu and its <code>.venv</code>. Antigravity, signed in: <a href="../../blog/install-antigravity-on-windows/">install Antigravity on Windows</a>. And your own Gemini key in <code>.env</code>.</div>
+      <div class="pq"><b>The code, ready to run</b><a href="https://github.com/Aditya-402/chatbot-from-scratch/releases/download/episode-04/chatbot-from-scratch-episode-04.zip" rel="noopener">Download this chapter's code (zip)</a>. Every chapter's code is on <a href="https://github.com/Aditya-402/chatbot-from-scratch" rel="noopener">GitHub</a>. Add your own <code>.env</code> with <code>GEMINI_API_KEY</code>; the README shows the setup.</div>
+    </div>
+    <div class="prose">
+      <h2>It forgets your name</h2>
+      <p>Chapter 3 gave our window a Settings menu. It ended on a puzzle.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter4/arch-ep03.svg" alt="Our project after Chapter 3: you, ui.py the window with its Settings menu, bot.py with ask() and usage(), the key in .env, and Gemini 3.1 Flash Lite in Google's cloud." loading="lazy"><figcaption>Where Chapter 3 left us.</figcaption></figure>
+    <div class="prose">
+      <p>Run <code>python ui.py</code> and type <i>My name is Adi.</i> It answers "Hi Adi!". Then ask <i>What is my name?</i> It does not know. The grey line under each reply says why: <b>6 in</b> both times. Only your latest question went to Gemini.</p>
+    </div>
+    <figure class="cc-shot"><video class="clip" src="img/chapter4/forgets.mp4" poster="img/chapter4/forgets-poster.jpg" controls muted playsinline preload="none" aria-label="My name is Adi. The bot: Hi Adi! Then What is my name? The bot: I do not know your name. Both replies show 6 tokens in." width="1200" height="576"></video>
+      <figcaption>Our window forgets, sped up. <a href="https://www.youtube.com/watch?v=yQXDOwvUp98&amp;t=27s" rel="noopener">Watch this step in the video</a>.</figcaption></figure>
+    <div class="cc-wall">
+      <div class="lbl">The question for this chapter</div>
+      <p>Why does my chatbot forget what I just told it?</p>
+    </div>
+  </section>
+
+  <section id="studio" data-rail="AI Studio remembers">
+    <div class="prose">
+      <h2>AI Studio remembers</h2>
+      <p>Send the same two messages in <a href="https://aistudio.google.com" rel="noopener">Google AI Studio</a>, on the same model, Gemini 3.1 Flash Lite. It answers "Your name is Adi." And the counter at the top shows <b>31 tokens</b>, more than our two small questions.</p>
+    </div>
+    <figure class="cc-shot"><video class="clip" src="img/chapter4/studio.mp4" poster="img/chapter4/studio-poster.jpg" controls muted playsinline preload="none" aria-label="Google AI Studio: My name is Adi, then What is my name; the model answers Your name is Adi; the counter shows 31 tokens." width="1200" height="576"></video>
+      <figcaption>AI Studio remembers, sped up. <a href="https://www.youtube.com/watch?v=yQXDOwvUp98&amp;t=70s" rel="noopener">Watch this step in the video</a>.</figcaption></figure>
+  </section>
+
+  <section id="nomemory" data-rail="A model has no memory">
+    <div class="prose">
+      <h2>A model has no memory</h2>
+      <p>Same model, two answers. The difference is not the model: every call is read on its own. AI Studio is a full chat app, and it sends the earlier messages again with every new question. Our window sends only the latest one.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter4/memory-calls.svg" alt="Call 2 without history sends only What is my name? and gets I do not know your name. Call 2 with history sends My name is Adi, Hi Adi, What is my name? and gets Your name is Adi." loading="lazy">
+      <figcaption>Memory is just text we send again.</figcaption></figure>
+    <div class="cheat"><table>
+      <tr><th></th><th>Google AI Studio</th><th>Our window (Chapter 3)</th></tr>
+      <tr><td>Sends with each question</td><td>The whole conversation so far</td><td>Only your latest question</td></tr>
+      <tr><td>Knows your name a message later</td><td>Yes</td><td>No</td></tr>
+      <tr><td>Tokens in for "What is my name?"</td><td>More: the history goes along</td><td>6</td></tr>
+    </table></div>
+  </section>
+
+  <section id="prompt1" data-rail="The short-term prompt">
+    <div class="prose">
+      <h2>The short-term prompt</h2>
+      <p>So we give our bot a <b>short-term memory</b>: the last few exchanges, sent with every question. One exchange is one question and its answer. Make a new file, <code>prompts/04-memory.txt</code>.</p>
+    </div>
+    <div class="pr"><div class="pr-h"><span>prompts/04-memory.txt</span><button type="button" class="pr-copy" data-for="p1">Copy</button></div><pre id="p1">Task : Give the bot a short-term memory: the last few exchanges of this chat, sent with every new question
+
+Context :
+- Use the virtual environment .venv in this folder. Don't create a new one.
+- Today ask() sends only my latest question to Gemini, so the bot forgets everything I said before.
+- In bot.py, keep the history in our own list: every question I ask and every reply the bot gives. Don't use the SDK's chats API.
+- One exchange is one question plus its reply.
+- With each new question, send the last N exchanges word for word, then the new question. Older exchanges are not sent.
+- N is the memory window. It starts at 6.
+- Keep ask() working as it does now for the terminal chat, with the same settings (temperature, top_p, max_output_tokens).
+- Add a function new_chat() that empties the history.
+- The memory lasts only while the program runs. Don't save it to a file.
+- In the window, add Settings &gt; Short-term memory: a tick I can select or unselect. It starts selected.
+- When it is unselected, send only my latest question, as before.
+- Add Settings &gt; Memory window... with a choice of 0, 3, 6, 9, 12 or 15 exchanges.
+- Add Settings &gt; New chat: it calls new_chat() and clears the chat area.
+- The grey status line under the menu bar also shows the memory, for example: Short-term on, 6 exchanges, 4 in the window.
+- Keep everything else as it is: the grey line under each reply with its tokens in and out, the token counter, the settings, the error messages and the colours.
+- No summary of older exchanges yet, and no system prompt.
+
+Folder arch :
+- ui.py : the window (frontend)
+- bot.py : the chatbot (backend), now with the history
+- prompts/ : our prompts</pre>
+      <p class="pr-why">The history lives in our own list, not the SDK's chat feature, so you can see that memory is text we send again. The window size and the tick are yours to play with.</p></div>
+    <div class="pr"><div class="pr-h"><span>Type into the agent panel</span><button type="button" class="pr-copy" data-for="p2">Copy</button></div><pre id="p2">Review and implement prompts/04-memory.txt</pre>
+      <p class="pr-why">It works for a while. When it is done, 3 files changed: click <b class="ui">Accept all</b>.</p></div>
+  </section>
+
+  <section id="short" data-rail="Short-term memory, live">
+    <div class="prose">
+      <h2>Short-term memory, live</h2>
+    </div>
+    <div class="pr"><div class="pr-h"><span>Type in the terminal</span><button type="button" class="pr-copy" data-for="p3">Copy</button></div><pre id="p3">python ui.py</pre></div>
+    <div class="prose">
+      <p>The grey line under the menu bar now shows the memory: <code>Short-term on, 6 exchanges</code>. Tell it your name, then ask it. "Your name is Adi." This time <b>27 tokens</b> went in, not 6: the first exchange went along.</p>
+      <p>Now <b class="ui">Settings › Memory window…</b> and pick 3 exchanges instead of 6. Ask four more things: a name for an electronics shop, a shorter one, what RAM does, and a 2-line poem about rain. Now read the tokens in under each reply: 46, 54, then 44 as your name drops out, 69 for the poem, 77 for the last question. They no longer grow with the chat, because only 3 exchanges go along. Ask your name again: "I don't know your name." It fell out of the window.</p>
+    </div>
+    <figure class="cc-shot"><video class="clip" src="img/chapter4/short.mp4" poster="img/chapter4/short-poster.jpg" controls muted playsinline preload="none" aria-label="Memory window set to 3; four more questions; then What is my name? and the bot answers I don&#x27;t know your name; 77 tokens in." width="1200" height="576"></video>
+      <figcaption>Window 3: it forgets again, sped up. <a href="https://www.youtube.com/watch?v=yQXDOwvUp98&amp;t=158s" rel="noopener">Watch this step in the video</a>.</figcaption></figure>
+  </section>
+
+  <section id="window" data-rail="Why a window">
+    <div class="prose">
+      <h2>Why a window</h2>
+      <p>Sending everything works for a short chat. But each call carries the whole conversation again, so the tokens in, and what you pay, grow with every message. A window caps that cost; the price is that anything older is gone. Real chat apps fill the gap with a short summary of the older part, and that summary is our <b>long-term memory</b>.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter4/window-summary.svg" alt="A memory window of 3: the last 3 exchanges are short-term memory, sent word for word; older exchanges are folded into one short summary, the long-term memory. Each call sends the summary, the last 3 exchanges and the new question." loading="lazy">
+      <figcaption>Each call sends: the summary, the last exchanges, the new question.</figcaption></figure>
+  </section>
+
+  <section id="prompt2" data-rail="The long-term prompt">
+    <div class="prose">
+      <h2>The long-term prompt</h2>
+      <p>A second file, <code>prompts/04-summary.txt</code>. Gemini itself writes the summary, at most 100 words, and keeps facts like your name. It is updated only when an exchange falls out of the window.</p>
+    </div>
+    <div class="pr"><div class="pr-h"><span>prompts/04-summary.txt</span><button type="button" class="pr-copy" data-for="p4">Copy</button></div><pre id="p4">Task : Give the bot a long-term memory: one running summary of the exchanges that fall outside the memory window
+
+Context :
+- Use the virtual environment .venv in this folder. Don't create a new one.
+- Today, exchanges older than the memory window are simply not sent, so the bot forgets them.
+- When an exchange falls outside the window, ask Gemini to update one running summary with it: the old summary plus that exchange in, a new short summary out.
+- Keep the summary short, at most 100 words, and keep facts about me such as my name.
+- With each new question, send the summary first, then the last N exchanges word for word, then the new question.
+- The summary lasts only while the program runs. Don't save it to a file.
+- Add Settings &gt; Long-term memory: a tick I can select or unselect. It starts selected.
+- When it is unselected, make no summary and send none, as before.
+- Settings &gt; New chat also clears the summary.
+- Add Settings &gt; Show memory summary: a small window that shows the current summary.
+- The grey status line also shows the long-term memory, for example: Short-term on, 3 exchanges, 3 in the window. Long-term on, 5 summarised.
+- Count the tokens of the summary updates in the token counter too.
+- Keep ask() working for the terminal chat, and keep everything else as it is.
+- No system prompt yet.
+
+Folder arch :
+- ui.py : the window (frontend)
+- bot.py : the chatbot (backend), with the history and the summary
+- prompts/ : our prompts</pre>
+      <p class="pr-why">The summary calls are counted in the token counter too, so the cost you see is the real one.</p></div>
+    <div class="pr"><div class="pr-h"><span>Type into the agent panel</span><button type="button" class="pr-copy" data-for="p5">Copy</button></div><pre id="p5">Review and implement prompts/04-summary.txt</pre>
+      <p class="pr-why">Again 3 files changed: click <b class="ui">Accept all</b>.</p></div>
+  </section>
+
+  <section id="long" data-rail="Long-term memory, live">
+    <div class="prose">
+      <h2>Long-term memory, live</h2>
+      <p>Run <code>python ui.py</code> again. The Settings menu now has <b class="ui">Long-term memory</b> (ticked) and <b class="ui">Show memory summary</b>. Set the window to 3 again and have the same chat: your name, the shop name, a shorter one, RAM, the rain poem. The grey line says <code>2 summarised</code>.</p>
+      <p>Ask your name. "Your name is Adi." Your name left the window, but it was kept in the summary. <b class="ui">Settings › Show memory summary</b> shows it:</p>
+    </div>
+    <div class="yousee"><b>The memory summary</b>Adi introduced himself to the bot and asked for a name for his electronics shop. The bot initially suggested "VoltEdge," but after Adi requested a shorter option, it suggested "Volt."</div>
+    <figure class="cc-shot"><video class="clip" src="img/chapter4/long.mp4" poster="img/chapter4/long-poster.jpg" controls muted playsinline preload="none" aria-label="Window 3 with long-term memory on: What is my name? The bot answers Your name is Adi. The memory summary window shows that Adi introduced himself and asked for a shop name." width="1200" height="576"></video>
+      <figcaption>Remembered through the summary, sped up. <a href="https://www.youtube.com/watch?v=yQXDOwvUp98&amp;t=265s" rel="noopener">Watch this step in the video</a>.</figcaption></figure>
+  </section>
+
+  <section id="newchat" data-rail="New chat">
+    <div class="prose">
+      <h2>New chat</h2>
+      <p><b class="ui">Settings › New chat</b> clears both memories: the grey line goes back to <code>0 summarised</code>, and "What is my name?" gets "I don't know your name" again, with 6 tokens in. Both memories last only while the program runs; nothing is saved to a file.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter4/arch-ep04.svg" alt="Our project after Chapter 4: you, ui.py the window with its Settings menu, bot.py with ask() and usage(), and two new parts in orange that go to bot.py: short-term memory, the last N exchanges, and long-term memory, one running summary. Gemini 3.1 Flash Lite in Google's cloud." loading="lazy">
+      <figcaption>Our project so far. The new parts are in orange: the two memories.</figcaption></figure>
+  </section>
+
+  <section id="quickref" data-rail="Quick reference">
+    <div class="prose"><h2>Quick reference</h2><p>Every command from this chapter. The prompts are above.</p></div>
+    <div class="cheat"><table><tr><th>Command or menu</th><th>What it does</th><th>Use it when</th></tr><tr><td><code>Review and implement prompts/04-memory.txt</code></td><td>Adds short-term memory</td><td>After writing the first prompt</td></tr><tr><td><code>Review and implement prompts/04-summary.txt</code></td><td>Adds long-term memory</td><td>After the second prompt</td></tr><tr><td><code>python ui.py</code></td><td>Opens the window</td><td>To try each memory</td></tr><tr><td><b class="ui">Settings › Memory window…</b></td><td>0, 3, 6, 9, 12 or 15 exchanges</td><td>To trade memory against tokens</td></tr><tr><td><b class="ui">Settings › New chat</b></td><td>Clears both memories</td><td>To start fresh</td></tr></table></div>
+  </section>
+
+  <section id="takeaway" data-rail="The takeaway">
+    <div class="prose">
+      <h2>The takeaway</h2>
+      <ol>
+        <li>A model has no memory between calls. A chatbot remembers only what we send it again.</li>
+        <li>Short-term memory sends the last few exchanges word for word; the window caps how many, and so the tokens.</li>
+        <li>Long-term memory folds what falls out of the window into one short summary, sent first with every question.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="homework" data-rail="Your homework">
+    <div class="next">
+      <div class="lbl">Your homework</div>
+      <h3>Which memory remembers?</h3>
+      <p style="font-size:var(--fs-cap);color:var(--slate)"><b>The goal:</b> see each memory work, and fail, in your own window.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>The steps:</b> give both memory prompts to the agent on your machine. Set the memory window to 3, tell it your name, and chat for 4 turns. Then ask your name with long-term memory on, and then off.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>Before you look:</b> which one remembers?</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:10px"><i>One question for you: what should your own bot remember about you?</i></p>
+    </div>
+  </section>
+
+  <section id="next" data-rail="Next">
+    <div class="prose">
+      <h2>Next: a character</h2>
+      <p>Ask our bot "Who are you?" and it has no answer of its own, only "a large language model, trained by Google". In Chapter 5 it gets a character: the assistant of our electronics shop.</p>
+    </div>
+    <figure class="cc-shot"><video class="clip" src="img/chapter4/who.mp4" poster="img/chapter4/who-poster.jpg" controls muted playsinline preload="none" aria-label="Who are you? The bot: I am a large language model, trained by Google, with no personal identity." width="1200" height="576"></video>
+      <figcaption>Who are you?, sped up. <a href="https://www.youtube.com/watch?v=yQXDOwvUp98&amp;t=353s" rel="noopener">Watch this step in the video</a>.</figcaption></figure>
+  </section>
+
+  <section class="lwa-refs" id="refs"><div class="prose"><h2>References</h2><p>Where each number on this page comes from. Everything was also checked in our own recording on 19 Nov 2026.</p></div><ol>
+    <li><b>Google</b> · <i>Text generation: multi-turn conversations</i> <span class="why">Chat history is sent with each request; the model itself keeps no state.</span> <a href="https://ai.google.dev/gemini-api/docs/text-generation" rel="noopener">https://ai.google.dev/gemini-api/docs/text-generation</a></li>
+    <li><b>Google</b> · <i>Google AI Studio</i> <span class="why">The chat that remembers, and its token counter.</span> <a href="https://aistudio.google.com" rel="noopener">https://aistudio.google.com</a></li>
+    <li><b>Learn AI by Building</b> · <i>chatbot-from-scratch on GitHub</i> <span class="why">This chapter's finished code and prompts.</span> <a href="https://github.com/Aditya-402/chatbot-from-scratch" rel="noopener">https://github.com/Aditya-402/chatbot-from-scratch</a></li>
+    <li><b>My own recording</b> · <i>19 Nov 2026, Windows 11</i> <span class="why">Every answer and token count on this page is from those takes, on Gemini 3.1 Flash Lite.</span></li>
+  </ol></section>
+  <section class="keep" aria-label="Follow along"><p class="follow">New chapters and episodes come out every week. Follow along on <a href="https://www.youtube.com/@learn-ai-by-building" rel="noopener">YouTube</a> or the <a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp channel</a>. Questions? Ask under the video on YouTube; I read every comment.</p></section>
+  <div class="lwa-chapnav"><a href="chapter3.html"><span class="k">← Chapter 3</span><span class="t">The model's settings</span></a><button type="button" class="lwa-complete" data-lwa-complete><span class="k">Progress</span><span class="t">Mark this chapter complete</span></button><a href="index.html"><span class="k">Series</span><span class="t">All chapters</span></a></div>
+  </main>
+</div>
+<footer class="nav2-foot"><div class="fi">
+  <a href="../../index.html"><img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building — home"></a>
+  <nav aria-label="Footer"><a href="../../index.html">Home</a><a href="../../series/index.html">Series</a><a href="../../blog/index.html">Blog</a><a href="../../connect.html">Connect</a><a href="https://www.youtube.com/@learn-ai-by-building" rel="noopener">YouTube</a><a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp</a><a href="../../privacy.html">Privacy</a></nav>
+  <span class="by">Learn AI by Building · by Adi (Aditya)</span>
+</div></footer>
+<script>
+// a Copy button for every command and prompt (as on the Claude Code prompt sheet)
+document.querySelectorAll('.pr-copy').forEach(function (b) {
+  b.addEventListener('click', function () {
+    var t = document.getElementById(b.dataset.for).textContent;
+    (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () {
+      b.textContent = 'Copied'; setTimeout(function () { b.textContent = 'Copy'; }, 1500);
+    }, function () { b.textContent = 'Select and copy'; });
+  });
+});
+</script>
+<script>
+// each clip plays once when most of it is on screen, never when the reader asks for reduced motion (WE-141)
+(function () {
+  if (!('IntersectionObserver' in window) || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+  document.querySelectorAll('video.clip').forEach(function (v) {
+    var o = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { o.disconnect(); v.play().catch(function () {}); } });
+    }, { threshold: 0.6 });
+    o.observe(v);
+  });
+})();
+</script>
+<script src="../../assets/site-config.js"></script>
+<script src="../../assets/analytics.js?v=1" defer></script>
+<script src="../../assets/progress.js?v=3"></script>
+<script src="../../assets/railspy.js?v=1"></script>
+</body>
+</html>
