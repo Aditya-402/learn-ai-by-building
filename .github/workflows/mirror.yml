@@ -1,0 +1,41 @@
+# Mirror the site to learnwithadi.com (Adi, 19 Nov 2026; Website book WE-163).
+# Both addresses serve the same pages with no forwarding jump; learnwithadi.com is the promoted, canonical address.
+# On every push to main, copy this site (minus its CNAME) into Aditya-402/learnwithadi-mirror, whose GitHub Pages
+# serves learnwithadi.com. Needs the secret MIRROR_DEPLOY_KEY: the private half of a deploy key with write access on
+# the mirror repo (created by Claude only after Adi's "yes"; see docs/reviews/2026-11-19-learnwithadi-mirror.html).
+name: mirror to learnwithadi.com
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+concurrency:
+  group: mirror
+  cancel-in-progress: true
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the site
+        uses: actions/checkout@v4
+        with:
+          path: site
+      - name: Check out the mirror
+        uses: actions/checkout@v4
+        with:
+          repository: Aditya-402/learnwithadi-mirror
+          ssh-key: ${{ secrets.MIRROR_DEPLOY_KEY }}
+          path: mirror
+      - name: Copy the site into the mirror
+        run: |
+          rsync -a --delete --exclude '.git/' --exclude '.github/' --exclude 'CNAME' --exclude '_mock/' --exclude '.claude/' site/ mirror/
+          echo 'learnwithadi.com' > mirror/CNAME
+          touch mirror/.nojekyll
+      - name: Push the mirror
+        working-directory: mirror
+        run: |
+          git config user.name 'Aditya-402'
+          git config user.email '59335643+Aditya-402@users.noreply.github.com'
+          git add -A
+          if git diff --cached --quiet; then echo 'mirror already up to date'; exit 0; fi
+          git commit -m "Mirror of learn-ai-by-building ${GITHUB_SHA::7}"
+          git push origin HEAD:main
