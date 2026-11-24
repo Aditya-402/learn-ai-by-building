@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="canonical" href="https://learnwithadi.com/series/chatbots/chapter6.html">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 6 · our own shop — Learn AI by Building</title>
+<meta name="description" content="Chapter 6 of Chatbot from Scratch: how to teach a chatbot about your own shop. Today's date and a shop sheet read from four files (a PDF, a web page, Markdown and plain text) go with every call. This is context stuffing; we measure what it costs and change a price live.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=8">
+<link rel="stylesheet" href="../../assets/unit.css?v=8">
+<link rel="stylesheet" href="../../assets/blog.css?v=8">
+<!-- the series-chapter parts (.cc-shot, .cc-wall, .pr copy blocks, the quick reference on a phone) are shared with the Claude Code chapters -->
+<link rel="stylesheet" href="../claude-code/cc.css?v=4">
+<link rel="stylesheet" href="../../assets/nav.css?v=1">
+</head>
+<body data-lwa-course="chatbots" data-lwa-chapter="chapter6" data-lwa-title="Chapter 6 · our own shop" data-lwa-taught="today's date sent with every call from the computer's clock; a preprocessor that turns a PDF, a web page, Markdown and plain text into one shop sheet; context stuffing: the whole sheet goes into every call as part of the system instruction; what it costs in tokens and where it stops working; answering prices only from the sheet; reloading changed files without a restart">
+<header class="top nav2"><div class="top-in">
+  <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark-maroon.svg?v=1" alt="Learn AI by Building — home"></a>
+  <nav class="nav2-links" aria-label="Main"><a href="../../index.html">Home</a><a href="../../series/index.html" aria-current="page">Series</a><a href="../../blog/index.html">Blog</a><a href="../../connect.html">Connect</a></nav>
+  <span class="nav2-auth" data-lwa-auth></span>
+  <details class="nav2-menu"><summary>Menu</summary><div class="m"><a href="../../index.html">Home</a><a href="../../series/index.html">Series</a><a href="../../blog/index.html">Blog</a><a href="../../connect.html">Connect</a><a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp channel</a><span class="nav2-auth-m" data-lwa-auth></span></div></details>
+</div></header>
+<header class="masthead">
+  <div class="masthead-in">
+    <div class="title-block">
+      <div class="eyebrow">Chatbot from Scratch · Chapter 6</div>
+      <h1>Our own shop</h1>
+      <p class="standfirst">Volt sounds like a shop assistant, but it cannot tell you today's date or what a charger costs. This chapter hands it both: the date from your computer, and a shop sheet built from four ordinary files. The whole sheet rides along with every question, and we look at what that costs.</p>
+      <div class="facts"><div><b>One sitting</b>~10 min read, ~45 min to build along (the agent works for about twenty-five of them)</div><div><b>You need</b>the project from Chapter 5, Antigravity, your own key in .env</div><div><b>You build</b>a date line, shop.py that reads four file types, a Reload and a Show shop sheet in Settings</div><div><b>Chapter 6</b>after <a href="chapter5.html">Chapter 5 · a character</a></div></div>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="rail" aria-label="Sections">
+    <a class="rnav-back" href="index.html"><span class="ico">←</span><span class="lbl">All chapters</span></a>
+    <div class="rail-h">Contents</div>
+    <a class="on" href="#nodate">It cannot tell the date</a>
+    <a href="#studio">A file in AI Studio</a>
+    <a href="#plan">What one call sends</a>
+    <a href="#prompt1">The date prompt</a>
+    <a href="#date">Today's date, live</a>
+    <a href="#files">Our shop in four files</a>
+    <a href="#prompt2">The shop prompt</a>
+    <a href="#shop">The shop sheet, live</a>
+    <a href="#cost">What context stuffing costs</a>
+    <a href="#edit">Change a price</a>
+    <a href="#project">Our project so far</a>
+    <a href="#quickref">Quick reference</a>
+    <a href="#takeaway">The takeaway</a>
+    <a href="#homework">Your homework</a>
+  </nav>
+
+  <main>
+  <section id="video">
+    <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/4b3roPPjtsU?rel=0" title="Episode 6 · How do I teach my chatbot about my own shop?"
+      allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+    <p class="video-cap">Prefer to watch? This chapter goes with Episode 6 (6:49). <a href="https://www.youtube.com/watch?v=4b3roPPjtsU" rel="noopener">Open it on YouTube</a>.</p>
+    <p class="yt-sub"><a href="https://www.youtube.com/@learn-ai-by-building?sub_confirmation=1" rel="noopener">Subscribe on YouTube</a></p>
+  </section>
+
+  <section id="nodate" data-rail="It cannot tell the date">
+    <div class="prereq">
+      <div class="pq"><b>Goes with Episode 6</b><a href="https://www.youtube.com/watch?v=4b3roPPjtsU" target="_blank" rel="noopener">"How do I teach my chatbot about my own shop?"</a>. Watch it just above, or build along here at your own pace.</div>
+      <div class="pq"><b>Before you start</b>The project from <a href="chapter5.html">Chapter 5</a>, with Volt's character and its <code>.venv</code>. Antigravity, signed in: <a href="../../blog/install-antigravity-on-windows/">install Antigravity on Windows</a>. And your own Gemini key in <code>.env</code>.</div>
+      <div class="pq"><b>The code, ready to run</b><a href="https://github.com/Aditya-402/chatbot-from-scratch/releases/download/episode-06/chatbot-from-scratch-episode-06.zip" rel="noopener">Download this chapter's code (zip)</a>. Every chapter's code is on <a href="https://github.com/Aditya-402/chatbot-from-scratch" rel="noopener">GitHub</a>. Add your own <code>.env</code> with <code>GEMINI_API_KEY</code>; the README shows the setup.</div>
+    </div>
+    <div class="prose">
+      <h2>It cannot tell the date</h2>
+      <p>Chapter 5 turned our bot into Volt, the assistant of a small electronics shop. Two questions show what it still lacks.</p>
+      <p>Ask <i>What is today's date?</i> and Volt says it can only help with questions about Volt Electronics. A model has no clock; nothing in the call tells it the day. Ask <i>How much is the 20W charger?</i> and it says it is not certain of the price and will check with the shop. That is the right answer for now, because it has never seen our price list. It is also not much use to a customer.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter6/arch-ep05.svg" alt="Our project after Chapter 5: you, ui.py the window with its Settings menu, bot.py, the key in .env, short-term and long-term memory, and the character from prompts/system/, Volt in 3 versions, sent as the system instruction. Gemini 3.1 Flash Lite in Google's cloud." loading="lazy"><figcaption>Where Chapter 5 left us.</figcaption></figure>
+  </section>
+
+  <section id="studio" data-rail="A file in AI Studio">
+    <div class="prose">
+      <h2>A file in AI Studio</h2>
+      <p>Google AI Studio shows the idea first. With Gemini 3.1 Flash Lite, attach the price list, <code>products.pdf</code>, with <b class="ui">+ › Upload files</b>, and ask the same question. AI Studio counts the file as <b>561 tokens</b>, and the answer is exact: the 20W USB-C charger costs 899 rupees.</p>
+      <p>Putting a whole file into the prompt like this has a name: <b>context stuffing</b>. The model does not remember the file; the file's text simply travels with the question. AI Studio does that for us inside one chat. Our window has to turn our files into text itself, and that is what we build here.</p>
+    </div>
+    <figure class="cc-shot"><video class="clip" src="img/chapter6/studio.mp4" poster="img/chapter6/studio-poster.jpg" controls muted playsinline preload="none" aria-label="Google AI Studio: products.pdf attached, 561 tokens; asked How much is the 20W charger?, the model answers The 20W USB-C charger costs 899 rupees." width="1200" height="576"></video>
+      <figcaption>A price list attached in AI Studio, sped up. <a href="https://www.youtube.com/watch?v=4b3roPPjtsU&amp;t=71s" rel="noopener">Watch this step in the video</a>.</figcaption></figure>
+  </section>
+
+  <section id="plan" data-rail="What one call sends">
+    <div class="prose">
+      <h2>What one call sends</h2>
+      <p>After this chapter, every call to Gemini carries five things, top to bottom. The first three go together as the system instruction; the memory and your question go in the contents, as before.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter6/call-layers.svg" alt="What one call sends now: 1, today's date, from this PC, every call; 2, the character, Volt the shop assistant; 3, the shop sheet, our 4 shop files as text. These three are the system instruction. Then in the contents: 4, the summary and the last exchanges, the memory; 5, the new question." loading="lazy"></figure>
+  </section>
+
+  <section id="prompt1" data-rail="The date prompt">
+    <div class="prose">
+      <h2>The date prompt</h2>
+      <p>The date first, because it is the smaller job. Make a new file, <code>prompts/06-date.txt</code>.</p>
+    </div>
+    <div class="pr"><div class="pr-h"><span>prompts/06-date.txt</span><button type="button" class="pr-copy" data-for="p1">Copy</button></div><pre id="p1">Task : Tell the bot today's date and time with every question
+
+Context :
+- Use the virtual environment .venv in this folder. Don't create a new one.
+- Today the bot does not know what day it is, so it cannot answer "What is today's date?".
+- With every call, add one line before the system prompt: Today is &lt;weekday, day month year&gt;, &lt;time&gt;.
+- Take the date and time from this computer at the moment of the call, not when the program starts.
+- Send it together with the system prompt as the system instruction of the call, not as a chat message.
+- Add Settings &gt; Today's date: a tick I can select or unselect. It starts selected.
+- When it is unselected, send no date line, as before.
+- The grey status line also shows it, for example: Date: on.
+- Count its tokens in the tokens in, as before.
+- Keep the character, the memory, the settings and everything else as it is.
+- Keep ask() working for the terminal chat.
+
+Folder arch :
+- ui.py : the window (frontend)
+- bot.py : the chatbot (backend), now adding today's date
+- prompts/ : our prompts
+- prompts/system/ : the system prompts</pre>
+      <p class="pr-why">The clock is read at the moment of each call, so a window left open overnight still knows the new day.</p></div>
+    <div class="pr"><div class="pr-h"><span>Type into the agent panel</span><button type="button" class="pr-copy" data-for="p2">Copy</button></div><pre id="p2">Review and implement prompts/06-date.txt</pre>
+      <p class="pr-why">When it is done, the agent has changed 3 files. Click Accept all.</p></div>
+  </section>
+
+  <section id="date" data-rail="Today's date, live">
+    <div class="prose">
+      <h2>Today's date, live</h2>
+    </div>
+    <div class="pr"><div class="pr-h"><span>Type in the terminal</span><button type="button" class="pr-copy" data-for="p3">Copy</button></div><pre id="p3">python ui.py</pre></div>
+    <div class="prose">
+      <p>The grey line under the menu bar now ends with <code>Date: on</code>. Ask <i>What is today's date?</i> and the answer on our recording day was <i>"Today is Friday, 20 November 2026."</i> The grey line under it shows <b>263 in</b>: the question, Volt's character and the date line.</p>
+    </div>
+    <figure class="cc-shot"><video class="clip" src="img/chapter6/date.mp4" poster="img/chapter6/date-poster.jpg" controls muted playsinline preload="none" aria-label="The window with Date: on in the grey line; What is today's date? Volt: Today is Friday, 20 November 2026." width="1200" height="576"></video>
+      <figcaption>Volt knows the day, sped up. <a href="https://www.youtube.com/watch?v=4b3roPPjtsU&amp;t=147s" rel="noopener">Watch this step in the video</a>.</figcaption></figure>
+  </section>
+
+  <section id="files" data-rail="Our shop in four files">
+    <div class="prose">
+      <h2>Our shop in four files</h2>
+      <p>A real shop keeps its facts in whatever files it already has. Ours has four, in <code>prompts/shop/</code>, each in a different format on purpose:</p>
+      <ul>
+        <li><a href="files/chapter6/products.pdf"><code>products.pdf</code></a>: products and prices, in rupees, tax included. The 20W USB-C charger is 899; a 1 m USB-C cable 299; a 2 m cable 449; wireless earbuds 2,499; a 10,000 mAh power bank 1,799, out of stock until next week; a phone stand 349.</li>
+        <li><a href="files/chapter6/offers.html"><code>offers.html</code></a>: this week's offers, a small web page. The 20W charger and a 1 m cable together for 1,099; a second pair of earbuds at 10% off.</li>
+        <li><a href="files/chapter6/faq.md"><code>faq.md</code></a>: questions we hear often, in Markdown: where the shop is, delivery, paying by UPI.</li>
+        <li><a href="files/chapter6/returns.txt"><code>returns.txt</code></a>: the returns policy, as plain text.</li>
+      </ul>
+      <p>The model reads text, so before anything reaches Gemini, each file has to become plain text: the PDF's words, the web page without its tags, the Markdown and the text as they are. Download the four files above into your own <code>prompts/shop/</code> folder to build along.</p>
+    </div>
+  </section>
+
+  <section id="prompt2" data-rail="The shop prompt">
+    <div class="prose">
+      <h2>The shop prompt</h2>
+      <p>The second prompt asks for a small preprocessor, <code>shop.py</code>, and sends its result with every call. Make a new file, <code>prompts/06-shop.txt</code>.</p>
+    </div>
+    <div class="pr"><div class="pr-h"><span>prompts/06-shop.txt</span><button type="button" class="pr-copy" data-for="p4">Copy</button></div><pre id="p4">Task : Teach the bot about our own shop from the files in prompts/shop/ (context stuffing: the whole shop sheet goes into every call)
+
+Context :
+- Use the virtual environment .venv in this folder. Don't create a new one.
+- Today the bot knows nothing about our shop, so it says it will check when I ask a price.
+- prompts/shop/ holds our shop files: products.pdf, offers.html, faq.md and returns.txt.
+- Write a small preprocessor in a new file, shop.py: it reads every file in prompts/shop/ and turns each one into plain text.
+- PDF: take the text of every page. HTML: take the visible text, without tags. .md and .txt: take the text as it is.
+- Use pypdf for PDF and beautifulsoup4 for HTML; install them in .venv and add them to requirements.txt.
+- Put the texts together into one shop sheet, each part starting with its file name.
+- Send the shop sheet with every call, after the date line and the system prompt, as part of the system instruction.
+- Volt answers prices and products only from the shop sheet; for anything not in it, it says it will check with the shop.
+- Read the files again when I choose Settings &gt; Reload shop files, so I can change a file without restarting.
+- Add Settings &gt; Shop files: a tick I can select or unselect. It starts selected. Unselected, send no shop sheet.
+- Add Settings &gt; Show shop sheet: a small window with the text the bot receives.
+- The grey status line also shows it, for example: Shop: 4 files, 410 tokens.
+- Count its tokens in the tokens in, as before.
+- Keep the date, the character, the memory, the settings and everything else as it is.
+
+Folder arch :
+- ui.py : the window (frontend)
+- bot.py : the chatbot (backend), now with the shop sheet
+- shop.py : reads the shop files into plain text
+- prompts/ : our prompts
+- prompts/system/ : the system prompts
+- prompts/shop/ : our shop files</pre>
+      <p class="pr-why">"Only from the shop sheet" is the line that stops invented prices: for anything not on the sheet, Volt says it will check with the shop.</p></div>
+    <div class="pr"><div class="pr-h"><span>Type into the agent panel</span><button type="button" class="pr-copy" data-for="p5">Copy</button></div><pre id="p5">Review and implement prompts/06-shop.txt</pre>
+      <p class="pr-why">The agent installs pypdf and beautifulsoup4 in <code>.venv</code>, writes <code>shop.py</code> and has changed 5 files in all. Click Accept all.</p></div>
+  </section>
+
+  <section id="shop" data-rail="The shop sheet, live">
+    <div class="prose">
+      <h2>The shop sheet, live</h2>
+      <p>Run <code>python ui.py</code> again and maximise the window, so the grey line fits: it ends with <code>Shop: 4 files, 331 tokens</code>. Now ask:</p>
+    </div>
+    <div class="cheat"><table><tr><th>Question</th><th>Volt's answer</th><th>Tokens in</th></tr>
+      <tr><td>How much is the 20W charger?</td><td>899 rupees, or bundled with a 1 m USB-C cable for 1,099 this week; both in stock</td><td>597</td></tr>
+      <tr><td>Do you have a power bank?</td><td>A 10,000 mAh power bank, out of stock and expected back next week</td><td>661</td></tr>
+      <tr><td>How much is a smart watch?</td><td>Not certain the shop carries smart watches; it will check with the shop</td><td>705</td></tr></table></div>
+    <div class="prose">
+      <p>The first two come straight from our files, the offer included. The smart watch is not on the sheet, so Volt does not invent a price. Tokens in climb a little with each question, because the conversation (the memory) grows as well.</p>
+    </div>
+    <figure class="cc-shot"><video class="clip" src="img/chapter6/shop.mp4" poster="img/chapter6/shop-poster.jpg" controls muted playsinline preload="none" aria-label="The maximised window: the 20W charger is 899 rupees, or 1,099 with a 1 m cable this week; the power bank is out of stock until next week; a smart watch: I am not certain we carry smart watches, I will check with the shop." width="1200" height="576"></video>
+      <figcaption>Answers from our own files, sped up. <a href="https://www.youtube.com/watch?v=4b3roPPjtsU&amp;t=224s" rel="noopener">Watch this step in the video</a>.</figcaption></figure>
+  </section>
+
+  <section id="cost" data-rail="What context stuffing costs">
+    <div class="prose">
+      <h2>What context stuffing costs</h2>
+    </div>
+    <div class="cheat"><table><tr><th>Call</th><th>Tokens in</th><th>What went with it</th></tr><tr><td>What is today's date?</td><td>263</td><td>Date line, character, memory, question</td></tr><tr><td>How much is the 20W charger?</td><td>597</td><td>The same, plus the shop sheet (331 tokens)</td></tr><tr><td>The charger with a cable, after the edit</td><td>756</td><td>The sheet again, plus a longer conversation</td></tr></table></div>
+    <div class="prose">
+      <p>The sheet rides along with every question, even one about the weather.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter6/stuffing.svg" alt="Context stuffing: without the shop sheet, 263 tokens in; with the shop sheet, 597 tokens in; the whole sheet, 331 tokens, goes with every question." loading="lazy"></figure>
+    <div class="prose">
+      <ul>
+        <li><b>Good for:</b> a handful of small files. Simple to build, nothing can be missed.</li>
+        <li><b>Breaks when:</b> the files grow. A thousand-product catalogue would travel in full with a question about one cable, in tokens and in waiting time.</li>
+        <li><b>Later in the series:</b> sending only the parts a question needs.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="edit" data-rail="Change a price">
+    <div class="prose">
+      <h2>Change a price</h2>
+      <p>Because the sheet is just files, you can change it. Open <code>prompts/shop/offers.html</code> and change the bundle from <b>1,099</b> to <b>999</b> rupees, and save. Then <b class="ui">Settings › Reload shop files</b>, with no restart, and ask <i>How much is the charger with a cable this week?</i> Volt answers that the 20W charger and the 1 m cable are available together for <b>999 rupees</b>. The grey line under it says 756 in.</p>
+      <p><b class="ui">Settings › Show shop sheet</b> opens the plain text Volt receives with every question, all four files one after another, each starting with its file name. Reading it is the quickest way to see why Volt answered what it did.</p>
+    </div>
+    <figure class="cc-shot"><video class="clip" src="img/chapter6/edit.mp4" poster="img/chapter6/edit-poster.jpg" controls muted playsinline preload="none" aria-label="After Reload shop files: How much is the charger with a cable this week? Volt: This week, the 20W charger and the 1m USB-C cable are available together for 999 rupees." width="1200" height="576"></video>
+      <figcaption>A price changed in a file and reloaded, sped up. <a href="https://www.youtube.com/watch?v=4b3roPPjtsU&amp;t=285s" rel="noopener">Watch this step in the video</a>.</figcaption></figure>
+  </section>
+
+  <section id="project" data-rail="Our project so far">
+    <div class="prose">
+      <h2>Our project so far</h2>
+      <p>Two parts are new in this chapter, in orange below:</p>
+      <ul>
+        <li><b>The date line</b>, read from this PC's clock when a call is made.</li>
+        <li><b><code>shop.py</code></b>, which reads <code>prompts/shop/</code> (PDF, HTML, Markdown, text) into one shop sheet for <code>bot.py</code>.</li>
+      </ul>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter6/arch-ep06.svg" alt="Our project after Chapter 6: you, ui.py with its Settings menu (temperature, top P, memory, character, date, shop), bot.py, the key in .env, short-term and long-term memory, the character from prompts/system/, and new in orange: today's date from this PC, and prompts/shop/ (PDF, HTML, .md, .txt) read by shop.py into the shop sheet for bot.py. Gemini 3.1 Flash Lite in Google's cloud." loading="lazy"></figure>
+  </section>
+
+  <section id="quickref" data-rail="Quick reference">
+    <div class="prose"><h2>Quick reference</h2><p>Every command and menu from this chapter. The prompts are above.</p></div>
+    <div class="cheat"><table><tr><th>Command or menu</th><th>What it does</th><th>Use it when</th></tr><tr><td><code>Review and implement prompts/06-date.txt</code></td><td>Adds today's date to every call</td><td>After writing the first prompt</td></tr><tr><td><code>Review and implement prompts/06-shop.txt</code></td><td>Adds shop.py and the shop sheet</td><td>After the second prompt</td></tr><tr><td><code>python ui.py</code></td><td>Opens the window</td><td>To ask about the shop</td></tr><tr><td><b class="ui">Settings › Today's date</b></td><td>Sends the date line, or not</td><td>To compare with and without</td></tr><tr><td><b class="ui">Settings › Shop files</b></td><td>Sends the shop sheet, or not</td><td>To see the token cost</td></tr><tr><td><b class="ui">Settings › Reload shop files</b></td><td>Reads the files again</td><td>After you change a file</td></tr><tr><td><b class="ui">Settings › Show shop sheet</b></td><td>Shows the text Volt receives</td><td>To check what Volt knows</td></tr></table></div>
+  </section>
+
+  <section id="takeaway" data-rail="The takeaway">
+    <div class="prose">
+      <h2>The takeaway</h2>
+      <ol>
+        <li>A model knows nothing you do not send: today's date and your own prices have to travel with the call.</li>
+        <li>Context stuffing means sending the whole shop sheet with every question, as text the model can read, whatever the original format.</li>
+        <li>It costs tokens on every call, so it suits small files; larger ones need sending only the parts a question needs.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="homework" data-rail="Your homework">
+    <div class="next">
+      <div class="lbl">Your homework</div>
+      <h3>Your own shop's files</h3>
+      <p style="font-size:var(--fs-cap);color:var(--slate)"><b>The goal:</b> see Volt answer from files you wrote, and refuse to guess beyond them.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>The steps:</b> run both prompts through the agent in your own copy of the project. Put your own shop's files in <code>prompts/shop/</code> in place of ours: a price list, an offer, a few common questions. Choose <b class="ui">Settings › Reload shop files</b>, then ask about one product that is in your files and one that is not.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>Guess first:</b> will it invent a price for the missing one?</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:10px"><i>One question for you: which file would you give your own bot first?</i></p>
+    </div>
+  </section>
+
+  <section id="next" data-rail="Next">
+    <div class="prose">
+      <h2>Next: the price as a number</h2>
+      <p>The question: a 20W charger and two 1 m cables, together. Volt's answer is correct, 999 for the bundle plus 299 for the second cable, 1,298 rupees.</p>
+      <p>The trouble is where that 1,298 lives: in the middle of a sentence written for a person. Code that wants to</p>
+      <ul>
+        <li>show a running total in the window, or</li>
+        <li>compare Volt's price with the price list</li>
+      </ul>
+      <p>has no dependable way to find the number. <b>Chapter 7:</b> Volt replies in a fixed shape, the product and its price as a plain number, that code can read directly.</p>
+    </div>
+    <figure class="cc-shot"><video class="clip" src="img/chapter6/next.mp4" poster="img/chapter6/next-poster.jpg" controls muted playsinline preload="none" aria-label="What do a 20W charger and two 1 m cables cost together? Volt: The 20W charger and one cable are 999 rupees as a bundle, and an additional 1m USB-C cable costs 299 rupees, bringing the total to 1,298 rupees." width="1200" height="576"></video>
+      <figcaption>The right sum, inside a sentence, sped up. <a href="https://www.youtube.com/watch?v=4b3roPPjtsU&amp;t=364s" rel="noopener">Watch this step in the video</a>.</figcaption></figure>
+  </section>
+
+  <section class="lwa-refs" id="refs"><div class="prose"><h2>References</h2><p>Where each number on this page comes from. Everything was also checked in our own recording on 20 Nov 2026.</p></div><ol>
+    <li><b>Google</b> · <i>Text generation: system instructions</i> <span class="why">A system instruction steers the model for the whole request, separate from the conversation.</span> <a href="https://ai.google.dev/gemini-api/docs/text-generation" rel="noopener">https://ai.google.dev/gemini-api/docs/text-generation</a></li>
+    <li><b>Google</b> · <i>Google AI Studio</i> <span class="why">Attaching a file to a prompt and its token count.</span> <a href="https://aistudio.google.com" rel="noopener">https://aistudio.google.com</a></li>
+    <li><b>pypdf</b> · <i>Extract text from a PDF</i> <span class="why">The library shop.py uses for the PDF.</span> <a href="https://pypdf.readthedocs.io/en/stable/user/extract-text.html" rel="noopener">https://pypdf.readthedocs.io/en/stable/user/extract-text.html</a></li>
+    <li><b>Beautiful Soup</b> · <i>Documentation</i> <span class="why">The library shop.py uses to take the visible text of the web page.</span> <a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/" rel="noopener">https://www.crummy.com/software/BeautifulSoup/bs4/doc/</a></li>
+    <li><b>Learn AI by Building</b> · <i>chatbot-from-scratch on GitHub</i> <span class="why">This chapter's finished code and prompts.</span> <a href="https://github.com/Aditya-402/chatbot-from-scratch" rel="noopener">https://github.com/Aditya-402/chatbot-from-scratch</a></li>
+    <li><b>My own recording</b> · <i>20 Nov 2026, Windows 11</i> <span class="why">Every answer and token count on this page is from those takes, on Gemini 3.1 Flash Lite.</span></li>
+  </ol></section>
+<section class="keep" aria-label="Follow along"><p class="follow">New chapters and episodes come out every week. Follow along on <a href="https://www.youtube.com/@learn-ai-by-building" rel="noopener">YouTube</a> or the <a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp channel</a>. Questions? Ask under the video on YouTube; I read every comment.</p></section>
+  <div class="lwa-chapnav"><a href="chapter5.html"><span class="k">← Chapter 5</span><span class="t">A character</span></a><button type="button" class="lwa-complete" data-lwa-complete><span class="k">Progress</span><span class="t">Mark this chapter complete</span></button><a href="index.html"><span class="k">Series</span><span class="t">All chapters</span></a></div>
+  </main>
+</div>
+<footer class="nav2-foot"><div class="fi">
+  <a href="../../index.html"><img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building — home"></a>
+  <nav aria-label="Footer"><a href="../../index.html">Home</a><a href="../../series/index.html">Series</a><a href="../../blog/index.html">Blog</a><a href="../../connect.html">Connect</a><a href="https://www.youtube.com/@learn-ai-by-building" rel="noopener">YouTube</a><a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp</a><a href="../../privacy.html">Privacy</a></nav>
+  <span class="by">Learn AI by Building · by Adi (Aditya)</span>
+</div></footer>
+<script>
+// a Copy button for every command and prompt (as on the Claude Code prompt sheet)
+document.querySelectorAll('.pr-copy').forEach(function (b) {
+  b.addEventListener('click', function () {
+    var t = document.getElementById(b.dataset.for).textContent;
+    (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () {
+      b.textContent = 'Copied'; setTimeout(function () { b.textContent = 'Copy'; }, 1500);
+    }, function () { b.textContent = 'Select and copy'; });
+  });
+});
+</script>
+<script>
+// each clip plays once when most of it is on screen, never when the reader asks for reduced motion (WE-141)
+(function () {
+  if (!('IntersectionObserver' in window) || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+  document.querySelectorAll('video.clip').forEach(function (v) {
+    var o = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { o.disconnect(); v.play().catch(function () {}); } });
+    }, { threshold: 0.6 });
+    o.observe(v);
+  });
+})();
+</script>
+<script src="../../assets/site-config.js"></script>
+<script src="../../assets/analytics.js?v=1" defer></script>
+<script src="../../assets/progress.js?v=3"></script>
+<script src="../../assets/railspy.js?v=1"></script>
+</body>
+</html>
