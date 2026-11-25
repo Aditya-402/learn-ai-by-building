@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="canonical" href="https://learnwithadi.com/series/chatbots/chapter8.html">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 8 · the first tool — Learn AI by Building</title>
+<meta name="description" content="Chapter 8 of Chatbot from Scratch: how a chatbot looks things up in your own data. Context stuffing a 500-phone price list costs about 128,000 tokens for three questions and still gets one wrong; one tool, find_phone, run by our own code on an Excel workbook, makes the same questions about 14 times cheaper, and right.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=8">
+<link rel="stylesheet" href="../../assets/unit.css?v=8">
+<link rel="stylesheet" href="../../assets/blog.css?v=8">
+<!-- the series-chapter parts (.cc-shot, .cc-wall, .pr copy blocks, the quick reference on a phone) are shared with the Claude Code chapters -->
+<link rel="stylesheet" href="../claude-code/cc.css?v=4">
+<link rel="stylesheet" href="../../assets/nav.css?v=1">
+</head>
+<body data-lwa-course="chatbots" data-lwa-chapter="chapter8" data-lwa-title="Chapter 8 · the first tool" data-lwa-taught="what context stuffing costs in tokens and rupees; function calling: the model asks for a tool and waits; a tool call in 4 steps; find_phone joins 3 sheets of a workbook by Product ID; our own code runs the call and sends the rows back (no automatic calling); a tool line and a Phone lookup tick in the window; the regression test grows to 7 checks; why a lookup by name cannot find the cheapest">
+<header class="top nav2"><div class="top-in">
+  <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark-maroon.svg?v=1" alt="Learn AI by Building — home"></a>
+  <nav class="nav2-links" aria-label="Main"><a href="../../index.html">Home</a><a href="../../series/index.html" aria-current="page">Series</a><a href="../../blog/index.html">Blog</a><a href="../../connect.html">Connect</a></nav>
+  <span class="nav2-auth" data-lwa-auth></span>
+  <details class="nav2-menu"><summary>Menu</summary><div class="m"><a href="../../index.html">Home</a><a href="../../series/index.html">Series</a><a href="../../blog/index.html">Blog</a><a href="../../connect.html">Connect</a><a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp channel</a><span class="nav2-auth-m" data-lwa-auth></span></div></details>
+</div></header>
+<header class="masthead">
+  <div class="masthead-in">
+    <div class="title-block">
+      <div class="eyebrow">Chatbot from Scratch · Chapter 8</div>
+      <h1>The first tool</h1>
+      <p class="standfirst">Our shop now sells 500 phones, and with context stuffing every question carries the whole price list. This chapter measures what that costs, then gives Volt its first tool: a function that looks up only the phone a question needs, run by our own code on an Excel workbook.</p>
+      <div class="facts"><div><b>One sitting</b>~10 min read, ~45 min to build along (the agent works for about fifteen of them)</div><div><b>You need</b>the project from Chapter 7, the price list workbook from this chapter's code, Antigravity, your own key in .env</div><div><b>You build</b>tools.py with find_phone, the tool in bot.py, a tool line and a Phone lookup tick in the window, two more checks</div><div><b>Chapter 8</b>after <a href="chapter7.html">Chapter 7 · answers our code can use</a></div></div>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="rail" aria-label="Sections">
+    <a class="rnav-back" href="index.html"><span class="ico">←</span><span class="lbl">All chapters</span></a>
+    <div class="rail-h">Contents</div>
+    <a class="on" href="#cost">What stuffing costs</a>
+    <a href="#studio">Function calling in AI Studio</a>
+    <a href="#steps">A tool call in 4 steps</a>
+    <a href="#workbook">The price list, as a workbook</a>
+    <a href="#prompt">The tool prompt</a>
+    <a href="#changed">What the agent wrote</a>
+    <a href="#live">The tool, live</a>
+    <a href="#compare">Before and after</a>
+    <a href="#check">The regression test grows</a>
+    <a href="#project">Our project so far</a>
+    <a href="#quickref">Quick reference</a>
+    <a href="#takeaway">The takeaway</a>
+    <a href="#homework">Your homework</a>
+  </nav>
+
+  <main>
+  <section id="video">
+    <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/Y7UHCBzAodo?rel=0" title="Episode 8 · How does my chatbot look things up in my own data?"
+      allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+    <p class="video-cap">Prefer to watch? This chapter goes with Episode 8 (8:08). <a href="https://www.youtube.com/watch?v=Y7UHCBzAodo" rel="noopener">Open it on YouTube</a>.</p>
+    <p class="yt-sub"><a href="https://www.youtube.com/@learn-ai-by-building?sub_confirmation=1" rel="noopener">Subscribe on YouTube</a></p>
+  </section>
+
+  <section id="cost" data-rail="What stuffing costs">
+    <div class="prereq">
+      <div class="pq"><b>Goes with Episode 8</b><a href="https://www.youtube.com/watch?v=Y7UHCBzAodo" target="_blank" rel="noopener">"How does my chatbot look things up in my own data?"</a>. Watch it just above, or build along here at your own pace.</div>
+      <div class="pq"><b>Before you start</b>The project from <a href="chapter7.html">Chapter 7</a>, with its <code>.venv</code>. Antigravity, signed in: <a href="../../blog/install-antigravity-on-windows/">install Antigravity on Windows</a>. Your own Gemini key in <code>.env</code>. And the price list workbook, <code>data/phones.xlsx</code>, from this chapter's code.</div>
+      <div class="pq"><b>The code, ready to run</b><a href="https://github.com/Aditya-402/chatbot-from-scratch/releases/download/episode-08/chatbot-from-scratch-episode-08.zip" rel="noopener">Download this chapter's code (zip)</a>. Every chapter's code is on <a href="https://github.com/Aditya-402/chatbot-from-scratch" rel="noopener">GitHub</a>. Add your own <code>.env</code> with <code>GEMINI_API_KEY</code>; the README shows the setup.</div>
+    </div>
+    <div class="prose">
+      <h2>What stuffing costs</h2>
+      <p>Chapter 7 ended with a bigger price list: 500 phones in <code>prompts/shop/phones.txt</code>. Context stuffing sends every shop file with every question, so our shop files alone came to 42,285 tokens.</p>
+      <p>Before changing anything, measure it. Start the window and ask three phone questions in one chat:</p>
+    </div>
+    <div class="cheat"><table><tr><th>Question</th><th>Volt's answer</th><th>Tokens in</th></tr>
+      <tr><td>How much is the Galaxy S25 with 12GB / 256GB?</td><td>69,999 rupees: right</td><td>42,601</td></tr>
+      <tr><td>Is the Galaxy S25 with 512GB in stock?</td><td>"Yes, in stock": <b>wrong</b>, the price list says out of stock until 1 December</td><td>42,653</td></tr>
+      <tr><td>Do you have the Pixel 9?</td><td>Not sure, will check with the shop</td><td>42,705</td></tr>
+      <tr><td><b>One short chat</b></td><td></td><td><b>127,959</b> (about 128,000)</td></tr></table></div>
+    <div class="prose">
+      <p>The token counter in the window shows 128,230: that adds the 271 tokens of Volt's three answers. In money:</p>
+      <ul>
+        <li><b>One chat:</b> 127,959 tokens in × $0.25 per million = about $0.032, about ₹2.7.</li>
+        <li><b>A thousand chats a day:</b> about ₹2,700 a day, though each answer needed only one row of the price list.</li>
+      </ul>
+      <p><small>Price: Gemini 3.1 Flash Lite input tokens, as listed in Google AI Studio on 25 Nov 2026; ₹85 to the dollar. Prices change: check the current one before you plan.</small></p>
+    </div>
+    <figure class="cc-shot"><video class="clip" src="img/chapter8/before.mp4" poster="img/chapter8/before-poster.jpg" controls muted playsinline preload="none" aria-label="The window with phones.txt in the shop files: status Shop 5 files, 42285 tokens. Three questions: the Galaxy S25 12GB / 256GB, 69,999 rupees, 42601 in; the 512GB one, a wrong yes, in stock, 42653 in; the Pixel 9, not sure, 42705 in; the counter at 128,230 tokens." width="1200" height="576"></video>
+      <figcaption>Three questions, with the price list stuffed in, sped up. <a href="https://www.youtube.com/watch?v=Y7UHCBzAodo&amp;t=80s" rel="noopener">Watch this step in the video</a>.</figcaption></figure>
+  </section>
+
+  <section id="studio" data-rail="Function calling in AI Studio">
+    <div class="prose">
+      <h2>Function calling in AI Studio</h2>
+      <p>Google AI Studio shows the idea first. In Run settings, turn on <b class="ui">Function calling</b> and click <b class="ui">Edit</b>. In the Code Editor, describe one function:</p>
+    </div>
+    <div class="pr"><div class="pr-h"><span>Function declarations (AI Studio)</span></div><pre>[
+  {
+    "name": "find_phone",
+    "description": "Look up a phone's price and stock by its model name.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "model": { "type": "string", "description": "The phone model, for example Galaxy S25" }
+      },
+      "required": ["model"]
+    }
+  }
+]</pre></div>
+    <div class="prose">
+      <p>Ask the same question. Gemini does not answer: it returns a call, <code>find_phone</code> with <code>{"model": "Galaxy S25"}</code>, and waits for a function response. Letting the model ask for your own function like this has a name: <b>function calling</b>, and the function is called a <b>tool</b>.</p>
+      <p>Here you play your code's part by hand: type two rows from the price list as the response (the 12GB / 256GB at 69,999, in stock; the 12GB / 512GB at 77,999, out of stock). Now Gemini answers: 69,999 rupees, in stock.</p>
+    </div>
+    <figure class="cc-shot"><video class="clip" src="img/chapter8/studio.mp4" poster="img/chapter8/studio-poster.jpg" controls muted playsinline preload="none" aria-label="Google AI Studio: Function calling on, the find_phone declaration in the Code Editor; the question; the model returns find_phone with model Galaxy S25 and waits; two rows typed as the function response; the answer, 69,999 rupees and in stock." width="1200" height="576"></video>
+      <figcaption>The model asks, and waits, sped up. <a href="https://www.youtube.com/watch?v=Y7UHCBzAodo&amp;t=155s" rel="noopener">Watch this step in the video</a>.</figcaption></figure>
+  </section>
+
+  <section id="steps" data-rail="A tool call in 4 steps">
+    <div class="prose">
+      <h2>A tool call in 4 steps</h2>
+      <ol>
+        <li>Gemini asks for the tool, with its input: <code>find_phone("Galaxy S25")</code>.</li>
+        <li>Our code runs it, on our own file.</li>
+        <li>The rows go back to Gemini.</li>
+        <li>Gemini answers from them.</li>
+      </ol>
+      <p>The model never runs anything. Our code does.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter8/tool-flow.svg" alt="How a tool call works: 1, Gemini asks for the tool, find_phone Galaxy S25; 2, our code runs it, reading data/phones.xlsx; 3, the rows go back: model, price, stock; 4, Gemini answers from them: 69,999 rupees, in stock. The model never runs anything: our code does." loading="lazy"></figure>
+  </section>
+
+  <section id="workbook" data-rail="The price list, as a workbook">
+    <div class="prose">
+      <h2>The price list, as a workbook</h2>
+      <p>Delete <code>prompts/shop/phones.txt</code>, so the shop files are small again. The price list moves to a workbook, <code>data/phones.xlsx</code>, with three sheets linked by a Product ID:</p>
+      <ul>
+        <li><b>Product Information:</b> brand, model, variant, segment;</li>
+        <li><b>Product Pricing:</b> MRP, selling price, discount, offer;</li>
+        <li><b>Product Availability:</b> stock, status, delivery days, restock date.</li>
+      </ul>
+      <p>Real model names, invented prices: it is a practice shop.</p>
+    </div>
+  </section>
+
+  <section id="prompt" data-rail="The tool prompt">
+    <div class="prose">
+      <h2>The tool prompt</h2>
+      <p>Make a new file, <code>prompts/08-tool.txt</code>. One line matters most: our own code runs the call, not the SDK, so you can see every step.</p>
+    </div>
+    <div class="pr"><div class="pr-h"><span>prompts/08-tool.txt</span><button type="button" class="pr-copy" data-for="p1">Copy</button></div><pre id="p1">Task : Give Volt its first tool, find_phone: Volt asks for it, and our own code runs it on the phone workbook and sends the result back
+
+Context :
+- Use the virtual environment .venv in this folder. Don't create a new one.
+- Today the 500 phones are not in the shop files any more. They live in data/phones.xlsx, in 3 sheets joined by Product ID: Product Information, Product Pricing, Product Availability.
+- Write a new file, tools.py, with one function: find_phone(model). It finds every row whose model name contains the words asked, joins the 3 sheets by Product ID, and returns a short list: model, variant, selling price in rupees, status, delivery days. At most 10 rows. Use openpyxl and add it to requirements.txt.
+- In bot.py, tell Gemini about find_phone as a tool, with a one-line description: look up a phone's price and stock by its model name.
+- Don't let the SDK run the tool by itself. When Gemini asks for find_phone, our code runs it, sends the rows back as the function response, and asks Gemini again for the answer.
+- When find_phone returns no rows, Volt says we don't sell that phone. Volt never invents a phone price.
+- Keep structured answers working: the reply plus items with plain-number prices.
+- In the window, under a reply that used the tool, add one grey line like the token line, for example: Tool: find_phone("Galaxy S25") -&gt; 3 rows.
+- Add Settings &gt; Phone lookup: a tick I can select or unselect. It starts selected. Unselected, Volt has no tool.
+- Count the tool's tokens in the tokens in, as before.
+- Keep the date, the shop sheet, the character, the memory, the settings and everything else as it is.
+- Don't write test files; I will try it myself.
+
+Folder arch :
+- ui.py : the window (frontend)
+- bot.py : the chatbot (backend), now with a tool
+- tools.py : find_phone, reads data/phones.xlsx
+- shop.py : reads the shop files into plain text
+- check.py : our regression test
+- data/phones.xlsx : the 500 phones, 3 sheets
+- prompts/ : our prompts
+- prompts/shop/ : our shop files</pre>
+      <p class="pr-why">"Don't let the SDK run the tool by itself" keeps the 4 steps in our code, where we can see them.</p></div>
+    <div class="pr"><div class="pr-h"><span>Type into the agent panel</span><button type="button" class="pr-copy" data-for="p2">Copy</button></div><pre id="p2">Review and implement prompts/08-tool.txt</pre>
+      <p class="pr-why">When it is done, the agent has changed 4 files: the new <code>tools.py</code>, <code>bot.py</code>, <code>ui.py</code> and <code>requirements.txt</code>. It also ran our regression test to check its own work. Click Accept all.</p></div>
+    <div class="prose">
+      <p><b>A note on the model.</b> A new update for Antigravity became available while we recorded, so we moved the agent to the Gemini 4 Hydrogen model, with thinking effort chosen as Medium. Pick the model your Antigravity offers.</p>
+    </div>
+  </section>
+
+  <section id="changed" data-rail="What the agent wrote">
+    <div class="prose">
+      <h2>What the agent wrote</h2>
+      <ul>
+        <li><b><code>tools.py</code>:</b> <code>find_phone(model)</code> takes the words of the model name, reads the three sheets, joins them by Product ID, and returns at most 10 short rows: model, variant, selling price, status, delivery days.</li>
+        <li><b><code>bot.py</code>:</b> the tool is described to Gemini, with its one input, the model. When Gemini answers with a call, our own code runs <code>find_phone</code> and sends the rows back with <code>Part.from_function_response</code>, then asks Gemini again.</li>
+        <li><b><code>ui.py</code>:</b> a grey line under each reply that used the tool, and a <b class="ui">Settings › Phone lookup</b> tick.</li>
+      </ul>
+    </div>
+    <figure class="cc-shot"><video class="clip" src="img/chapter8/changes.mp4" poster="img/chapter8/changes-poster.jpg" controls muted playsinline preload="none" aria-label="tools.py: def find_phone and the three sheets read by Product ID; bot.py: FIND_PHONE_TOOL with its FunctionDeclaration, then the loop where our code runs find_phone and sends the rows back; ui.py: the grey tool line." width="1200" height="576"></video>
+      <figcaption>What changed in tools.py, bot.py and ui.py, sped up. <a href="https://www.youtube.com/watch?v=Y7UHCBzAodo&amp;t=279s" rel="noopener">Watch this step in the video</a>.</figcaption></figure>
+  </section>
+
+  <section id="live" data-rail="The tool, live">
+    <div class="prose">
+      <h2>The tool, live</h2>
+    </div>
+    <div class="pr"><div class="pr-h"><span>Type in the terminal</span><button type="button" class="pr-copy" data-for="p3">Copy</button></div><pre id="p3">python ui.py</pre></div>
+    <div class="prose">
+      <p>The status line now ends with <code>Shop: 4 files, 329 tokens · Phone lookup: on</code>. Ask the same three questions:</p>
+    </div>
+    <div class="cheat"><table><tr><th>Question</th><th>Volt's answer</th><th>The tool line</th><th>Tokens in</th></tr>
+      <tr><td>Galaxy S25, 12GB / 256GB</td><td>69,999 rupees, in stock</td><td><code>find_phone("Galaxy S25 with 12GB / 256GB") -&gt; 0 rows</code>, then <code>find_phone("Galaxy S25") -&gt; 10 rows</code></td><td>3,043</td></tr>
+      <tr><td>The 512GB one in stock?</td><td>Out of stock: right</td><td>0 rows, then 10 rows</td><td>3,199</td></tr>
+      <tr><td>Pixel 9?</td><td>We do not sell it</td><td><code>find_phone("Pixel 9") -&gt; 0 rows</code></td><td>2,694</td></tr></table></div>
+    <div class="prose">
+      <p>The two calls are honest: Volt first asks for the whole question as a name, finds nothing, and tries again with <i>Galaxy S25</i>. With <b class="ui">Phone lookup</b> off, in a new chat, Volt has no tool and can only say it will check with the shop.</p>
+    </div>
+    <figure class="cc-shot"><video class="clip" src="img/chapter8/live.mp4" poster="img/chapter8/live-poster.jpg" controls muted playsinline preload="none" aria-label="The window with Phone lookup on: the Galaxy S25 at 69,999 with two tool calls under the reply, 3043 in; the 512GB one out of stock; the Pixel 9 not sold; Phone lookup off in a new chat: Volt will check with the shop." width="1200" height="576"></video>
+      <figcaption>Three questions, with the tool, sped up. <a href="https://www.youtube.com/watch?v=Y7UHCBzAodo&amp;t=307s" rel="noopener">Watch this step in the video</a>.</figcaption></figure>
+  </section>
+
+  <section id="compare" data-rail="Before and after">
+    <div class="prose">
+      <h2>Before and after</h2>
+    </div>
+    <div class="cheat"><table><tr><th>The same 3 questions</th><th>Tokens in</th><th>About</th><th>Answers</th></tr>
+      <tr><td>Price list stuffed in</td><td>127,959 (≈128,000)</td><td>₹2.7 a chat; ₹2,700 per 1,000 chats a day</td><td>1 wrong</td></tr>
+      <tr><td>With the tool</td><td>8,936</td><td>₹0.19 a chat; ₹190 per 1,000 chats a day</td><td>all 3 right</td></tr></table></div>
+    <div class="prose">
+      <p>About 14 times less, and right. <small>Input tokens at $0.25 per million (Gemini 3.1 Flash Lite, AI Studio, 25 Nov 2026), ₹85 to the dollar.</small></p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter8/cost-compare.svg" alt="The same 3 questions: price list stuffed in, 127,959 tokens in, about 2.7 rupees, 1 wrong; with the tool, 8,936 tokens in, about 0.19 rupees, all 3 right. About 14 times less, for one short chat." loading="lazy"></figure>
+  </section>
+
+  <section id="check" data-rail="The regression test grows">
+    <div class="prose">
+      <h2>The regression test grows</h2>
+      <p>Add two lines to the answer key at the top of <code>check.py</code>, by hand:</p>
+    </div>
+    <div class="pr"><div class="pr-h"><span>check.py, the two new lines</span></div><pre>    ("How much is the Galaxy S25 with 12GB / 256GB?", 69999),
+    ("How much is the Pixel 9?", 0),</pre></div>
+    <div class="pr"><div class="pr-h"><span>Type in the terminal</span><button type="button" class="pr-copy" data-for="p4">Copy</button></div><pre id="p4">python check.py</pre>
+      <p class="pr-why">The new lines get their answers through the tool: 7 of 7 passed.</p></div>
+  </section>
+
+  <section id="project" data-rail="Our project so far">
+    <div class="prose">
+      <h2>Our project so far</h2>
+      <p>New in this chapter, in orange below: <code>tools.py</code> with <code>find_phone</code>, and the workbook <code>data/phones.xlsx</code>. Our own code runs each call.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter8/arch-ep08.svg" alt="Our project after Chapter 8: everything from Chapter 7, and new in orange: tools.py with find_phone, reading data/phones.xlsx, three sheets and 500 phones joined by Product ID, and sending rows back to bot.py, which runs the call. check.py now has 7 questions; the Settings menu has Phone lookup." loading="lazy"></figure>
+  </section>
+
+  <section id="quickref" data-rail="Quick reference">
+    <div class="prose"><h2>Quick reference</h2><p>Every command and menu from this chapter. The prompt is above.</p></div>
+    <div class="cheat"><table><tr><th>Command or menu</th><th>What it does</th><th>Use it when</th></tr><tr><td><code>Review and implement prompts/08-tool.txt</code></td><td>Adds find_phone, the tool and the tool line</td><td>After writing the prompt</td></tr><tr><td><code>python ui.py</code></td><td>Opens the window</td><td>To ask about phones</td></tr><tr><td><b class="ui">Settings › Phone lookup</b></td><td>Gives Volt the tool, or takes it away</td><td>To compare with and without</td></tr><tr><td><code>python check.py</code></td><td>Runs the regression test</td><td>After every change</td></tr></table></div>
+  </section>
+
+  <section id="takeaway" data-rail="The takeaway">
+    <div class="prose">
+      <h2>The takeaway</h2>
+      <ol>
+        <li>Context stuffing pays for the whole price list on every question, and a big context can still give a wrong answer.</li>
+        <li>With function calling the model only asks for a tool; your own code runs it and sends back just the rows needed.</li>
+        <li>Fewer tokens, and the answers come from your data: about 14 times cheaper here, and all three right.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="homework" data-rail="Your homework">
+    <div class="next">
+      <div class="lbl">Your homework</div>
+      <h3>Count the tokens</h3>
+      <p style="font-size:var(--fs-cap);color:var(--slate)"><b>The goal:</b> see the cost of a tool against stuffing, in your own window.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>The steps:</b> give our prompt to the agent in your own copy of the project. Ask about three phones from <code>data/phones.xlsx</code>, and read the grey line under each answer. Then untick <b class="ui">Settings › Phone lookup</b>, start a new chat, and ask once more.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>Guess first:</b> how many tokens in, with the tool and without?</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:10px"><i>One question for you: if your own bot got one tool, what should it look up?</i></p>
+    </div>
+  </section>
+
+  <section id="next" data-rail="Next">
+    <div class="prose">
+      <h2>Next: our first agent</h2>
+      <p>Try a harder question: <i>Which is the cheapest Samsung phone in stock, and when can it be delivered?</i> <code>find_phone</code> searches only by model name, so Volt has to guess names. After four guesses it settles on the Galaxy S26 at 89,999 rupees. The price list says otherwise: the Galaxy A06 (2GB / 32GB) costs 7,999 rupees, is in stock and arrives in 2 days.</p>
+      <p><b>Why it fails:</b> "cheapest" is not a model name, so no single lookup by name can answer it. In <b>Chapter 9</b>, Volt gets more tools and a loop that plans, uses a tool, checks the result and tries again: our first agent.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter8/agent-next.svg" alt="Cheapest Samsung in stock? Four find_phone calls: Samsung, Samsung Galaxy S26, S26 plus, S26 Ultra. Volt: Galaxy S26, 89,999, wrong. The price list: Galaxy A06, 7,999, in 2 days. A lookup by name cannot find the cheapest. Next: more tools, plus plan, act, check, try again." loading="lazy"></figure>
+    <figure class="cc-shot"><video class="clip" src="img/chapter8/next.mp4" poster="img/chapter8/next-poster.jpg" controls muted playsinline preload="none" aria-label="The window: Which is the cheapest Samsung phone in stock, and when can it be delivered? Four find_phone calls under the reply, and the answer Galaxy S26 at 89,999, which is wrong." width="1200" height="576"></video>
+      <figcaption>Four guesses, one wrong answer, sped up. <a href="https://www.youtube.com/watch?v=Y7UHCBzAodo&amp;t=431s" rel="noopener">Watch this step in the video</a>.</figcaption></figure>
+  </section>
+
+  <section class="lwa-refs" id="refs"><div class="prose"><h2>References</h2><p>Where each number on this page comes from. Everything was also checked in our own recording on 25 Nov 2026.</p></div><ol>
+    <li><b>Google</b> · <i>Function calling with the Gemini API</i> <span class="why">Declaring a function, the model's function call, and sending the function response back.</span> <a href="https://ai.google.dev/gemini-api/docs/function-calling" rel="noopener">https://ai.google.dev/gemini-api/docs/function-calling</a></li>
+    <li><b>Google</b> · <i>Gemini API pricing</i> <span class="why">The input price per million tokens (we used the price AI Studio listed on 25 Nov 2026).</span> <a href="https://ai.google.dev/gemini-api/docs/pricing" rel="noopener">https://ai.google.dev/gemini-api/docs/pricing</a></li>
+    <li><b>Google</b> · <i>Google AI Studio</i> <span class="why">The Function calling switch, its Code Editor and the function response box.</span> <a href="https://aistudio.google.com" rel="noopener">https://aistudio.google.com</a></li>
+    <li><b>openpyxl</b> · <i>Documentation</i> <span class="why">Reading the sheets of an Excel workbook in Python.</span> <a href="https://openpyxl.readthedocs.io/" rel="noopener">https://openpyxl.readthedocs.io/</a></li>
+    <li><b>Learn AI by Building</b> · <i>chatbot-from-scratch on GitHub</i> <span class="why">This chapter's finished code, the prompt and the workbook.</span> <a href="https://github.com/Aditya-402/chatbot-from-scratch" rel="noopener">https://github.com/Aditya-402/chatbot-from-scratch</a></li>
+    <li><b>My own recording</b> · <i>25 Nov 2026, Windows 11</i> <span class="why">Every answer, total and token count on this page is from those takes, on Gemini 3.1 Flash Lite.</span></li>
+  </ol></section>
+<section class="keep" aria-label="Follow along"><p class="follow">New chapters and episodes come out every week. Follow along on <a href="https://www.youtube.com/@learn-ai-by-building" rel="noopener">YouTube</a> or the <a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp channel</a>. Questions? Ask under the video on YouTube; I read every comment.</p></section>
+  <div class="lwa-chapnav"><a href="chapter7.html"><span class="k">← Chapter 7</span><span class="t">Answers our code can use</span></a><button type="button" class="lwa-complete" data-lwa-complete><span class="k">Progress</span><span class="t">Mark this chapter complete</span></button><a href="index.html"><span class="k">Series</span><span class="t">All chapters</span></a></div>
+  </main>
+</div>
+<footer class="nav2-foot"><div class="fi">
+  <a href="../../index.html"><img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building — home"></a>
+  <nav aria-label="Footer"><a href="../../index.html">Home</a><a href="../../series/index.html">Series</a><a href="../../blog/index.html">Blog</a><a href="../../connect.html">Connect</a><a href="https://www.youtube.com/@learn-ai-by-building" rel="noopener">YouTube</a><a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp</a><a href="../../privacy.html">Privacy</a></nav>
+  <span class="by">Learn AI by Building · by Adi (Aditya)</span>
+</div></footer>
+<script>
+// a Copy button for every command and prompt (as on the Claude Code prompt sheet)
+document.querySelectorAll('.pr-copy').forEach(function (b) {
+  b.addEventListener('click', function () {
+    var t = document.getElementById(b.dataset.for).textContent;
+    (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () {
+      b.textContent = 'Copied'; setTimeout(function () { b.textContent = 'Copy'; }, 1500);
+    }, function () { b.textContent = 'Select and copy'; });
+  });
+});
+</script>
+<script>
+// each clip plays once when most of it is on screen, never when the reader asks for reduced motion (WE-141)
+(function () {
+  if (!('IntersectionObserver' in window) || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+  document.querySelectorAll('video.clip').forEach(function (v) {
+    var o = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { o.disconnect(); v.play().catch(function () {}); } });
+    }, { threshold: 0.6 });
+    o.observe(v);
+  });
+})();
+</script>
+<script src="../../assets/site-config.js"></script>
+<script src="../../assets/analytics.js?v=1" defer></script>
+<script src="../../assets/progress.js?v=3"></script>
+<script src="../../assets/railspy.js?v=1"></script>
+</body>
+</html>
