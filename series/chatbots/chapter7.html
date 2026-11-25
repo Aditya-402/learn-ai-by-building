@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="canonical" href="https://learnwithadi.com/series/chatbots/chapter7.html">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 7 · answers our code can use — Learn AI by Building</title>
+<meta name="description" content="Chapter 7 of Chatbot from Scratch: how to get an answer your code can use, not just read. Structured output with two small Pydantic classes gives every price as a plain number; our own code adds the total, and check.py, a regression test, catches a price change.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=8">
+<link rel="stylesheet" href="../../assets/unit.css?v=8">
+<link rel="stylesheet" href="../../assets/blog.css?v=8">
+<!-- the series-chapter parts (.cc-shot, .cc-wall, .pr copy blocks, the quick reference on a phone) are shared with the Claude Code chapters -->
+<link rel="stylesheet" href="../claude-code/cc.css?v=4">
+<link rel="stylesheet" href="../../assets/nav.css?v=1">
+</head>
+<body data-lwa-course="chatbots" data-lwa-chapter="chapter7" data-lwa-title="Chapter 7 · answers our code can use" data-lwa-taught="structured output: the model fills a shape we describe; two small Pydantic classes, Item and Answer, handed to Gemini as response_schema and read back with model_validate_json; prices as plain whole numbers our own code adds up; a Structured answers tick in Settings; a regression test, check.py, with an answer key; what a failing check tells you; why a big catalogue breaks context stuffing">
+<header class="top nav2"><div class="top-in">
+  <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark-maroon.svg?v=1" alt="Learn AI by Building — home"></a>
+  <nav class="nav2-links" aria-label="Main"><a href="../../index.html">Home</a><a href="../../series/index.html" aria-current="page">Series</a><a href="../../blog/index.html">Blog</a><a href="../../connect.html">Connect</a></nav>
+  <span class="nav2-auth" data-lwa-auth></span>
+  <details class="nav2-menu"><summary>Menu</summary><div class="m"><a href="../../index.html">Home</a><a href="../../series/index.html">Series</a><a href="../../blog/index.html">Blog</a><a href="../../connect.html">Connect</a><a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp channel</a><span class="nav2-auth-m" data-lwa-auth></span></div></details>
+</div></header>
+<header class="masthead">
+  <div class="masthead-in">
+    <div class="title-block">
+      <div class="eyebrow">Chatbot from Scratch · Chapter 7</div>
+      <h1>Answers our code can use</h1>
+      <p class="standfirst">Volt now knows our prices, but it writes them inside sentences. A person can read 1,298 rupees; code cannot reliably dig it out. This chapter asks Gemini for answers in a fixed shape, so every price arrives as a plain number, and adds a small test that checks those numbers against an answer key.</p>
+      <div class="facts"><div><b>One sitting</b>~10 min read, ~45 min to build along (the agent works for about twenty of them)</div><div><b>You need</b>the project from Chapter 6, Antigravity, your own key in .env</div><div><b>You build</b>an Answer shape in bot.py, a total line and a Structured answers tick in the window, and check.py</div><div><b>Chapter 7</b>after <a href="chapter6.html">Chapter 6 · our own shop</a></div></div>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="rail" aria-label="Sections">
+    <a class="rnav-back" href="index.html"><span class="ico">←</span><span class="lbl">All chapters</span></a>
+    <div class="rail-h">Contents</div>
+    <a class="on" href="#sentence">A number inside a sentence</a>
+    <a href="#studio">Structured output in AI Studio</a>
+    <a href="#prompt1">The structured prompt</a>
+    <a href="#changed">What the agent wrote</a>
+    <a href="#live">Structured answers, live</a>
+    <a href="#fair">Two fair answers</a>
+    <a href="#prompt2">The regression test prompt</a>
+    <a href="#check">The regression test, live</a>
+    <a href="#project">Our project so far</a>
+    <a href="#quickref">Quick reference</a>
+    <a href="#takeaway">The takeaway</a>
+    <a href="#homework">Your homework</a>
+  </nav>
+
+  <main>
+  <section id="video">
+    <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/YQaPqegz6Ac?rel=0" title="Episode 7 · How do I get an answer my code can use, not just read?"
+      allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+    <p class="video-cap">Prefer to watch? This chapter goes with Episode 7 (7:36). <a href="https://www.youtube.com/watch?v=YQaPqegz6Ac" rel="noopener">Open it on YouTube</a>.</p>
+    <p class="yt-sub"><a href="https://www.youtube.com/@learn-ai-by-building?sub_confirmation=1" rel="noopener">Subscribe on YouTube</a></p>
+  </section>
+
+  <section id="sentence" data-rail="A number inside a sentence">
+    <div class="prereq">
+      <div class="pq"><b>Goes with Episode 7</b><a href="https://www.youtube.com/watch?v=YQaPqegz6Ac" target="_blank" rel="noopener">"How do I get an answer my code can use, not just read?"</a>. Watch it just above, or build along here at your own pace.</div>
+      <div class="pq"><b>Before you start</b>The project from <a href="chapter6.html">Chapter 6</a>, with the shop files in <code>prompts/shop/</code> and its <code>.venv</code>. Antigravity, signed in: <a href="../../blog/install-antigravity-on-windows/">install Antigravity on Windows</a>. And your own Gemini key in <code>.env</code>.</div>
+      <div class="pq"><b>The code, ready to run</b><a href="https://github.com/Aditya-402/chatbot-from-scratch/releases/download/episode-07/chatbot-from-scratch-episode-07.zip" rel="noopener">Download this chapter's code (zip)</a>. Every chapter's code is on <a href="https://github.com/Aditya-402/chatbot-from-scratch" rel="noopener">GitHub</a>. Add your own <code>.env</code> with <code>GEMINI_API_KEY</code>; the README shows the setup.</div>
+    </div>
+    <div class="prose">
+      <h2>A number inside a sentence</h2>
+      <p>Chapter 6 ended with a fair question: what do a 20W charger and two 1 m cables cost together? Volt got it right, 1,298 rupees. But the number sat in the middle of a sentence written for a person.</p>
+      <p>Code cannot reliably add that up, show it as a total, or compare it with the price list. It would have to guess which number in the sentence is the one that matters.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter7/arch-ep06.svg" alt="Our project after Chapter 6: you, ui.py the window with its Settings menu, bot.py, the key in .env, memory, the character, today's date, and shop.py reading prompts/shop/ into the shop sheet. Gemini 3.1 Flash Lite in Google's cloud." loading="lazy"><figcaption>Where Chapter 6 left us.</figcaption></figure>
+  </section>
+
+  <section id="studio" data-rail="Structured output in AI Studio">
+    <div class="prose">
+      <h2>Structured output in AI Studio</h2>
+      <p>Google AI Studio shows the idea first. In Run settings, turn on <b class="ui">Structured outputs</b> and click <b class="ui">Edit</b>. In the Code Editor, describe the answer you want back:</p>
+      <ul>
+        <li><code>reply</code>: the sentence, for people;</li>
+        <li><code>items</code>: a list, each with a <code>product</code>, its <code>price_rupees</code> as a whole number, and a <code>quantity</code>.</li>
+      </ul>
+      <p>Giving the model a shape to fill like this has a name: <b>structured output</b>. Attach <code>products.pdf</code> and <code>offers.html</code>, ask the same question, and the answer comes back as JSON in exactly that shape: the 20W USB-C charger, 899, quantity 1; the 1 m USB-C cable, 299, quantity 2.</p>
+      <p>We used Gemini 3.1 Flash Lite, the same model as our bot. The first model we tried was busy, so we switched.</p>
+    </div>
+    <figure class="cc-shot"><video class="clip" src="img/chapter7/studio.mp4" poster="img/chapter7/studio-poster.jpg" controls muted playsinline preload="none" aria-label="Google AI Studio: Structured outputs on, the schema with reply and items pasted in the Code Editor, two shop files attached; the answer comes back as JSON: 20W USB-C charger, price_rupees 899, quantity 1; USB-C cable 1 m, price_rupees 299, quantity 2." width="1200" height="576"></video>
+      <figcaption>The shape, then the JSON answer, in AI Studio, sped up. <a href="https://www.youtube.com/watch?v=YQaPqegz6Ac&amp;t=81s" rel="noopener">Watch this step in the video</a>.</figcaption></figure>
+    <figure class="cc-shot"><img src="img/chapter7/answer-shape.svg" alt="One answer, two parts: reply, the sentence for people; items, for our code: 20W USB-C charger, 899, quantity 1; USB-C cable 1 m, 299, quantity 2. Our code adds it up: 899 + 2 × 299 = 1,497." loading="lazy"></figure>
+  </section>
+
+  <section id="prompt1" data-rail="The structured prompt">
+    <div class="prose">
+      <h2>The structured prompt</h2>
+      <p>Now bring this to our own code. Make a new file, <code>prompts/07-structured.txt</code>.</p>
+    </div>
+    <div class="pr"><div class="pr-h"><span>prompts/07-structured.txt</span><button type="button" class="pr-copy" data-for="p1">Copy</button></div><pre id="p1">Task : Make Volt's answers something our code can use, not just read (structured output): the reply, plus each product with its price as a plain number
+
+Context :
+- Use the virtual environment .venv in this folder. Don't create a new one.
+- Today Volt's price sits inside a sentence, so our code cannot add it up or check it.
+- In bot.py, describe the answer with two small Pydantic classes. Item: product (text), price_rupees (whole number), quantity (whole number). Answer: reply (text), items (a list of Item).
+- Ask Gemini to answer in exactly that shape (JSON with the Answer schema), and read it back into an Answer.
+- items lists each product the question asks about, with its price from the shop sheet and the quantity asked. When the question has no price in the shop sheet, items is empty.
+- The window shows the reply as before. Under it, when items is not empty, one line our code works out itself: Total (our code): 1,298 rupees (price times quantity, added up).
+- Add Settings &gt; Structured answers: a tick I can select or unselect. It starts selected. Unselected, Volt answers in plain text as before, with no total line.
+- The memory keeps the reply text only.
+- Add pydantic to requirements.txt if it is not there.
+- Keep the date, the shop sheet, the character, the memory, the settings and everything else as it is.
+- Don't write test files; I will try it myself.
+
+Folder arch :
+- ui.py : the window (frontend)
+- bot.py : the chatbot (backend), now with structured answers
+- shop.py : reads the shop files into plain text
+- prompts/ : our prompts
+- prompts/system/ : the system prompts
+- prompts/shop/ : our shop files</pre>
+      <p class="pr-why">"Don't write test files" keeps the change small: we try it ourselves in the window next.</p></div>
+    <div class="pr"><div class="pr-h"><span>Type into the agent panel</span><button type="button" class="pr-copy" data-for="p2">Copy</button></div><pre id="p2">Review and implement prompts/07-structured.txt</pre>
+      <p class="pr-why">When it is done, the agent has changed 3 files: <code>bot.py</code>, <code>ui.py</code> and <code>requirements.txt</code>. Click Accept all. We ran the agent on Gemini 3.8 Flash with Thinking effort Medium (hover the model name to choose it); a small, clear prompt needs no deeper thinking, and the wait is shorter.</p></div>
+  </section>
+
+  <section id="changed" data-rail="What the agent wrote">
+    <div class="prose">
+      <h2>What the agent wrote</h2>
+      <p><b>Pydantic</b> is a Python library for describing data as small classes with typed fields. The agent wrote two of them in <code>bot.py</code>:</p>
+    </div>
+    <div class="pr"><div class="pr-h"><span>bot.py (each field's description left out)</span></div><pre>class Item(BaseModel):
+    product: str
+    price_rupees: int
+    quantity: int
+
+class Answer(BaseModel):
+    reply: str
+    items: list[Item]</pre></div>
+    <div class="prose">
+      <ul>
+        <li><b>The shape goes to Gemini:</b> <code>bot.py</code> sends <code>response_mime_type="application/json"</code> and <code>response_schema=Answer</code> with the call.</li>
+        <li><b>The answer comes back into it:</b> <code>Answer.model_validate_json(...)</code> turns the reply into an <code>Answer</code>, so <code>price_rupees</code> is a real whole number, not text.</li>
+        <li><b>Our code does the sum:</b> in <code>ui.py</code>, price times quantity, added up, shown as <code>Total (our code)</code> under the reply.</li>
+      </ul>
+    </div>
+    <figure class="cc-shot"><video class="clip" src="img/chapter7/changes.mp4" poster="img/chapter7/changes-poster.jpg" controls muted playsinline preload="none" aria-label="In bot.py: class Item and class Answer, then response_schema = Answer, then Answer.model_validate_json; in ui.py: the block that adds up price times quantity for the Total (our code) line." width="1200" height="576"></video>
+      <figcaption>What changed in bot.py and ui.py, sped up. <a href="https://www.youtube.com/watch?v=YQaPqegz6Ac&amp;t=181s" rel="noopener">Watch this step in the video</a>.</figcaption></figure>
+  </section>
+
+  <section id="live" data-rail="Structured answers, live">
+    <div class="prose">
+      <h2>Structured answers, live</h2>
+    </div>
+    <div class="pr"><div class="pr-h"><span>Type in the terminal</span><button type="button" class="pr-copy" data-for="p3">Copy</button></div><pre id="p3">python ui.py</pre></div>
+    <div class="prose">
+      <p>Maximise the window and ask <i>What do a 20W charger and two 1 m USB-C cables cost together?</i> Then untick <b class="ui">Settings › Structured answers</b> and ask again.</p>
+    </div>
+    <div class="cheat"><table><tr><th>Structured answers</th><th>What the window shows</th><th>Tokens in</th></tr>
+      <tr><td>On</td><td>The reply, and under it <b>Total (our code): 1,497 rupees</b></td><td>645</td></tr>
+      <tr><td>Off</td><td>One sentence with two totals in it: 1,497 from single prices, and 1,298 with this week's offer; no total line</td><td>674</td></tr></table></div>
+    <figure class="cc-shot"><video class="clip" src="img/chapter7/live.mp4" poster="img/chapter7/live-poster.jpg" controls muted playsinline preload="none" aria-label="The window: the question; under the reply, Total (our code): 1,497 rupees. Structured answers unticked: the same question gives a plain sentence with two totals, 1,497 and 1,298 with the offer, and no total line." width="1200" height="576"></video>
+      <figcaption>Structured answers on, then off, sped up. <a href="https://www.youtube.com/watch?v=YQaPqegz6Ac&amp;t=213s" rel="noopener">Watch this step in the video</a>.</figcaption></figure>
+  </section>
+
+  <section id="fair" data-rail="Two fair answers">
+    <div class="prose">
+      <h2>Two fair answers</h2>
+      <p>Both totals are right:</p>
+      <ul>
+        <li><b>Single prices:</b> 899 + 299 + 299 = 1,497.</li>
+        <li><b>This week's offer:</b> the charger with one cable for 999, plus a second cable at 299 = 1,298.</li>
+      </ul>
+      <p>In one sentence, code cannot know which number to take. With structured output it gets the items, and adds them up itself.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter7/two-answers.svg" alt="Two fair answers: single prices, 899 + 299 + 299 = 1,497; this week's offer, 999 + 299 = 1,298. In one sentence, which number should our code take?" loading="lazy"></figure>
+  </section>
+
+  <section id="prompt2" data-rail="The regression test prompt">
+    <div class="prose">
+      <h2>The regression test prompt</h2>
+      <p>Now that prices are plain numbers, code can check them. Make another file, <code>prompts/07-check.txt</code>: five fixed questions about different products, each with the total we expect, written down like an answer key.</p>
+    </div>
+    <div class="pr"><div class="pr-h"><span>prompts/07-check.txt</span><button type="button" class="pr-copy" data-for="p4">Copy</button></div><pre id="p4">Task : Write check.py, a five-question check: it asks Volt fixed questions and compares each total with the answer we wrote down
+
+Context :
+- Use the virtual environment .venv in this folder. Don't create a new one.
+- I run it in the terminal with: python check.py
+- At the top of check.py, a list of 5 checks, each a question and the total we expect in rupees. These are our answers, written down:
+- How much is the 20W charger? 899
+- How much is the charger with a cable this week? 999
+- How much are two 2 m USB-C cables? 898
+- How much are wireless earbuds and a phone stand together? 2848
+- How much is a smart watch? 0 (we don't sell it, so no items)
+- For each check, start a new chat and ask through bot.py with structured answers, today's date and the shop files on.
+- Our code works out Volt's total from the items: price times quantity, added up.
+- Print one line per check: its number, the question, Volt's total, the expected total, and PASS or FAIL, in columns.
+- Last line: 5 of 5 passed (or how many passed).
+- Don't change ui.py. Change bot.py only if check.py needs it to ask without the window.
+- Don't write test files; I will try it myself.
+
+Folder arch :
+- ui.py : the window (frontend)
+- bot.py : the chatbot (backend)
+- shop.py : reads the shop files into plain text
+- check.py : the five-question check
+- prompts/ : our prompts
+- prompts/shop/ : our shop files</pre></div>
+    <div class="pr"><div class="pr-h"><span>Type into the agent panel</span><button type="button" class="pr-copy" data-for="p5">Copy</button></div><pre id="p5">Review and implement prompts/07-check.txt</pre>
+      <p class="pr-why">The agent may ask to try the five questions itself. We said no: we run it ourselves. It writes one new file, <code>check.py</code>.</p></div>
+  </section>
+
+  <section id="check" data-rail="The regression test, live">
+    <div class="prose">
+      <h2>The regression test, live</h2>
+      <p>Asking the same fixed questions after every change, to catch what broke, has a name: a <b>regression test</b>.</p>
+    </div>
+    <div class="pr"><div class="pr-h"><span>Type in the terminal</span><button type="button" class="pr-copy" data-for="p6">Copy</button></div><pre id="p6">python check.py</pre></div>
+    <div class="cheat"><table><tr><th>Run</th><th>What happened</th><th>Result</th></tr>
+      <tr><td>First</td><td>Every total matches the answer key: 899, 999, 898, 2848, 0</td><td>5 of 5 passed</td></tr>
+      <tr><td>Second</td><td>In <code>prompts/shop/offers.html</code> the charger with a cable goes from 999 to 949, saved. Line 2: Volt says 949, the key says 999</td><td>FAIL, 4 of 5 passed</td></tr>
+      <tr><td>Third</td><td>The shop is right, so the key in <code>check.py</code> becomes 949</td><td>5 of 5 passed</td></tr></table></div>
+    <div class="prose">
+      <p>A failing line does not say who is wrong; it says something changed. You decide which is right, the shop or your answer key, and fix that one.</p>
+      <p><code>check.py</code> itself is short: the answer key at the top, a list of questions and totals; then, for each question, a new chat, Volt's items added up, and the total compared with the key.</p>
+    </div>
+    <figure class="cc-shot"><video class="clip" src="img/chapter7/check.mp4" poster="img/chapter7/check-poster.jpg" controls muted playsinline preload="none" aria-label="Terminal: python check.py, five PASS lines, 5 of 5 passed; offers.html changed from 999 to 949; line 2 shows 949 against 999, FAIL, 4 of 5 passed; the answer key changed to 949; 5 of 5 passed." width="1200" height="576"></video>
+      <figcaption>Pass, fail, fixed, sped up. <a href="https://www.youtube.com/watch?v=YQaPqegz6Ac&amp;t=293s" rel="noopener">Watch this step in the video</a>.</figcaption></figure>
+  </section>
+
+  <section id="project" data-rail="Our project so far">
+    <div class="prose">
+      <h2>Our project so far</h2>
+      <p>Two parts are new in this chapter, in orange below:</p>
+      <ul>
+        <li><b>The Answer shape</b> (Pydantic) in <code>bot.py</code>: a reply plus items, each price a whole number.</li>
+        <li><b><code>check.py</code></b>, our regression test: five questions against an answer key.</li>
+      </ul>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter7/arch-ep07.svg" alt="Our project after Chapter 7: everything from Chapter 6, and new in orange: the Answer shape, reply plus items, in Pydantic, used by bot.py; and check.py, a regression test with 5 questions and an answer key, which asks bot.py and adds up the total. The Settings menu now has Structured answers." loading="lazy"></figure>
+  </section>
+
+  <section id="quickref" data-rail="Quick reference">
+    <div class="prose"><h2>Quick reference</h2><p>Every command and menu from this chapter. The prompts are above.</p></div>
+    <div class="cheat"><table><tr><th>Command or menu</th><th>What it does</th><th>Use it when</th></tr><tr><td><code>Review and implement prompts/07-structured.txt</code></td><td>Adds the Answer shape and the total line</td><td>After writing the first prompt</td></tr><tr><td><code>Review and implement prompts/07-check.txt</code></td><td>Writes check.py</td><td>After the second prompt</td></tr><tr><td><code>python ui.py</code></td><td>Opens the window</td><td>To see the total line</td></tr><tr><td><b class="ui">Settings › Structured answers</b></td><td>Asks for the shape, or plain text</td><td>To compare the two</td></tr><tr><td><code>python check.py</code></td><td>Runs the regression test</td><td>After every change to the shop or the code</td></tr></table></div>
+  </section>
+
+  <section id="takeaway" data-rail="The takeaway">
+    <div class="prose">
+      <h2>The takeaway</h2>
+      <ol>
+        <li>Structured output: give the model a shape and it fills it, so prices arrive as numbers your code can use.</li>
+        <li>Pydantic describes that shape in Python, hands it to Gemini, and reads the answer back into it.</li>
+        <li>A regression test asks the same questions after every change; a failure tells you something changed, and you decide what is right.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="homework" data-rail="Your homework">
+    <div class="next">
+      <div class="lbl">Your homework</div>
+      <h3>Your own check</h3>
+      <p style="font-size:var(--fs-cap);color:var(--slate)"><b>The goal:</b> watch your own regression test catch a change.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>The steps:</b> run both prompts through the agent in your own copy of the project. Add one question of your own to the <code>CHECKS</code> list at the top of <code>check.py</code>, with the total you expect, and run <code>python check.py</code>. Then change one price in <code>prompts/shop/</code> and run it again.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>Guess first:</b> which line will fail?</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:10px"><i>One question for you: what would you check first in your own bot?</i></p>
+    </div>
+  </section>
+
+  <section id="next" data-rail="Next">
+    <div class="prose">
+      <h2>Next: a real shop's data</h2>
+      <p>Our shop gets another price list: 500 mobile phones, in three tables (product information, pricing, availability) linked by a Product ID.</p>
+      <div class="cheat"><table><tr><th></th><th>Shop sheet</th><th>One question sends</th></tr>
+        <tr><td>4 shop files</td><td>329 tokens</td><td>645 tokens in</td></tr>
+        <tr><td>+ 500 phones</td><td>42,285 tokens</td><td>42,601 tokens in</td></tr></table></div>
+      <p>The answer is still right (the Galaxy S25 with 12 GB and 256 GB, 69,999 rupees), but every question pays for all 500 phones. <b>Chapter 8:</b> the phones go into an Excel sheet, and Volt uses a tool to fetch only the rows a question needs.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter7/linked-sheets.svg" alt="A real shop: linked tables. Product information (brand, model, variant), product pricing (MRP, selling price, offer) and product availability (stock, status, delivery), joined by a Product ID; 500 rows in each." loading="lazy"></figure>
+    <figure class="cc-shot"><video class="clip" src="img/chapter7/next.mp4" poster="img/chapter7/next-poster.jpg" controls muted playsinline preload="none" aria-label="phones.txt copied into prompts/shop; the status line shows Shop: 5 files, 42285 tokens; How much is the Galaxy S25 with 12GB / 256GB? 69,999 rupees, Total (our code) 69,999, 42601 in." width="1200" height="576"></video>
+      <figcaption>500 phones in every question, sped up. <a href="https://www.youtube.com/watch?v=YQaPqegz6Ac&amp;t=402s" rel="noopener">Watch this step in the video</a>.</figcaption></figure>
+  </section>
+
+  <section class="lwa-refs" id="refs"><div class="prose"><h2>References</h2><p>Where each number on this page comes from. Everything was also checked in our own recording on 24 Nov 2026.</p></div><ol>
+    <li><b>Google</b> · <i>Structured output</i> <span class="why">Asking Gemini for JSON in a given schema, including a Pydantic class as the schema.</span> <a href="https://ai.google.dev/gemini-api/docs/structured-output" rel="noopener">https://ai.google.dev/gemini-api/docs/structured-output</a></li>
+    <li><b>Pydantic</b> · <i>Models</i> <span class="why">Classes with typed fields, and model_validate_json to read JSON into one.</span> <a href="https://docs.pydantic.dev/latest/concepts/models/" rel="noopener">https://docs.pydantic.dev/latest/concepts/models/</a></li>
+    <li><b>Google</b> · <i>Google AI Studio</i> <span class="why">The Structured outputs switch and its Code Editor.</span> <a href="https://aistudio.google.com" rel="noopener">https://aistudio.google.com</a></li>
+    <li><b>Learn AI by Building</b> · <i>chatbot-from-scratch on GitHub</i> <span class="why">This chapter's finished code and prompts.</span> <a href="https://github.com/Aditya-402/chatbot-from-scratch" rel="noopener">https://github.com/Aditya-402/chatbot-from-scratch</a></li>
+    <li><b>My own recording</b> · <i>24 Nov 2026, Windows 11</i> <span class="why">Every answer, total and token count on this page is from those takes, on Gemini 3.1 Flash Lite.</span></li>
+  </ol></section>
+<section class="keep" aria-label="Follow along"><p class="follow">New chapters and episodes come out every week. Follow along on <a href="https://www.youtube.com/@learn-ai-by-building" rel="noopener">YouTube</a> or the <a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp channel</a>. Questions? Ask under the video on YouTube; I read every comment.</p></section>
+  <div class="lwa-chapnav"><a href="chapter6.html"><span class="k">← Chapter 6</span><span class="t">Our own shop</span></a><button type="button" class="lwa-complete" data-lwa-complete><span class="k">Progress</span><span class="t">Mark this chapter complete</span></button><a href="index.html"><span class="k">Series</span><span class="t">All chapters</span></a></div>
+  </main>
+</div>
+<footer class="nav2-foot"><div class="fi">
+  <a href="../../index.html"><img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building — home"></a>
+  <nav aria-label="Footer"><a href="../../index.html">Home</a><a href="../../series/index.html">Series</a><a href="../../blog/index.html">Blog</a><a href="../../connect.html">Connect</a><a href="https://www.youtube.com/@learn-ai-by-building" rel="noopener">YouTube</a><a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp</a><a href="../../privacy.html">Privacy</a></nav>
+  <span class="by">Learn AI by Building · by Adi (Aditya)</span>
+</div></footer>
+<script>
+// a Copy button for every command and prompt (as on the Claude Code prompt sheet)
+document.querySelectorAll('.pr-copy').forEach(function (b) {
+  b.addEventListener('click', function () {
+    var t = document.getElementById(b.dataset.for).textContent;
+    (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () {
+      b.textContent = 'Copied'; setTimeout(function () { b.textContent = 'Copy'; }, 1500);
+    }, function () { b.textContent = 'Select and copy'; });
+  });
+});
+</script>
+<script>
+// each clip plays once when most of it is on screen, never when the reader asks for reduced motion (WE-141)
+(function () {
+  if (!('IntersectionObserver' in window) || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+  document.querySelectorAll('video.clip').forEach(function (v) {
+    var o = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { o.disconnect(); v.play().catch(function () {}); } });
+    }, { threshold: 0.6 });
+    o.observe(v);
+  });
+})();
+</script>
+<script src="../../assets/site-config.js"></script>
+<script src="../../assets/analytics.js?v=1" defer></script>
+<script src="../../assets/progress.js?v=3"></script>
+<script src="../../assets/railspy.js?v=1"></script>
+</body>
+</html>
