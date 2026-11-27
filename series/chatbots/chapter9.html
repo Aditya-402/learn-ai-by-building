@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="canonical" href="https://learnwithadi.com/series/chatbots/chapter9.html">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 9 · our first agent — Learn AI by Building</title>
+<meta name="description" content="Chapter 9 of Chatbot from Scratch: our first agent. Volt gets two more tools and a loop our own code runs, with a step cap, and a step-by-step agent prompt: Plan, Execute, Evaluate, Iterate. Two real failures on the way, why the agent would not stop, and the two fixes that take the regression test to 8 of 8.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=8">
+<link rel="stylesheet" href="../../assets/unit.css?v=8">
+<link rel="stylesheet" href="../../assets/blog.css?v=8">
+<!-- the series-chapter parts (.cc-shot, .cc-wall, .pr copy blocks, the quick reference on a phone) are shared with the Claude Code chapters -->
+<link rel="stylesheet" href="../claude-code/cc.css?v=4">
+<link rel="stylesheet" href="../../assets/nav.css?v=1">
+</head>
+<body data-lwa-course="chatbots" data-lwa-chapter="chapter9" data-lwa-title="Chapter 9 · our first agent" data-lwa-taught="why one lookup by name answers a two-step question wrong; what an agent is: a model, tools and a loop; Plan, Execute, Evaluate, Iterate in agent.txt (the prompt asks, our code runs the loop); list_phones and check_delivery; the step cap, our code's brake; an agent that would not stop: structured answers on every call with tools; shaping the answer once at the end; an offer as one item; the regression test grows to 8 checks">
+<header class="top nav2"><div class="top-in">
+  <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark-maroon.svg?v=1" alt="Learn AI by Building — home"></a>
+  <nav class="nav2-links" aria-label="Main"><a href="../../index.html">Home</a><a href="../../series/index.html" aria-current="page">Series</a><a href="../../blog/index.html">Blog</a><a href="../../connect.html">Connect</a></nav>
+  <span class="nav2-auth" data-lwa-auth></span>
+  <details class="nav2-menu"><summary>Menu</summary><div class="m"><a href="../../index.html">Home</a><a href="../../series/index.html">Series</a><a href="../../blog/index.html">Blog</a><a href="../../connect.html">Connect</a><a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp channel</a><span class="nav2-auth-m" data-lwa-auth></span></div></details>
+</div></header>
+<header class="masthead">
+  <div class="masthead-in">
+    <div class="title-block">
+      <div class="eyebrow">Chatbot from Scratch · Chapter 9</div>
+      <h1>Our first agent</h1>
+      <p class="standfirst">Volt answered a two-step question wrong: its one tool saw only 10 of 101 Samsung phones. This chapter gives it two more tools and a loop our own code runs, with a step cap. That is our first agent. It also shows the two failures we hit along the way, and the fixes that brought our regression test to 8 of 8.</p>
+      <div class="facts"><div><b>One sitting</b>~12 min read, ~60 min to build along (the agent works for about fifteen of them)</div><div><b>You need</b>the project from Chapter 8, Antigravity, your own key in .env</div><div><b>You build</b>agent.txt, list_phones and check_delivery, the agent loop with a step cap, step lines in the window, a last call that shapes the answer, one more check</div><div><b>Chapter 9</b>after <a href="chapter8.html">Chapter 8 · the first tool</a></div></div>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="rail" aria-label="Sections">
+    <a class="rnav-back" href="index.html"><span class="ico">←</span><span class="lbl">All chapters</span></a>
+    <div class="rail-h">Contents</div>
+    <a class="on" href="#wrong">The wrong cheapest phone</a>
+    <a href="#agent">What an agent is</a>
+    <a href="#agentprompt">The agent prompt</a>
+    <a href="#prompt">The agent prompt for Antigravity</a>
+    <a href="#changed">What the agent wrote</a>
+    <a href="#who">Who does what</a>
+    <a href="#cap">The step cap</a>
+    <a href="#live">The agent, live</a>
+    <a href="#stuck">When it does not stop</a>
+    <a href="#why">Why it would not stop</a>
+    <a href="#prompt2">Prompt 2: shape it at the end</a>
+    <a href="#again">Live, again</a>
+    <a href="#check">The regression test grows</a>
+    <a href="#failures">Two failures, two fixes</a>
+    <a href="#project">Our project so far</a>
+    <a href="#quickref">Quick reference</a>
+    <a href="#takeaway">The takeaway</a>
+    <a href="#homework">Your homework</a>
+  </nav>
+
+  <main>
+  <section id="video">
+    <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/UpFGDLn-yHs?rel=0" title="Episode 9 · How does my chatbot answer a question that needs several look-ups?"
+      allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+    <p class="video-cap">Prefer to watch? This chapter goes with Episode 9 (11:31). <a href="https://www.youtube.com/watch?v=UpFGDLn-yHs" rel="noopener">Open it on YouTube</a>.</p>
+    <p class="yt-sub"><a href="https://www.youtube.com/@learn-ai-by-building?sub_confirmation=1" rel="noopener">Subscribe on YouTube</a></p>
+  </section>
+
+  <section id="wrong" data-rail="The wrong cheapest phone">
+    <div class="prereq">
+      <div class="pq"><b>Goes with Episode 9</b><a href="https://www.youtube.com/watch?v=UpFGDLn-yHs" target="_blank" rel="noopener">"How does my chatbot answer a question that needs several look-ups?"</a>. Watch it just above, or build along here at your own pace.</div>
+      <div class="pq"><b>Before you start</b>The project from <a href="chapter8.html">Chapter 8</a>, with its <code>.venv</code> and <code>data/phones.xlsx</code>. Antigravity, signed in: <a href="../../blog/install-antigravity-on-windows/">install Antigravity on Windows</a>. Your own Gemini key in <code>.env</code>.</div>
+      <div class="pq"><b>The code, ready to run</b><a href="https://github.com/Aditya-402/chatbot-from-scratch/releases/download/episode-09/chatbot-from-scratch-episode-09.zip" rel="noopener">Download this chapter's code (zip)</a>. Every chapter's code is on <a href="https://github.com/Aditya-402/chatbot-from-scratch" rel="noopener">GitHub</a>. Add your own <code>.env</code> with <code>GEMINI_API_KEY</code>; the README shows the setup.</div>
+    </div>
+    <div class="prose">
+      <h2>The wrong cheapest phone</h2>
+      <p>Chapter 8 ended on a question one tool could not answer. Ask it in the window from Chapter 8:</p>
+    </div>
+    <div class="pr"><div class="pr-h"><span>Type in the window</span><button type="button" class="pr-copy" data-for="p0">Copy</button></div><pre id="p0">Which is the cheapest Samsung phone in stock, and when can it be delivered?</pre></div>
+    <div class="prose">
+      <p>Volt says the Galaxy S26 (12GB / 512GB), at 89,999 rupees, delivered in about 3 days. The grey line under the reply says <code>find_phone("Samsung") -&gt; 10 rows</code>.</p>
+    </div>
+    <figure class="cc-shot"><video class="clip" src="img/chapter9/wrong.mp4" poster="img/chapter9/wrong-poster.jpg" controls muted playsinline preload="none" aria-label="The window from Chapter 8: the question, and Volt's answer, the Galaxy S26 12GB / 512GB at 89,999 rupees, with the tool line find_phone Samsung, 10 rows." width="1200" height="576"></video>
+      <figcaption>The wrong answer, sped up. <a href="https://www.youtube.com/watch?v=UpFGDLn-yHs&amp;t=6s" rel="noopener">Watch this step in the video</a>.</figcaption></figure>
+    <div class="prose">
+      <p>Check the workbook itself. In Excel, add a Price column to the Product Information sheet with <code>=XLOOKUP(A2,'Product Pricing'!A:A,'Product Pricing'!C:C)</code>, filter Brand to Samsung, and sort Price smallest to largest. Excel counts 101 Samsung phones. The cheapest is the <b>Galaxy A06 (2GB / 32GB), VZ-0099, at 7,999 rupees</b>. On the Product Availability sheet, VZ-0099 is in stock, delivered in 2 days.</p>
+    </div>
+    <figure class="cc-shot"><video class="clip" src="img/chapter9/excel.mp4" poster="img/chapter9/excel-poster.jpg" controls muted playsinline preload="none" aria-label="Excel: the Price column added with XLOOKUP, the Samsung filter, sorted cheapest first: row 2, VZ-0099, Samsung Galaxy A06, 2GB / 32GB, 7999." width="1200" height="576"></video>
+      <figcaption>The workbook, sorted, sped up. <a href="https://www.youtube.com/watch?v=UpFGDLn-yHs&amp;t=52s" rel="noopener">Watch this step in the video</a>.</figcaption></figure>
+    <div class="prose">
+      <p>So where did 89,999 come from? <code>find_phone</code> stops at 10 rows, and for "Samsung" those 10 are all S26 models: the A06 at row 1 of the sorted sheet never reached Volt. A tool shows only what it is built to find.</p>
+    </div>
+  </section>
+
+  <section id="agent" data-rail="What an agent is">
+    <div class="prose">
+      <h2>What an agent is</h2>
+      <p>Say you walk into a phone shop and ask for the cheapest phone that reaches you tomorrow. The shopkeeper checks the price list first. Then he checks delivery, one phone at a time, until one fits.</p>
+      <p>An agent works the same way. The model picks a tool, reads the result, and decides the next step, in a loop our own code runs until it can answer. Written as steps:</p>
+      <ol>
+        <li><b>Plan:</b> which tool answers the next part?</li>
+        <li><b>Execute:</b> call that one tool.</li>
+        <li><b>Evaluate:</b> does the result answer the question?</li>
+        <li><b>Iterate:</b> if not, plan the next tool call.</li>
+      </ol>
+      <p>Plan, Execute, Evaluate, Iterate is a common pattern for agents, not one formal standard.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter9/agent-loop.svg" alt="An agent: a model plus tools plus a loop. Plan, which tool next; Execute, call one tool; Evaluate, does it answer; Iterate, if not, plan again; answer when it has everything. A common pattern for agents, not one formal standard." loading="lazy"></figure>
+  </section>
+
+  <section id="agentprompt" data-rail="The agent prompt">
+    <div class="prose">
+      <h2>The agent prompt</h2>
+      <p>Write these steps down for Volt yourself, in a new file in the system folder of the prompts: <code>prompts/system/agent.txt</code>.</p>
+    </div>
+    <div class="pr"><div class="pr-h"><span>prompts/system/agent.txt</span><button type="button" class="pr-copy" data-for="p1">Copy</button></div><pre id="p1">You can use tools to answer. Work step by step:
+1. Plan: decide which tool answers the next part of the question.
+2. Execute: call that one tool.
+3. Evaluate: does the result answer the question?
+4. Iterate: if not, plan the next tool call.
+When you have everything, answer in one reply.
+Never invent a price, a stock status or a date.</pre>
+      <p class="pr-why">This file only asks Volt to work this way. It cannot run anything.</p></div>
+  </section>
+
+  <section id="prompt" data-rail="The agent prompt for Antigravity">
+    <div class="prose">
+      <h2>The agent prompt for Antigravity</h2>
+      <p>Now a prompt file for the agent in Antigravity, <code>prompts/09-agent.txt</code>, to turn Volt into an agent. It adds 2 tools: <code>list_phones</code> lists a brand's phones, cheapest first, and <code>check_delivery</code> tells when one phone arrives. Our own code runs the loop, up to a step cap of 6.</p>
+    </div>
+    <div class="pr"><div class="pr-h"><span>prompts/09-agent.txt</span><button type="button" class="pr-copy" data-for="p2">Copy</button></div><pre id="p2">Task : Turn Volt into our first agent: give it two more tools, and let our own code run the tools in a loop, one step after another, until Volt can answer or reaches a step cap
+
+Context :
+- Use the virtual environment .venv in this folder. Don't create a new one.
+- Keep find_phone(model) in tools.py as it is.
+- Add list_phones(brand, in_stock_only) to tools.py. It returns the phones of that brand from data/phones.xlsx, joined by Product ID, cheapest first. In stock only leaves out phones that are Out of stock; Low stock still counts. At most 10 rows: product ID, model, variant, selling price in rupees, status. No delivery days.
+- Add check_delivery(product_id) to tools.py. For one product ID it returns model, variant, status, delivery days, and the date it arrives: today's date plus the delivery days. When the phone is out of stock, it returns the restock date instead.
+- In bot.py, tell Gemini about all three tools, each with a one-line description.
+- I have written prompts/system/agent.txt myself. Add it to the system prompt whenever Phone lookup is on. Don't change the file.
+- Our own code runs the loop: ask Gemini; when it asks for a tool, run the tool, send the result back, and ask again. Every call to Gemini is one step. Stop when Volt answers without a tool, or at the step cap.
+- Add Settings &gt; Step cap: a number from 1 to 10, starting at 6.
+- When the loop reaches the step cap before Volt has answered, don't ask Gemini again. Volt replies: "I couldn't finish this in N steps. Please ask again or raise the step cap." Say "1 step" when N is 1.
+- In the window, the grey tool line becomes one numbered grey line per tool call under the reply, for example: Step 1: list_phones("Samsung", in stock) -&gt; 10 rows. Then one last grey line: Steps: 3 of 6.
+- Volt never invents a price, a stock status or a date.
+- Keep structured answers working, and count every step's tokens in the tokens in, as before.
+- Keep the date, the shop sheet, the character, the memory, the settings and everything else as it is.
+- Don't write test files; I will try it myself.
+
+Folder arch :
+- ui.py : the window (frontend)
+- bot.py : the chatbot (backend), now an agent: the loop and the step cap
+- tools.py : find_phone, list_phones, check_delivery; reads data/phones.xlsx
+- shop.py : reads the shop files into plain text
+- check.py : our regression test
+- data/phones.xlsx : the 500 phones, 3 sheets
+- prompts/ : our prompts
+- prompts/system/agent.txt : how Volt works step by step with tools
+- prompts/shop/ : our shop files</pre>
+      <p class="pr-why">"Our own code runs the loop" keeps every step where we can see it; the step cap is our code's brake.</p></div>
+    <div class="pr"><div class="pr-h"><span>Type into the agent panel</span><button type="button" class="pr-copy" data-for="p3">Copy</button></div><pre id="p3">Review and implement prompts/09-agent.txt</pre>
+      <p class="pr-why">When it is done, the agent has changed 3 files: <code>tools.py</code>, <code>bot.py</code> and <code>ui.py</code>. It also ran our regression test, and its report says only 4 of 7 passed. Keep that in mind. Click Accept all.</p></div>
+    <div class="prose">
+      <p><b>A note on the model.</b> In Antigravity we used the Gemini 4 Hydrogen model, with thinking effort chosen as Medium. Pick the model your Antigravity offers.</p>
+    </div>
+  </section>
+
+  <section id="changed" data-rail="What the agent wrote">
+    <div class="prose">
+      <h2>What the agent wrote</h2>
+      <ul>
+        <li><b><code>tools.py</code>:</b> <code>list_phones(brand, in_stock_only)</code> puts a brand's phones in price order and returns at most 10, with their Product ID. <code>check_delivery(product_id)</code> works out the delivery date from today's date, or gives the restock date.</li>
+        <li><b><code>bot.py</code>:</b> the 3 tools are described to Gemini, and <code>agent.txt</code> joins the system prompt. Near the top, <code>DEFAULT_STEP_CAP = 6</code>. Then the loop, <code>for step in range(1, step_cap + 1)</code>: ask Gemini, run the tool it asks for, send the result back.</li>
+        <li><b><code>ui.py</code>:</b> one grey line for each step under the reply, then <code>Steps: N of 6</code>, and <b class="ui">Settings › Step cap</b>.</li>
+      </ul>
+    </div>
+    <figure class="cc-shot"><video class="clip" src="img/chapter9/changes.mp4" poster="img/chapter9/changes-poster.jpg" controls muted playsinline preload="none" aria-label="tools.py: def list_phones and def check_delivery; bot.py: the three tool declarations, DEFAULT_STEP_CAP = 6, agent.txt added to the system prompt, the loop for step in range 1 to step_cap; ui.py: the Step line." width="1200" height="576"></video>
+      <figcaption>What changed in tools.py, bot.py and ui.py, sped up. <a href="https://www.youtube.com/watch?v=UpFGDLn-yHs&amp;t=231s" rel="noopener">Watch this step in the video</a>.</figcaption></figure>
+  </section>
+
+  <section id="who" data-rail="Who does what">
+    <div class="prose">
+      <h2>Who does what</h2>
+      <p>The prompt asks Volt to plan the next tool and to evaluate the result. Our code runs the tool, sends the result back, and stops at the step cap. A prompt cannot run anything. Our loop does.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter9/who-does.svg" alt="Who does what. The prompt asks, in agent.txt: plan the next tool, evaluate the result, answer when done. Our code does, in bot.py, the loop: runs the tool, sends the result back, stops at the step cap. A prompt cannot run anything: our loop does." loading="lazy"></figure>
+  </section>
+
+  <section id="cap" data-rail="The step cap">
+    <div class="prose">
+      <h2>The step cap</h2>
+      <ul>
+        <li><b>A step</b> is one call to Gemini.</li>
+        <li><b>The cap</b> is 6 by default: <code>DEFAULT_STEP_CAP = 6</code> in <code>bot.py</code>. Change it in <b class="ui">Settings › Step cap</b>, from 1 to 10.</li>
+        <li><b>At the cap,</b> our code stops Volt without another call, and Volt says: <i>I couldn't finish this in 6 steps. Please ask again or raise the step cap.</i></li>
+      </ul>
+      <p>It is our code's brake, not the prompt's.</p>
+    </div>
+  </section>
+
+  <section id="live" data-rail="The agent, live">
+    <div class="prose">
+      <h2>The agent, live</h2>
+    </div>
+    <div class="pr"><div class="pr-h"><span>Type in the terminal</span><button type="button" class="pr-copy" data-for="p4">Copy</button></div><pre id="p4">python ui.py</pre></div>
+    <div class="prose">
+      <p>Ask the same question again. Under the answer, the steps:</p>
+    </div>
+    <div class="pr"><div class="pr-h"><span>The grey lines under the answer</span></div><pre>Step 1: list_phones("Samsung", in stock) -&gt; 10 rows
+Step 2: check_delivery("VZ-0099") -&gt; In stock, 2 days
+Steps: 3 of 6</pre></div>
+    <div class="prose">
+      <p>The right answer: the Galaxy A06 (2GB / 32GB), at 7,999 rupees, delivered by 28 November 2026 (the date is today's date plus 2 days). It took 4,714 tokens in; the counter at the top of the window adds up everything in this window.</p>
+    </div>
+    <figure class="cc-shot"><video class="clip" src="img/chapter9/liveA.mp4" poster="img/chapter9/liveA-poster.jpg" controls muted playsinline preload="none" aria-label="The agent window: the same question, the steps list_phones Samsung in stock 10 rows, check_delivery VZ-0099 in stock 2 days, Steps 3 of 6, and the answer Galaxy A06 at 7,999 rupees." width="1200" height="576"></video>
+      <figcaption>The agent, live, sped up. <a href="https://www.youtube.com/watch?v=UpFGDLn-yHs&amp;t=311s" rel="noopener">Watch this step in the video</a>.</figcaption></figure>
+  </section>
+
+  <section id="stuck" data-rail="When it does not stop">
+    <div class="prose">
+      <h2>When it does not stop</h2>
+      <p>Now a harder question, in a new chat: <i>I need a Samsung phone delivered by tomorrow. Which is the cheapest?</i></p>
+    </div>
+    <div class="cheat"><table><tr><th>Step</th><th>Tool call</th><th>Result</th></tr>
+      <tr><td>1</td><td><code>list_phones("Samsung", in stock)</code></td><td>10 rows, cheapest first</td></tr>
+      <tr><td>2</td><td><code>check_delivery("VZ-0099")</code></td><td>2 days</td></tr>
+      <tr><td>3</td><td><code>check_delivery("VZ-0100")</code></td><td>4 days</td></tr>
+      <tr><td>4</td><td><code>check_delivery("VZ-0096")</code></td><td><b>1 day: the answer</b></td></tr>
+      <tr><td>5</td><td><code>check_delivery("VZ-0101")</code></td><td>2 days: Volt kept checking</td></tr>
+      <tr><td>6</td><td>the step cap</td><td>"I couldn't finish this in 6 steps."</td></tr></table></div>
+    <div class="prose">
+      <p>With the cap raised to 8 the story is the same: it could not finish in 8 steps. With the cap at 1, our code stops Volt after its first step. The prompt cannot do that.</p>
+      <p>Then run the regression test: 4 of 7. The two charger questions now get 0, and so does the Galaxy S25. Our regression test caught real failures.</p>
+    </div>
+    <figure class="cc-shot"><video class="clip" src="img/chapter9/fail6.mp4" poster="img/chapter9/fail6-poster.jpg" controls muted playsinline preload="none" aria-label="The window: I need a Samsung phone delivered by tomorrow, which is the cheapest; Volt could not finish in 6 steps; the step lines show check_delivery VZ-0096 in stock 1 day at step 4, then VZ-0101." width="1200" height="576"></video>
+      <figcaption>Found at step 4, kept checking, sped up. <a href="https://www.youtube.com/watch?v=UpFGDLn-yHs&amp;t=335s" rel="noopener">Watch this step in the video</a>.</figcaption></figure>
+    <div class="prose">
+      <p><b>A first try, by hand:</b> 2 lines added to <code>agent.txt</code>.</p>
+    </div>
+    <div class="pr"><div class="pr-h"><span>agent.txt, the two new lines</span></div><pre>Use the tools only for phones; accessories are in the shop sheet.
+The list is cheapest first: stop at the first phone that answers the question.</pre></div>
+    <div class="prose">
+      <p>That did not help. Changing the prompt alone could not fix it: the cap still stops Volt after 6 steps, and <code>check.py</code> gives 5 of 7.</p>
+    </div>
+  </section>
+
+  <section id="why" data-rail="Why it would not stop">
+    <div class="prose">
+      <h2>Why it would not stop</h2>
+      <p>We tested it off camera, asking the same question twice each way, with a step cap of 10. With our structured answers, the JSON reply from Chapter 7, and the tools together, Gemini kept calling tools: 10 steps, no answer, both times. In plain text, the same agent stopped at step 5, with the right answer, both times.</p>
+      <p>So let the agent think in plain text, and shape the answer once, at the end.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter9/why-json.svg" alt="Same question, step cap 10, asked twice each. Structured answers (JSON) plus tools, together: 10 of 10 steps, no answer, both times. Plain text plus tools: 5 steps, Galaxy M06 5G, 9,999, both times. So: think in plain text, then shape the answer once, at the end. Tested off camera, 26 Nov 2026." loading="lazy"></figure>
+  </section>
+
+  <section id="prompt2" data-rail="Prompt 2: shape it at the end">
+    <div class="prose">
+      <h2>Prompt 2: shape it at the end</h2>
+      <p>A second prompt file, <code>prompts/09-structured-last.txt</code>. The loop runs without the JSON shape. When Volt has answered, our code makes one last call, with no tools, to shape the answer.</p>
+    </div>
+    <div class="pr"><div class="pr-h"><span>prompts/09-structured-last.txt</span><button type="button" class="pr-copy" data-for="p5">Copy</button></div><pre id="p5">Task : Let Volt stop when it has the answer: run the agent loop without the JSON shape, and shape the answer once at the end
+
+Context :
+- Use the virtual environment .venv in this folder. Don't create a new one.
+- Today, when the tools and structured answers are on together, Gemini keeps calling tools until the step cap.
+- In bot.py, run the agent loop without the JSON shape: ask Gemini, run the tools, send the results back, until Volt answers in plain text or reaches the step cap.
+- When Volt has answered, our code makes one last call to Gemini, with no tools, that turns this answer into the reply and items, as before. This last call is not a step, but its tokens count in the tokens in.
+- When structured answers is off, there is no last call.
+- Keep agent.txt, the step cap, the step lines, the total and everything else as it is.
+- Don't write test files; I will try it myself.</pre>
+      <p class="pr-why">The last call is not a step, but its tokens count in the tokens in.</p></div>
+    <div class="pr"><div class="pr-h"><span>Type into the agent panel</span><button type="button" class="pr-copy" data-for="p6">Copy</button></div><pre id="p6">Review and implement prompts/09-structured-last.txt</pre>
+      <p class="pr-why">The agent changes <code>bot.py</code> and runs our test again. Click Accept all. In <code>bot.py</code>, the loop now has the tools but runs without structured answers, so Volt answers in plain text; after the answer, one last call shapes the reply and the items.</p></div>
+  </section>
+
+  <section id="again" data-rail="Live, again">
+    <div class="prose">
+      <h2>Live, again</h2>
+    </div>
+    <div class="cheat"><table><tr><th>Question</th><th>Volt's answer</th><th>Steps</th></tr>
+      <tr><td>Which is the cheapest Samsung phone in stock, and when can it be delivered?</td><td>Galaxy A06 (2GB / 32GB), 7,999 rupees</td><td>3 of 6</td></tr>
+      <tr><td>I need a Samsung phone delivered by tomorrow. Which is the cheapest?</td><td>Galaxy M06 5G (4GB / 64GB), 9,999 rupees</td><td>5 of 6: it stops at the 1-day phone</td></tr></table></div>
+    <figure class="cc-shot"><video class="clip" src="img/chapter9/final.mp4" poster="img/chapter9/final-poster.jpg" controls muted playsinline preload="none" aria-label="The window after prompt 2: the Galaxy A06 at 7,999 in 3 steps, then the harder question: the Galaxy M06 5G at 9,999 rupees, Steps 5 of 6." width="1200" height="576"></video>
+      <figcaption>It stops when it has the answer, sped up. <a href="https://www.youtube.com/watch?v=UpFGDLn-yHs&amp;t=495s" rel="noopener">Watch this step in the video</a>.</figcaption></figure>
+  </section>
+
+  <section id="check" data-rail="The regression test grows">
+    <div class="prose">
+      <h2>The regression test grows</h2>
+      <p>Add the question from the start to the answer key in <code>check.py</code>, by hand:</p>
+    </div>
+    <div class="pr"><div class="pr-h"><span>check.py, the new line</span></div><pre>    ("Which is the cheapest Samsung phone in stock, and when can it be delivered?", 7999),</pre></div>
+    <div class="prose">
+      <p>Run it: 7 of 8. Line 2, the charger with a cable, gives 1,198, not the offer price, 949: the last call listed the charger and the cable on their own. So one sentence, by hand, at the end of the items rule of that last call in <code>bot.py</code>:</p>
+    </div>
+    <div class="pr"><div class="pr-h"><span>bot.py, added to the items rule of the last call</span></div><pre>Use the price you said in your answer: when you gave one offer price for products sold together, list them as one item at that price.</pre></div>
+    <div class="pr"><div class="pr-h"><span>Type in the terminal</span><button type="button" class="pr-copy" data-for="p7">Copy</button></div><pre id="p7">python check.py</pre>
+      <p class="pr-why">8 of 8 passed.</p></div>
+    <figure class="cc-shot"><video class="clip" src="img/chapter9/check8.mp4" poster="img/chapter9/check8-poster.jpg" controls muted playsinline preload="none" aria-label="The terminal: python check.py, eight lines PASS, 8 of 8 passed." width="1200" height="576"></video>
+      <figcaption>8 of 8, sped up. <a href="https://www.youtube.com/watch?v=UpFGDLn-yHs&amp;t=583s" rel="noopener">Watch this step in the video</a>.</figcaption></figure>
+  </section>
+
+  <section id="failures" data-rail="Two failures, two fixes">
+    <div class="prose">
+      <h2>Two failures, two fixes</h2>
+    </div>
+    <div class="cheat"><table><tr><th></th><th>What went wrong</th><th>Why</th><th>The fix</th></tr>
+      <tr><td><b>Failure 1</b></td><td>Volt found the 1-day phone at step 4 but kept checking until the cap</td><td>Structured answers (JSON) on every call, together with the tools, kept Gemini calling tools</td><td>Let Volt work in plain text, and shape the JSON once, at the end (prompt 2)</td></tr>
+      <tr><td><b>Failure 2</b></td><td><code>check.py</code> gave 4 of 7, then 7 of 8</td><td>Volt used the tools on accessories, and the charger-with-cable offer became 2 items: 1,198, not 949</td><td>Prompt 2, then one sentence in the items rule: an offer is one item</td></tr>
+      <tr><td><b>Tried, did not help</b></td><td>2 lines in <code>agent.txt</code></td><td>The prompt only asks; the cause was in how our code called Gemini</td><td>Changing the prompt alone could not fix it</td></tr></table></div>
+  </section>
+
+  <section id="project" data-rail="Our project so far">
+    <div class="prose">
+      <h2>Our project so far</h2>
+      <p>New in this chapter, in orange below: <code>agent.txt</code> gives Volt its steps, <code>tools.py</code> has 3 tools, and our own loop runs them, up to the step cap.</p>
+    </div>
+    <figure class="cc-shot"><img src="img/chapter9/arch-ep09.svg" alt="Our project after Chapter 9: everything from Chapter 8, and new in orange: prompts/system/agent.txt with Plan, Execute, Evaluate, Iterate, given to bot.py as a system instruction; the agent loop in our code, inside ask(): ask, run a tool, send it back, stop at the step cap, one tool a step; tools.py now has find_phone, list_phones and check_delivery. check.py has 8 questions; the Settings menu has a step cap." loading="lazy"></figure>
+  </section>
+
+  <section id="quickref" data-rail="Quick reference">
+    <div class="prose"><h2>Quick reference</h2><p>Every command and menu from this chapter. The prompts are above.</p></div>
+    <div class="cheat"><table><tr><th>Command or menu</th><th>What it does</th><th>Use it when</th></tr><tr><td><code>Review and implement prompts/09-agent.txt</code></td><td>Adds the 2 tools, the loop, the step cap and the step lines</td><td>After writing agent.txt and the prompt</td></tr><tr><td><code>Review and implement prompts/09-structured-last.txt</code></td><td>Runs the loop in plain text and shapes the answer once at the end</td><td>When the agent will not stop</td></tr><tr><td><code>python ui.py</code></td><td>Opens the window</td><td>To ask Volt</td></tr><tr><td><b class="ui">Settings › Step cap</b></td><td>Sets how many calls to Gemini one answer may take (1 to 10, 6 by default)</td><td>To see the brake work</td></tr><tr><td><code>python check.py</code></td><td>Runs the regression test</td><td>After every change</td></tr></table></div>
+  </section>
+
+  <section id="takeaway" data-rail="The takeaway">
+    <div class="prose">
+      <h2>The takeaway</h2>
+      <ol>
+        <li>A tool shows only what it is built to find: Volt's one tool saw 10 of 101 phones, so better tools come first.</li>
+        <li>The prompt asks the model to plan and evaluate; your own loop runs the tools, and its step cap is the brake.</li>
+        <li>Let the agent work in plain text and shape the JSON once at the end, and let the regression test tell you when something breaks.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="homework" data-rail="Your homework">
+    <div class="next">
+      <div class="lbl">Your homework</div>
+      <h3>Is a cap of 6 enough?</h3>
+      <p style="font-size:var(--fs-cap);color:var(--slate)"><b>The goal:</b> watch the loop and its brake on a question of your own.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>The steps:</b> in your copy of the Chapter 8 project, open the Antigravity agent panel and send <code>Review and implement prompts/09-agent.txt</code>, then <code>prompts/09-structured-last.txt</code>. Run <code>python ui.py</code> and ask: <i>Which is the cheapest Xiaomi phone delivered by tomorrow?</i> Read the grey Step lines and the <code>Steps: N of 6</code> line under the answer.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>Guess first:</b> is a step cap of 6 enough?</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:10px"><i>One question for you: which actions should an agent like Volt, our assistant, never take without asking you?</i></p>
+    </div>
+  </section>
+
+  <section id="next" data-rail="Next">
+    <div class="prose">
+      <h2>Next: an agent we can trust</h2>
+      <p>An agent that runs tools on its own also needs limits: a tool can fail, and an order should never go out without you. <b>Chapter 10</b> makes our agent safe to trust.</p>
+    </div>
+  </section>
+
+  <section class="lwa-refs" id="refs"><div class="prose"><h2>References</h2><p>Where each number on this page comes from. Everything was also checked in our own recording on 26 Nov 2026.</p></div><ol>
+    <li><b>Google</b> · <i>Function calling with the Gemini API</i> <span class="why">Several function calls in a row, and sending each function response back.</span> <a href="https://ai.google.dev/gemini-api/docs/function-calling" rel="noopener">https://ai.google.dev/gemini-api/docs/function-calling</a></li>
+    <li><b>Google</b> · <i>Structured output with the Gemini API</i> <span class="why">The JSON answer shape from Chapter 7.</span> <a href="https://ai.google.dev/gemini-api/docs/structured-output" rel="noopener">https://ai.google.dev/gemini-api/docs/structured-output</a></li>
+    <li><b>Microsoft</b> · <i>XLOOKUP function</i> <span class="why">The Price column in the Excel check.</span> <a href="https://support.microsoft.com/en-us/office/xlookup-function-b7fd680e-6d10-43e6-84f9-88eae8bf5929" rel="noopener">https://support.microsoft.com/en-us/office/xlookup-function-b7fd680e-6d10-43e6-84f9-88eae8bf5929</a></li>
+    <li><b>Learn AI by Building</b> · <i>chatbot-from-scratch on GitHub</i> <span class="why">Every chapter's finished code and prompts.</span> <a href="https://github.com/Aditya-402/chatbot-from-scratch" rel="noopener">https://github.com/Aditya-402/chatbot-from-scratch</a></li>
+    <li><b>My own recording</b> · <i>26 Nov 2026, Windows 11</i> <span class="why">Every answer, step and token count on this page is from those takes, on Gemini 3.1 Flash Lite; the off-camera test of the cause too.</span></li>
+  </ol></section>
+<section class="keep" aria-label="Follow along"><p class="follow">New chapters and episodes come out every week. Follow along on <a href="https://www.youtube.com/@learn-ai-by-building" rel="noopener">YouTube</a> or the <a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp channel</a>. Questions? Ask under the video on YouTube; I read every comment.</p></section>
+  <div class="lwa-chapnav"><a href="chapter8.html"><span class="k">← Chapter 8</span><span class="t">The first tool</span></a><button type="button" class="lwa-complete" data-lwa-complete><span class="k">Progress</span><span class="t">Mark this chapter complete</span></button><a href="index.html"><span class="k">Series</span><span class="t">All chapters</span></a></div>
+  </main>
+</div>
+<footer class="nav2-foot"><div class="fi">
+  <a href="../../index.html"><img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building — home"></a>
+  <nav aria-label="Footer"><a href="../../index.html">Home</a><a href="../../series/index.html">Series</a><a href="../../blog/index.html">Blog</a><a href="../../connect.html">Connect</a><a href="https://www.youtube.com/@learn-ai-by-building" rel="noopener">YouTube</a><a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp</a><a href="../../privacy.html">Privacy</a></nav>
+  <span class="by">Learn AI by Building · by Adi (Aditya)</span>
+</div></footer>
+<script>
+// a Copy button for every command and prompt (as on the Claude Code prompt sheet)
+document.querySelectorAll('.pr-copy').forEach(function (b) {
+  b.addEventListener('click', function () {
+    var t = document.getElementById(b.dataset.for).textContent;
+    (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () {
+      b.textContent = 'Copied'; setTimeout(function () { b.textContent = 'Copy'; }, 1500);
+    }, function () { b.textContent = 'Select and copy'; });
+  });
+});
+</script>
+<script>
+// each clip plays once when most of it is on screen, never when the reader asks for reduced motion (WE-141)
+(function () {
+  if (!('IntersectionObserver' in window) || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+  document.querySelectorAll('video.clip').forEach(function (v) {
+    var o = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { o.disconnect(); v.play().catch(function () {}); } });
+    }, { threshold: 0.6 });
+    o.observe(v);
+  });
+})();
+</script>
+<script src="../../assets/site-config.js"></script>
+<script src="../../assets/analytics.js?v=1" defer></script>
+<script src="../../assets/progress.js?v=3"></script>
+<script src="../../assets/railspy.js?v=1"></script>
+</body>
+</html>
