@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="canonical" href="https://learnwithadi.com/series/chatbots/chapter10.html">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 10 · an agent we can trust — Learn AI by Building</title>
+<meta name="description" content="Chapter 10 of Chatbot from Scratch, the last: an agent we can trust. A tool that fails says so, as text, instead of an empty answer that reads as no such phone; a place_order tool our code puts behind a Yes / No box; two new checks, 10 of 10; and the whole series in one table of technical names.">
+<link rel="icon" type="image/svg+xml" href="../../assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css?v=8">
+<link rel="stylesheet" href="../../assets/unit.css?v=8">
+<link rel="stylesheet" href="../../assets/blog.css?v=8">
+<!-- the series-chapter parts (.cc-shot, .cc-wall, .pr copy blocks, the quick reference on a phone) are shared with the Claude Code chapters -->
+<link rel="stylesheet" href="../claude-code/cc.css?v=4">
+<link rel="stylesheet" href="../../assets/nav.css?v=1">
+</head>
+<body data-lwa-course="chatbots" data-lwa-chapter="chapter10" data-lwa-title="Chapter 10 · an agent we can trust" data-lwa-taught="why a tool that hides its failure makes an agent say something false; tool errors returned as text; a try around each tool call; searching the variant too; a tool that acts: place_order and orders.csv; human in the loop: a Yes / No box in our code, No by default; two checks that lock the guards in; the ten chapters and their technical names">
+<header class="top nav2"><div class="top-in">
+  <a class="lwa-home" href="../../index.html"><img src="../../assets/wordmark-maroon.svg?v=1" alt="Learn AI by Building — home"></a>
+  <nav class="nav2-links" aria-label="Main"><a href="../../index.html">Home</a><a href="../../series/index.html" aria-current="page">Series</a><a href="../../blog/index.html">Blog</a><a href="../../connect.html">Connect</a></nav>
+  <span class="nav2-auth" data-lwa-auth></span>
+  <details class="nav2-menu"><summary>Menu</summary><div class="m"><a href="../../index.html">Home</a><a href="../../series/index.html">Series</a><a href="../../blog/index.html">Blog</a><a href="../../connect.html">Connect</a><a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp channel</a><span class="nav2-auth-m" data-lwa-auth></span></div></details>
+</div></header>
+<header class="masthead">
+  <div class="masthead-in">
+    <div class="title-block">
+      <div class="eyebrow">Chatbot from Scratch · Chapter 10</div>
+      <h1>An agent we can trust</h1>
+      <p class="standfirst">Volt told a customer we do not sell a phone we sell, and nothing looked wrong. This chapter gives our agent two guards: a tool that fails says so, and no order goes out without your yes.</p>
+      <div class="facts"><div><b>One sitting</b>~10 min read, ~45 min to build along (the agent works for about ten of them)</div><div><b>You need</b>the project from Chapter 9, Antigravity, your own key in .env</div><div><b>You build</b>honest tool errors, place_order behind a Yes / No box, two new checks</div></div>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <nav class="rail" aria-label="Sections">
+    <a class="rnav-back" href="index.html"><span class="ico">←</span><span class="lbl">All chapters</span></a>
+    <div class="rail-h">Contents</div>
+    <a class="on" href="#lie">A wrong "we don't sell it"</a>
+    <a href="#why">Why Volt said no</a>
+    <a href="#prompt1">Prompt 1: honest tools</a>
+    <a href="#changed1">What changed</a>
+    <a href="#honest">Honest, live</a>
+    <a href="#acts">A tool that acts</a>
+    <a href="#prompt2">Prompt 2: a yes before an order</a>
+    <a href="#changed2">The order code</a>
+    <a href="#order">Place this order?</a>
+    <a href="#check">Two new checks</a>
+    <a href="#guards">Our two guards</a>
+    <a href="#series">Ten chapters, one assistant</a>
+    <a href="#quickref">Quick reference</a>
+    <a href="#takeaway">The takeaway</a>
+    <a href="#homework">Your homework</a>
+  </nav>
+
+  <main>
+  <section id="video">
+    <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/whm4pZPJ_IY?rel=0" title="Episode 10 · How do I make my AI agent safe to trust?"
+      allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe></div>
+    <p class="video-cap">Prefer to watch? This chapter goes with Episode 10 (8:59). <a href="https://www.youtube.com/watch?v=whm4pZPJ_IY" rel="noopener">Open it on YouTube</a>.</p>
+    <p class="yt-sub"><a href="https://www.youtube.com/@learn-ai-by-building?sub_confirmation=1" rel="noopener">Subscribe on YouTube</a></p>
+  </section>
+
+  <section id="lie" data-rail="A wrong &quot;we don't sell it&quot;">
+    <div class="prereq">
+      <div class="pq"><b>Goes with Episode 10</b><a href="https://www.youtube.com/watch?v=whm4pZPJ_IY" target="_blank" rel="noopener">"How do I make my AI agent safe to trust?"</a>. Watch it just above, or build along here at your own pace.</div>
+      <div class="pq"><b>Before you start</b>The project from <a href="chapter9.html">Chapter 9</a>, with its <code>.venv</code> and <code>data/phones.xlsx</code>. Antigravity, signed in: <a href="../../blog/install-antigravity-on-windows/">install Antigravity on Windows</a>. Your own Gemini key in <code>.env</code>.</div>
+      <div class="pq"><b>The code, ready to run</b><a href="https://github.com/Aditya-402/chatbot-from-scratch/releases/download/episode-10/chatbot-from-scratch-episode-10.zip" rel="noopener">Download this chapter's code (zip)</a>. Every chapter's code is on <a href="https://github.com/Aditya-402/chatbot-from-scratch" rel="noopener">GitHub</a>. Add your own <code>.env</code> with <code>GEMINI_API_KEY</code>; the README shows the setup.</div>
+    </div>
+    <div class="prose">
+      <h2>A wrong "we don't sell it"</h2>
+      <p>Open the window from Chapter 9 and ask Volt one price:</p>
+    </div>
+    <div class="pr"><div class="pr-h"><span>Type in the window</span><button type="button" class="pr-copy" data-for="p0">Copy</button></div><pre id="p0">How much is the Galaxy S25 with 12GB / 256GB?</pre></div>
+    <div class="prose">
+      <p>In our recording, Volt replied: <i>I am sorry, we do not sell the Galaxy S25.</i> The grey lines show two searches, both with 0 rows. Yet the shop sells it: Chapter 8 found it at 69,999 rupees.</p>
+      <p>Nothing crashed. No error showed. A customer would simply believe it.</p>
+    </div>
+    <figure class="cc-shot"><video class="clip" src="img/chapter10/lie.mp4" poster="img/chapter10/lie-poster.jpg" controls muted playsinline preload="none" aria-label="The window: the question about the Galaxy S25 12GB / 256GB, and Volt's reply, sorry, we do not sell the Galaxy S25, with two find_phone lines of 0 rows." width="1200" height="576"></video>
+      <figcaption>The wrong answer, sped up. <a href="https://www.youtube.com/watch?v=whm4pZPJ_IY&amp;t=5s" rel="noopener">Watch this step in the video</a>.</figcaption></figure>
+  </section>
+
+  <section id="why" data-rail="Why Volt said no">
+    <div class="prose">
+      <h2>Why Volt said no</h2>
+      <p>Before that take, we renamed the workbook, as happens when someone tidies a folder. The <code>data</code> folder held only <code>phones-old.xlsx</code>.</p>
+    </div>
+    <div class="cheat"><table><tr><th></th><th>What happened</th><th>Why</th></tr>
+      <tr><td><b>Case 1</b></td><td>The workbook was missing</td><td><code>find_phone</code> could not open it and sent back an empty list</td></tr>
+      <tr><td><b>Case 2</b>, found off camera</td><td>A search with <code>12GB/256GB</code> in it</td><td><code>find_phone</code> matched only brand and model, never the variant, so this came back empty too</td></tr></table></div>
+    <div class="prose">
+      <p>To Volt, an empty list means one thing: no such phone. So the fix is plain. A tool that fails must say so, as text.</p>
+    </div>
+  </section>
+
+  <section id="prompt1" data-rail="Prompt 1: honest tools">
+    <div class="prose">
+      <h2>Prompt 1: honest tools</h2>
+      <p>Create <code>prompts/10-honest-tools.txt</code> with this prompt. It asks for three things. Every tool returns its error as text. <code>find_phone</code> searches the variant. And our loop runs each tool inside a <code>try</code>.</p>
+    </div>
+    <div class="pr"><div class="pr-h"><span>prompts/10-honest-tools.txt</span><button type="button" class="pr-copy" data-for="p1">Copy</button></div><pre id="p1">Task : Make our tools honest when they fail: a tool that cannot do its job says so, and the agent loop passes that on to Volt instead of hiding it or crashing
+
+Context :
+- Use the virtual environment .venv in this folder. Don't create a new one.
+- Today, when data/phones.xlsx is missing, find_phone and list_phones return an empty list, the same answer as "no such phone". Volt then tells the customer we don't sell it.
+- In tools.py, when the workbook cannot be found or opened, every tool returns an error as text instead of rows, for example: "The phone catalogue could not be opened: data/phones.xlsx was not found."
+- find_phone matches only the brand and model name, so a search with the variant, such as find_phone("Galaxy S25 12GB/256GB"), finds nothing, and Volt says we don't sell it. Make find_phone match the words against the brand, the model and the variant together, whatever spaces sit around the "/".
+- In bot.py, the agent loop runs every tool inside a try. When a tool raises an error, send its message back to Gemini as the tool's result, as text, and carry on with the loop.
+- In the window, a step whose tool failed shows the error in its grey line, for example: Step 1: find_phone("Galaxy S25") -&gt; error: the phone catalogue could not be opened.
+- Don't change prompts/system/agent.txt; I will add a line myself.
+- Keep the step cap, the step lines, structured answers, the date, the shop sheet, the character, the memory, the settings and everything else as it is.
+- Don't write test files; I will try it myself.
+
+Folder arch :
+- ui.py : the window (frontend)
+- bot.py : the chatbot (backend), an agent: the loop and the step cap
+- tools.py : find_phone, list_phones, check_delivery; reads data/phones.xlsx
+- shop.py : reads the shop files into plain text
+- check.py : our regression test
+- data/phones.xlsx : the 500 phones, 3 sheets
+- prompts/ : our prompts
+- prompts/system/agent.txt : how Volt works step by step with tools
+- prompts/shop/ : our shop files</pre>
+      <p class="pr-why">Asking for the error as text, not a crash and not an empty list, is what lets Volt tell the customer the truth.</p></div>
+    <div class="pr"><div class="pr-h"><span>Type into the agent panel</span><button type="button" class="pr-copy" data-for="p2">Copy</button></div><pre id="p2">Review and implement prompts/10-honest-tools.txt</pre>
+      <p class="pr-why">The agent changes 3 files and tests its own work. Click Accept all.</p></div>
+    <div class="prose">
+      <p>Then add one line yourself, at the end of <code>prompts/system/agent.txt</code>:</p>
+    </div>
+    <div class="pr"><div class="pr-h"><span>prompts/system/agent.txt, the new last line</span><button type="button" class="pr-copy" data-for="p3">Copy</button></div><pre id="p3">If a tool returns an error, tell the customer you could not check, and never guess.</pre></div>
+    <div class="prose">
+      <p><b>A note on the model.</b> In Antigravity we used the Gemini 4 Hydrogen model, with thinking effort Medium. Pick the model your Antigravity offers.</p>
+    </div>
+  </section>
+
+  <section id="changed1" data-rail="What changed">
+    <div class="prose">
+      <h2>What changed</h2>
+      <ul>
+        <li><b><code>tools.py</code>:</b> a missing workbook now returns a message, "The phone catalogue could not be opened". <code>find_phone</code> searches brand, model and variant together.</li>
+        <li><b><code>bot.py</code>:</b> each tool runs inside a <code>try</code>. A failed tool's error goes back to Gemini as text.</li>
+        <li><b><code>ui.py</code>:</b> a failed step shows its error in the grey line.</li>
+      </ul>
+    </div>
+    <figure class="cc-shot"><video class="clip" src="img/chapter10/changes1.mp4" poster="img/chapter10/changes1-poster.jpg" controls muted playsinline preload="none" aria-label="tools.py: the error message when the workbook is missing, and the search over brand, model and variant; bot.py: the try around each tool and the error sent back; ui.py: the step line with the error." width="1200" height="576"></video>
+      <figcaption>What changed in tools.py, bot.py and ui.py, sped up. <a href="https://www.youtube.com/watch?v=whm4pZPJ_IY&amp;t=186s" rel="noopener">Watch this step in the video</a>.</figcaption></figure>
+  </section>
+
+  <section id="honest" data-rail="Honest, live">
+    <div class="prose">
+      <h2>Honest, live</h2>
+      <p>Run <code>python ui.py</code> with the workbook still renamed, and ask the same question. Now the grey line reads <code>find_phone(...) -&gt; error: The phone catalogue could not be opened</code>. Volt says it is not certain of the price and will check with the shop.</p>
+    </div>
+    <figure class="cc-shot"><video class="clip" src="img/chapter10/honest.mp4" poster="img/chapter10/honest-poster.jpg" controls muted playsinline preload="none" aria-label="The window: the same question; the grey line shows the error, the phone catalogue could not be opened; Volt says it is not certain of the price." width="1200" height="576"></video>
+      <figcaption>No false answer, sped up. <a href="https://www.youtube.com/watch?v=whm4pZPJ_IY&amp;t=218s" rel="noopener">Watch this step in the video</a>.</figcaption></figure>
+    <div class="prose">
+      <p>Rename the file back to <code>phones.xlsx</code> and ask once more. <code>find_phone</code> finds 4 rows, variant and all. The Galaxy S25 with 12GB / 256GB is 69,999 rupees, in stock.</p>
+    </div>
+    <figure class="cc-shot"><video class="clip" src="img/chapter10/fileback.mp4" poster="img/chapter10/fileback-poster.jpg" controls muted playsinline preload="none" aria-label="The workbook renamed back to phones.xlsx; the same question: find_phone finds 4 rows, and Volt says 69,999 rupees, in stock." width="1200" height="576"></video>
+      <figcaption>The right answer again, sped up. <a href="https://www.youtube.com/watch?v=whm4pZPJ_IY&amp;t=235s" rel="noopener">Watch this step in the video</a>.</figcaption></figure>
+  </section>
+
+  <section id="acts" data-rail="A tool that acts">
+    <div class="prose">
+      <h2>A tool that acts</h2>
+      <p>Every tool so far only looked something up. A wrong look-up costs a second question. An order happens in the real world.</p>
+      <p>So the agent may <i>ask</i> for an order, but our code asks you first, and only your yes runs it. This is called <b>human in the loop</b>.</p>
+    </div>
+  </section>
+
+  <section id="prompt2" data-rail="Prompt 2: a yes before an order">
+    <div class="prose">
+      <h2>Prompt 2: a yes before an order</h2>
+      <p>Create <code>prompts/10-order.txt</code>. A new tool, <code>place_order</code>, adds one row to a new file, <code>data/orders.csv</code>. Before it runs, our code stops and shows a small box. Only Yes runs it.</p>
+    </div>
+    <div class="pr"><div class="pr-h"><span>prompts/10-order.txt</span><button type="button" class="pr-copy" data-for="p4">Copy</button></div><pre id="p4">Task : Let Volt place an order, but only after the customer says yes in the window: our code asks, not the prompt
+
+Context :
+- Use the virtual environment .venv in this folder. Don't create a new one.
+- Add place_order(product_id) to tools.py. It looks up the phone as check_delivery does. When the phone is In stock or Low stock, it adds one row to data/orders.csv: order number (ORD-0001, ORD-0002, ...), date and time, product ID, model, variant, price in rupees, delivery date. It creates the file with a header row the first time. When the phone is Out of stock, it adds no row and returns an error as text.
+- find_phone also returns each phone's product ID, as list_phones does, so Volt has it when it orders.
+- place_order only adds rows to data/orders.csv. It never changes data/phones.xlsx.
+- In bot.py, tell Gemini about place_order with a one-line description.
+- Before our code runs place_order, it stops and asks the customer. The yes/no question is a function that ask() receives; the window passes its own. Without one, the answer is No.
+- In the window, the question is a small box, "Place this order?", with the phone, variant, price and delivery date, and two buttons, Yes and No. Only Yes runs place_order.
+- On No, our code sends back to Gemini, as the tool's result: "The customer said no. No order was placed." Then the loop carries on.
+- This question can't be switched off in Settings.
+- The grey step line shows the answer, for example: Step 2: place_order("VZ-0018") -&gt; customer said yes -&gt; ORD-0001, or: Step 2: place_order("VZ-0018") -&gt; customer said no.
+- Keep the honest tool errors, the step cap, the step lines, structured answers and everything else as it is.
+- Don't write test files; I will try it myself.
+
+Folder arch :
+- ui.py : the window (frontend)
+- bot.py : the chatbot (backend), an agent: the loop, the step cap, the yes/no before an order
+- tools.py : find_phone, list_phones, check_delivery, place_order; reads data/phones.xlsx
+- shop.py : reads the shop files into plain text
+- check.py : our regression test
+- data/phones.xlsx : the 500 phones, 3 sheets
+- data/orders.csv : the orders Volt placed (made by place_order)
+- prompts/ : our prompts
+- prompts/system/agent.txt : how Volt works step by step with tools
+- prompts/shop/ : our shop files</pre>
+      <p class="pr-why">"Our code asks, not the prompt." A rule in a prompt is a request the model may skip. A box in our code cannot be skipped.</p></div>
+    <div class="pr"><div class="pr-h"><span>Type into the agent panel</span><button type="button" class="pr-copy" data-for="p5">Copy</button></div><pre id="p5">Review and implement prompts/10-order.txt</pre>
+      <p class="pr-why">The agent changes 3 files and tests its own work again. Click Accept all.</p></div>
+  </section>
+
+  <section id="changed2" data-rail="The order code">
+    <div class="prose">
+      <h2>The order code</h2>
+      <ul>
+        <li><b><code>tools.py</code>:</b> <code>place_order</code> only appends a row to <code>orders.csv</code>. It never touches the phone workbook.</li>
+        <li><b><code>bot.py</code>:</b> before <code>place_order</code> runs, our code asks. With no answer, the answer is No. On No, Gemini hears: "The customer said no. No order was placed."</li>
+        <li><b><code>ui.py</code>:</b> the box itself, <b class="ui">Place this order?</b>, with Yes and No.</li>
+      </ul>
+    </div>
+    <figure class="cc-shot"><video class="clip" src="img/chapter10/changes2.mp4" poster="img/chapter10/changes2-poster.jpg" controls muted playsinline preload="none" aria-label="tools.py: place_order writes only to orders.csv; bot.py: the order goes ahead only with a yes, and No is the default; ui.py: the Place this order box." width="1200" height="576"></video>
+      <figcaption>The order code, sped up. <a href="https://www.youtube.com/watch?v=whm4pZPJ_IY&amp;t=303s" rel="noopener">Watch this step in the video</a>.</figcaption></figure>
+  </section>
+
+  <section id="order" data-rail="Place this order?">
+    <div class="prose">
+      <h2>Place this order?</h2>
+    </div>
+    <div class="pr"><div class="pr-h"><span>Type in the window</span><button type="button" class="pr-copy" data-for="p6">Copy</button></div><pre id="p6">Order the Galaxy S25 with 12GB / 256GB for me.</pre></div>
+    <div class="prose">
+      <p>The box comes up with the phone, its variant, 69,999 rupees and the delivery date. Volt waits. Click <b>No</b>: Volt says it could not place the order, and the grey line reads <code>place_order("VZ-0018") -&gt; customer said no</code>.</p>
+    </div>
+    <figure class="cc-shot"><video class="clip" src="img/chapter10/orderno.mp4" poster="img/chapter10/orderno-poster.jpg" controls muted playsinline preload="none" aria-label="The Place this order box: Samsung Galaxy S25, 12GB / 256GB, 69,999 rupees, a delivery date, Yes and No; after No, Volt says it could not place the order." width="1200" height="576"></video>
+      <figcaption>No means no order, sped up. <a href="https://www.youtube.com/watch?v=whm4pZPJ_IY&amp;t=325s" rel="noopener">Watch this step in the video</a>.</figcaption></figure>
+    <div class="prose">
+      <p>Ask again and click <b>Yes</b>: order ORD-0001, with its delivery date. Open <code>data/orders.csv</code>. It has exactly one row; the No left nothing behind.</p>
+      <p>In our recording, a "Total" line still showed under the cancelled order. The released code no longer shows a total when you say No.</p>
+    </div>
+    <figure class="cc-shot"><video class="clip" src="img/chapter10/orderyes.mp4" poster="img/chapter10/orderyes-poster.jpg" controls muted playsinline preload="none" aria-label="After Yes: Volt confirms order ORD-0001 with its delivery date, and orders.csv holds one row." width="1200" height="576"></video>
+      <figcaption>Yes, and one row, sped up. <a href="https://www.youtube.com/watch?v=whm4pZPJ_IY&amp;t=352s" rel="noopener">Watch this step in the video</a>.</figcaption></figure>
+  </section>
+
+  <section id="check" data-rail="Two new checks">
+    <div class="prose">
+      <h2>Two new checks</h2>
+      <p>Our regression test grows with the bot. Create <code>prompts/10-check.txt</code>:</p>
+    </div>
+    <div class="pr"><div class="pr-h"><span>prompts/10-check.txt</span><button type="button" class="pr-copy" data-for="p7">Copy</button></div><pre id="p7">Task : Add two checks to check.py, one for each of our two guards
+
+Context :
+- Use the virtual environment .venv in this folder. Don't create a new one.
+- Keep the 8 checks as they are.
+- Check 9, a missing workbook: hide data/phones.xlsx for this check only, by renaming it, and always put it back afterwards, even when the check fails. Ask "How much is the Galaxy S25 with 12GB / 256GB?". It passes when the total is 0 and Volt's reply does not say that we don't sell it.
+- Check 10, an order without a yes: ask "Order the Galaxy S25 with 12GB / 256GB for me." and answer the yes/no question with No. It passes when data/orders.csv has the same rows before and after.
+- Print both in the same table as the other checks, with the same columns, and the score out of 10.
+- Don't change anything outside check.py.
+
+Folder arch :
+- check.py : our regression test
+- bot.py : ask() receives the yes/no question as a function
+- data/phones.xlsx : the 500 phones, 3 sheets
+- data/orders.csv : the orders Volt placed</pre>
+      <p class="pr-why">A guard you can test is a guard you can trust.</p></div>
+    <div class="pr"><div class="pr-h"><span>Type into the agent panel</span><button type="button" class="pr-copy" data-for="p8">Copy</button></div><pre id="p8">Review and implement prompts/10-check.txt</pre>
+      <p class="pr-why">The agent adds both checks and runs the test itself. Click Accept all.</p></div>
+    <div class="cheat"><table><tr><th>Check</th><th>What it does</th><th>It passes when</th></tr>
+      <tr><td><b>9</b></td><td>Hides the workbook, asks the S25 price, then always puts the workbook back</td><td>No price comes back, and Volt does not say we don't sell it</td></tr>
+      <tr><td><b>10</b></td><td>Asks for an order and answers the box with No</td><td><code>orders.csv</code> has the same rows before and after</td></tr></table></div>
+    <div class="pr"><div class="pr-h"><span>Type in the terminal</span><button type="button" class="pr-copy" data-for="p9">Copy</button></div><pre id="p9">python check.py</pre>
+      <p class="pr-why">10 of 10 passed.</p></div>
+    <figure class="cc-shot"><video class="clip" src="img/chapter10/check10.mp4" poster="img/chapter10/check10-poster.jpg" controls muted playsinline preload="none" aria-label="check.py: the two new checks in the code, then the terminal, ten lines PASS and 10 of 10 passed." width="1200" height="576"></video>
+      <figcaption>10 of 10, sped up. <a href="https://www.youtube.com/watch?v=whm4pZPJ_IY&amp;t=396s" rel="noopener">Watch this step in the video</a>.</figcaption></figure>
+  </section>
+
+  <section id="guards" data-rail="Our two guards">
+    <div class="prose">
+      <h2>Our two guards</h2>
+      <ol>
+        <li><b>Errors as text.</b> A tool that fails says so; it never hides behind an empty answer.</li>
+        <li><b>A yes before any action.</b> Our code asks you, not the prompt.</li>
+      </ol>
+      <p>Two guards are a start, not the whole job. An agent must also doubt what its tools send back; the Agents series picks up there.</p>
+    </div>
+  </section>
+
+  <section id="series" data-rail="Ten chapters, one assistant">
+    <div class="prose">
+      <h2>Ten chapters, one assistant</h2>
+      <p>From one API call to an agent we can trust. Here is every step, with the name to search for:</p>
+    </div>
+    <div class="cheat"><table><tr><th>Chapter</th><th>What Volt gained</th><th>The technical name</th></tr>
+      <tr><td><a href="chapter1.html">1</a></td><td>A first reply from Gemini</td><td>API call, API key in <code>.env</code></td></tr>
+      <tr><td><a href="chapter2.html">2</a></td><td>Its own window</td><td>Frontend (<code>ui.py</code>) and backend (<code>bot.py</code>)</td></tr>
+      <tr><td><a href="chapter3.html">3</a></td><td>Settings for its answers</td><td>Temperature, top-P, max tokens</td></tr>
+      <tr><td><a href="chapter4.html">4</a></td><td>A memory of the chat</td><td>Short-term memory, running summary</td></tr>
+      <tr><td><a href="chapter5.html">5</a></td><td>A character, Volt</td><td>System prompt</td></tr>
+      <tr><td><a href="chapter6.html">6</a></td><td>Today's date and our shop</td><td>Grounding, context</td></tr>
+      <tr><td><a href="chapter7.html">7</a></td><td>Prices our code can use</td><td>Structured output, Pydantic, regression test</td></tr>
+      <tr><td><a href="chapter8.html">8</a></td><td>A look-up in our own data</td><td>Function calling, tools</td></tr>
+      <tr><td><a href="chapter9.html">9</a></td><td>Several look-ups in a row</td><td>Agent loop: Plan, Execute, Evaluate, Iterate; step cap</td></tr>
+      <tr><td><b>10</b></td><td>Honest failures, a yes before an order</td><td>Errors as text, human in the loop</td></tr></table></div>
+    <figure class="cc-shot"><img src="img/chapter10/arch-ep10.svg" alt="Our project after Chapter 10: everything from Chapter 9, and new: tools return their errors as text, place_order writes to data/orders.csv, and our code asks Place this order? before it runs." loading="lazy"></figure>
+  </section>
+
+  <section id="quickref" data-rail="Quick reference">
+    <div class="prose"><h2>Quick reference</h2><p>Every command from this chapter. The prompts are above.</p></div>
+    <div class="cheat"><table><tr><th>Command</th><th>What it does</th><th>Use it when</th></tr><tr><td><code>Review and implement prompts/10-honest-tools.txt</code></td><td>Errors as text, the variant search, a <code>try</code> around each tool</td><td>First</td></tr><tr><td><code>Review and implement prompts/10-order.txt</code></td><td>Adds <code>place_order</code> and the Yes / No box</td><td>After prompt 1</td></tr><tr><td><code>Review and implement prompts/10-check.txt</code></td><td>Adds checks 9 and 10</td><td>After prompt 2</td></tr><tr><td><code>python ui.py</code></td><td>Opens the window</td><td>To ask Volt</td></tr><tr><td><code>python check.py</code></td><td>Runs the regression test</td><td>After every change</td></tr></table></div>
+  </section>
+
+  <section id="takeaway" data-rail="The takeaway">
+    <div class="prose">
+      <h2>The takeaway</h2>
+      <ol>
+        <li>An empty answer is not the same as "none": make every tool say when it could not look.</li>
+        <li>Let the agent ask for actions, but let your code ask the person before any of them runs.</li>
+        <li>Lock each guard in with a check, so a later change cannot quietly break it.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="homework" data-rail="Your homework">
+    <div class="next">
+      <div class="lbl">Your homework</div>
+      <h3>Should cancelling need a yes too?</h3>
+      <p style="font-size:var(--fs-cap);color:var(--slate)"><b>The goal:</b> put a second action behind the same box.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>The steps:</b> in your copy of the Chapter 9 project, give the agent panel the three prompts of this chapter. Then add a tool, <code>cancel_order</code>, that removes an order from <code>orders.csv</code>, behind the same Yes / No box.</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:8px"><b>Guess first:</b> should cancelling need a yes too?</p>
+      <p style="font-size:var(--fs-cap);color:var(--slate);margin-top:10px"><i>One question for you: what is one thing you would never let an AI agent do without asking you first?</i></p>
+    </div>
+  </section>
+
+  <section class="lwa-refs" id="refs"><div class="prose"><h2>References</h2><p>Where each number on this page comes from. Everything was also checked in our own recording on 28 Nov 2026.</p></div><ol>
+    <li><b>Google</b> · <i>Function calling with the Gemini API</i> <span class="why">Tool calls, and sending each tool's response, or its error, back to the model.</span> <a href="https://ai.google.dev/gemini-api/docs/function-calling" rel="noopener">https://ai.google.dev/gemini-api/docs/function-calling</a></li>
+    <li><b>Python</b> · <i>Errors and exceptions</i> <span class="why">The try and except around each tool.</span> <a href="https://docs.python.org/3/tutorial/errors.html" rel="noopener">https://docs.python.org/3/tutorial/errors.html</a></li>
+    <li><b>Python</b> · <i>csv, CSV file reading and writing</i> <span class="why">How place_order appends one row to orders.csv.</span> <a href="https://docs.python.org/3/library/csv.html" rel="noopener">https://docs.python.org/3/library/csv.html</a></li>
+    <li><b>Learn AI by Building</b> · <i>chatbot-from-scratch on GitHub</i> <span class="why">Every chapter's finished code and prompts.</span> <a href="https://github.com/Aditya-402/chatbot-from-scratch" rel="noopener">https://github.com/Aditya-402/chatbot-from-scratch</a></li>
+    <li><b>My own recording</b> · <i>28 Nov 2026, Windows 11</i> <span class="why">Every answer, step and number on this page is from those takes, on Gemini 3.1 Flash Lite; the off-camera test of the variant search too.</span></li>
+  </ol></section>
+<section class="keep" aria-label="Follow along"><p class="follow">New chapters and episodes come out every week. Follow along on <a href="https://www.youtube.com/@learn-ai-by-building" rel="noopener">YouTube</a> or the <a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp channel</a>. Questions? Ask under the video on YouTube; I read every comment.</p></section>
+  <div class="lwa-chapnav"><a href="chapter9.html"><span class="k">← Chapter 9</span><span class="t">Our first agent</span></a><button type="button" class="lwa-complete" data-lwa-complete><span class="k">Progress</span><span class="t">Mark this chapter complete</span></button><a href="index.html"><span class="k">Series</span><span class="t">All chapters</span></a></div>
+  </main>
+</div>
+<footer class="nav2-foot"><div class="fi">
+  <a href="../../index.html"><img src="../../assets/wordmark.svg?v=2" alt="Learn AI by Building — home"></a>
+  <nav aria-label="Footer"><a href="../../index.html">Home</a><a href="../../series/index.html">Series</a><a href="../../blog/index.html">Blog</a><a href="../../connect.html">Connect</a><a href="https://www.youtube.com/@learn-ai-by-building" rel="noopener">YouTube</a><a href="https://whatsapp.com/channel/0029VbBmUYHADTOID6uURl2U" rel="noopener">WhatsApp</a><a href="../../privacy.html">Privacy</a></nav>
+  <span class="by">Learn AI by Building · by Adi (Aditya)</span>
+</div></footer>
+<script>
+// a Copy button for every command and prompt (as on the Claude Code prompt sheet)
+document.querySelectorAll('.pr-copy').forEach(function (b) {
+  b.addEventListener('click', function () {
+    var t = document.getElementById(b.dataset.for).textContent;
+    (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () {
+      b.textContent = 'Copied'; setTimeout(function () { b.textContent = 'Copy'; }, 1500);
+    }, function () { b.textContent = 'Select and copy'; });
+  });
+});
+</script>
+<script>
+// each clip plays once when most of it is on screen, never when the reader asks for reduced motion (WE-141)
+(function () {
+  if (!('IntersectionObserver' in window) || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+  document.querySelectorAll('video.clip').forEach(function (v) {
+    var o = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { o.disconnect(); v.play().catch(function () {}); } });
+    }, { threshold: 0.6 });
+    o.observe(v);
+  });
+})();
+</script>
+<script src="../../assets/site-config.js"></script>
+<script src="../../assets/analytics.js?v=1" defer></script>
+<script src="../../assets/progress.js?v=3"></script>
+<script src="../../assets/railspy.js?v=1"></script>
+</body>
+</html>
